@@ -18,26 +18,38 @@ public class MeasureParse
         var filePath = @"C:\code\CQMParser\CQMParse\Antithrombotic Therapy By End of Hospital Day 2 10.6.000.html";
         var doc = new HtmlDocument();
         doc.Load(filePath);
-        
+
         // var web = new HtmlWeb();
         // var doc = web.Load(measureUrl);
 
-        var tableOfContentsNode = doc.DocumentNode.SelectSingleNode("//a[@name='toc']");
-        if (tableOfContentsNode == null)
+        //var tableOfContentsNode = doc.DocumentNode.SelectSingleNode("//a[@name='toc']");
+
+
+        var codeNodes = CodeNode.GetCodeNodes(doc.DocumentNode);
+
+        foreach(var cn in codeNodes)
         {
-            Console.WriteLine("No Table Of Contents was found.");
-            return;
+            Console.WriteLine(cn);
+            Console.WriteLine("==============");
         }
 
-        var tocContents = tableOfContentsNode.NextSibling;
-        foreach (var tocEntry in tocContents.SelectNodes("//a"))
-        {
-            Console.WriteLine(tocEntry.InnerHtml + " => " + tocEntry.Attributes["name"].Value);
-        }
+
+
+        //if (tableOfContentsNode == null)
+        //{
+        //    Console.WriteLine("No Table Of Contents was found.");
+        //    return;
+        //}
+
+        //var tocContents = tableOfContentsNode.NextSibling;
+        //foreach (var tocEntry in tocContents.SelectNodes("/a"))
+        //{
+        //    Console.WriteLine(tocEntry.InnerHtml + " => " + tocEntry.Attributes["name"].Value);
+        //}
         
         
         
-        Console.WriteLine(tableOfContentsNode.InnerHtml);
+        //Console.WriteLine(tableOfContentsNode.InnerHtml);
         
     }
 }
