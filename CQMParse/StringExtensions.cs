@@ -10,6 +10,7 @@ namespace CQMParse
     {
         public static IEnumerable<(string segment, bool isQuoted)> BreakIntoQuotedAndUnquoted(this string s)
         {
+            s = s.Replace("\": \"", ": ");
             var results = new List<(string segment, bool isQuoted)>();
 
             int openCount = 0;
