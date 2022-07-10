@@ -171,5 +171,15 @@ namespace CQMParse
             code.IsPopulated = true;
         }
 
+        public string GetFormatted(int indentCount, string indent)
+        {
+            var sb = new StringBuilder();
+            foreach(var s in SubSegments)
+            {
+                sb.Append(s.GetFormatted(indentCount + 1, indent));
+            }
+            var txt = sb.ToString();
+            return txt;
+        }
     }
 }
