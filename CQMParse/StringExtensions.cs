@@ -8,8 +8,19 @@ namespace CQMParse
 {
     public static class StringExtensions
     {
-        public static IEnumerable<(string segment, bool isQuoted)> BreakIntoQuotedAndUnquoted(this string s)
+        private static string FormatFunctionCalls(string s, IEnumerable<CodeNode> allCodes)
         {
+            var functions = allCodes.Where(x => x.IsFunction).ToArray();
+            foreach(var f in functions)
+            {
+                s = s.Replace(f.FunctionCallFormat, f.NormalizedFunctionCallFormat);
+            }
+            return s;
+        }
+
+        public static IEnumerable<(string segment, bool isQuoted)> BreakIntoQuotedAndUnquoted(this string s, IEnumerable<CodeNode> allCodes)
+        {
+            s = FormatFunctionCalls(s, allCodes);
             s = s.Replace("\": \"", ": ");
             var results = new List<(string segment, bool isQuoted)>();
 

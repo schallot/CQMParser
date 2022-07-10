@@ -33,11 +33,52 @@ namespace CQMParse
             NameHtmlNode = htmlNode;
             CodeHtmlNode = codeNode;
             Name = System.Web.HttpUtility.HtmlDecode(htmlNode.InnerText).Trim();
+            if (Name.Contains("("))
+            {
+                Name = Name.Substring(0, Name.IndexOf('('));
+            }
             SegmentText = System.Web.HttpUtility.HtmlDecode(codeNode.InnerText).Trim();
         }
 
         const string NameNodeClass = "list-header";
         const string CodeNodeClass = "code";
+
+        public bool IsFunction { 
+            get
+            {
+                var txt = NameHtmlNode.InnerText;
+                if (txt.Contains("(") && txt.Contains("."))
+                {
+                    return true;
+                }
+                return false;
+            } 
+        }
+
+        public string FunctionNameSpace
+        {
+            get
+            {
+                if (!IsFunction) return "";
+                var txt = NameHtmlNode.InnerText;
+                return NameHtmlNode.InnerText.Substring(0, txt.IndexOf(".")).Trim();
+            }
+        }
+
+        public string FunctionName
+        {
+            get
+            {
+                if (!IsFunction) return "";
+                var txt = NameHtmlNode.InnerText.Trim();
+                txt = txt.Substring($"{FunctionNameSpace}.".Length).Trim();
+                txt = txt.Split('(').First();
+                return txt;
+            }
+        }
+
+        public string FunctionCallFormat => $"{FunctionNameSpace}.\"{FunctionName}\"";
+        public string NormalizedFunctionCallFormat => $"\"{FunctionNameSpace}.{FunctionName}\"";
 
         public string Name { get; }
         public string SegmentText { get; }
@@ -70,7 +111,7 @@ namespace CQMParse
         {
             if (code.IsPopulated) return;
 
-            var segTexts = code.SegmentText.BreakIntoQuotedAndUnquoted();
+            var segTexts = code.SegmentText.BreakIntoQuotedAndUnquoted(allCodes);
 
             var segments = new List<ISegment>();
 
@@ -97,7 +138,23 @@ namespace CQMParse
 
                         if(c == null)
                         {
-                            throw new Exception($"Couldn't find code named [{s.segment}]");
+                            // TODO: Measurement Period is defined up in the top table.  Might want to parse this out.  For now just treating as plain text.
+                            if (s.segment.Trim().Equals("Measurement Period", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                segments.Add(new PlainTextSegment(s.segment));
+                            }
+                            else if (s.segment.Trim().Equals("LengthInDays", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                segments.Add(new PlainTextSegment(s.segment));
+                            }
+                            else if (s.segment.Trim().Equals("HospitalizationWithObservation", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                segments.Add(new PlainTextSegment(s.segment));
+                            }
+                            else
+                            {
+                                throw new Exception($"Couldn't find code named [{s.segment}]");
+                            }
                         }
                         else
                         {
@@ -110,7 +167,7 @@ namespace CQMParse
                     }
                 }
             }
-
+            code._subSegments = segments;
             code.IsPopulated = true;
         }
 
