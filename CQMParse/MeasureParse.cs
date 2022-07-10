@@ -40,21 +40,8 @@ public class MeasureParse
             Console.WriteLine("--==--==--==--=");
         }
 
-        //if (tableOfContentsNode == null)
-        //{
-        //    Console.WriteLine("No Table Of Contents was found.");
-        //    return;
-        //}
+        CodeNode.PopulateSubSegments(codeNodes, terminals);
 
-        //var tocContents = tableOfContentsNode.NextSibling;
-        //foreach (var tocEntry in tocContents.SelectNodes("/a"))
-        //{
-        //    Console.WriteLine(tocEntry.InnerHtml + " => " + tocEntry.Attributes["name"].Value);
-        //}
-        
-        
-        
-        //Console.WriteLine(tableOfContentsNode.InnerHtml);
         
     }
 }

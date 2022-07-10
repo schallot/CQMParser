@@ -18,19 +18,21 @@ namespace CQMParse
         /// </summary>
         public string UsingName { get; set; }
 
+        public override IEnumerable<ISegment> SubSegments => new[] { this };
+
         public DataCriteriaTerminal(HtmlNode node, IEnumerable<TerminologyTerminal> allTerminals) : base(node)
         {
             var splitToken = "\" using \"";
 
 
-            if (!Text.Contains(splitToken))
+            if (!SegmentText.Contains(splitToken))
             {
-                throw new ArgumentException($"DataCriteriaTerminal text is expected to contain [{splitToken}], but was [{Text}]");
+                throw new ArgumentException($"DataCriteriaTerminal text is expected to contain [{splitToken}], but was [{SegmentText}]");
             }
-            var split = Text.Split(splitToken);
+            var split = SegmentText.Split(splitToken);
             if(split.Length > 2)
             {
-                throw new ArgumentException($"DataCriteriaTerminal text is expected to contain a single [{splitToken}], but was [{Text}], containing {split.Length - 1}");
+                throw new ArgumentException($"DataCriteriaTerminal text is expected to contain a single [{splitToken}], but was [{SegmentText}], containing {split.Length - 1}");
             }
             
             Name = split.First().TrimStart('"');
@@ -101,16 +103,20 @@ namespace CQMParse
 
         public abstract string Token { get; }
         public string Code { get; protected set; }
+        public override IEnumerable<ISegment> SubSegments => new[] { this };
+
 
         public TerminologyTerminal(HtmlNode root) : base(root)
         {
-            Name = Text.GetQuotedSections().First();
-            Code = Text.GetParentheticalSections().Last();
+            Name = SegmentText.GetQuotedSections().First();
+            Code = SegmentText.GetParentheticalSections().Last();
         }
     }
 
-    public abstract class Terminal
+    public abstract class Terminal : ISegment
     {
+        public abstract IEnumerable<ISegment> SubSegments { get; }
+
         public static List<Terminal> GetTerminals(HtmlNode root)
         {
             const string NameNodeClass = "list-header";
@@ -156,11 +162,11 @@ namespace CQMParse
         protected Terminal(HtmlNode htmlNode)
         {            
             Node = htmlNode;
-            Text = System.Web.HttpUtility.HtmlDecode(Node.InnerText).Trim();
+            SegmentText = System.Web.HttpUtility.HtmlDecode(Node.InnerText).Trim();
         }
 
 
-        public string Text { get; }
+        public string SegmentText { get; }
         public HtmlNode Node { get; }
         public string Name { get; protected set; }
     }
