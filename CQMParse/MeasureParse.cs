@@ -33,7 +33,12 @@ public class MeasureParse
             Console.WriteLine("==============");
         }
 
-
+        var terminals = Terminal.GetTerminals(doc.DocumentNode);
+        foreach(var t in terminals)
+        {
+            Console.WriteLine(t);
+            Console.WriteLine("--==--==--==--=");
+        }
 
         //if (tableOfContentsNode == null)
         //{
