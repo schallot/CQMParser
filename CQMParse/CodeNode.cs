@@ -120,10 +120,13 @@ namespace CQMParse
         }
 
         public bool IsPopulated { get; private set; }
+        // Used to help prevent stack overflows
+        public bool IsBeingPopulated { get; private set; }
 
         private static void PopulateSubSegments(CodeNode code, CodeNode[] allCodes, Terminal[] terminals)
         {
             if (code.IsPopulated) return;
+            code.IsBeingPopulated = true;
 
             var segTexts = code.SegmentText.RemoveComments().BreakIntoQuotedAndUnquoted(allCodes);
 
@@ -178,7 +181,8 @@ namespace CQMParse
                                 var skippableNames = new[] { "Measurement Period", "LengthInDays", "HospitalizationWithObservation",
                                     "Patient Characteristic Birthdate", "LowRiskDatetime", "Laboratory Test, Performed", "InitialADHDMedication", 
                                     "Medication", "Patient Characteristic Expired", "AgeInYearsAt", "Procedure, Order", "Medication, Active",
-                                    "Date"};
+                                    "Date", "Medication, Administered: Hypoglycemics Treatment Medications",
+                                    "Laboratory Test, Performed: Glucose Lab Test Mass Per Volume"};
                                 if (skippableNames.Any(y => y.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase)))
                                 {
                                     segments.Add(new PlainTextSegment(s.segment));
@@ -200,18 +204,28 @@ namespace CQMParse
                         }
                         else
                         {
-                            if (!c.IsPopulated)
+                            if (!c.IsPopulated && !c.IsBeingPopulated)
                             {
                                 PopulateSubSegments(c, allCodes, terminals);
                             }
-                            segments.AddRange(c.SubSegments);
+                            else if (c.IsBeingPopulated)
+                            {
+                                // We have some sort of loop rather than a tree...                                
+                                segments.Add(new PlainTextSegment(s.segment));
+                            }
+
+                            if (!c.IsBeingPopulated)
+                            {
+                                segments.AddRange(c.SubSegments);
+                            }
                         }
                     }
                 }
                 prev = s;
             }
             code._subSegments = segments;
-            code.IsPopulated = true;
+            code.IsBeingPopulated = false;
+            code.IsPopulated = true;            
         }
 
         public string GetFormatted(int indentCount, string indent)

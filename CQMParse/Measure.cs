@@ -97,21 +97,19 @@ namespace CQMParse
             DenominatorExclusions = codeNodes.First(x => x.Name.Equals("Denominator Exclusions"));
             Numerator = codeNodes.First(x => x.Name.Equals("Numerator"));
             NumeratorExclusions = codeNodes.First(x => x.Name.Equals("Numerator Exclusions"));
-            DenominatorExceptions = codeNodes.First(x => x.Name.Equals("Denominator Exceptions"));
-
-            var mainPopulationCriteria = new[] { InitalPopulation, Denominator, DenominatorExclusions, Numerator, NumeratorExclusions, DenominatorExceptions };
+            DenominatorExceptions = codeNodes.FirstOrDefault(x => x.Name.Equals("Denominator Exceptions"));
 
             var allNodes = doc.DocumentNode.Descendants();
             var populationCriteriaNodes = InitalPopulation.CodeHtmlNode.GetMostRecentCommonAncestor(Denominator.CodeHtmlNode).Descendants().ToArray();
-            OtherPopulationCriteria = codeNodes.Where(x => populationCriteriaNodes.Contains(x.CodeHtmlNode) && !mainPopulationCriteria.Contains(x)).ToArray();            
+            OtherPopulationCriteria = codeNodes.Where(x => populationCriteriaNodes.Contains(x.CodeHtmlNode) && !MainPopulationCriteria.Contains(x)).ToArray();            
         }
+
+        CodeNode[] MainPopulationCriteria => new[] { InitalPopulation, Denominator, DenominatorExclusions, Numerator, NumeratorExclusions, DenominatorExceptions }.Where(x => x != null).ToArray();
 
         public string GetSummary()
         {
-            var mainPopulationCritieria = new[] { InitalPopulation, Denominator, DenominatorExclusions, Numerator, NumeratorExclusions, DenominatorExceptions};
-
             var sb = new StringBuilder();
-            foreach (var r in mainPopulationCritieria.Union(OtherPopulationCriteria))
+            foreach (var r in MainPopulationCriteria.Union(OtherPopulationCriteria))
             {
                 sb.AppendLine("=============================================================================================================================================================================");
                 sb.AppendLine($"{r.Name}:");
