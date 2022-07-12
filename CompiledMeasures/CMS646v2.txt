@@ -1,10 +1,10 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+exists ( [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period )
-	  and Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  and Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -16,9 +16,9 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "T1: Urinary tract tumor invades subepithelial connective tissue (finding)" ("SNOMEDCT Code (369935001)")
-	  or Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	).result ~ (code "T1: Urinary tract tumor invades subepithelial connective tissue (finding)" ("SNOMEDCT Code (369935001)"))
+	  or Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -30,9 +30,9 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "Ta: Noninvasive papillary carcinoma (urinary tract) (finding)" ("SNOMEDCT Code (369949005)")
-	  or Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	).result ~ (code "Ta: Noninvasive papillary carcinoma (urinary tract) (finding)" ("SNOMEDCT Code (369949005)"))
+	  or Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -44,9 +44,9 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)" ("SNOMEDCT Code (369934002)")
-	  or Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	).result ~ (code "Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)" ("SNOMEDCT Code (369934002)"))
+	  or Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -58,16 +58,16 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "Carcinoma in situ of bladder" ("ICD10CM Code (D09.0)")
-	  and exists ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] ValidEncounter
+	).result ~ (code "Carcinoma in situ of bladder" ("ICD10CM Code (D09.0)"))
+	  and exists [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period
 =============================================================================================================================================================================
 Denominator:
-exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+exists ( [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period )
-	  and Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  and Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -79,9 +79,9 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "T1: Urinary tract tumor invades subepithelial connective tissue (finding)" ("SNOMEDCT Code (369935001)")
-	  or Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	).result ~ (code "T1: Urinary tract tumor invades subepithelial connective tissue (finding)" ("SNOMEDCT Code (369935001)"))
+	  or Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -93,9 +93,9 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "Ta: Noninvasive papillary carcinoma (urinary tract) (finding)" ("SNOMEDCT Code (369949005)")
-	  or Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	).result ~ (code "Ta: Noninvasive papillary carcinoma (urinary tract) (finding)" ("SNOMEDCT Code (369949005)"))
+	  or Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -107,9 +107,9 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)" ("SNOMEDCT Code (369934002)")
-	  or Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	).result ~ (code "Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)" ("SNOMEDCT Code (369934002)"))
+	  or Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -121,14 +121,14 @@ exists ( ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for
 	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
-	).result ~ code "Carcinoma in situ of bladder" ("ICD10CM Code (D09.0)")
-	  and exists ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] ValidEncounter
+	).result ~ (code "Carcinoma in situ of bladder" ("ICD10CM Code (D09.0)"))
+	  and exists [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period
 =============================================================================================================================================================================
 Denominator Exclusions:
-exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"] HIV
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+exists [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)")] HIV
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -142,9 +142,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	) Staging
 	    such that HIV.prevalencePeriod starts on or before start of Staging.relevantPeriod
-	  or exists ["Diagnosis: Immunocompromised Conditions" using "Immunocompromised Conditions (2.16.840.1.113883.3.666.5.1940)"] ImmunocompromisedDiagnosis
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  or exists [("Diagnosis: Immunocompromised Conditions" using "Immunocompromised Conditions (2.16.840.1.113883.3.666.5.1940)")] ImmunocompromisedDiagnosis
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -160,9 +160,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	    such that ImmunocompromisedDiagnosis.prevalencePeriod starts on or before start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Staging.relevantDatetime, Staging.relevantPeriod )
-	  or exists ["Medication, Active: Immunosuppressive Drugs for Urology Care" using "Immunosuppressive Drugs for Urology Care (2.16.840.1.113762.1.4.1151.32)"] ImmunosuppressiveDrugs
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  or exists [("Medication, Active: Immunosuppressive Drugs for Urology Care" using "Immunosuppressive Drugs for Urology Care (2.16.840.1.113762.1.4.1151.32)")] ImmunosuppressiveDrugs
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -178,9 +178,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( ImmunosuppressiveDrugs.relevantDatetime, ImmunosuppressiveDrugs.relevantPeriod ) starts on or before Staging.relevantPeriod
-	  or exists ["Diagnosis: Active Tuberculosis for Urology Care" using "Active Tuberculosis for Urology Care (2.16.840.1.113762.1.4.1151.56)"] TB
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  or exists [("Diagnosis: Active Tuberculosis for Urology Care" using "Active Tuberculosis for Urology Care (2.16.840.1.113762.1.4.1151.56)")] TB
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -196,9 +196,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	    such that TB.prevalencePeriod overlaps after if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Staging.relevantDatetime, Staging.relevantPeriod )
-	  or exists ["Diagnosis: Mixed histology urothelial cell carcinoma for Urology Care" using "Mixed histology urothelial cell carcinoma for Urology Care (2.16.840.1.113762.1.4.1151.39)"] MixedHistology
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  or exists [("Diagnosis: Mixed histology urothelial cell carcinoma for Urology Care" using "Mixed histology urothelial cell carcinoma for Urology Care (2.16.840.1.113762.1.4.1151.39)")] MixedHistology
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -214,9 +214,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	    such that MixedHistology.prevalencePeriod starts on or before start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Staging.relevantDatetime, Staging.relevantPeriod )
-	  or exists ["Procedure, Performed: Cystectomy for Urology Care" using "Cystectomy for Urology Care (2.16.840.1.113762.1.4.1151.55)"] Cystectomy
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  or exists [("Procedure, Performed: Cystectomy for Urology Care" using "Cystectomy for Urology Care (2.16.840.1.113762.1.4.1151.55)")] Cystectomy
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -230,9 +230,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	) Staging
 	    such that Global.EarliestOf ( Cystectomy.relevantDatetime, Cystectomy.relevantPeriod ) 6 months or less before Staging.relevantPeriod
-	  or exists ["Medication, Active: Chemotherapy for Advanced Cancer" using "Chemotherapy for Advanced Cancer (2.16.840.1.113883.3.7643.3.1048)"] Chemotherapy
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  or exists [("Medication, Active: Chemotherapy for Advanced Cancer" using "Chemotherapy for Advanced Cancer (2.16.840.1.113883.3.7643.3.1048)")] Chemotherapy
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -248,9 +248,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Chemotherapy.relevantDatetime, Chemotherapy.relevantPeriod ) starts 6 months or less before Staging.relevantPeriod
-	  or exists ["Procedure, Performed: Combined radiotherapy (procedure)" using "Combined radiotherapy (procedure) (SNOMEDCT Code 169331000)"] Radiation
-	  with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+	  or exists [("Procedure, Performed: Combined radiotherapy (procedure)" using "Combined radiotherapy (procedure) (SNOMEDCT Code 169331000)")] Radiation
+	  with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -268,9 +268,9 @@ exists ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
 	  else null as Interval<DateTime> ( Radiation.relevantDatetime, Radiation.relevantPeriod ) starts 6 months or less before Staging.relevantPeriod
 =============================================================================================================================================================================
 Numerator:
-First(["Medication, Administered: BCG Bacillus Calmette Guerin for Urology Care" using "BCG Bacillus Calmette Guerin for Urology Care (2.16.840.1.113762.1.4.1151.52)"] BCG
-	    with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+First([("Medication, Administered: BCG Bacillus Calmette Guerin for Urology Care" using "BCG Bacillus Calmette Guerin for Urology Care (2.16.840.1.113762.1.4.1151.52)")] BCG
+	    with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -298,9 +298,9 @@ Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-exists ( ["Medication, Not Administered: BCG Bacillus Calmette Guerin for Urology Care" using "BCG Bacillus Calmette Guerin for Urology Care (2.16.840.1.113762.1.4.1151.52)"] BCGnotGiven
-	    with Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] Staging
-	    with ["Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)"] BladderCancer
+exists ( [("Medication, Not Administered: BCG Bacillus Calmette Guerin for Urology Care" using "BCG Bacillus Calmette Guerin for Urology Care (2.16.840.1.113762.1.4.1151.52)")] BCGnotGiven
+	    with Last([("Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)")] Staging
+	    with [("Diagnosis: Bladder Cancer for Urology Care" using "Bladder Cancer for Urology Care (2.16.840.1.113762.1.4.1151.45)")] BladderCancer
 	  where BladderCancer.prevalencePeriod starts before 
 	  end Measurement Period BladderCancer
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -317,7 +317,7 @@ exists ( ["Medication, Not Administered: BCG Bacillus Calmette Guerin for Urolog
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Staging.relevantDatetime, Staging.relevantPeriod )
 	        and BCGnotGiven.authorDatetime in Measurement Period
-	    where BCGnotGiven.negationRationale in valueset "Unavailability of Bacillus Calmette Guerin for urology care" (2.16.840.1.113762.1.4.1151.44)
+	    where BCGnotGiven.negationRationale in (valueset "Unavailability of Bacillus Calmette Guerin for urology care" (2.16.840.1.113762.1.4.1151.44))
 	)
 =============================================================================================================================================================================
 Stratification:

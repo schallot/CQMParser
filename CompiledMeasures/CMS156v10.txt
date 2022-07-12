@@ -1,62 +1,62 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 65
-	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
-	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-	  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-	  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"] ) ValidEncounter
+	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)")]
+	  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+	  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+	  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 65
-	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
-	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-	  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-	  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"] ) ValidEncounter
+	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)")]
+	  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+	  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+	  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
-	    where ( DischargeHospice.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-	        or DischargeHospice.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
+	    where ( DischargeHospice.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+	        or DischargeHospice.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
 	    )
 	      and DischargeHospice.relevantPeriod ends during Measurement Period
 	)
-	  or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+	  or exists ( [("Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
-	  or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
-	  or PalliativeCare.exists ( ["Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)"] PalliativeAssessment
+	  or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
 	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 	)
-	  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)"] PalliativeEncounter
+	  or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)")] PalliativeEncounter
 	      where PalliativeEncounter.relevantPeriod overlaps Measurement Period
 	  )
-	  or exists ( ["Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)"] PalliativeIntervention
+	  or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
@@ -64,8 +64,8 @@ Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter I
 =============================================================================================================================================================================
 Numerator:
 exists ( ( from
-	    ["Medication, Order: List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly" using "List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly (2.16.840.1.113883.3.464.1003.196.12.1272)"] MedicationOrder1,
-	    ["Medication, Order: List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly" using "List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly (2.16.840.1.113883.3.464.1003.196.12.1272)"] MedicationOrder2
+	    [("Medication, Order: List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly" using "List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly (2.16.840.1.113883.3.464.1003.196.12.1272)")] MedicationOrder1,
+	    [("Medication, Order: List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly" using "List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly (2.16.840.1.113883.3.464.1003.196.12.1272)")] MedicationOrder2
 	    where MedicationOrder1.authorDatetime during Measurement Period
 	      and MedicationOrder2.authorDatetime during Measurement Period
 	      and MedicationOrder1.authorDatetime 1 day or more after MedicationOrder2.authorDatetime
@@ -77,376 +77,376 @@ exists ( ( from
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Amitriptyline Hydrochloride" using "Amitriptyline Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1373)"])
+	  return OrderMedication1([("Medication, Order: Amitriptyline Hydrochloride" using "Amitriptyline Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1373)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Amoxapine" using "Amoxapine (2.16.840.1.113883.3.464.1003.196.12.1273)"])
+	  return OrderMedication1([("Medication, Order: Amoxapine" using "Amoxapine (2.16.840.1.113883.3.464.1003.196.12.1273)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Orphenadrine" using "Orphenadrine (2.16.840.1.113883.3.464.1003.196.12.1302)"])
+	  return OrderMedication1([("Medication, Order: Orphenadrine" using "Orphenadrine (2.16.840.1.113883.3.464.1003.196.12.1302)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Atropine" using "Atropine (2.16.840.1.113883.3.464.1003.196.12.1274)"])
+	  return OrderMedication1([("Medication, Order: Atropine" using "Atropine (2.16.840.1.113883.3.464.1003.196.12.1274)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Benztropine" using "Benztropine (2.16.840.1.113883.3.464.1003.196.12.1361)"])
+	  return OrderMedication1([("Medication, Order: Benztropine" using "Benztropine (2.16.840.1.113883.3.464.1003.196.12.1361)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Brompheniramine" using "Brompheniramine (2.16.840.1.113883.3.464.1003.196.12.1427)"])
+	  return OrderMedication1([("Medication, Order: Brompheniramine" using "Brompheniramine (2.16.840.1.113883.3.464.1003.196.12.1427)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Butabarbital" using "Butabarbital (2.16.840.1.113883.3.464.1003.196.12.1402)"])
+	  return OrderMedication1([("Medication, Order: Butabarbital" using "Butabarbital (2.16.840.1.113883.3.464.1003.196.12.1402)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Butalbital" using "Butalbital (2.16.840.1.113883.3.464.1003.196.12.1514)"])
+	  return OrderMedication1([("Medication, Order: Butalbital" using "Butalbital (2.16.840.1.113883.3.464.1003.196.12.1514)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Carbinoxamine" using "Carbinoxamine (2.16.840.1.113883.3.464.1003.196.12.1306)"])
+	  return OrderMedication1([("Medication, Order: Carbinoxamine" using "Carbinoxamine (2.16.840.1.113883.3.464.1003.196.12.1306)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Carisoprodol" using "Carisoprodol (2.16.840.1.113883.3.464.1003.196.12.1369)"])
+	  return OrderMedication1([("Medication, Order: Carisoprodol" using "Carisoprodol (2.16.840.1.113883.3.464.1003.196.12.1369)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Chlorpheniramine" using "Chlorpheniramine (2.16.840.1.113883.3.464.1003.196.12.1352)"])
+	  return OrderMedication1([("Medication, Order: Chlorpheniramine" using "Chlorpheniramine (2.16.840.1.113883.3.464.1003.196.12.1352)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Chlorpropamide" using "Chlorpropamide (2.16.840.1.113883.3.464.1003.196.12.1303)"])
+	  return OrderMedication1([("Medication, Order: Chlorpropamide" using "Chlorpropamide (2.16.840.1.113883.3.464.1003.196.12.1303)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Chlorzoxazone" using "Chlorzoxazone (2.16.840.1.113883.3.464.1003.196.12.1362)"])
+	  return OrderMedication1([("Medication, Order: Chlorzoxazone" using "Chlorzoxazone (2.16.840.1.113883.3.464.1003.196.12.1362)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Clemastine" using "Clemastine (2.16.840.1.113883.3.464.1003.196.12.1308)"])
+	  return OrderMedication1([("Medication, Order: Clemastine" using "Clemastine (2.16.840.1.113883.3.464.1003.196.12.1308)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Clomipramine" using "Clomipramine (2.16.840.1.113883.3.464.1003.196.12.1336)"])
+	  return OrderMedication1([("Medication, Order: Clomipramine" using "Clomipramine (2.16.840.1.113883.3.464.1003.196.12.1336)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Conjugated Estrogens" using "Conjugated Estrogens (2.16.840.1.113883.3.464.1003.196.12.1357)"])
+	  return OrderMedication1([("Medication, Order: Conjugated Estrogens" using "Conjugated Estrogens (2.16.840.1.113883.3.464.1003.196.12.1357)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Cyclobenzaprine Hydrochloride" using "Cyclobenzaprine Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1372)"])
+	  return OrderMedication1([("Medication, Order: Cyclobenzaprine Hydrochloride" using "Cyclobenzaprine Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1372)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Cyproheptadine" using "Cyproheptadine (2.16.840.1.113883.3.464.1003.196.12.1277)"])
+	  return OrderMedication1([("Medication, Order: Cyproheptadine" using "Cyproheptadine (2.16.840.1.113883.3.464.1003.196.12.1277)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Desiccated Thyroid" using "Desiccated Thyroid (2.16.840.1.113883.3.464.1003.196.12.1354)"])
+	  return OrderMedication1([("Medication, Order: Desiccated Thyroid" using "Desiccated Thyroid (2.16.840.1.113883.3.464.1003.196.12.1354)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Desipramine" using "Desipramine (2.16.840.1.113883.3.464.1003.196.12.1278)"])
+	  return OrderMedication1([("Medication, Order: Desipramine" using "Desipramine (2.16.840.1.113883.3.464.1003.196.12.1278)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Dexbrompheniramine" using "Dexbrompheniramine (2.16.840.1.113883.3.464.1003.196.12.1375)"])
+	  return OrderMedication1([("Medication, Order: Dexbrompheniramine" using "Dexbrompheniramine (2.16.840.1.113883.3.464.1003.196.12.1375)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Dexchlorpheniramine" using "Dexchlorpheniramine (2.16.840.1.113883.3.464.1003.196.12.1300)"])
+	  return OrderMedication1([("Medication, Order: Dexchlorpheniramine" using "Dexchlorpheniramine (2.16.840.1.113883.3.464.1003.196.12.1300)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Dicyclomine" using "Dicyclomine (2.16.840.1.113883.3.464.1003.196.12.1279)"])
+	  return OrderMedication1([("Medication, Order: Dicyclomine" using "Dicyclomine (2.16.840.1.113883.3.464.1003.196.12.1279)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Dimenhydrinate" using "Dimenhydrinate (2.16.840.1.113883.3.464.1003.196.12.1500)"])
+	  return OrderMedication1([("Medication, Order: Dimenhydrinate" using "Dimenhydrinate (2.16.840.1.113883.3.464.1003.196.12.1500)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Diphenhydramine" using "Diphenhydramine (2.16.840.1.113883.3.464.1003.196.12.1293)"])
+	  return OrderMedication1([("Medication, Order: Diphenhydramine" using "Diphenhydramine (2.16.840.1.113883.3.464.1003.196.12.1293)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Dipyridamole" using "Dipyridamole (2.16.840.1.113883.3.464.1003.196.12.1349)"])
+	  return OrderMedication1([("Medication, Order: Dipyridamole" using "Dipyridamole (2.16.840.1.113883.3.464.1003.196.12.1349)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Disopyramide" using "Disopyramide (2.16.840.1.113883.3.464.1003.196.12.1311)"])
+	  return OrderMedication1([("Medication, Order: Disopyramide" using "Disopyramide (2.16.840.1.113883.3.464.1003.196.12.1311)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Doxylamine" using "Doxylamine (2.16.840.1.113883.3.464.1003.196.12.1515)"])
+	  return OrderMedication1([("Medication, Order: Doxylamine" using "Doxylamine (2.16.840.1.113883.3.464.1003.196.12.1515)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Esterified Estrogens" using "Esterified Estrogens (2.16.840.1.113883.3.464.1003.196.12.1419)"])
+	  return OrderMedication1([("Medication, Order: Esterified Estrogens" using "Esterified Estrogens (2.16.840.1.113883.3.464.1003.196.12.1419)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Estradiol" using "Estradiol (2.16.840.1.113883.3.464.1003.196.12.1365)"])
+	  return OrderMedication1([("Medication, Order: Estradiol" using "Estradiol (2.16.840.1.113883.3.464.1003.196.12.1365)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Estropipate" using "Estropipate (2.16.840.1.113883.3.464.1003.196.12.1319)"])
+	  return OrderMedication1([("Medication, Order: Estropipate" using "Estropipate (2.16.840.1.113883.3.464.1003.196.12.1319)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Glyburide" using "Glyburide (2.16.840.1.113883.3.464.1003.196.12.1368)"])
+	  return OrderMedication1([("Medication, Order: Glyburide" using "Glyburide (2.16.840.1.113883.3.464.1003.196.12.1368)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Guanfacine" using "Guanfacine (2.16.840.1.113883.3.464.1003.196.12.1341)"])
+	  return OrderMedication1([("Medication, Order: Guanfacine" using "Guanfacine (2.16.840.1.113883.3.464.1003.196.12.1341)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Hydroxyzine" using "Hydroxyzine (2.16.840.1.113883.3.464.1003.196.12.1374)"])
+	  return OrderMedication1([("Medication, Order: Hydroxyzine" using "Hydroxyzine (2.16.840.1.113883.3.464.1003.196.12.1374)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Hyoscyamine" using "Hyoscyamine (2.16.840.1.113883.3.464.1003.196.12.1501)"])
+	  return OrderMedication1([("Medication, Order: Hyoscyamine" using "Hyoscyamine (2.16.840.1.113883.3.464.1003.196.12.1501)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Imipramine" using "Imipramine (2.16.840.1.113883.3.464.1003.196.12.1359)"])
+	  return OrderMedication1([("Medication, Order: Imipramine" using "Imipramine (2.16.840.1.113883.3.464.1003.196.12.1359)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Indomethacin" using "Indomethacin (2.16.840.1.113883.3.464.1003.196.12.1366)"])
+	  return OrderMedication1([("Medication, Order: Indomethacin" using "Indomethacin (2.16.840.1.113883.3.464.1003.196.12.1366)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Isoxsuprine" using "Isoxsuprine (2.16.840.1.113883.3.464.1003.196.12.1422)"])
+	  return OrderMedication1([("Medication, Order: Isoxsuprine" using "Isoxsuprine (2.16.840.1.113883.3.464.1003.196.12.1422)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Ketorolac Tromethamine" using "Ketorolac Tromethamine (2.16.840.1.113883.3.464.1003.196.12.1364)"])
+	  return OrderMedication1([("Medication, Order: Ketorolac Tromethamine" using "Ketorolac Tromethamine (2.16.840.1.113883.3.464.1003.196.12.1364)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Meclizine" using "Meclizine (2.16.840.1.113883.3.464.1003.196.12.1506)"])
+	  return OrderMedication1([("Medication, Order: Meclizine" using "Meclizine (2.16.840.1.113883.3.464.1003.196.12.1506)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Megestrol" using "Megestrol (2.16.840.1.113883.3.464.1003.196.12.1342)"])
+	  return OrderMedication1([("Medication, Order: Megestrol" using "Megestrol (2.16.840.1.113883.3.464.1003.196.12.1342)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Meperidine" using "Meperidine (2.16.840.1.113883.3.464.1003.196.12.1351)"])
+	  return OrderMedication1([("Medication, Order: Meperidine" using "Meperidine (2.16.840.1.113883.3.464.1003.196.12.1351)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Meprobamate" using "Meprobamate (2.16.840.1.113883.3.464.1003.196.12.1284)"])
+	  return OrderMedication1([("Medication, Order: Meprobamate" using "Meprobamate (2.16.840.1.113883.3.464.1003.196.12.1284)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Metaxalone" using "Metaxalone (2.16.840.1.113883.3.464.1003.196.12.1358)"])
+	  return OrderMedication1([("Medication, Order: Metaxalone" using "Metaxalone (2.16.840.1.113883.3.464.1003.196.12.1358)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Methocarbamol" using "Methocarbamol (2.16.840.1.113883.3.464.1003.196.12.1370)"])
+	  return OrderMedication1([("Medication, Order: Methocarbamol" using "Methocarbamol (2.16.840.1.113883.3.464.1003.196.12.1370)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Methyldopa" using "Methyldopa (2.16.840.1.113883.3.464.1003.196.12.1331)"])
+	  return OrderMedication1([("Medication, Order: Methyldopa" using "Methyldopa (2.16.840.1.113883.3.464.1003.196.12.1331)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Nifedipine" using "Nifedipine (2.16.840.1.113883.3.464.1003.196.12.1353)"])
+	  return OrderMedication1([("Medication, Order: Nifedipine" using "Nifedipine (2.16.840.1.113883.3.464.1003.196.12.1353)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Nortriptyline" using "Nortriptyline (2.16.840.1.113883.3.464.1003.196.12.1507)"])
+	  return OrderMedication1([("Medication, Order: Nortriptyline" using "Nortriptyline (2.16.840.1.113883.3.464.1003.196.12.1507)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Paroxetine" using "Paroxetine (2.16.840.1.113883.3.464.1003.196.12.1508)"])
+	  return OrderMedication1([("Medication, Order: Paroxetine" using "Paroxetine (2.16.840.1.113883.3.464.1003.196.12.1508)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Pentobarbital" using "Pentobarbital (2.16.840.1.113883.3.464.1003.196.12.1518)"])
+	  return OrderMedication1([("Medication, Order: Pentobarbital" using "Pentobarbital (2.16.840.1.113883.3.464.1003.196.12.1518)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Phenobarbital" using "Phenobarbital (2.16.840.1.113883.3.464.1003.196.12.1348)"])
+	  return OrderMedication1([("Medication, Order: Phenobarbital" using "Phenobarbital (2.16.840.1.113883.3.464.1003.196.12.1348)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Promethazine Hydrochloride" using "Promethazine Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1367)"])
+	  return OrderMedication1([("Medication, Order: Promethazine Hydrochloride" using "Promethazine Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1367)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Protriptyline" using "Protriptyline (2.16.840.1.113883.3.464.1003.196.12.1509)"])
+	  return OrderMedication1([("Medication, Order: Protriptyline" using "Protriptyline (2.16.840.1.113883.3.464.1003.196.12.1509)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Propantheline" using "Propantheline (2.16.840.1.113883.3.464.1003.196.12.1519)"])
+	  return OrderMedication1([("Medication, Order: Propantheline" using "Propantheline (2.16.840.1.113883.3.464.1003.196.12.1519)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Scopolamine" using "Scopolamine (2.16.840.1.113883.3.464.1003.196.12.1520)"])
+	  return OrderMedication1([("Medication, Order: Scopolamine" using "Scopolamine (2.16.840.1.113883.3.464.1003.196.12.1520)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Secobarbital" using "Secobarbital (2.16.840.1.113883.3.464.1003.196.12.1521)"])
+	  return OrderMedication1([("Medication, Order: Secobarbital" using "Secobarbital (2.16.840.1.113883.3.464.1003.196.12.1521)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Trihexyphenidyl" using "Trihexyphenidyl (2.16.840.1.113883.3.464.1003.196.12.1334)"])
+	  return OrderMedication1([("Medication, Order: Trihexyphenidyl" using "Trihexyphenidyl (2.16.840.1.113883.3.464.1003.196.12.1334)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Trimipramine" using "Trimipramine (2.16.840.1.113883.3.464.1003.196.12.1285)"])
+	  return OrderMedication1([("Medication, Order: Trimipramine" using "Trimipramine (2.16.840.1.113883.3.464.1003.196.12.1285)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Triprolidine" using "Triprolidine (2.16.840.1.113883.3.464.1003.196.12.1408)"])
+	  return OrderMedication1([("Medication, Order: Triprolidine" using "Triprolidine (2.16.840.1.113883.3.464.1003.196.12.1408)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Nonbenzodiazepine hypnotics" using "Nonbenzodiazepine hypnotics (2.16.840.1.113883.3.464.1003.196.12.1480)"])
+	  return OrderMedication1([("Medication, Order: Nonbenzodiazepine hypnotics" using "Nonbenzodiazepine hypnotics (2.16.840.1.113883.3.464.1003.196.12.1480)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Methscopolamine" using "Methscopolamine (2.16.840.1.113883.3.464.1003.196.12.1525)"])
+	  return OrderMedication1([("Medication, Order: Methscopolamine" using "Methscopolamine (2.16.840.1.113883.3.464.1003.196.12.1525)")])
 	  union Medication OrderMedication1
 	  with Medication OrderMedication2
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Pyrilamine" using "Pyrilamine (2.16.840.1.113883.3.464.1003.196.12.1524)"]) )
+	  return OrderMedication1([("Medication, Order: Pyrilamine" using "Pyrilamine (2.16.840.1.113883.3.464.1003.196.12.1524)")]) )
 	  or ( ( Sum((collapse(Medication.relevantPeriod))CumulativeDosages
 	    return all duration in days of CumulativeDosages
-	)(["Medication, Order: Anti Infectives, other" using "Anti Infectives, other (2.16.840.1.113883.3.464.1003.196.12.1481)"] AntiInfectives
+	)([("Medication, Order: Anti Infectives, other" using "Anti Infectives, other (2.16.840.1.113883.3.464.1003.196.12.1481)")] AntiInfectives
 	  where AntiInfectives.authorDatetime during Measurement Period)>= 90
 	    and //Anti Infectives, other
 	exists ( Medication OrderMedication1
@@ -454,7 +454,7 @@ exists ( ( from
 	    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
 	      and OrderMedication1.authorDatetime during Measurement Period
 	      and OrderMedication2.authorDatetime during Measurement Period
-	  return OrderMedication1(["Medication, Order: Anti Infectives, other" using "Anti Infectives, other (2.16.840.1.113883.3.464.1003.196.12.1481)"]))
+	  return OrderMedication1([("Medication, Order: Anti Infectives, other" using "Anti Infectives, other (2.16.840.1.113883.3.464.1003.196.12.1481)")]))
 	) )
 =============================================================================================================================================================================
 Numerator Exclusions:
@@ -464,20 +464,20 @@ Denominator Exceptions:
 None
 =============================================================================================================================================================================
 Population Criteria 1:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 65
-	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
-	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-	  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-	  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"] ) ValidEncounter
+	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)")]
+	  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+	  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+	  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Stratification:

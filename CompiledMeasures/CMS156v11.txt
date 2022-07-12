@@ -3,73 +3,73 @@ Initial Population:
 AgeInYearsAt(date from 
   end of Measurement Period
 )>= 67
-  and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"] ) ValidEncounters
+  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator:
 AgeInYearsAt(date from 
   end of Measurement Period
 )>= 67
-  and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"] ) ValidEncounters
+  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
-  or PalliativeCare.exists ( ["Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)"] PalliativeAssessment
+  or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
     where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 )
-or exists (["Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)"] PalliativeDiagnosis
+or exists ([("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis
 where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
-  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)"] PalliativeEncounter
+  or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)")] PalliativeEncounter
       where PalliativeEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)"] PalliativeIntervention
+  or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
@@ -85,7 +85,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Anticholinergics, first generation antihistamines" using "Anticholinergics, first generation antihistamines (2.16.840.1.113883.3.464.1003.1043)"])
+  return OrderMedication1([("Medication, Order: Anticholinergics, first generation antihistamines" using "Anticholinergics, first generation antihistamines (2.16.840.1.113883.3.464.1003.1043)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -95,7 +95,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Anticholinergics, anti Parkinson agents" using "Anticholinergics, anti Parkinson agents (2.16.840.1.113883.3.464.1003.1049)"])
+  return OrderMedication1([("Medication, Order: Anticholinergics, anti Parkinson agents" using "Anticholinergics, anti Parkinson agents (2.16.840.1.113883.3.464.1003.1049)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -105,7 +105,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Antispasmodics" using "Antispasmodics (2.16.840.1.113883.3.464.1003.1050)"])
+  return OrderMedication1([("Medication, Order: Antispasmodics" using "Antispasmodics (2.16.840.1.113883.3.464.1003.1050)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -115,7 +115,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Antithrombotic" using "Antithrombotic (2.16.840.1.113883.3.464.1003.1051)"])
+  return OrderMedication1([("Medication, Order: Antithrombotic" using "Antithrombotic (2.16.840.1.113883.3.464.1003.1051)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -125,7 +125,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Cardiovascular, alpha agonists, central" using "Cardiovascular, alpha agonists, central (2.16.840.1.113883.3.464.1003.1052)"])
+  return OrderMedication1([("Medication, Order: Cardiovascular, alpha agonists, central" using "Cardiovascular, alpha agonists, central (2.16.840.1.113883.3.464.1003.1052)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -135,7 +135,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Cardiovascular, other" using "Cardiovascular, other (2.16.840.1.113883.3.464.1003.1053)"])
+  return OrderMedication1([("Medication, Order: Cardiovascular, other" using "Cardiovascular, other (2.16.840.1.113883.3.464.1003.1053)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -145,7 +145,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Central nervous system, antidepressants" using "Central nervous system, antidepressants (2.16.840.1.113883.3.464.1003.1054)"])
+  return OrderMedication1([("Medication, Order: Central nervous system, antidepressants" using "Central nervous system, antidepressants (2.16.840.1.113883.3.464.1003.1054)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -155,7 +155,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Central nervous system, barbiturates" using "Central nervous system, barbiturates (2.16.840.1.113883.3.464.1003.1055)"])
+  return OrderMedication1([("Medication, Order: Central nervous system, barbiturates" using "Central nervous system, barbiturates (2.16.840.1.113883.3.464.1003.1055)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -165,7 +165,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Central nervous system, vasodilators" using "Central nervous system, vasodilators (2.16.840.1.113883.3.464.1003.1056)"])
+  return OrderMedication1([("Medication, Order: Central nervous system, vasodilators" using "Central nervous system, vasodilators (2.16.840.1.113883.3.464.1003.1056)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -175,7 +175,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Central nervous system, other" using "Central nervous system, other (2.16.840.1.113883.3.464.1003.1057)"])
+  return OrderMedication1([("Medication, Order: Central nervous system, other" using "Central nervous system, other (2.16.840.1.113883.3.464.1003.1057)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -185,7 +185,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Endocrine system, estrogens with or without progestins" using "Endocrine system, estrogens with or without progestins (2.16.840.1.113883.3.464.1003.1058)"])
+  return OrderMedication1([("Medication, Order: Endocrine system, estrogens with or without progestins" using "Endocrine system, estrogens with or without progestins (2.16.840.1.113883.3.464.1003.1058)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -195,7 +195,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Endocrine system, sulfonylureas, long duration" using "Endocrine system, sulfonylureas, long duration (2.16.840.1.113883.3.464.1003.1059)"])
+  return OrderMedication1([("Medication, Order: Endocrine system, sulfonylureas, long duration" using "Endocrine system, sulfonylureas, long duration (2.16.840.1.113883.3.464.1003.1059)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -205,7 +205,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Endocrine system, other" using "Endocrine system, other (2.16.840.1.113883.3.464.1003.1060)"])
+  return OrderMedication1([("Medication, Order: Endocrine system, other" using "Endocrine system, other (2.16.840.1.113883.3.464.1003.1060)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -215,7 +215,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Nonbenzodiazepine hypnotics" using "Nonbenzodiazepine hypnotics (2.16.840.1.113883.3.464.1003.196.12.1480)"])
+  return OrderMedication1([("Medication, Order: Nonbenzodiazepine hypnotics" using "Nonbenzodiazepine hypnotics (2.16.840.1.113883.3.464.1003.196.12.1480)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -225,7 +225,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Pain medications, skeletal muscle relaxants" using "Pain medications, skeletal muscle relaxants (2.16.840.1.113883.3.464.1003.1062)"])
+  return OrderMedication1([("Medication, Order: Pain medications, skeletal muscle relaxants" using "Pain medications, skeletal muscle relaxants (2.16.840.1.113883.3.464.1003.1062)")])
   union Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -235,7 +235,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Pain medications, other" using "Pain medications, other (2.16.840.1.113883.3.464.1003.1063)"]) )
+  return OrderMedication1([("Medication, Order: Pain medications, other" using "Pain medications, other (2.16.840.1.113883.3.464.1003.1063)")]) )
   or ( Sum((Medication OrderMedication1
   with Medication OrderMedication2
     such that ( OrderMedication1.authorDatetime during Measurement Period
@@ -245,7 +245,7 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Anti Infectives, other" using "Anti Infectives, other (2.16.840.1.113883.3.464.1003.196.12.1481)"]))AntiInfectives
+  return OrderMedication1([("Medication, Order: Anti Infectives, other" using "Anti Infectives, other (2.16.840.1.113883.3.464.1003.196.12.1481)")]))AntiInfectives
     let DaysSupply: Coalesce(AntiInfectives.daysSupplied, AntiInfectives.supply.value /(AntiInfectives.dosage.value * CMD.ToDaily(AntiInfectives.frequency)))*(1 + Coalesce(AntiInfectives.refills, 0))
     return all DaysSupply
 )> 90 )
@@ -258,27 +258,27 @@ exists ( Medication OrderMedication1
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Reserpine" using "Reserpine (2.16.840.1.113883.3.464.1003.1044)"] ReserpineOrdered
+  return OrderMedication1([("Medication, Order: Reserpine" using "Reserpine (2.16.840.1.113883.3.464.1003.1044)")] ReserpineOrdered
       where MedicationOrder Order
   let MedicationStrength: case
-  when Strength ~ code "reserpine 0.1 MG Oral Tablet" ("RXNORM Code (198196)") then 0.1 'mg'
-  when Strength ~ code "reserpine 0.25 MG Oral Tablet" ("RXNORM Code (198197)") then 0.25 'mg'
-  when Strength ~ code "digoxin 0.05 MG/ML Oral Solution" ("RXNORM Code (393245)") then 0.05 'mg/mL'
-  when Strength ~ code "digoxin 0.0625 MG Oral Tablet" ("RXNORM Code (245273)") then 0.0625 'mg'
-  when Strength ~ code "1 ML digoxin 0.1 MG/ML Injection" ("RXNORM Code (204504)") then 0.1 'mg/mL'
-  when Strength ~ code "digoxin 0.125 MG Oral Tablet" ("RXNORM Code (197604)") then 0.125 'mg'
-  when Strength ~ code "digoxin 0.1875 MG Oral Tablet" ("RXNORM Code (1441565)") then 0.1875 'mg'
-  when Strength ~ code "digoxin 0.25 MG Oral Tablet" ("RXNORM Code (197606)") then 0.25 'mg'
-  when Strength ~ code "2 ML digoxin 0.25 MG/ML Injection" ("RXNORM Code (104208)") then 0.25 'mg/mL'
-  when Strength ~ code "doxepin 3 MG Oral Tablet" ("RXNORM Code (966787)") then 3 'mg'
-  when Strength ~ code "doxepin 6 MG Oral Tablet" ("RXNORM Code (966793)") then 6 'mg'
-  when Strength ~ code "doxepin hydrochloride 10 MG Oral Capsule" ("RXNORM Code (1000048)") then 10 'mg'
-  when Strength ~ code "doxepin hydrochloride 10 MG/ML Oral Solution" ("RXNORM Code (1000054)") then 10 'mg/mL'
-  when Strength ~ code "doxepin hydrochloride 25 MG Oral Capsule" ("RXNORM Code (1000070)") then 25 'mg'
-  when Strength ~ code "doxepin hydrochloride 50 MG Oral Capsule" ("RXNORM Code (1000076)") then 50 'mg'
-  when Strength ~ code "doxepin hydrochloride 75 MG Oral Capsule" ("RXNORM Code (1000097)") then 75 'mg'
-  when Strength ~ code "doxepin hydrochloride 100 MG Oral Capsule" ("RXNORM Code (1000058)") then 100 'mg'
-  when Strength ~ code "doxepin hydrochloride 150 MG Oral Capsule" ("RXNORM Code (1000064)") then 150 'mg' 
+  when Strength ~ (code "reserpine 0.1 MG Oral Tablet" ("RXNORM Code (198196)")) then 0.1 'mg'
+  when Strength ~ (code "reserpine 0.25 MG Oral Tablet" ("RXNORM Code (198197)")) then 0.25 'mg'
+  when Strength ~ (code "digoxin 0.05 MG/ML Oral Solution" ("RXNORM Code (393245)")) then 0.05 'mg/mL'
+  when Strength ~ (code "digoxin 0.0625 MG Oral Tablet" ("RXNORM Code (245273)")) then 0.0625 'mg'
+  when Strength ~ (code "1 ML digoxin 0.1 MG/ML Injection" ("RXNORM Code (204504)")) then 0.1 'mg/mL'
+  when Strength ~ (code "digoxin 0.125 MG Oral Tablet" ("RXNORM Code (197604)")) then 0.125 'mg'
+  when Strength ~ (code "digoxin 0.1875 MG Oral Tablet" ("RXNORM Code (1441565)")) then 0.1875 'mg'
+  when Strength ~ (code "digoxin 0.25 MG Oral Tablet" ("RXNORM Code (197606)")) then 0.25 'mg'
+  when Strength ~ (code "2 ML digoxin 0.25 MG/ML Injection" ("RXNORM Code (104208)")) then 0.25 'mg/mL'
+  when Strength ~ (code "doxepin 3 MG Oral Tablet" ("RXNORM Code (966787)")) then 3 'mg'
+  when Strength ~ (code "doxepin 6 MG Oral Tablet" ("RXNORM Code (966793)")) then 6 'mg'
+  when Strength ~ (code "doxepin hydrochloride 10 MG Oral Capsule" ("RXNORM Code (1000048)")) then 10 'mg'
+  when Strength ~ (code "doxepin hydrochloride 10 MG/ML Oral Solution" ("RXNORM Code (1000054)")) then 10 'mg/mL'
+  when Strength ~ (code "doxepin hydrochloride 25 MG Oral Capsule" ("RXNORM Code (1000070)")) then 25 'mg'
+  when Strength ~ (code "doxepin hydrochloride 50 MG Oral Capsule" ("RXNORM Code (1000076)")) then 50 'mg'
+  when Strength ~ (code "doxepin hydrochloride 75 MG Oral Capsule" ("RXNORM Code (1000097)")) then 75 'mg'
+  when Strength ~ (code "doxepin hydrochloride 100 MG Oral Capsule" ("RXNORM Code (1000058)")) then 100 'mg'
+  when Strength ~ (code "doxepin hydrochloride 150 MG Oral Capsule" ("RXNORM Code (1000064)")) then 150 'mg' 
   else null 
 end(Order.code),
   DaysSupplied: Coalesce(Order.daysSupplied, Order.supply.value /(Order.dosage.value * CMD.ToDaily(Order.frequency)))
@@ -300,27 +300,27 @@ end(Order.code),
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Digoxin" using "Digoxin (2.16.840.1.113883.3.464.1003.1065)"] DigoxinOrdered
+  return OrderMedication1([("Medication, Order: Digoxin" using "Digoxin (2.16.840.1.113883.3.464.1003.1065)")] DigoxinOrdered
         where MedicationOrder Order
   let MedicationStrength: case
-  when Strength ~ code "reserpine 0.1 MG Oral Tablet" ("RXNORM Code (198196)") then 0.1 'mg'
-  when Strength ~ code "reserpine 0.25 MG Oral Tablet" ("RXNORM Code (198197)") then 0.25 'mg'
-  when Strength ~ code "digoxin 0.05 MG/ML Oral Solution" ("RXNORM Code (393245)") then 0.05 'mg/mL'
-  when Strength ~ code "digoxin 0.0625 MG Oral Tablet" ("RXNORM Code (245273)") then 0.0625 'mg'
-  when Strength ~ code "1 ML digoxin 0.1 MG/ML Injection" ("RXNORM Code (204504)") then 0.1 'mg/mL'
-  when Strength ~ code "digoxin 0.125 MG Oral Tablet" ("RXNORM Code (197604)") then 0.125 'mg'
-  when Strength ~ code "digoxin 0.1875 MG Oral Tablet" ("RXNORM Code (1441565)") then 0.1875 'mg'
-  when Strength ~ code "digoxin 0.25 MG Oral Tablet" ("RXNORM Code (197606)") then 0.25 'mg'
-  when Strength ~ code "2 ML digoxin 0.25 MG/ML Injection" ("RXNORM Code (104208)") then 0.25 'mg/mL'
-  when Strength ~ code "doxepin 3 MG Oral Tablet" ("RXNORM Code (966787)") then 3 'mg'
-  when Strength ~ code "doxepin 6 MG Oral Tablet" ("RXNORM Code (966793)") then 6 'mg'
-  when Strength ~ code "doxepin hydrochloride 10 MG Oral Capsule" ("RXNORM Code (1000048)") then 10 'mg'
-  when Strength ~ code "doxepin hydrochloride 10 MG/ML Oral Solution" ("RXNORM Code (1000054)") then 10 'mg/mL'
-  when Strength ~ code "doxepin hydrochloride 25 MG Oral Capsule" ("RXNORM Code (1000070)") then 25 'mg'
-  when Strength ~ code "doxepin hydrochloride 50 MG Oral Capsule" ("RXNORM Code (1000076)") then 50 'mg'
-  when Strength ~ code "doxepin hydrochloride 75 MG Oral Capsule" ("RXNORM Code (1000097)") then 75 'mg'
-  when Strength ~ code "doxepin hydrochloride 100 MG Oral Capsule" ("RXNORM Code (1000058)") then 100 'mg'
-  when Strength ~ code "doxepin hydrochloride 150 MG Oral Capsule" ("RXNORM Code (1000064)") then 150 'mg' 
+  when Strength ~ (code "reserpine 0.1 MG Oral Tablet" ("RXNORM Code (198196)")) then 0.1 'mg'
+  when Strength ~ (code "reserpine 0.25 MG Oral Tablet" ("RXNORM Code (198197)")) then 0.25 'mg'
+  when Strength ~ (code "digoxin 0.05 MG/ML Oral Solution" ("RXNORM Code (393245)")) then 0.05 'mg/mL'
+  when Strength ~ (code "digoxin 0.0625 MG Oral Tablet" ("RXNORM Code (245273)")) then 0.0625 'mg'
+  when Strength ~ (code "1 ML digoxin 0.1 MG/ML Injection" ("RXNORM Code (204504)")) then 0.1 'mg/mL'
+  when Strength ~ (code "digoxin 0.125 MG Oral Tablet" ("RXNORM Code (197604)")) then 0.125 'mg'
+  when Strength ~ (code "digoxin 0.1875 MG Oral Tablet" ("RXNORM Code (1441565)")) then 0.1875 'mg'
+  when Strength ~ (code "digoxin 0.25 MG Oral Tablet" ("RXNORM Code (197606)")) then 0.25 'mg'
+  when Strength ~ (code "2 ML digoxin 0.25 MG/ML Injection" ("RXNORM Code (104208)")) then 0.25 'mg/mL'
+  when Strength ~ (code "doxepin 3 MG Oral Tablet" ("RXNORM Code (966787)")) then 3 'mg'
+  when Strength ~ (code "doxepin 6 MG Oral Tablet" ("RXNORM Code (966793)")) then 6 'mg'
+  when Strength ~ (code "doxepin hydrochloride 10 MG Oral Capsule" ("RXNORM Code (1000048)")) then 10 'mg'
+  when Strength ~ (code "doxepin hydrochloride 10 MG/ML Oral Solution" ("RXNORM Code (1000054)")) then 10 'mg/mL'
+  when Strength ~ (code "doxepin hydrochloride 25 MG Oral Capsule" ("RXNORM Code (1000070)")) then 25 'mg'
+  when Strength ~ (code "doxepin hydrochloride 50 MG Oral Capsule" ("RXNORM Code (1000076)")) then 50 'mg'
+  when Strength ~ (code "doxepin hydrochloride 75 MG Oral Capsule" ("RXNORM Code (1000097)")) then 75 'mg'
+  when Strength ~ (code "doxepin hydrochloride 100 MG Oral Capsule" ("RXNORM Code (1000058)")) then 100 'mg'
+  when Strength ~ (code "doxepin hydrochloride 150 MG Oral Capsule" ("RXNORM Code (1000064)")) then 150 'mg' 
   else null 
 end(Order.code),
   DaysSupplied: Coalesce(Order.daysSupplied, Order.supply.value /(Order.dosage.value * CMD.ToDaily(Order.frequency)))
@@ -342,27 +342,27 @@ end(Order.code),
           and OrderMedication1.authorDatetime during Measurement Period
           and OrderMedication2.authorDatetime during Measurement Period
       )
-  return OrderMedication1(["Medication, Order: Doxepin" using "Doxepin (2.16.840.1.113883.3.464.1003.1067)"] DoxepinOrdered
+  return OrderMedication1([("Medication, Order: Doxepin" using "Doxepin (2.16.840.1.113883.3.464.1003.1067)")] DoxepinOrdered
         where MedicationOrder Order
   let MedicationStrength: case
-  when Strength ~ code "reserpine 0.1 MG Oral Tablet" ("RXNORM Code (198196)") then 0.1 'mg'
-  when Strength ~ code "reserpine 0.25 MG Oral Tablet" ("RXNORM Code (198197)") then 0.25 'mg'
-  when Strength ~ code "digoxin 0.05 MG/ML Oral Solution" ("RXNORM Code (393245)") then 0.05 'mg/mL'
-  when Strength ~ code "digoxin 0.0625 MG Oral Tablet" ("RXNORM Code (245273)") then 0.0625 'mg'
-  when Strength ~ code "1 ML digoxin 0.1 MG/ML Injection" ("RXNORM Code (204504)") then 0.1 'mg/mL'
-  when Strength ~ code "digoxin 0.125 MG Oral Tablet" ("RXNORM Code (197604)") then 0.125 'mg'
-  when Strength ~ code "digoxin 0.1875 MG Oral Tablet" ("RXNORM Code (1441565)") then 0.1875 'mg'
-  when Strength ~ code "digoxin 0.25 MG Oral Tablet" ("RXNORM Code (197606)") then 0.25 'mg'
-  when Strength ~ code "2 ML digoxin 0.25 MG/ML Injection" ("RXNORM Code (104208)") then 0.25 'mg/mL'
-  when Strength ~ code "doxepin 3 MG Oral Tablet" ("RXNORM Code (966787)") then 3 'mg'
-  when Strength ~ code "doxepin 6 MG Oral Tablet" ("RXNORM Code (966793)") then 6 'mg'
-  when Strength ~ code "doxepin hydrochloride 10 MG Oral Capsule" ("RXNORM Code (1000048)") then 10 'mg'
-  when Strength ~ code "doxepin hydrochloride 10 MG/ML Oral Solution" ("RXNORM Code (1000054)") then 10 'mg/mL'
-  when Strength ~ code "doxepin hydrochloride 25 MG Oral Capsule" ("RXNORM Code (1000070)") then 25 'mg'
-  when Strength ~ code "doxepin hydrochloride 50 MG Oral Capsule" ("RXNORM Code (1000076)") then 50 'mg'
-  when Strength ~ code "doxepin hydrochloride 75 MG Oral Capsule" ("RXNORM Code (1000097)") then 75 'mg'
-  when Strength ~ code "doxepin hydrochloride 100 MG Oral Capsule" ("RXNORM Code (1000058)") then 100 'mg'
-  when Strength ~ code "doxepin hydrochloride 150 MG Oral Capsule" ("RXNORM Code (1000064)") then 150 'mg' 
+  when Strength ~ (code "reserpine 0.1 MG Oral Tablet" ("RXNORM Code (198196)")) then 0.1 'mg'
+  when Strength ~ (code "reserpine 0.25 MG Oral Tablet" ("RXNORM Code (198197)")) then 0.25 'mg'
+  when Strength ~ (code "digoxin 0.05 MG/ML Oral Solution" ("RXNORM Code (393245)")) then 0.05 'mg/mL'
+  when Strength ~ (code "digoxin 0.0625 MG Oral Tablet" ("RXNORM Code (245273)")) then 0.0625 'mg'
+  when Strength ~ (code "1 ML digoxin 0.1 MG/ML Injection" ("RXNORM Code (204504)")) then 0.1 'mg/mL'
+  when Strength ~ (code "digoxin 0.125 MG Oral Tablet" ("RXNORM Code (197604)")) then 0.125 'mg'
+  when Strength ~ (code "digoxin 0.1875 MG Oral Tablet" ("RXNORM Code (1441565)")) then 0.1875 'mg'
+  when Strength ~ (code "digoxin 0.25 MG Oral Tablet" ("RXNORM Code (197606)")) then 0.25 'mg'
+  when Strength ~ (code "2 ML digoxin 0.25 MG/ML Injection" ("RXNORM Code (104208)")) then 0.25 'mg/mL'
+  when Strength ~ (code "doxepin 3 MG Oral Tablet" ("RXNORM Code (966787)")) then 3 'mg'
+  when Strength ~ (code "doxepin 6 MG Oral Tablet" ("RXNORM Code (966793)")) then 6 'mg'
+  when Strength ~ (code "doxepin hydrochloride 10 MG Oral Capsule" ("RXNORM Code (1000048)")) then 10 'mg'
+  when Strength ~ (code "doxepin hydrochloride 10 MG/ML Oral Solution" ("RXNORM Code (1000054)")) then 10 'mg/mL'
+  when Strength ~ (code "doxepin hydrochloride 25 MG Oral Capsule" ("RXNORM Code (1000070)")) then 25 'mg'
+  when Strength ~ (code "doxepin hydrochloride 50 MG Oral Capsule" ("RXNORM Code (1000076)")) then 50 'mg'
+  when Strength ~ (code "doxepin hydrochloride 75 MG Oral Capsule" ("RXNORM Code (1000097)")) then 75 'mg'
+  when Strength ~ (code "doxepin hydrochloride 100 MG Oral Capsule" ("RXNORM Code (1000058)")) then 100 'mg'
+  when Strength ~ (code "doxepin hydrochloride 150 MG Oral Capsule" ("RXNORM Code (1000064)")) then 150 'mg' 
   else null 
 end(Order.code),
   DaysSupplied: Coalesce(Order.daysSupplied, Order.supply.value /(Order.dosage.value * CMD.ToDaily(Order.frequency)))
@@ -386,18 +386,18 @@ Population Criteria 1:
 AgeInYearsAt(date from 
   end of Measurement Period
 )>= 67
-  and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"] ) ValidEncounters
+  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmologic Services" using "Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Stratification:

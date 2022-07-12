@@ -1,28 +1,28 @@
 =============================================================================================================================================================================
 Initial Population:
 from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
@@ -31,28 +31,28 @@ from
 =============================================================================================================================================================================
 Denominator:
 from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
@@ -61,173 +61,173 @@ from
 =============================================================================================================================================================================
 Denominator Exclusions:
 from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
   where AgeInYearsAt(date from start of Measurement Period)>= 3
   return EncounterWithPharyngitis EligibleEncounters
-  where Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+  where Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   union from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
-  with ["Medication, Active: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] ActiveAntibiotic
+  with [("Medication, Active: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] ActiveAntibiotic
     such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( ActiveAntibiotic.relevantDatetime, ActiveAntibiotic.relevantPeriod ) overlaps day of Interval[start of EncounterWithPharyngitis.relevantPeriod - 30 days, start of EncounterWithPharyngitis.relevantPeriod - 1 day])
   return EncounterWithPharyngitis
   union from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
-  with ["Diagnosis: Competing Conditions for Respiratory Conditions" using "Competing Conditions for Respiratory Conditions (2.16.840.1.113883.3.464.1003.102.12.1017)"] CompetingCondition
+  with [("Diagnosis: Competing Conditions for Respiratory Conditions" using "Competing Conditions for Respiratory Conditions (2.16.840.1.113883.3.464.1003.102.12.1017)")] CompetingCondition
     such that CompetingCondition.prevalencePeriod starts 3 days or less on or after day of start of EncounterWithPharyngitis.relevantPeriod
   return EncounterWithPharyngitis
   union from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
-  with ["Diagnosis: Comorbid Conditions for Respiratory Conditions" using "Comorbid Conditions for Respiratory Conditions (2.16.840.1.113883.3.464.1003.102.12.1025)"] ComorbidCondition
+  with [("Diagnosis: Comorbid Conditions for Respiratory Conditions" using "Comorbid Conditions for Respiratory Conditions (2.16.840.1.113883.3.464.1003.102.12.1025)")] ComorbidCondition
     such that start of ComorbidCondition.prevalencePeriod in day of Interval[start of EncounterWithPharyngitis.relevantPeriod - 1 year, start of EncounterWithPharyngitis.relevantPeriod]
   return EncounterWithPharyngitis
 =============================================================================================================================================================================
 Numerator:
 from
-  ["Laboratory Test, Performed: Group A Streptococcus Test" using "Group A Streptococcus Test (2.16.840.1.113883.3.464.1003.198.12.1012)"] GroupAStreptococcusTest
+  [("Laboratory Test, Performed: Group A Streptococcus Test" using "Group A Streptococcus Test (2.16.840.1.113883.3.464.1003.198.12.1012)")] GroupAStreptococcusTest
   where GroupAStreptococcusTest.result is not null GroupAStreptococcusTest,
   from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
@@ -249,28 +249,28 @@ None
 =============================================================================================================================================================================
 Stratification 1:
 from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
@@ -279,28 +279,28 @@ from
 =============================================================================================================================================================================
 Stratification 2:
 from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
@@ -309,28 +309,28 @@ from
 =============================================================================================================================================================================
 Stratification 3:
 from
-  ( ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-  union ["Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) ValidEncounters
+  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+  union [("Encounter, Performed: Medical Disability Exam" using "Medical Disability Exam (2.16.840.1.113883.3.464.1003.101.12.1073)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+  union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period EDOrAmbulatoryVisit
-  with ["Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)"] AntibioticOrdered
+  with [("Medication, Order: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] AntibioticOrdered
     such that ( start of EDOrAmbulatoryVisit.relevantPeriod ) 3 days or less on or before day of AntibioticOrdered.authorDatetime VisitWithAntibiotic,
-  ( ["Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)"]
-    union ["Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)"]
+  ( [("Diagnosis: Acute Pharyngitis" using "Acute Pharyngitis (2.16.840.1.113883.3.464.1003.102.12.1011)")]
+    union [("Diagnosis: Acute Tonsillitis" using "Acute Tonsillitis (2.16.840.1.113883.3.464.1003.102.12.1012)")]
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis

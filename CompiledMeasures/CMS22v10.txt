@@ -1,26 +1,26 @@
 =============================================================================================================================================================================
 Initial Population:
-["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+[("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator:
-["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+[("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator Exclusions:
-["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+[("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ["Diagnosis: Diagnosis of Hypertension" using "Diagnosis of Hypertension (2.16.840.1.113883.3.600.263)"] Hypertension
+	  with [("Diagnosis: Diagnosis of Hypertension" using "Diagnosis of Hypertension (2.16.840.1.113883.3.600.263)")] Hypertension
 	    such that Hypertension.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 =============================================================================================================================================================================
 Numerator:
-["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+[("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -28,7 +28,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -38,9 +38,9 @@ Numerator:
 	  )
 	  where EncounterLastSystolicBP.result included in Interval[1 'mm[Hg]', 120 'mm[Hg]' )
 	    and EncounterLastDiastolicBP.result included in Interval[1 'mm[Hg]', 80 'mm[Hg]' )
-	  union ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -48,7 +48,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -59,21 +59,21 @@ Numerator:
 	  where ( EncounterLastSystolicBP.result included in Interval[120 'mm[Hg]', 129 'mm[Hg]']
 	      and EncounterLastDiastolicBP.result < 80 'mm[Hg]'
 	  ) ElevatedEncounter
-	    with ( ["Intervention, Order: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)"]
-	    union ["Intervention, Order: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)"]
+	    with ( [("Intervention, Order: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)")]
+	    union [("Intervention, Order: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)")]
 	) Twoto6MonthRescreen
 	      such that Twoto6MonthRescreen.authorDatetime same day as start of ElevatedEncounter.relevantPeriod
-	    with ( ["Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	    with ( [("Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	) NonPharmInterventions
 	      such that NonPharmInterventions.authorDatetime same day as start of ElevatedEncounter.relevantPeriod
 	)
-	  union ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -81,7 +81,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -92,13 +92,13 @@ Numerator:
 	  where ( EncounterLastSystolicBP.result included in Interval[120 'mm[Hg]', 129 'mm[Hg]']
 	      and EncounterLastDiastolicBP.result < 80 'mm[Hg]'
 	  ) ElevatedEncounter
-	      with ["Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"] Referral
-	  where Referral.reason in valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514) Referral
+	      with [("Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")] Referral
+	  where Referral.reason in (valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514)) Referral
 	        such that Referral.authorDatetime same day as start of ElevatedEncounter.relevantPeriod
 	  ) )
-	  union ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -106,7 +106,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -118,9 +118,9 @@ Numerator:
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    )
 	)
-	  except ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  except [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -128,7 +128,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -141,21 +141,21 @@ Numerator:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) FirstHTNEncounter
-	  with ( ["Intervention, Order: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)"] FourWeekRescreen
-	    with ( ["Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	  with ( [("Intervention, Order: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)")] FourWeekRescreen
+	    with ( [("Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	) NonPharmInterventionsHTN
 	      such that FourWeekRescreen.authorDatetime same day as NonPharmInterventionsHTN.authorDatetime
 	)
-	  union ( ["Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"] Referral
-	  where Referral.reason in valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514) ) FirstHTNIntervention
+	  union ( [("Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")] Referral
+	  where Referral.reason in (valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514)) ) FirstHTNIntervention
 	    such that FirstHTNIntervention.authorDatetime same day as start of FirstHTNEncounter.relevantPeriod )
-	  union ( ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -163,7 +163,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -177,9 +177,9 @@ Numerator:
 	            or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
 	        )
 	)
-	  intersect ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -187,7 +187,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -200,26 +200,26 @@ Numerator:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) SecondHTNEncounterReading
-	    with ( ( ["Intervention, Order: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)"]
-	    union ["Intervention, Order: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)"]
+	    with ( ( [("Intervention, Order: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)")]
+	    union [("Intervention, Order: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)")]
 	) Rescreen2to6
-	  with ( ["Diagnostic Study, Order: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)"]
-	    union ["Diagnostic Study, Order: EKG study" using "EKG study (LOINC Code 11524-6)"]
-	    union ["Laboratory Test, Order: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)"]
+	  with ( [("Diagnostic Study, Order: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)")]
+	    union [("Diagnostic Study, Order: EKG study" using "EKG study (LOINC Code 11524-6)")]
+	    union [("Laboratory Test, Order: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)")]
 	) LabECGIntervention
 	    such that Rescreen2to6.authorDatetime same day as LabECGIntervention.authorDatetime ) RescreenLabECG
-	  with ( ["Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	  with ( [("Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	) NonPharmSecondIntervention
 	    such that RescreenLabECG.authorDatetime same day as NonPharmSecondIntervention.authorDatetime EncounterInterventions
 	      such that EncounterInterventions.authorDatetime same day as start of SecondHTNEncounterReading.relevantPeriod
 	)
-	  union ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -227,7 +227,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -241,9 +241,9 @@ Numerator:
 	            or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
 	        )
 	)
-	  intersect ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -251,7 +251,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -264,13 +264,13 @@ Numerator:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) SecondHTNEncounterReading
-	      with ["Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"] Referral
-	  where Referral.reason in valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514) ReferralForHTN
+	      with [("Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")] Referral
+	  where Referral.reason in (valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514)) ReferralForHTN
 	        such that ReferralForHTN.authorDatetime same day as start of SecondHTNEncounterReading.relevantPeriod
 	  ) )
-	  union ( ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -278,7 +278,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -289,9 +289,9 @@ Numerator:
 	    where EncounterLastSystolicBP.result >= 140 'mm[Hg]'
 	      or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
 	)
-	  intersect ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -299,7 +299,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -312,27 +312,27 @@ Numerator:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) SecondHTNEncounterReading140Over90
-	    with ( ( ( ["Intervention, Order: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)"] WeeksRescreen
-	    with ( ["Diagnostic Study, Order: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)"]
-	    union ["Diagnostic Study, Order: EKG study" using "EKG study (LOINC Code 11524-6)"]
-	    union ["Laboratory Test, Order: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)"]
+	    with ( ( ( [("Intervention, Order: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)")] WeeksRescreen
+	    with ( [("Diagnostic Study, Order: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)")]
+	    union [("Diagnostic Study, Order: EKG study" using "EKG study (LOINC Code 11524-6)")]
+	    union [("Laboratory Test, Order: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)")]
 	) ECGLabTest
 	      such that WeeksRescreen.authorDatetime same day as ECGLabTest.authorDatetime ) RescreenECGLab
-	    with ( ["Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	    with ( [("Intervention, Order: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Order: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Order: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Order: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Order: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	) HTNInterventions
 	      such that HTNInterventions.authorDatetime same day as RescreenECGLab.authorDatetime ) RescreenECGLabInterventions
-	    with ["Medication, Order: Pharmacologic Therapy for Hypertension" using "Pharmacologic Therapy for Hypertension (2.16.840.1.113883.3.526.1577)"] Medications
+	    with [("Medication, Order: Pharmacologic Therapy for Hypertension" using "Pharmacologic Therapy for Hypertension (2.16.840.1.113883.3.526.1577)")] Medications
 	      such that Medications.authorDatetime same day as RescreenECGLabInterventions.authorDatetime
 	) SecondHTN140Over90Interventions
 	      such that SecondHTN140Over90Interventions.authorDatetime same day as start of SecondHTNEncounterReading140Over90.relevantPeriod
 	)
-	  union ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -340,7 +340,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -351,9 +351,9 @@ Numerator:
 	    where EncounterLastSystolicBP.result >= 140 'mm[Hg]'
 	      or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
 	)
-	  intersect ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -361,7 +361,7 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -374,25 +374,25 @@ Numerator:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) SecondHTNEncounterReading140Over90
-	    with ["Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"] Referral
-	  where Referral.reason in valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514) ReferralToProfessional
+	    with [("Intervention, Order: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")] Referral
+	  where Referral.reason in (valueset "Finding of Elevated Blood Pressure or Hypertension" (2.16.840.1.113762.1.4.1047.514)) ReferralToProfessional
 	      such that ReferralToProfessional.authorDatetime same day as start of SecondHTNEncounterReading140Over90.relevantPeriod )
 =============================================================================================================================================================================
 Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+[("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ( ["Physical Exam, Not Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"]
-	    union ["Physical Exam, Not Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] ) NoBPScreen
-	    such that ( NoBPScreen.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
-	        or NoBPScreen.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)
+	  with ( [("Physical Exam, Not Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")]
+	    union [("Physical Exam, Not Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] ) NoBPScreen
+	    such that ( NoBPScreen.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
+	        or NoBPScreen.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))
 	    )
 	      and NoBPScreen.authorDatetime same day as start of QualifyingEncounter.relevantPeriod
-	  union ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -400,7 +400,7 @@ Denominator Exceptions:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -411,21 +411,21 @@ Denominator Exceptions:
 	  where ( EncounterLastSystolicBP.result included in Interval[120 'mm[Hg]', 129 'mm[Hg]']
 	      and EncounterLastDiastolicBP.result < 80 'mm[Hg]'
 	  ) ElevatedBPEncounter
-	    with ( ( ["Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	    with ( ( [("Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	)
-	      union ["Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"]
-	      union ["Intervention, Not Ordered: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)"]
-	      union ["Intervention, Not Ordered: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)"] ) ElevatedBPDeclinedInterventions
-	      such that ElevatedBPDeclinedInterventions.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)
+	      union [("Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")]
+	      union [("Intervention, Not Ordered: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)")]
+	      union [("Intervention, Not Ordered: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)")] ) ElevatedBPDeclinedInterventions
+	      such that ElevatedBPDeclinedInterventions.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))
 	        and ElevatedBPDeclinedInterventions.authorDatetime same day as start of ElevatedBPEncounter.relevantPeriod
 	)
-	  union ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -433,7 +433,7 @@ Denominator Exceptions:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -445,9 +445,9 @@ Denominator Exceptions:
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    )
 	)
-	  except ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  except [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -455,7 +455,7 @@ Denominator Exceptions:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -468,20 +468,20 @@ Denominator Exceptions:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) FirstHTNEncounter
-	      with ( ( ["Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	      with ( ( [("Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	)
-	        union ["Intervention, Not Ordered: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)"]
-	        union ["Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"] ) FirstHTNDeclinedInterventions
-	        such that FirstHTNDeclinedInterventions.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)
+	        union [("Intervention, Not Ordered: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)")]
+	        union [("Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")] ) FirstHTNDeclinedInterventions
+	        such that FirstHTNDeclinedInterventions.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))
 	          and FirstHTNDeclinedInterventions.authorDatetime same day as start of FirstHTNEncounter.relevantPeriod
 	  )
-	  union ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -489,7 +489,7 @@ Denominator Exceptions:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -503,9 +503,9 @@ Denominator Exceptions:
 	            or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
 	        )
 	)
-	  intersect ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -513,7 +513,7 @@ Denominator Exceptions:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -526,25 +526,25 @@ Denominator Exceptions:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) SecondHTNEncounter
-	      with ( ["Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"]
-	  union ( ["Diagnostic Study, Not Ordered: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)"]
-	    union ["Diagnostic Study, Not Ordered: EKG study" using "EKG study (LOINC Code 11524-6)"]
-	    union ["Laboratory Test, Not Ordered: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)"]
+	      with ( [("Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")]
+	  union ( [("Diagnostic Study, Not Ordered: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)")]
+	    union [("Diagnostic Study, Not Ordered: EKG study" using "EKG study (LOINC Code 11524-6)")]
+	    union [("Laboratory Test, Not Ordered: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)")]
 	)
-	  union ["Intervention, Not Ordered: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)"]
-	  union ["Intervention, Not Ordered: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)"]
-	  union ( ["Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	  union [("Intervention, Not Ordered: Follow-up 2-3 months (finding)" using "Follow-up 2-3 months (finding) (SNOMEDCT Code 183624006)")]
+	  union [("Intervention, Not Ordered: Follow-up 4-6 months (finding)" using "Follow-up 4-6 months (finding) (SNOMEDCT Code 183625007)")]
+	  union ( [("Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	) ) SecondHTNDeclinedInterventions
-	  where SecondHTNDeclinedInterventions.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582) SecondHTNDeclinedInterventions
+	  where SecondHTNDeclinedInterventions.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)) SecondHTNDeclinedInterventions
 	        such that SecondHTNDeclinedInterventions.authorDatetime same day as start of SecondHTNEncounter.relevantPeriod
 	  )
-	  union ( ( ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -552,7 +552,7 @@ Denominator Exceptions:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	    ),
-	    EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
@@ -563,9 +563,9 @@ Denominator Exceptions:
 	    where EncounterLastSystolicBP.result >= 140 'mm[Hg]'
 	      or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
 	)
-	  intersect ["Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)"] ValidEncounter
+	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  let EncounterLastSystolicBP: Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -573,7 +573,7 @@ Denominator Exceptions:
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	  ),
-	  EncounterLastDiastolicBP: Last(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
@@ -586,20 +586,20 @@ Denominator Exceptions:
 	    and ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
 	    ) SecondHTN140Over90Encounter
-	      with ( ["Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)"]
-	  union ["Medication, Not Ordered: Pharmacologic Therapy for Hypertension" using "Pharmacologic Therapy for Hypertension (2.16.840.1.113883.3.526.1577)"]
-	  union ( ["Diagnostic Study, Not Ordered: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)"]
-	    union ["Diagnostic Study, Not Ordered: EKG study" using "EKG study (LOINC Code 11524-6)"]
-	    union ["Laboratory Test, Not Ordered: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)"]
+	      with ( [("Intervention, Not Ordered: Referral to Primary Care or Alternate Provider" using "Referral to Primary Care or Alternate Provider (2.16.840.1.113883.3.526.3.1580)")]
+	  union [("Medication, Not Ordered: Pharmacologic Therapy for Hypertension" using "Pharmacologic Therapy for Hypertension (2.16.840.1.113883.3.526.1577)")]
+	  union ( [("Diagnostic Study, Not Ordered: EKG 12 channel panel" using "EKG 12 channel panel (LOINC Code 34534-8)")]
+	    union [("Diagnostic Study, Not Ordered: EKG study" using "EKG study (LOINC Code 11524-6)")]
+	    union [("Laboratory Test, Not Ordered: Laboratory Tests for Hypertension" using "Laboratory Tests for Hypertension (2.16.840.1.113883.3.600.1482)")]
 	)
-	  union ["Intervention, Not Ordered: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)"]
-	  union ( ["Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)"]
-	    union ["Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)"]
-	    union ["Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)"]
-	    union ["Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)"]
-	    union ["Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)"]
+	  union [("Intervention, Not Ordered: Follow Up Within 4 Weeks" using "Follow Up Within 4 Weeks (2.16.840.1.113883.3.526.3.1578)")]
+	  union ( [("Intervention, Not Ordered: Lifestyle Recommendation" using "Lifestyle Recommendation (2.16.840.1.113883.3.526.3.1581)")]
+	    union [("Intervention, Not Ordered: Weight Reduction Recommended" using "Weight Reduction Recommended (2.16.840.1.113883.3.600.1510)")]
+	    union [("Intervention, Not Ordered: Dietary Recommendations" using "Dietary Recommendations (2.16.840.1.113883.3.600.1515)")]
+	    union [("Intervention, Not Ordered: Recommendation to Increase Physical Activity" using "Recommendation to Increase Physical Activity (2.16.840.1.113883.3.600.1518)")]
+	    union [("Intervention, Not Ordered: Referral or Counseling for Alcohol Consumption" using "Referral or Counseling for Alcohol Consumption (2.16.840.1.113883.3.526.3.1583)")]
 	) ) SecondHTN140Over90InterventionsNotOrdered
-	  where SecondHTN140Over90InterventionsNotOrdered.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582) SecondHTN140Over90DeclinedInterventions
+	  where SecondHTN140Over90InterventionsNotOrdered.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)) SecondHTN140Over90DeclinedInterventions
 	        such that SecondHTN140Over90DeclinedInterventions.authorDatetime same day as start of SecondHTN140Over90Encounter.relevantPeriod
 	  )
 =============================================================================================================================================================================

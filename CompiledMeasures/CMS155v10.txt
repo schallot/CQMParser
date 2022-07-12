@@ -1,58 +1,58 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[3, 17 )
-	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	  union [("Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[3, 17 )
-	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	  union [("Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
-	    where ( DischargeHospice.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-	        or DischargeHospice.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
+	    where ( DischargeHospice.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+	        or DischargeHospice.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
 	    )
 	      and DischargeHospice.relevantPeriod ends during Measurement Period
 	)
-	  or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+	  or exists ( [("Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
-	  or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
-	  or exists ( ["Diagnosis: Pregnancy" using "Pregnancy (2.16.840.1.113883.3.526.3.378)"] Pregnancy
+	  or exists ( [("Diagnosis: Pregnancy" using "Pregnancy (2.16.840.1.113883.3.526.3.378)")] Pregnancy
 	  where Pregnancy.prevalencePeriod overlaps Measurement Period )
 =============================================================================================================================================================================
 Numerator:
-exists ( ["Physical Exam, Performed: BMI percentile" using "BMI percentile (2.16.840.1.113883.3.464.1003.121.12.1012)"] BMIPercentile
+exists ( [("Physical Exam, Performed: BMI percentile" using "BMI percentile (2.16.840.1.113883.3.464.1003.121.12.1012)")] BMIPercentile
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( BMIPercentile.relevantDatetime, BMIPercentile.relevantPeriod ) during Measurement Period
 	    and BMIPercentile.result is not null )
-	  and exists ( ["Physical Exam, Performed: Height" using "Height (2.16.840.1.113883.3.464.1003.121.12.1014)"] Height
+	  and exists ( [("Physical Exam, Performed: Height" using "Height (2.16.840.1.113883.3.464.1003.121.12.1014)")] Height
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Height.relevantDatetime, Height.relevantPeriod ) during Measurement Period
 	    and Height.result is not null )
-	  and exists ( ["Physical Exam, Performed: Weight" using "Weight (2.16.840.1.113883.3.464.1003.121.12.1015)"] Weight
+	  and exists ( [("Physical Exam, Performed: Weight" using "Weight (2.16.840.1.113883.3.464.1003.121.12.1015)")] Weight
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Weight.relevantDatetime, Weight.relevantPeriod ) during Measurement Period
@@ -65,21 +65,21 @@ Denominator Exceptions:
 None
 =============================================================================================================================================================================
 Population Criteria 1:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[3, 17 )
-	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	  union [("Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Stratification 1:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[3, 11]
 =============================================================================================================================================================================
 Stratification 2:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[12, 17 )

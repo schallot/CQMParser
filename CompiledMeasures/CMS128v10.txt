@@ -1,10 +1,10 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
-	  and exists ( ["Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)"] MajorDepression
-	    let AntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	  and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
+	    let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
@@ -16,17 +16,17 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
 	    )
 	)
-	  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-	  union ["Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
-	  union ["Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounter
-	  let AntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+	  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+	  union [("Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)")]
+	  union [("Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounter
+	  let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
@@ -35,11 +35,11 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
 =============================================================================================================================================================================
 Denominator:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
-	  and exists ( ["Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)"] MajorDepression
-	    let AntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	  and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
+	    let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
@@ -51,17 +51,17 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
 	    )
 	)
-	  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-	  union ["Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
-	  union ["Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounter
-	  let AntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+	  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+	  union [("Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)")]
+	  union [("Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounter
+	  let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
@@ -70,26 +70,26 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
-	    where ( DischargeHospice.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-	        or DischargeHospice.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
+	    where ( DischargeHospice.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+	        or DischargeHospice.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
 	    )
 	      and DischargeHospice.relevantPeriod ends during Measurement Period
 	)
-	  or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+	  or exists ( [("Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
-	  or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
-	  or exists ( ["Medication, Active: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] ActiveAntidepressant
+	  or exists ( [("Medication, Active: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] ActiveAntidepressant
 	      let ActiveMedPeriod: ActiveAntidepressant Meds
 	        return Meds.relevantPeriod
 	          intersect Interval[start of Measurement Period - 245 days, 
 	          end of Measurement Period],
-	      AntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	      AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
@@ -100,12 +100,12 @@ Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter I
 Numerator:
 Sum((collapse(Medication))CumulativeAntidepressant
 	    return all duration in days of CumulativeAntidepressant
-	)(["Medication, Active: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] ActiveAntidepressant
+	)([("Medication, Active: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] ActiveAntidepressant
 	  let ActiveMedPeriod: ActiveAntidepressant Meds
 	    return Meds.relevantPeriod
 	      intersect Interval[start of Measurement Period - 245 days, 
 	      end of Measurement Period],
-	  InitialAntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	  InitialAntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
@@ -120,11 +120,11 @@ Denominator Exceptions:
 None
 =============================================================================================================================================================================
 Population Criteria 1:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
-	  and exists ( ["Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)"] MajorDepression
-	    let AntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	  and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
+	    let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
@@ -136,17 +136,17 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
 	    )
 	)
-	  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-	  union ["Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
-	  union ["Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounter
-	  let AntidepressantDispensed: First(["Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)"] Antidepressant
+	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+	  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+	  union [("Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)")]
+	  union [("Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounter
+	  let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)

@@ -1,193 +1,193 @@
 =============================================================================================================================================================================
 Initial Population:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18
 =============================================================================================================================================================================
 Denominator:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)"] AtrialAblation
+  with [("Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)")] AtrialAblation
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( AtrialAblation.relevantDatetime, AtrialAblation.relevantPeriod ) starts before start of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)"] AtrialFibrillationFlutter
+  with [("Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)")] AtrialFibrillationFlutter
     such that AtrialFibrillationFlutter.prevalencePeriod starts on or before 
     end of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
   where exists ( IschemicStrokeEncounter.diagnoses Diagnosis
-      where ( Diagnosis.code in valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202) )
+      where ( Diagnosis.code in (valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202)) )
   )
 =============================================================================================================================================================================
 Denominator Exclusions:
-( TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+( TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)"] AtrialAblation
+  with [("Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)")] AtrialAblation
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( AtrialAblation.relevantDatetime, AtrialAblation.relevantPeriod ) starts before start of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)"] AtrialFibrillationFlutter
+  with [("Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)")] AtrialFibrillationFlutter
     such that AtrialFibrillationFlutter.prevalencePeriod starts on or before 
     end of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
   where exists ( IschemicStrokeEncounter.diagnoses Diagnosis
-      where ( Diagnosis.code in valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202) )
+      where ( Diagnosis.code in (valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202)) )
   ) Encounter
-    where Encounter.dischargeDisposition in valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87)
-      or Encounter.dischargeDisposition in valueset "Left Against Medical Advice" (2.16.840.1.113883.3.117.1.7.1.308)
-      or Encounter.dischargeDisposition in valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309)
-      or Encounter.dischargeDisposition in valueset "Discharged to Home for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.209)
-      or Encounter.dischargeDisposition in valueset "Discharged to Health Care Facility for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.207)
+    where Encounter.dischargeDisposition in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))
+      or Encounter.dischargeDisposition in (valueset "Left Against Medical Advice" (2.16.840.1.113883.3.117.1.7.1.308))
+      or Encounter.dischargeDisposition in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))
+      or Encounter.dischargeDisposition in (valueset "Discharged to Home for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.209))
+      or Encounter.dischargeDisposition in (valueset "Discharged to Health Care Facility for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.207))
 )
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)"] AtrialAblation
+  with [("Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)")] AtrialAblation
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( AtrialAblation.relevantDatetime, AtrialAblation.relevantPeriod ) starts before start of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)"] AtrialFibrillationFlutter
+  with [("Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)")] AtrialFibrillationFlutter
     such that AtrialFibrillationFlutter.prevalencePeriod starts on or before 
     end of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
   where exists ( IschemicStrokeEncounter.diagnoses Diagnosis
-      where ( Diagnosis.code in valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202) )
+      where ( Diagnosis.code in (valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202)) )
   ) Encounter
-  with TJC.["Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"]
-  union ["Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"] ComfortMeasure
+  with TJC.[("Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")]
+  union [("Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")] ComfortMeasure
     such that Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(ComfortMeasure.relevantDatetime, ComfortMeasure.relevantPeriod), ComfortMeasure.authorDatetime)during Encounter Visit
-	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+	let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
 			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
 			sort by 
 			end of relevantPeriod
 	),
 	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+	EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
 			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
 			sort by 
 			end of relevantPeriod
@@ -196,120 +196,120 @@ Denominator Exclusions:
 	end of Visit.relevantPeriod] ( Encounter )
 =============================================================================================================================================================================
 Numerator:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)"] AtrialAblation
+  with [("Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)")] AtrialAblation
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( AtrialAblation.relevantDatetime, AtrialAblation.relevantPeriod ) starts before start of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)"] AtrialFibrillationFlutter
+  with [("Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)")] AtrialFibrillationFlutter
     such that AtrialFibrillationFlutter.prevalencePeriod starts on or before 
     end of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
   where exists ( IschemicStrokeEncounter.diagnoses Diagnosis
-      where ( Diagnosis.code in valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202) )
+      where ( Diagnosis.code in (valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202)) )
   ) Encounter
-  with ["Medication, Discharge: Anticoagulant Therapy" using "Anticoagulant Therapy (2.16.840.1.113883.3.117.1.7.1.200)"] DischargeAnticoagulant
+  with [("Medication, Discharge: Anticoagulant Therapy" using "Anticoagulant Therapy (2.16.840.1.113883.3.117.1.7.1.200)")] DischargeAnticoagulant
     such that DischargeAnticoagulant.authorDatetime during Encounter.relevantPeriod
 =============================================================================================================================================================================
 Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)"] AtrialAblation
+  with [("Procedure, Performed: Atrial Ablation" using "Atrial Ablation (2.16.840.1.113883.3.117.1.7.1.203)")] AtrialAblation
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( AtrialAblation.relevantDatetime, AtrialAblation.relevantPeriod ) starts before start of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
-  with ["Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)"] AtrialFibrillationFlutter
+  with [("Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)")] AtrialFibrillationFlutter
     such that AtrialFibrillationFlutter.prevalencePeriod starts on or before 
     end of IschemicStrokeEncounter.relevantPeriod
-  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
   where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
     and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
   where exists ( NonElectiveEncounter.diagnoses Diagnosis
       where Diagnosis.rank = 1
-        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         )
   ) AllStrokeEncounter
   where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
   where exists ( EncounterWithAge.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
         and Diagnosis.rank = 1
   ) IschemicStrokeEncounter
   where exists ( IschemicStrokeEncounter.diagnoses Diagnosis
-      where ( Diagnosis.code in valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202) )
+      where ( Diagnosis.code in (valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202)) )
   ) Encounter
-  with ["Medication, Not Discharged: Anticoagulant Therapy" using "Anticoagulant Therapy (2.16.840.1.113883.3.117.1.7.1.200)"] NoAnticoagulant
-  where NoAnticoagulant.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
-    or NoAnticoagulant.negationRationale in valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93) NoDischargeAnticoagulant
+  with [("Medication, Not Discharged: Anticoagulant Therapy" using "Anticoagulant Therapy (2.16.840.1.113883.3.117.1.7.1.200)")] NoAnticoagulant
+  where NoAnticoagulant.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))
+    or NoAnticoagulant.negationRationale in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93)) NoDischargeAnticoagulant
     such that NoDischargeAnticoagulant.authorDatetime during Encounter.relevantPeriod
 =============================================================================================================================================================================
 Stratification:

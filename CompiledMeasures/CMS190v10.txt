@@ -1,134 +1,134 @@
 =============================================================================================================================================================================
 Initial Population:
-VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  )
 =============================================================================================================================================================================
 Denominator:
-VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  )
 =============================================================================================================================================================================
 Denominator Exclusions:
-VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
 	  where difference in days between start of Value and end of Value ( QualifyingEncounterICU.relevantPeriod ) < 2
-	  union VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
 	  with ( //'SCIP' stands for Surgical Care Improvement Project
-	["Procedure, Performed: General Surgery" using "General Surgery (2.16.840.1.113883.3.117.1.7.1.255)"]
-	  union ["Procedure, Performed: Gynecological Surgery" using "Gynecological Surgery (2.16.840.1.113883.3.117.1.7.1.257)"]
-	  union ["Procedure, Performed: Hip Fracture Surgery" using "Hip Fracture Surgery (2.16.840.1.113883.3.117.1.7.1.258)"]
-	  union ["Procedure, Performed: Hip Replacement Surgery" using "Hip Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.259)"]
-	  union ["Procedure, Performed: Intracranial Neurosurgery" using "Intracranial Neurosurgery (2.16.840.1.113883.3.117.1.7.1.260)"]
-	  union ["Procedure, Performed: Knee Replacement Surgery" using "Knee Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.261)"]
-	  union ["Procedure, Performed: Urological Surgery" using "Urological Surgery (2.16.840.1.113883.3.117.1.7.1.272)"] Procedure
+	[("Procedure, Performed: General Surgery" using "General Surgery (2.16.840.1.113883.3.117.1.7.1.255)")]
+	  union [("Procedure, Performed: Gynecological Surgery" using "Gynecological Surgery (2.16.840.1.113883.3.117.1.7.1.257)")]
+	  union [("Procedure, Performed: Hip Fracture Surgery" using "Hip Fracture Surgery (2.16.840.1.113883.3.117.1.7.1.258)")]
+	  union [("Procedure, Performed: Hip Replacement Surgery" using "Hip Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.259)")]
+	  union [("Procedure, Performed: Intracranial Neurosurgery" using "Intracranial Neurosurgery (2.16.840.1.113883.3.117.1.7.1.260)")]
+	  union [("Procedure, Performed: Knee Replacement Surgery" using "Knee Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.261)")]
+	  union [("Procedure, Performed: Urological Surgery" using "Urological Surgery (2.16.840.1.113883.3.117.1.7.1.272)")] Procedure
 	    where Procedure.rank = 1 ) SelectedSCIPProcedure
 	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( SelectedSCIPProcedure.relevantDatetime, SelectedSCIPProcedure.relevantPeriod ) ends during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU ) )
-	  union VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	  with ["Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"]
-	  union ["Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"] ComfortMeasures
+	  with [("Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")]
+	  union [("Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")] ComfortMeasures
 	    such that Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(ComfortMeasures.relevantDatetime, ComfortMeasures.relevantPeriod), ComfortMeasures.authorDatetime)during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(start of Encounter Visit
-		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
 				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
 				sort by 
 				end of relevantPeriod
 		),
 		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
 				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
 				sort by 
 				end of relevantPeriod
@@ -136,33 +136,33 @@ VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
 		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
 		end of Visit.relevantPeriod](Encounter)), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(StartOfFirstICU(Encounter)+ 2 days)) ( QualifyingEncounterICU )
 	  union from
-	  VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU,
-	  ["Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)"] AnesthesiaProcedure,
-	  ["Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"]
-	  union ["Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"] ComfortMeasures
+	  [("Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)")] AnesthesiaProcedure,
+	  [("Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")]
+	  union [("Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")] ComfortMeasures
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) ends 1 day after day of start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU )
@@ -175,80 +175,80 @@ VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
 	  return QualifyingEncounterICU
 =============================================================================================================================================================================
 Numerator:
-( VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+( VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	    with ( ["Medication, Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"] VTEMedication
-	    where VTEMedication.route in valueset "Subcutaneous route" (2.16.840.1.113883.3.117.1.7.1.223)
+	    with ( [("Medication, Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")] VTEMedication
+	    where VTEMedication.route in (valueset "Subcutaneous route" (2.16.840.1.113883.3.117.1.7.1.223))
 	)
-	  union ["Medication, Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Device, Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"] VTEProphylaxis
+	  union [("Medication, Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Device, Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")] VTEProphylaxis
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( VTEProphylaxis.relevantDatetime, VTEProphylaxis.relevantPeriod ) starts during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU ) )
 	)
 	  union ( from
-	      VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	      VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU,
-	      ["Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)"] AnesthesiaProcedure,
-	      ( ["Medication, Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"] VTEMedication
-	    where VTEMedication.route in valueset "Subcutaneous route" (2.16.840.1.113883.3.117.1.7.1.223)
+	      [("Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)")] AnesthesiaProcedure,
+	      ( [("Medication, Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")] VTEMedication
+	    where VTEMedication.route in (valueset "Subcutaneous route" (2.16.840.1.113883.3.117.1.7.1.223))
 	)
-	  union ["Medication, Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Device, Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"] VTEProphylaxis
+	  union [("Medication, Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Device, Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")] VTEProphylaxis
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) ends 1 day after day of start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU )
@@ -260,62 +260,62 @@ Numerator:
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) )
 	      return QualifyingEncounterICU
 	  )
-	  union ( ( VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union ( ( VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	    with ["Medication, Administered: Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment" using "Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment (2.16.840.1.113883.3.117.1.7.1.134)"] FactorXaMedication
+	    with [("Medication, Administered: Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment" using "Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment (2.16.840.1.113883.3.117.1.7.1.134)")] FactorXaMedication
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( FactorXaMedication.relevantDatetime, FactorXaMedication.relevantPeriod ) starts during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU ) )
 	)
 	  union ( from
-	      VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	      VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU,
-	      ["Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)"] AnesthesiaProcedure,
-	      ["Medication, Administered: Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment" using "Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment (2.16.840.1.113883.3.117.1.7.1.134)"] FactorXaMedication
+	      [("Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)")] AnesthesiaProcedure,
+	      [("Medication, Administered: Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment" using "Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment (2.16.840.1.113883.3.117.1.7.1.134)")] FactorXaMedication
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) ends 1 day after day of start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU )
@@ -327,145 +327,145 @@ Numerator:
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) )
 	      return QualifyingEncounterICU
 	  )
-	      intersect ( ( VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	      intersect ( ( VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	    with ["Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)"] AtrialFibrillation
+	    with [("Diagnosis: Atrial Fibrillation/Flutter" using "Atrial Fibrillation/Flutter (2.16.840.1.113883.3.117.1.7.1.202)")] AtrialFibrillation
 	      such that AtrialFibrillation.prevalencePeriod starts on or before 
 	      end of QualifyingEncounterICU.relevantPeriod
 	)
-	  union ( VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union ( VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
 	      where exists ( QualifyingEncounterICU.diagnoses QualifyingEncounterDiagnoses
-	          where QualifyingEncounterDiagnoses.code in valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202)
+	          where QualifyingEncounterDiagnoses.code in (valueset "Atrial Fibrillation/Flutter" (2.16.840.1.113883.3.117.1.7.1.202))
 	      )
 	  )
-	  union ( VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union ( VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	      with ["Diagnosis: Venous Thromboembolism" using "Venous Thromboembolism (2.16.840.1.113883.3.117.1.7.1.279)"] VTEDiagnosis
+	      with [("Diagnosis: Venous Thromboembolism" using "Venous Thromboembolism (2.16.840.1.113883.3.117.1.7.1.279)")] VTEDiagnosis
 	        such that VTEDiagnosis.prevalencePeriod starts before start of QualifyingEncounterICU.relevantPeriod
 	  )
-	          union VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	          union VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	  with ( ["Procedure, Performed: Hip Replacement Surgery" using "Hip Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.259)"]
-	    union ["Procedure, Performed: Knee Replacement Surgery" using "Knee Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.261)"] ) HipKneeProcedure
+	  with ( [("Procedure, Performed: Hip Replacement Surgery" using "Hip Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.259)")]
+	    union [("Procedure, Performed: Knee Replacement Surgery" using "Knee Replacement Surgery (2.16.840.1.113883.3.117.1.7.1.261)")] ) HipKneeProcedure
 	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HipKneeProcedure.relevantDatetime, HipKneeProcedure.relevantPeriod ) starts on or before 
 	    end of QualifyingEncounterICU.relevantPeriod
 	      )
 	  )
-	  union VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
 	  with 
-	( ["Assessment, Performed: Risk for venous thromboembolism" using "Risk for venous thromboembolism (LOINC Code 72136-5)"] VTERiskAssessment
-	    where VTERiskAssessment.result in valueset "Low Risk" (2.16.840.1.113883.3.117.1.7.1.400)
+	( [("Assessment, Performed: Risk for venous thromboembolism" using "Risk for venous thromboembolism (LOINC Code 72136-5)")] VTERiskAssessment
+	    where VTERiskAssessment.result in (valueset "Low Risk" (2.16.840.1.113883.3.117.1.7.1.400))
 	    return {
 	      id: VTERiskAssessment.id,
 	      LowRiskDatetime: Earliest(NormalizeInterval(pointInTime, period)) ( VTERiskAssessment.relevantDatetime, VTERiskAssessment.relevantPeriod )
 	    }
 	)
-	  union ( ["Laboratory Test, Performed: INR" using "INR (2.16.840.1.113883.3.117.1.7.1.213)"] INRLabTest
+	  union ( [("Laboratory Test, Performed: INR" using "INR (2.16.840.1.113883.3.117.1.7.1.213)")] INRLabTest
 	      where INRLabTest.result > 3.0
 	      return {
 	        id: INRLabTest.id,
 	        LowRiskDatetime: INRLabTest.resultDatetime
 	      }
 	  )
-	  union ( ( ( ["Medication, Administered: Unfractionated Heparin" using "Unfractionated Heparin (2.16.840.1.113883.3.117.1.7.1.218)"] UnfractionatedHeparin
-	        where UnfractionatedHeparin.route in valueset "Intravenous route" (2.16.840.1.113883.3.117.1.7.1.222)
+	  union ( ( ( [("Medication, Administered: Unfractionated Heparin" using "Unfractionated Heparin (2.16.840.1.113883.3.117.1.7.1.218)")] UnfractionatedHeparin
+	        where UnfractionatedHeparin.route in (valueset "Intravenous route" (2.16.840.1.113883.3.117.1.7.1.222))
 	    )
-	      union ["Medication, Administered: Direct Thrombin Inhibitor" using "Direct Thrombin Inhibitor (2.16.840.1.113883.3.117.1.7.1.205)"]
-	      union ["Medication, Administered: Glycoprotein IIb/IIIa Inhibitors" using "Glycoprotein IIb/IIIa Inhibitors (2.16.840.1.113762.1.4.1045.41)"] ) AnticoagulantMedication
+	      union [("Medication, Administered: Direct Thrombin Inhibitor" using "Direct Thrombin Inhibitor (2.16.840.1.113883.3.117.1.7.1.205)")]
+	      union [("Medication, Administered: Glycoprotein IIb/IIIa Inhibitors" using "Glycoprotein IIb/IIIa Inhibitors (2.16.840.1.113762.1.4.1045.41)")] ) AnticoagulantMedication
 	      return {
 	        id: AnticoagulantMedication.id,
 	        LowRiskDatetime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -474,13 +474,13 @@ Numerator:
 	      }
 	  ) LowRiskForVTE
 	    such that LowRiskForVTE.LowRiskDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(start of Encounter Visit
-		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
 				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
 				sort by 
 				end of relevantPeriod
 		),
 		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
 				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
 				sort by 
 				end of relevantPeriod
@@ -488,47 +488,47 @@ Numerator:
 		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
 		end of Visit.relevantPeriod](Encounter)), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(StartOfFirstICU(Encounter)+ 2 days)) ( QualifyingEncounterICU )
 	  union from
-	  VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU,
-	  ["Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)"] AnesthesiaProcedure,
+	  [("Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)")] AnesthesiaProcedure,
 	  
-	( ["Assessment, Performed: Risk for venous thromboembolism" using "Risk for venous thromboembolism (LOINC Code 72136-5)"] VTERiskAssessment
-	    where VTERiskAssessment.result in valueset "Low Risk" (2.16.840.1.113883.3.117.1.7.1.400)
+	( [("Assessment, Performed: Risk for venous thromboembolism" using "Risk for venous thromboembolism (LOINC Code 72136-5)")] VTERiskAssessment
+	    where VTERiskAssessment.result in (valueset "Low Risk" (2.16.840.1.113883.3.117.1.7.1.400))
 	    return {
 	      id: VTERiskAssessment.id,
 	      LowRiskDatetime: Earliest(NormalizeInterval(pointInTime, period)) ( VTERiskAssessment.relevantDatetime, VTERiskAssessment.relevantPeriod )
 	    }
 	)
-	  union ( ["Laboratory Test, Performed: INR" using "INR (2.16.840.1.113883.3.117.1.7.1.213)"] INRLabTest
+	  union ( [("Laboratory Test, Performed: INR" using "INR (2.16.840.1.113883.3.117.1.7.1.213)")] INRLabTest
 	      where INRLabTest.result > 3.0
 	      return {
 	        id: INRLabTest.id,
 	        LowRiskDatetime: INRLabTest.resultDatetime
 	      }
 	  )
-	  union ( ( ( ["Medication, Administered: Unfractionated Heparin" using "Unfractionated Heparin (2.16.840.1.113883.3.117.1.7.1.218)"] UnfractionatedHeparin
-	        where UnfractionatedHeparin.route in valueset "Intravenous route" (2.16.840.1.113883.3.117.1.7.1.222)
+	  union ( ( ( [("Medication, Administered: Unfractionated Heparin" using "Unfractionated Heparin (2.16.840.1.113883.3.117.1.7.1.218)")] UnfractionatedHeparin
+	        where UnfractionatedHeparin.route in (valueset "Intravenous route" (2.16.840.1.113883.3.117.1.7.1.222))
 	    )
-	      union ["Medication, Administered: Direct Thrombin Inhibitor" using "Direct Thrombin Inhibitor (2.16.840.1.113883.3.117.1.7.1.205)"]
-	      union ["Medication, Administered: Glycoprotein IIb/IIIa Inhibitors" using "Glycoprotein IIb/IIIa Inhibitors (2.16.840.1.113762.1.4.1045.41)"] ) AnticoagulantMedication
+	      union [("Medication, Administered: Direct Thrombin Inhibitor" using "Direct Thrombin Inhibitor (2.16.840.1.113883.3.117.1.7.1.205)")]
+	      union [("Medication, Administered: Glycoprotein IIb/IIIa Inhibitors" using "Glycoprotein IIb/IIIa Inhibitors (2.16.840.1.113762.1.4.1045.41)")] ) AnticoagulantMedication
 	      return {
 	        id: AnticoagulantMedication.id,
 	        LowRiskDatetime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -539,7 +539,7 @@ Numerator:
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) ends 1 day after day of start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU )
@@ -548,86 +548,86 @@ Numerator:
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) )
 	  return QualifyingEncounterICU
-	  union ( VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union ( VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	  with ["Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"] NoVTEMedicaion
-	    such that NoVTEMedicaion.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
+	  with [("Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")] NoVTEMedicaion
+	    such that NoVTEMedicaion.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))
 	      and NoVTEMedicaion.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(start of Encounter Visit
-		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
 				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
 				sort by 
 				end of relevantPeriod
 		),
 		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
 				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
 				sort by 
 				end of relevantPeriod
 		)
 		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
 		end of Visit.relevantPeriod](Encounter)), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(StartOfFirstICU(Encounter)+ 2 days)) ( QualifyingEncounterICU )
-	    intersect VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	    intersect VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	  with ["Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"]
-	  union ["Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"] NoVTEDevice
-	    such that NoVTEDevice.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
+	  with [("Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")]
+	  union [("Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")] NoVTEDevice
+	    such that NoVTEDevice.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))
 	      and NoVTEDevice.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(start of Encounter Visit
-		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
 				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
 				sort by 
 				end of relevantPeriod
 		),
 		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
 				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
 				sort by 
 				end of relevantPeriod
@@ -636,42 +636,42 @@ Numerator:
 		end of Visit.relevantPeriod](Encounter)), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(StartOfFirstICU(Encounter)+ 2 days)) ( QualifyingEncounterICU )
 	)
 	  union ( from
-	  VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU,
-	  ["Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)"] AnesthesiaProcedure,
-	  ["Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"] NoVTEMedication
-	  where NoVTEMedication.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
+	  [("Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)")] AnesthesiaProcedure,
+	  [("Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")] NoVTEMedication
+	  where NoVTEMedication.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))
 	    and if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) ends 1 day after day of start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU )
@@ -681,38 +681,38 @@ Numerator:
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) )
 	  return QualifyingEncounterICU
 	      intersect from
-	  VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU,
-	  ["Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)"] AnesthesiaProcedure,
-	  ["Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"]
-	  union ["Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"] NoVTEDevice
-	  where NoVTEDevice.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
+	  [("Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)")] AnesthesiaProcedure,
+	  [("Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")]
+	  union [("Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")] NoVTEDevice
+	  where NoVTEDevice.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))
 	    and if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) ends 1 day after day of start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU )
@@ -722,87 +722,87 @@ Numerator:
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) )
 	  return QualifyingEncounterICU
 	  )
-	  union VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  union VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
-	  with ( ["Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"]
-	  union ["Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"] ) NoVTEProphylaxis
-	  where NoVTEProphylaxis.negationRationale in valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93) PatientRefusal
+	  with ( [("Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")]
+	  union [("Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")] ) NoVTEProphylaxis
+	  where NoVTEProphylaxis.negationRationale in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93)) PatientRefusal
 	    such that PatientRefusal.authorDatetime during VTE.FromDayOfStartOfHospitalizationToDayAfterFirstICU ( QualifyingEncounterICU )
 	  union from
-	  VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU,
-	  ["Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)"] AnesthesiaProcedure,
-	  ( ["Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)"]
-	  union ["Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)"]
-	  union ["Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)"]
-	  union ["Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)"]
-	  union ["Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)"]
-	  union ["Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"]
-	  union ["Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)"]
-	  union ["Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)"]
-	  union ["Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)"] ) NoVTEProphylaxis
-	  where NoVTEProphylaxis.negationRationale in valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93) PatientRefusal
+	  [("Procedure, Performed: General or Neuraxial Anesthesia" using "General or Neuraxial Anesthesia (2.16.840.1.113883.3.666.5.1743)")] AnesthesiaProcedure,
+	  ( [("Medication, Not Administered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Administered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Administered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Administered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Administered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Medication, Not Ordered: Low Dose Unfractionated Heparin for VTE Prophylaxis" using "Low Dose Unfractionated Heparin for VTE Prophylaxis (2.16.840.1.113762.1.4.1045.39)")]
+	  union [("Medication, Not Ordered: Low Molecular Weight Heparin for VTE Prophylaxis" using "Low Molecular Weight Heparin for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.219)")]
+	  union [("Medication, Not Ordered: Injectable Factor Xa Inhibitor for VTE Prophylaxis" using "Injectable Factor Xa Inhibitor for VTE Prophylaxis (2.16.840.1.113883.3.117.1.7.1.211)")]
+	  union [("Medication, Not Ordered: Warfarin" using "Warfarin (2.16.840.1.113883.3.117.1.7.1.232)")]
+	  union [("Medication, Not Ordered: Rivaroxaban for VTE Prophylaxis" using "Rivaroxaban for VTE Prophylaxis (2.16.840.1.113762.1.4.1110.50)")]
+	  union [("Device, Not Applied: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Applied: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Applied: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")]
+	  union [("Device, Not Ordered: Intermittent pneumatic compression devices (IPC)" using "Intermittent pneumatic compression devices (IPC) (2.16.840.1.113883.3.117.1.7.1.214)")]
+	  union [("Device, Not Ordered: Venous foot pumps (VFP)" using "Venous foot pumps (VFP) (2.16.840.1.113883.3.117.1.7.1.230)")]
+	  union [("Device, Not Ordered: Graduated compression stockings (GCS)" using "Graduated compression stockings (GCS) (2.16.840.1.113883.3.117.1.7.1.256)")] ) NoVTEProphylaxis
+	  where NoVTEProphylaxis.negationRationale in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93)) PatientRefusal
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AnesthesiaProcedure.relevantDatetime, AnesthesiaProcedure.relevantPeriod ) ends 1 day after day of start of First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod(Encounter) ( QualifyingEncounterICU )
@@ -816,28 +816,28 @@ Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-VTE.( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+VTE.( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
-	    with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod ) >= 18
 	)
-	  intersect Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+	  intersect Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 	  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 	    and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientEncounter
 	  where not ( exists ( InpatientEncounter.diagnoses EncounterDiagnoses
-	        where ( EncounterDiagnoses.code in valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263)
-	            or EncounterDiagnoses.code in valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279)
-	            or EncounterDiagnoses.code in valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264)
+	        where ( EncounterDiagnoses.code in (valueset "Obstetrics" (2.16.840.1.113883.3.117.1.7.1.263))
+	            or EncounterDiagnoses.code in (valueset "Venous Thromboembolism" (2.16.840.1.113883.3.117.1.7.1.279))
+	            or EncounterDiagnoses.code in (valueset "Obstetrics VTE" (2.16.840.1.113883.3.117.1.7.1.264))
 	        )
 	    )
 	  ) QualifyingEncounter
 	  where exists ( QualifyingEncounter.facilityLocations Location
-	      where Location.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	      where Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	        and Location.locationPeriod during QualifyingEncounter.relevantPeriod
 	  ) QualifyingEncounterICU
 	  where difference in days between start of Value and end of Value ( First((Encounter.facilityLocations)HospitalLocation
-	    where HospitalLocation.code in valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)
+	    where HospitalLocation.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206))
 	      and HospitalLocation.locationPeriod during Encounter.relevantPeriod
 	    sort by start of locationPeriod
 	) ( Encounter ).locationPeriod ( QualifyingEncounterICU ) ) < 1

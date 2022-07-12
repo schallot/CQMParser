@@ -1,65 +1,65 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 64 )
-	    and exists ( ["Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)"] )
-	    and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+	    and exists ( [("Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)")] )
+	    and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period
 =============================================================================================================================================================================
 Denominator:
-exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 64 )
-	    and exists ( ["Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)"] )
-	    and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+	    and exists ( [("Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)")] )
+	    and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period
 =============================================================================================================================================================================
 Denominator Exclusions:
-singleton from ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+singleton from ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    let Age: years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ),
 	    NumberOfRiskFactors: Count(( { First(Diagnosis Dx
 	    where Dx.prevalencePeriod starts on or before day of 
 	    end of Measurement Period
 	    sort by start of prevalencePeriod
-	)(["Diagnosis: Rheumatoid Arthritis" using "Rheumatoid Arthritis (2.16.840.1.113883.3.464.1003.113.12.1005)"]), First(Diagnosis Dx
+	)([("Diagnosis: Rheumatoid Arthritis" using "Rheumatoid Arthritis (2.16.840.1.113883.3.464.1003.113.12.1005)")]), First(Diagnosis Dx
 	    where Dx.prevalencePeriod starts on or before day of 
 	    end of Measurement Period
 	    sort by start of prevalencePeriod
-	)(["Diagnosis: Hyperthyroidism" using "Hyperthyroidism (2.16.840.1.113883.3.464.1003.117.12.1015)"]), First(Diagnosis Dx
+	)([("Diagnosis: Hyperthyroidism" using "Hyperthyroidism (2.16.840.1.113883.3.464.1003.117.12.1015)")]), First(Diagnosis Dx
 	    where Dx.prevalencePeriod starts on or before day of 
 	    end of Measurement Period
 	    sort by start of prevalencePeriod
-	)(["Diagnosis: Malabsorption Syndromes" using "Malabsorption Syndromes (2.16.840.1.113883.3.464.1003.199.12.1050)"]), First(Diagnosis Dx
+	)([("Diagnosis: Malabsorption Syndromes" using "Malabsorption Syndromes (2.16.840.1.113883.3.464.1003.199.12.1050)")]), First(Diagnosis Dx
 	    where Dx.prevalencePeriod starts on or before day of 
 	    end of Measurement Period
 	    sort by start of prevalencePeriod
-	)(["Diagnosis: Chronic Liver Disease" using "Chronic Liver Disease (2.16.840.1.113883.3.464.1003.199.12.1035)"]), First(Diagnosis Dx
+	)([("Diagnosis: Chronic Liver Disease" using "Chronic Liver Disease (2.16.840.1.113883.3.464.1003.199.12.1035)")]), First(Diagnosis Dx
 	    where Dx.prevalencePeriod starts on or before day of 
 	    end of Measurement Period
 	    sort by start of prevalencePeriod
-	)(["Diagnosis: Chronic Malnutrition" using "Chronic Malnutrition (2.16.840.1.113883.3.464.1003.199.12.1036)"])} )
-	  union ["Diagnosis: Osteoporotic Fractures" using "Osteoporotic Fractures (2.16.840.1.113883.3.464.1003.113.12.1050)"] PathologicalFracture
+	)([("Diagnosis: Chronic Malnutrition" using "Chronic Malnutrition (2.16.840.1.113883.3.464.1003.199.12.1036)")])} )
+	  union [("Diagnosis: Osteoporotic Fractures" using "Osteoporotic Fractures (2.16.840.1.113883.3.464.1003.113.12.1050)")] PathologicalFracture
 	  where PathologicalFracture.prevalencePeriod starts on or before day of 
 	  end of Measurement Period
-	  union ["Assessment, Performed: History of hip fracture in parent" using "History of hip fracture in parent (2.16.840.1.113883.3.464.1003.113.12.1040)"] ParentFractureHistory
+	  union [("Assessment, Performed: History of hip fracture in parent" using "History of hip fracture in parent (2.16.840.1.113883.3.464.1003.113.12.1040)")] ParentFractureHistory
 	  where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( ParentFractureHistory.relevantDatetime, ParentFractureHistory.relevantPeriod ) before start of Measurement Period
-	  union ["Diagnosis: Osteopenia" using "Osteopenia (2.16.840.1.113883.3.464.1003.113.12.1049)"] OsteopeniaDiagnosis
+	  union [("Diagnosis: Osteopenia" using "Osteopenia (2.16.840.1.113883.3.464.1003.113.12.1049)")] OsteopeniaDiagnosis
 	  where OsteopeniaDiagnosis.prevalencePeriod starts before start Measurement Period
-	  union { First(["Assessment, Performed: Tobacco Use Screening" using "Tobacco Use Screening (2.16.840.1.113883.3.526.3.1278)"] TobaccoScreen
-	    where TobaccoScreen.result in valueset "Current Tobacco Smoker" (2.16.840.1.113883.3.600.2390)
+	  union { First([("Assessment, Performed: Tobacco Use Screening" using "Tobacco Use Screening (2.16.840.1.113883.3.526.3.1278)")] TobaccoScreen
+	    where TobaccoScreen.result in (valueset "Current Tobacco Smoker" (2.16.840.1.113883.3.600.2390))
 	      and start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(TobaccoScreen.relevantDatetime, TobaccoScreen.relevantPeriod)during Measurement Period
@@ -67,7 +67,7 @@ singleton from ( ["Patient Characteristic Birthdate: Birth date" using "Birth da
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	)}
-	  union { First(["Assessment, Performed: Average Number of Drinks per Drinking Day" using "Average Number of Drinks per Drinking Day (2.16.840.1.113883.3.464.1003.106.12.1018)"] AverageDrinks
+	  union { First([("Assessment, Performed: Average Number of Drinks per Drinking Day" using "Average Number of Drinks per Drinking Day (2.16.840.1.113883.3.464.1003.106.12.1018)")] AverageDrinks
 	    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(AverageDrinks.relevantDatetime, AverageDrinks.relevantPeriod)during Measurement Period
@@ -76,7 +76,7 @@ singleton from ( ["Patient Characteristic Birthdate: Birth date" using "Birth da
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	)}
-	  union { First(["Physical Exam, Performed: BMI Ratio" using "BMI Ratio (2.16.840.1.113883.3.600.1.1490)"] BMI
+	  union { First([("Physical Exam, Performed: BMI Ratio" using "BMI Ratio (2.16.840.1.113883.3.600.1.1490)")] BMI
 	    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)during Measurement Period
@@ -86,7 +86,7 @@ singleton from ( ["Patient Characteristic Birthdate: Birth date" using "Birth da
 	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 	)} FirstBMI
 	  where FirstBMI.result <= 20 'kg/m2'
-	  union ["Patient Characteristic Race: White" using "White (2.16.840.1.113883.3.464.1003.123.12.1007)"]) + ( if Sum(( collapse ( ["Medication, Active: Glucocorticoids (oral only)" using "Glucocorticoids (oral only) (2.16.840.1.113883.3.464.1003.196.12.1266)"] Glucocorticoid
+	  union [("Patient Characteristic Race: White" using "White (2.16.840.1.113883.3.464.1003.123.12.1007)")]) + ( if Sum(( collapse ( [("Medication, Active: Glucocorticoids (oral only)" using "Glucocorticoids (oral only) (2.16.840.1.113883.3.464.1003.196.12.1266)")] Glucocorticoid
 	    where Glucocorticoid.relevantPeriod starts before 
 	    end of Measurement Period
 	).relevantPeriod ) GlucocorticoidIntervals
@@ -107,34 +107,34 @@ singleton from ( ["Patient Characteristic Birthdate: Birth date" using "Birth da
 	        )
 	    )
 	)
-	  or exists ["Diagnosis: Osteoporosis" using "Osteoporosis (2.16.840.1.113883.3.464.1003.113.12.1038)"] OsteoporosisDiagnosis
+	  or exists [("Diagnosis: Osteoporosis" using "Osteoporosis (2.16.840.1.113883.3.464.1003.113.12.1038)")] OsteoporosisDiagnosis
 	  where OsteoporosisDiagnosis.prevalencePeriod overlaps before Measurement Period
-	  or exists ( ["Diagnosis: Type 1 Diabetes" using "Type 1 Diabetes (2.16.840.1.113883.3.464.1003.103.12.1020)"]
-	  union ["Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)"]
-	  union ["Diagnosis: Osteogenesis Imperfecta" using "Osteogenesis Imperfecta (2.16.840.1.113883.3.464.1003.113.12.1044)"]
-	  union ["Diagnosis: Ankylosing Spondylitis" using "Ankylosing Spondylitis (2.16.840.1.113883.3.464.1003.113.12.1045)"]
-	  union ["Diagnosis: Psoriatic Arthritis" using "Psoriatic Arthritis (2.16.840.1.113883.3.464.1003.113.12.1046)"]
-	  union ["Diagnosis: Ehlers Danlos Syndrome" using "Ehlers Danlos Syndrome (2.16.840.1.113883.3.464.1003.113.12.1047)"]
-	  union ["Diagnosis: Cushings Syndrome" using "Cushings Syndrome (2.16.840.1.113883.3.464.1003.117.12.1009)"]
-	  union ["Diagnosis: Marfan's Syndrome" using "Marfan's Syndrome (2.16.840.1.113883.3.464.1003.113.12.1048)"]
-	  union ["Diagnosis: Hyperparathyroidism" using "Hyperparathyroidism (2.16.840.1.113883.3.464.1003.117.12.1016)"]
-	  union ["Diagnosis: Lupus" using "Lupus (2.16.840.1.113883.3.464.1003.117.12.1010)"] ) IndependentRiskDiagnosis
+	  or exists ( [("Diagnosis: Type 1 Diabetes" using "Type 1 Diabetes (2.16.840.1.113883.3.464.1003.103.12.1020)")]
+	  union [("Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)")]
+	  union [("Diagnosis: Osteogenesis Imperfecta" using "Osteogenesis Imperfecta (2.16.840.1.113883.3.464.1003.113.12.1044)")]
+	  union [("Diagnosis: Ankylosing Spondylitis" using "Ankylosing Spondylitis (2.16.840.1.113883.3.464.1003.113.12.1045)")]
+	  union [("Diagnosis: Psoriatic Arthritis" using "Psoriatic Arthritis (2.16.840.1.113883.3.464.1003.113.12.1046)")]
+	  union [("Diagnosis: Ehlers Danlos Syndrome" using "Ehlers Danlos Syndrome (2.16.840.1.113883.3.464.1003.113.12.1047)")]
+	  union [("Diagnosis: Cushings Syndrome" using "Cushings Syndrome (2.16.840.1.113883.3.464.1003.117.12.1009)")]
+	  union [("Diagnosis: Marfan's Syndrome" using "Marfan's Syndrome (2.16.840.1.113883.3.464.1003.113.12.1048)")]
+	  union [("Diagnosis: Hyperparathyroidism" using "Hyperparathyroidism (2.16.840.1.113883.3.464.1003.117.12.1016)")]
+	  union [("Diagnosis: Lupus" using "Lupus (2.16.840.1.113883.3.464.1003.117.12.1010)")] ) IndependentRiskDiagnosis
 	  where IndependentRiskDiagnosis.prevalencePeriod starts before 
 	  end Measurement Period
-	  or exists ( ( ["Procedure, Performed: Gastric Bypass Surgery" using "Gastric Bypass Surgery (2.16.840.1.113883.3.464.1003.198.12.1050)"] GastricBypass
+	  or exists ( ( [("Procedure, Performed: Gastric Bypass Surgery" using "Gastric Bypass Surgery (2.16.840.1.113883.3.464.1003.198.12.1050)")] GastricBypass
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( GastricBypass.relevantDatetime, GastricBypass.relevantPeriod ) ends before start of Measurement Period
 	  )
-	    union ( ["Medication, Active: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)"] AromataseInhibitorActive
+	    union ( [("Medication, Active: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)")] AromataseInhibitorActive
 	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( AromataseInhibitorActive.relevantDatetime, AromataseInhibitorActive.relevantPeriod ) starts before start of Measurement Period
 	    )
-	    union ( ["Medication, Order: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)"] AromataseInhibitorOrder
+	    union ( [("Medication, Order: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)")] AromataseInhibitorOrder
 	        where AromataseInhibitorOrder.authorDatetime before start of Measurement Period
 	    )
-	    union ["Assessment, Performed: Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment" using "Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment (LOINC Code 90265-0)"] ProbabilityAssessment
+	    union [("Assessment, Performed: Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment" using "Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment (LOINC Code 90265-0)")] ProbabilityAssessment
 	  where ProbabilityAssessment.result >= 8.4 '%'
 	    and start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
@@ -142,7 +142,7 @@ singleton from ( ["Patient Characteristic Birthdate: Birth date" using "Birth da
 	)
 =============================================================================================================================================================================
 Numerator:
-exists ["Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.1051)"] DXA
+exists [("Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.1051)")] DXA
 	  where DXA.authorDatetime during Measurement Period
 =============================================================================================================================================================================
 Numerator Exclusions:

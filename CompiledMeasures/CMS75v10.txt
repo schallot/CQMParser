@@ -1,38 +1,38 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
 	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 20
 	)
-	  and exists ( ["Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)"] ValidEncounter
+	  and exists ( [("Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
 	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 20
 	)
-	  and exists ( ["Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)"] ValidEncounter
+	  and exists ( [("Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
-	    where ( DischargeHospice.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-	        or DischargeHospice.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
+	    where ( DischargeHospice.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+	        or DischargeHospice.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
 	    )
 	      and DischargeHospice.relevantPeriod ends during Measurement Period
 	)
-	  or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+	  or exists ( [("Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
-	  or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 =============================================================================================================================================================================
 Numerator:
-exists ( ["Diagnosis: Dental Caries" using "Dental Caries (2.16.840.1.113883.3.464.1003.125.12.1004)"] DentalCaries
+exists ( [("Diagnosis: Dental Caries" using "Dental Caries (2.16.840.1.113883.3.464.1003.125.12.1004)")] DentalCaries
 	    where DentalCaries.prevalencePeriod overlaps Measurement Period
 	)
 =============================================================================================================================================================================

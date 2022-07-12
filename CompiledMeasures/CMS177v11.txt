@@ -1,31 +1,31 @@
 =============================================================================================================================================================================
 Initial Population:
-( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
-  union ["Encounter, Performed: Psych Visit for Family Psychotherapy" using "Psych Visit for Family Psychotherapy (2.16.840.1.113883.3.526.3.1018)"]
-  union ["Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
-  union ["Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)"]
-  union ["Encounter, Performed: Group Psychotherapy" using "Group Psychotherapy (2.16.840.1.113883.3.526.3.1187)"]
-  union ["Encounter, Performed: Telehealth Services" using "Telehealth Services (2.16.840.1.113883.3.464.1003.101.12.1031)"] ) ValidEncounter
+( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)")]
+  union [("Encounter, Performed: Psych Visit for Family Psychotherapy" using "Psych Visit for Family Psychotherapy (2.16.840.1.113883.3.526.3.1018)")]
+  union [("Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
+  union [("Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)")]
+  union [("Encounter, Performed: Group Psychotherapy" using "Group Psychotherapy (2.16.840.1.113883.3.526.3.1187)")]
+  union [("Encounter, Performed: Telehealth Services" using "Telehealth Services (2.16.840.1.113883.3.464.1003.101.12.1031)")] ) ValidEncounter
   where exists ( ValidEncounter.diagnoses EncounterDiagnosis
-      where EncounterDiagnosis.code in valueset "Major Depressive Disorder Active" (2.16.840.1.113883.3.526.3.1491)
+      where EncounterDiagnosis.code in (valueset "Major Depressive Disorder Active" (2.16.840.1.113883.3.526.3.1491))
   )
     and ValidEncounter.relevantPeriod during Measurement Period MDDEncounter
   where AgeInYearsAt(date from start of Measurement Period)>= 6
     and AgeInYearsAt(date from start of Measurement Period)< 17
 =============================================================================================================================================================================
 Denominator:
-( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
-  union ["Encounter, Performed: Psych Visit for Family Psychotherapy" using "Psych Visit for Family Psychotherapy (2.16.840.1.113883.3.526.3.1018)"]
-  union ["Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
-  union ["Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)"]
-  union ["Encounter, Performed: Group Psychotherapy" using "Group Psychotherapy (2.16.840.1.113883.3.526.3.1187)"]
-  union ["Encounter, Performed: Telehealth Services" using "Telehealth Services (2.16.840.1.113883.3.464.1003.101.12.1031)"] ) ValidEncounter
+( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)")]
+  union [("Encounter, Performed: Psych Visit for Family Psychotherapy" using "Psych Visit for Family Psychotherapy (2.16.840.1.113883.3.526.3.1018)")]
+  union [("Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
+  union [("Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)")]
+  union [("Encounter, Performed: Group Psychotherapy" using "Group Psychotherapy (2.16.840.1.113883.3.526.3.1187)")]
+  union [("Encounter, Performed: Telehealth Services" using "Telehealth Services (2.16.840.1.113883.3.464.1003.101.12.1031)")] ) ValidEncounter
   where exists ( ValidEncounter.diagnoses EncounterDiagnosis
-      where EncounterDiagnosis.code in valueset "Major Depressive Disorder Active" (2.16.840.1.113883.3.526.3.1491)
+      where EncounterDiagnosis.code in (valueset "Major Depressive Disorder Active" (2.16.840.1.113883.3.526.3.1491))
   )
     and ValidEncounter.relevantPeriod during Measurement Period MDDEncounter
   where AgeInYearsAt(date from start of Measurement Period)>= 6
@@ -35,19 +35,19 @@ Denominator Exclusions:
 None
 =============================================================================================================================================================================
 Numerator:
-( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
-  union ["Encounter, Performed: Psych Visit for Family Psychotherapy" using "Psych Visit for Family Psychotherapy (2.16.840.1.113883.3.526.3.1018)"]
-  union ["Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
-  union ["Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)"]
-  union ["Encounter, Performed: Group Psychotherapy" using "Group Psychotherapy (2.16.840.1.113883.3.526.3.1187)"]
-  union ["Encounter, Performed: Telehealth Services" using "Telehealth Services (2.16.840.1.113883.3.464.1003.101.12.1031)"] ) ValidEncounter
+( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)")]
+  union [("Encounter, Performed: Psych Visit for Family Psychotherapy" using "Psych Visit for Family Psychotherapy (2.16.840.1.113883.3.526.3.1018)")]
+  union [("Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
+  union [("Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)")]
+  union [("Encounter, Performed: Group Psychotherapy" using "Group Psychotherapy (2.16.840.1.113883.3.526.3.1187)")]
+  union [("Encounter, Performed: Telehealth Services" using "Telehealth Services (2.16.840.1.113883.3.464.1003.101.12.1031)")] ) ValidEncounter
   where exists ( ValidEncounter.diagnoses EncounterDiagnosis
-      where EncounterDiagnosis.code in valueset "Major Depressive Disorder Active" (2.16.840.1.113883.3.526.3.1491)
+      where EncounterDiagnosis.code in (valueset "Major Depressive Disorder Active" (2.16.840.1.113883.3.526.3.1491))
   )
     and ValidEncounter.relevantPeriod during Measurement Period MDDEncounter
-  with ["Intervention, Performed: Suicide risk assessment (procedure)" using "Suicide risk assessment (procedure) (SNOMEDCT Code 225337009)"] SuicideRiskAssessment
+  with [("Intervention, Performed: Suicide risk assessment (procedure)" using "Suicide risk assessment (procedure) (SNOMEDCT Code 225337009)")] SuicideRiskAssessment
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( SuicideRiskAssessment.relevantDatetime, SuicideRiskAssessment.relevantPeriod ) during MDDEncounter.relevantPeriod

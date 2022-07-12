@@ -2,42 +2,42 @@
 Initial Population:
 AgeInMonthsAt(date from start of Measurement Period)>= 6
   and AgeInYearsAt(date from start of Measurement Period)<= 20
-  and exists ( ["Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)"] ValidEncounter
+  and exists ( [("Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)")] ValidEncounter
   where ValidEncounter.relevantPeriod during day of Measurement Period )
 =============================================================================================================================================================================
 Denominator:
 AgeInMonthsAt(date from start of Measurement Period)>= 6
   and AgeInYearsAt(date from start of Measurement Period)<= 20
-  and exists ( ["Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)"] ValidEncounter
+  and exists ( [("Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)")] ValidEncounter
   where ValidEncounter.relevantPeriod during day of Measurement Period )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
-exists ["Procedure, Performed: Fluoride Varnish Application for Children" using "Fluoride Varnish Application for Children (2.16.840.1.113883.3.464.1003.125.12.1002)"] FluorideApplication
+exists [("Procedure, Performed: Fluoride Varnish Application for Children" using "Fluoride Varnish Application for Children (2.16.840.1.113883.3.464.1003.125.12.1002)")] FluorideApplication
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( FluorideApplication.relevantDatetime, FluorideApplication.relevantPeriod ) during day of Measurement Period

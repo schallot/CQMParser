@@ -3,15 +3,15 @@ Initial Population:
 AgeInYearsAt(date from 
   end of Measurement Period
 )in Interval[18, 75]
-  and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounters
+  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period )
-  and exists ( ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+  and exists ( [("Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)")] Diabetes
       where Diabetes.prevalencePeriod overlaps Measurement Period
   )
 =============================================================================================================================================================================
@@ -19,38 +19,38 @@ Denominator:
 AgeInYearsAt(date from 
   end of Measurement Period
 )in Interval[18, 75]
-  and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounters
+  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period )
-  and exists ( ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+  and exists ( [("Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)")] Diabetes
       where Diabetes.prevalencePeriod overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
@@ -58,41 +58,41 @@ Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter I
   or AIFrailLTCF.( AgeInYearsAt(date from 
     end of Measurement Period
   )>= 66
-    and exists ( ["Device, Order: Frailty Device" using "Frailty Device (2.16.840.1.113883.3.464.1003.118.12.1300)"] FrailtyDeviceOrder
+    and exists ( [("Device, Order: Frailty Device" using "Frailty Device (2.16.840.1.113883.3.464.1003.118.12.1300)")] FrailtyDeviceOrder
     where FrailtyDeviceOrder.authorDatetime during day of Measurement Period
 )
-  or exists ( ["Assessment, Performed: Medical equipment used" using "Medical equipment used (LOINC Code 98181-1)"] EquipmentUsed
-      where EquipmentUsed.result in valueset "Frailty Device" (2.16.840.1.113883.3.464.1003.118.12.1300)
+  or exists ( [("Assessment, Performed: Medical equipment used" using "Medical equipment used (LOINC Code 98181-1)")] EquipmentUsed
+      where EquipmentUsed.result in (valueset "Frailty Device" (2.16.840.1.113883.3.464.1003.118.12.1300))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( EquipmentUsed.relevantDatetime, EquipmentUsed.relevantPeriod ) ends during day of Measurement Period
   )
-  or exists ( ["Diagnosis: Frailty Diagnosis" using "Frailty Diagnosis (2.16.840.1.113883.3.464.1003.113.12.1074)"] FrailtyDiagnosis
+  or exists ( [("Diagnosis: Frailty Diagnosis" using "Frailty Diagnosis (2.16.840.1.113883.3.464.1003.113.12.1074)")] FrailtyDiagnosis
       where FrailtyDiagnosis.prevalencePeriod overlaps Measurement Period
   )
-  or exists ( ["Encounter, Performed: Frailty Encounter" using "Frailty Encounter (2.16.840.1.113883.3.464.1003.101.12.1088)"] FrailtyEncounter
+  or exists ( [("Encounter, Performed: Frailty Encounter" using "Frailty Encounter (2.16.840.1.113883.3.464.1003.101.12.1088)")] FrailtyEncounter
       where FrailtyEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Symptom: Frailty Symptom" using "Frailty Symptom (2.16.840.1.113883.3.464.1003.113.12.1075)"] FrailtySymptom
+  or exists ( [("Symptom: Frailty Symptom" using "Frailty Symptom (2.16.840.1.113883.3.464.1003.113.12.1075)")] FrailtySymptom
       where FrailtySymptom.prevalencePeriod overlaps Measurement Period
   )
     and ( exists (
 from
-  ( ["Encounter, Performed: Outpatient" using "Outpatient (2.16.840.1.113883.3.464.1003.101.12.1087)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Nonacute Inpatient" using "Nonacute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1084)"] ) OutpatientEncounter
+  ( [("Encounter, Performed: Outpatient" using "Outpatient (2.16.840.1.113883.3.464.1003.101.12.1087)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Nonacute Inpatient" using "Nonacute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1084)")] ) OutpatientEncounter
   where exists ( OutpatientEncounter.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082)
+      where Diagnosis.code in (valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082))
   )
     and OutpatientEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 1 year, 
     end of Measurement Period] OutpatientEncounter1,
-  ( ["Encounter, Performed: Outpatient" using "Outpatient (2.16.840.1.113883.3.464.1003.101.12.1087)"]
-  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
-  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
-  union ["Encounter, Performed: Nonacute Inpatient" using "Nonacute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1084)"] ) OutpatientEncounter
+  ( [("Encounter, Performed: Outpatient" using "Outpatient (2.16.840.1.113883.3.464.1003.101.12.1087)")]
+  union [("Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)")]
+  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
+  union [("Encounter, Performed: Nonacute Inpatient" using "Nonacute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1084)")] ) OutpatientEncounter
   where exists ( OutpatientEncounter.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082)
+      where Diagnosis.code in (valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082))
   )
     and OutpatientEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 1 year, 
     end of Measurement Period] OutpatientEncounter2
@@ -100,13 +100,13 @@ from
   end of OutpatientEncounter1.relevantPeriod
   return OutpatientEncounter1
   )
-        or exists( ["Encounter, Performed: Acute Inpatient" using "Acute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1083)"] InpatientEncounter
+        or exists( [("Encounter, Performed: Acute Inpatient" using "Acute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1083)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses Diagnosis
-      where Diagnosis.code in valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082)
+      where Diagnosis.code in (valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082))
   )
     and InpatientEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 1 year, 
     end of Measurement Period])
-        or exists (["Medication, Active: Dementia Medications" using "Dementia Medications (2.16.840.1.113883.3.464.1003.196.12.1510)"] DementiaMedication
+        or exists ([("Medication, Active: Dementia Medications" using "Dementia Medications (2.16.840.1.113883.3.464.1003.196.12.1510)")] DementiaMedication
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( DementiaMedication.relevantDatetime, DementiaMedication.relevantPeriod ) overlaps Interval[start of Measurement Period - 1 year, 
@@ -117,7 +117,7 @@ from
     end of Measurement Period
   )>= 66
 )
-  and ( ( Last(["Assessment, Performed: Housing status" using "Housing status (LOINC Code 71802-3)"] HousingStatus
+  and ( ( Last([("Assessment, Performed: Housing status" using "Housing status (LOINC Code 71802-3)")] HousingStatus
         where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(HousingStatus.relevantDatetime, HousingStatus.relevantPeriod)ends on or before 
@@ -127,37 +127,37 @@ from
   else if period is not null then period 
   else null as Interval<DateTime>(relevantDatetime, relevantPeriod)asc
     )) LastHousingStatus
-      where LastHousingStatus.result ~ code "Lives in a nursing home (finding)" ("SNOMEDCT Code (160734000)")
+      where LastHousingStatus.result ~ (code "Lives in a nursing home (finding)" ("SNOMEDCT Code (160734000)"))
   ) is not null
-  or PalliativeCare.exists ( ["Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)"] PalliativeAssessment
+  or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
     where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 )
-or exists (["Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)"] PalliativeDiagnosis
+or exists ([("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis
 where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
-  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)"] PalliativeEncounter
+  or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)")] PalliativeEncounter
       where PalliativeEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)"] PalliativeIntervention
+  or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
-( exists ( ["Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)"] Retinopathy
+( exists ( [("Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)")] Retinopathy
     where Retinopathy.prevalencePeriod overlaps Measurement Period
 )
-    and exists ( ["Physical Exam, Performed: Retinal or Dilated Eye Exam" using "Retinal or Dilated Eye Exam (2.16.840.1.113883.3.464.1003.115.12.1088)"] RetinalExam
+    and exists ( [("Physical Exam, Performed: Retinal or Dilated Eye Exam" using "Retinal or Dilated Eye Exam (2.16.840.1.113883.3.464.1003.115.12.1088)")] RetinalExam
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( RetinalExam.relevantDatetime, RetinalExam.relevantPeriod ) during day of Measurement Period )
 )
-  or ( not ( exists ( ["Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)"] Retinopathy
+  or ( not ( exists ( [("Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)")] Retinopathy
     where Retinopathy.prevalencePeriod overlaps Measurement Period
 ) )
-      and exists ( ["Physical Exam, Performed: Retinal or Dilated Eye Exam" using "Retinal or Dilated Eye Exam (2.16.840.1.113883.3.464.1003.115.12.1088)"] RetinalExam
+      and exists ( [("Physical Exam, Performed: Retinal or Dilated Eye Exam" using "Retinal or Dilated Eye Exam (2.16.840.1.113883.3.464.1003.115.12.1088)")] RetinalExam
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( RetinalExam.relevantDatetime, RetinalExam.relevantPeriod ) during day of Interval[start of Measurement Period - 1 year, 

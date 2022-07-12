@@ -1,6 +1,6 @@
 =============================================================================================================================================================================
 Initial Population:
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period InpatientEncounter
 		with [Patient Characteristic Birthdate] BirthDate
@@ -8,37 +8,37 @@ Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (
 		where InpatientEncounter.principalDiagnosis in Asthma
 =============================================================================================================================================================================
 Denominator:
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period InpatientEncounter
 		with [Patient Characteristic Birthdate] BirthDate
 			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod)between 2 and 17
 		where InpatientEncounter.principalDiagnosis in Asthma AsthmaAgeEncounter
-		where AsthmaAgeEncounter.dischargeDisposition in valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82"
+		where AsthmaAgeEncounter.dischargeDisposition in (valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82")
 =============================================================================================================================================================================
 Denominator Exclusions:
 None
 =============================================================================================================================================================================
 Numerator:
-( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period InpatientEncounter
 		with [Patient Characteristic Birthdate] BirthDate
 			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod)between 2 and 17
 		where InpatientEncounter.principalDiagnosis in Asthma AsthmaAgeEncounter
-		where AsthmaAgeEncounter.dischargeDisposition in valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82" DischargeToHomeEncounter
-			with ["Communication: From Provider To Patient: Asthma action plan" using "Asthma action plan (LOINC version 2.63 Code 69981-9)"] ActionPlan ActionPlan
+		where AsthmaAgeEncounter.dischargeDisposition in (valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82") DischargeToHomeEncounter
+			with [("Communication: From Provider To Patient: Asthma action plan" using "Asthma action plan (LOINC version 2.63 Code 69981-9)")] ActionPlan ActionPlan
 				such that ActionPlan.authorDatetime during DischargeToHomeEncounter.relevantPeriod
 	)
-		union ( Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+		union ( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
 		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period InpatientEncounter
 		with [Patient Characteristic Birthdate] BirthDate
 			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of InpatientEncounter.relevantPeriod)between 2 and 17
 		where InpatientEncounter.principalDiagnosis in Asthma AsthmaAgeEncounter
-		where AsthmaAgeEncounter.dischargeDisposition in valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82" DischargeToHomeEncounter
-				with ["Communication: From Provider To Patient, Not Done: Asthma action plan" using "Asthma action plan (LOINC version 2.63 Code 69981-9)"] NoActionPlan
-		where NoActionPlan.negationRationale in valueset "Patient Refusal" using "2.16.840.1.113883.3.117.1.7.1.93" NoActionPlan
+		where AsthmaAgeEncounter.dischargeDisposition in (valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82") DischargeToHomeEncounter
+				with [("Communication: From Provider To Patient, Not Done: Asthma action plan" using "Asthma action plan (LOINC version 2.63 Code 69981-9)")] NoActionPlan
+		where NoActionPlan.negationRationale in (valueset "Patient Refusal" using "2.16.840.1.113883.3.117.1.7.1.93") NoActionPlan
 					such that NoActionPlan.authorDatetime during DischargeToHomeEncounter.relevantPeriod
 		)
 =============================================================================================================================================================================

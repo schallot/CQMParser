@@ -1,16 +1,16 @@
 =============================================================================================================================================================================
 Initial Population:
 
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
     where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 )
   and ( 
-exists ( ["Encounter, Performed: Face to Face Interaction - No ED" using "Face to Face Interaction - No ED (2.16.840.1.113762.1.4.1080.2)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"] ) QualifyingEncounter
+exists ( [("Encounter, Performed: Face to Face Interaction - No ED" using "Face to Face Interaction - No ED (2.16.840.1.113762.1.4.1080.2)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period )
   and exists ( 
 
@@ -20,7 +20,7 @@ if Length(
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -37,7 +37,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -54,7 +54,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -72,7 +72,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -90,7 +90,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
                                                                 */ then { 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -105,7 +105,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -124,7 +124,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
                                                                      */ { Interval[start of 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -139,7 +139,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -157,7 +157,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -174,7 +174,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -191,7 +191,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -209,7 +209,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -231,7 +231,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -248,7 +248,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -265,7 +265,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -283,7 +283,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -303,7 +303,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -320,7 +320,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -337,7 +337,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -355,7 +355,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -375,7 +375,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -392,7 +392,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -409,7 +409,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -427,7 +427,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -447,7 +447,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -464,7 +464,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -481,7 +481,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -499,7 +499,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -519,7 +519,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
     end of 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -534,7 +534,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -550,7 +550,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod]] PeriodsWithAllowedGaps
   let Medications: ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -579,16 +579,16 @@ Sum((collapse(Periods))Period
 Denominator:
 
 
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
     where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 )
   and ( 
-exists ( ["Encounter, Performed: Face to Face Interaction - No ED" using "Face to Face Interaction - No ED (2.16.840.1.113762.1.4.1080.2)"]
-  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"] ) QualifyingEncounter
+exists ( [("Encounter, Performed: Face to Face Interaction - No ED" using "Face to Face Interaction - No ED (2.16.840.1.113762.1.4.1080.2)")]
+  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period )
   and exists ( 
 
@@ -598,7 +598,7 @@ if Length(
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -615,7 +615,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -632,7 +632,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -650,7 +650,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -668,7 +668,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
                                                                 */ then { 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -683,7 +683,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -702,7 +702,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
                                                                      */ { Interval[start of 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -717,7 +717,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -735,7 +735,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -752,7 +752,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -769,7 +769,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -787,7 +787,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -809,7 +809,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -826,7 +826,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -843,7 +843,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -861,7 +861,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -881,7 +881,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -898,7 +898,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -915,7 +915,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -933,7 +933,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -953,7 +953,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -970,7 +970,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -987,7 +987,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1005,7 +1005,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1025,7 +1025,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1042,7 +1042,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1059,7 +1059,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1077,7 +1077,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1097,7 +1097,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
     end of 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1112,7 +1112,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1128,7 +1128,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod]] PeriodsWithAllowedGaps
   let Medications: ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1156,19 +1156,19 @@ Sum((collapse(Periods))Period
 =============================================================================================================================================================================
 Denominator Exclusions:
 
-exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)"] PalliativeOrHospiceCareOrder
+exists ( [("Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] PalliativeOrHospiceCareOrder
     where PalliativeOrHospiceCareOrder.authorDatetime on or before 
     end of Measurement Period
 )
-  or exists ( ["Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)"] PalliativeOrHospiceCarePerformed
+  or exists ( [("Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] PalliativeOrHospiceCarePerformed
       where PalliativeOrHospiceCarePerformed.relevantPeriod starts on or before 
       end of Measurement Period
   )
-  or exists ( ["Diagnosis: All Primary and Secondary Cancer" using "All Primary and Secondary Cancer (2.16.840.1.113762.1.4.1111.161)"] CancerDiagnosis
+  or exists ( [("Diagnosis: All Primary and Secondary Cancer" using "All Primary and Secondary Cancer (2.16.840.1.113762.1.4.1111.161)")] CancerDiagnosis
       where CancerDiagnosis.prevalencePeriod starts 2 years or less before 
       end of Measurement Period
   )
-  or exists ( ["Diagnosis: Sickle Cell Disease and Related Blood Disorders" using "Sickle Cell Disease and Related Blood Disorders (2.16.840.1.113762.1.4.1029.35)"] SickleCellDiagnosis
+  or exists ( [("Diagnosis: Sickle Cell Disease and Related Blood Disorders" using "Sickle Cell Disease and Related Blood Disorders (2.16.840.1.113762.1.4.1029.35)")] SickleCellDiagnosis
       where SickleCellDiagnosis.prevalencePeriod overlaps Measurement Period
   )
 =============================================================================================================================================================================
@@ -1184,7 +1184,7 @@ if Length(
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1201,7 +1201,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1218,7 +1218,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1236,7 +1236,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1254,7 +1254,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
                                                                 */ then { 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1269,7 +1269,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1288,7 +1288,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
                                                                      */ { Interval[start of 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1303,7 +1303,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1321,7 +1321,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1338,7 +1338,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1355,7 +1355,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1373,7 +1373,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1395,7 +1395,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1412,7 +1412,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1429,7 +1429,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1447,7 +1447,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1467,7 +1467,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1484,7 +1484,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1501,7 +1501,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1519,7 +1519,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1539,7 +1539,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1556,7 +1556,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1573,7 +1573,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1591,7 +1591,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1611,7 +1611,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1628,7 +1628,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   let NextIndex: IndexOf(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1645,7 +1645,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   where NextIndex < Length(
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1663,7 +1663,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
   end of CompleteOpioidPeriod, start of 
 collapse ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1683,7 +1683,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
     end of 
 Interval[start of First(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1698,7 +1698,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod, 
 end of Last(
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1714,7 +1714,7 @@ end of OpioidMedication.relevantPeriod](Opioid)
 ).periodInMeasurementPeriod]] PeriodsWithAllowedGaps
   let Medications: ( 
 
-["Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)"] OpioidMedicationOrder
+[("Medication, Order: Opioid Medications" using "Opioid Medications (2.16.840.1.113883.3.3157.1004.26)")] OpioidMedicationOrder
   where Interval[start of OpioidMedication.relevantPeriod, if OpioidMedication.daysSupplied is not null then start of OpioidMedication.relevantPeriod + Quantity { value: OpioidMedication.daysSupplied, unit: 'd' } 
   else 
 end of OpioidMedication.relevantPeriod](OpioidMedicationOrder)overlaps Measurement Period Opioid
@@ -1743,27 +1743,27 @@ Sum((collapse(Periods))Period
 medications OpioidMedication
   let dosesPerDay: 
 case
-  when frequency ~ code "Once daily (qualifier value)" ("SNOMEDCT Code (229797004)") then 1.0
-  when frequency ~ code "Twice a day (qualifier value)" ("SNOMEDCT Code (229799001)") then 2.0
-  when frequency ~ code "Three times daily (qualifier value)" ("SNOMEDCT Code (229798009)") then 3.0
-  when frequency ~ code "Four times daily (qualifier value)" ("SNOMEDCT Code (307439001)") then 4.0
-  when frequency ~ code "Every twenty four hours (qualifier value)" ("SNOMEDCT Code (396125000)") then 1.0
-  when frequency ~ code "Every twelve hours (qualifier value)" ("SNOMEDCT Code (307470009)") then 2.0
-  when frequency ~ code "Every thirty six hours (qualifier value)" ("SNOMEDCT Code (396126004)") then 0.67
-  when frequency ~ code "Every eight hours (qualifier value)" ("SNOMEDCT Code (307469008)") then 3.0
-  when frequency ~ code "Every four hours (qualifier value)" ("SNOMEDCT Code (225756002)") then 6.0
-  when frequency ~ code "Every six hours (qualifier value)" ("SNOMEDCT Code (307468000)") then 4.0
-  when frequency ~ code "Every seventy two hours (qualifier value)" ("SNOMEDCT Code (396143001)") then 0.34
-  when frequency ~ code "Every forty eight hours (qualifier value)" ("SNOMEDCT Code (396131002)") then 0.5
-  when frequency ~ code "Every eight to twelve hours (qualifier value)" ("SNOMEDCT Code (396140003)") then 2.0
-  when frequency ~ code "Every six to eight hours (qualifier value)" ("SNOMEDCT Code (396139000)") then 3.0
-  when frequency ~ code "Every three to four hours (qualifier value)" ("SNOMEDCT Code (225754004)") then 6.0
-  when frequency ~ code "Every three to six hours (qualifier value)" ("SNOMEDCT Code (396127008)") then 4.0
-  when frequency ~ code "Every two to four hours (qualifier value)" ("SNOMEDCT Code (225752000)") then 6.0
-  when frequency ~ code "One to four times a day (qualifier value)" ("SNOMEDCT Code (396109005)") then 4.0
-  when frequency ~ code "One to three times a day (qualifier value)" ("SNOMEDCT Code (396108002)") then 3.0
-  when frequency ~ code "One to two times a day (qualifier value)" ("SNOMEDCT Code (396107007)") then 2.0
-  when frequency ~ code "Two to four times a day (qualifier value)" ("SNOMEDCT Code (396111001)") then 4.0 
+  when frequency ~ (code "Once daily (qualifier value)" ("SNOMEDCT Code (229797004)")) then 1.0
+  when frequency ~ (code "Twice a day (qualifier value)" ("SNOMEDCT Code (229799001)")) then 2.0
+  when frequency ~ (code "Three times daily (qualifier value)" ("SNOMEDCT Code (229798009)")) then 3.0
+  when frequency ~ (code "Four times daily (qualifier value)" ("SNOMEDCT Code (307439001)")) then 4.0
+  when frequency ~ (code "Every twenty four hours (qualifier value)" ("SNOMEDCT Code (396125000)")) then 1.0
+  when frequency ~ (code "Every twelve hours (qualifier value)" ("SNOMEDCT Code (307470009)")) then 2.0
+  when frequency ~ (code "Every thirty six hours (qualifier value)" ("SNOMEDCT Code (396126004)")) then 0.67
+  when frequency ~ (code "Every eight hours (qualifier value)" ("SNOMEDCT Code (307469008)")) then 3.0
+  when frequency ~ (code "Every four hours (qualifier value)" ("SNOMEDCT Code (225756002)")) then 6.0
+  when frequency ~ (code "Every six hours (qualifier value)" ("SNOMEDCT Code (307468000)")) then 4.0
+  when frequency ~ (code "Every seventy two hours (qualifier value)" ("SNOMEDCT Code (396143001)")) then 0.34
+  when frequency ~ (code "Every forty eight hours (qualifier value)" ("SNOMEDCT Code (396131002)")) then 0.5
+  when frequency ~ (code "Every eight to twelve hours (qualifier value)" ("SNOMEDCT Code (396140003)")) then 2.0
+  when frequency ~ (code "Every six to eight hours (qualifier value)" ("SNOMEDCT Code (396139000)")) then 3.0
+  when frequency ~ (code "Every three to four hours (qualifier value)" ("SNOMEDCT Code (225754004)")) then 6.0
+  when frequency ~ (code "Every three to six hours (qualifier value)" ("SNOMEDCT Code (396127008)")) then 4.0
+  when frequency ~ (code "Every two to four hours (qualifier value)" ("SNOMEDCT Code (225752000)")) then 6.0
+  when frequency ~ (code "One to four times a day (qualifier value)" ("SNOMEDCT Code (396109005)")) then 4.0
+  when frequency ~ (code "One to three times a day (qualifier value)" ("SNOMEDCT Code (396108002)")) then 3.0
+  when frequency ~ (code "One to two times a day (qualifier value)" ("SNOMEDCT Code (396107007)")) then 2.0
+  when frequency ~ (code "Two to four times a day (qualifier value)" ("SNOMEDCT Code (396111001)")) then 4.0 
   else null 
 end(OpioidMedication.frequency),
   MME: ( 

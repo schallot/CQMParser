@@ -1,60 +1,60 @@
 =============================================================================================================================================================================
 Initial Population:
 
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
   where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
-  with ( ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"]
-    union ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] ) OpioidOrBenzodiazepineDischargeMedication
+  with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
+    union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedication
     such that OpioidOrBenzodiazepineDischargeMedication.authorDatetime during InpatientEncounter.relevantPeriod
 =============================================================================================================================================================================
 Denominator:
 
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
   where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
-  with ( ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"]
-    union ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] ) OpioidOrBenzodiazepineDischargeMedication
+  with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
+    union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedication
     such that OpioidOrBenzodiazepineDischargeMedication.authorDatetime during InpatientEncounter.relevantPeriod
 =============================================================================================================================================================================
 Denominator Exclusions:
 
 
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
   where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
-  with ( ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"]
-    union ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] ) OpioidOrBenzodiazepineDischargeMedication
+  with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
+    union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedication
     such that OpioidOrBenzodiazepineDischargeMedication.authorDatetime during InpatientEncounter.relevantPeriod InpatientEncounter
-  where exists ( ["Diagnosis: All Primary and Secondary Cancer" using "All Primary and Secondary Cancer (2.16.840.1.113762.1.4.1111.161)"] Cancer
+  where exists ( [("Diagnosis: All Primary and Secondary Cancer" using "All Primary and Secondary Cancer (2.16.840.1.113762.1.4.1111.161)")] Cancer
       where Cancer.prevalencePeriod overlaps InpatientEncounter.relevantPeriod
   )
     or exists ( 
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
   where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
-  with ( ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"]
-    union ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] ) OpioidOrBenzodiazepineDischargeMedication
+  with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
+    union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedication
     such that OpioidOrBenzodiazepineDischargeMedication.authorDatetime during InpatientEncounter.relevantPeriod InpatientEncounter
         where exists InpatientEncounter.diagnoses Diagnosis
-          where Diagnosis.code in valueset "All Primary and Secondary Cancer" (2.16.840.1.113762.1.4.1111.161)
+          where Diagnosis.code in (valueset "All Primary and Secondary Cancer" (2.16.840.1.113762.1.4.1111.161))
     )
-    or exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)"]
-  union ["Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)"] PalliativeOrHospiceCare
+    or exists ( [("Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")]
+  union [("Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] PalliativeOrHospiceCare
         where Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(PalliativeOrHospiceCare.relevantDatetime, PalliativeOrHospiceCare.relevantPeriod), PalliativeOrHospiceCare.authorDatetime)during Encounter Visit
-	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+	let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
 			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
 			sort by 
 			end of relevantPeriod
 	),
 	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+	EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
 			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
 			sort by 
 			end of relevantPeriod
@@ -63,45 +63,45 @@ Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (
 	end of Visit.relevantPeriod] ( InpatientEncounter )
     )
     or exists ( 
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
   where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
-  with ( ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"]
-    union ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] ) OpioidOrBenzodiazepineDischargeMedication
+  with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
+    union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedication
     such that OpioidOrBenzodiazepineDischargeMedication.authorDatetime during InpatientEncounter.relevantPeriod InpatientEncounter
-        where InpatientEncounter.dischargeDisposition in valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87)
-          or InpatientEncounter.dischargeDisposition in valueset "Hospice Care Referral or Admission" (2.16.840.1.113762.1.4.1116.365)
-          or InpatientEncounter.dischargeDisposition in valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309)
+        where InpatientEncounter.dischargeDisposition in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))
+          or InpatientEncounter.dischargeDisposition in (valueset "Hospice Care Referral or Admission" (2.16.840.1.113762.1.4.1116.365))
+          or InpatientEncounter.dischargeDisposition in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))
     )
 =============================================================================================================================================================================
 Numerator:
 
 ( 
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
   where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
-  with ( ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"]
-    union ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] ) OpioidOrBenzodiazepineDischargeMedication
+  with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
+    union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedication
     such that OpioidOrBenzodiazepineDischargeMedication.authorDatetime during InpatientEncounter.relevantPeriod InpatientEncounter
-    where ( Count(["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"] Opioids
+    where ( Count([("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")] Opioids
           where Opioids.authorDatetime during InpatientEncounter.relevantPeriod
           return distinct Opioids.code
       )>= 2
     )
 )
   union ( 
-Global.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
   where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
-  with ( ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"]
-    union ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] ) OpioidOrBenzodiazepineDischargeMedication
+  with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
+    union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedication
     such that OpioidOrBenzodiazepineDischargeMedication.authorDatetime during InpatientEncounter.relevantPeriod InpatientEncounter
-      with ["Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)"] OpioidsDischarge
+      with [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")] OpioidsDischarge
         such that OpioidsDischarge.authorDatetime during InpatientEncounter.relevantPeriod
-      with ["Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)"] BenzodiazepinesDischarge
+      with [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] BenzodiazepinesDischarge
         such that BenzodiazepinesDischarge.authorDatetime during InpatientEncounter.relevantPeriod
   )
 =============================================================================================================================================================================

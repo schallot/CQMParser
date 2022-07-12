@@ -1,11 +1,11 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
-	    with First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
+	    with First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -22,11 +22,11 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( IndexAssessment.relevantDatetime, IndexAssessment.relevantPeriod ) ) >= 12
-	        and First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	        and First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -43,12 +43,12 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	)
 =============================================================================================================================================================================
 Denominator:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
-	    with First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
+	    with First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -65,11 +65,11 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( IndexAssessment.relevantDatetime, IndexAssessment.relevantPeriod ) ) >= 12
-	        and First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	        and First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -86,13 +86,13 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	)
 =============================================================================================================================================================================
 Denominator Exclusions:
-exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)"] PalliativeCareOrder
+exists ( [("Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] PalliativeCareOrder
 	    where DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( PalliativeCareOrder.authorDatetime ) occurs on or before 
-	    end of First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	    end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -112,13 +112,13 @@ exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) ) + 12 months + 60 days]
 	)
-	  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.600.1.1575)"] PalliativeCareEncounter
+	  or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.600.1.1575)")] PalliativeCareEncounter
 	    where DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( start of PalliativeCareEncounter.relevantPeriod ) on or before 
-	    end of First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	    end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -138,13 +138,13 @@ exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) ) + 12 months + 60 days]
 	)
-	  or exists ( ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] EncounterLongTermCare
+	  or exists ( [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] EncounterLongTermCare
 	    where DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( start of EncounterLongTermCare.relevantPeriod ) on or before 
-	    end of First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	    end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -164,13 +164,13 @@ exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) ) + 12 months + 60 days]
 	)
-	  or exists ( ["Patient Characteristic Expired: Dead (finding)" using "Dead (finding) (SNOMEDCT Code 419099009)"] Deceased
+	  or exists ( [("Patient Characteristic Expired: Dead (finding)" using "Dead (finding) (SNOMEDCT Code 419099009)")] Deceased
 	    where DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( Deceased.expiredDatetime ) occurs on or before 
-	    end of First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	    end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -190,16 +190,16 @@ exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) ) + 12 months + 60 days]
 	)
-	  or exists ( ( ["Diagnosis: Bipolar Disorder" using "Bipolar Disorder (2.16.840.1.113883.3.67.1.101.1.128)"]
-	    union ["Diagnosis: Personality Disorder Emotionally Labile" using "Personality Disorder Emotionally Labile (2.16.840.1.113883.3.67.1.101.1.246)"]
-	    union ["Diagnosis: Schizophrenia or Psychotic Disorder" using "Schizophrenia or Psychotic Disorder (2.16.840.1.113883.3.464.1003.105.12.1104)"]
-	    union ["Diagnosis: Pervasive Developmental Disorder" using "Pervasive Developmental Disorder (2.16.840.1.113883.3.464.1003.105.12.1152)"] ) DisorderDiagnoses
+	  or exists ( ( [("Diagnosis: Bipolar Disorder" using "Bipolar Disorder (2.16.840.1.113883.3.67.1.101.1.128)")]
+	    union [("Diagnosis: Personality Disorder Emotionally Labile" using "Personality Disorder Emotionally Labile (2.16.840.1.113883.3.67.1.101.1.246)")]
+	    union [("Diagnosis: Schizophrenia or Psychotic Disorder" using "Schizophrenia or Psychotic Disorder (2.16.840.1.113883.3.464.1003.105.12.1104)")]
+	    union [("Diagnosis: Pervasive Developmental Disorder" using "Pervasive Developmental Disorder (2.16.840.1.113883.3.464.1003.105.12.1152)")] ) DisorderDiagnoses
 	    where DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( start of DisorderDiagnoses.prevalencePeriod ) on or before 
-	    end of First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	    end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -221,14 +221,14 @@ exists ( ["Intervention, Order: Palliative or Hospice Care" using "Palliative or
 	)
 =============================================================================================================================================================================
 Numerator:
-Last(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+Last([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	    where DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
-	  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod))during First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+	  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod))during First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -259,12 +259,12 @@ Denominator Exceptions:
 None
 =============================================================================================================================================================================
 Stratification 1:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
-	    with First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
+	    with First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -284,12 +284,12 @@ exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOIN
 	)
 =============================================================================================================================================================================
 Stratification 2:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
-	    with First(["Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)"] DepressionAssessment
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
+	    with First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
 	  where DepressionAssessment.result > 9 DepressionAssessment
-	    with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] ValidEncounter
-	  with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
-	  union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+	    with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
+	  with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
+	  union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 	    such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 	      and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
 	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]

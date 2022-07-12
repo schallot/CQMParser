@@ -1,17 +1,17 @@
 =============================================================================================================================================================================
 Initial Population:
 AgeInYearsAt(date from start of Measurement Period)>= 18
-  and exists ( ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+  and exists ( [("Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)")] HeartFailure
       where HeartFailure.prevalencePeriod overlaps before Measurement Period
   )
   and exists ( from
-  ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+  ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period OfficeVisit1,
-  ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+  ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period OfficeVisit2
   where OfficeVisit2.relevantPeriod starts 1 day or more after day of 
   end of OfficeVisit1.relevantPeriod
@@ -19,59 +19,59 @@ AgeInYearsAt(date from start of Measurement Period)>= 18
 =============================================================================================================================================================================
 Denominator:
 AgeInYearsAt(date from start of Measurement Period)>= 18
-  and exists ( ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+  and exists ( [("Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)")] HeartFailure
       where HeartFailure.prevalencePeriod overlaps before Measurement Period
   )
   and exists ( from
-  ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+  ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period OfficeVisit1,
-  ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+  ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period OfficeVisit2
   where OfficeVisit2.relevantPeriod starts 1 day or more after day of 
   end of OfficeVisit1.relevantPeriod
   return OfficeVisit1 )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Diagnosis: Severe dementia (disorder)" using "Severe dementia (disorder) (SNOMEDCT Code 428351000124105)"] Dementia
+  or exists ( [("Diagnosis: Severe dementia (disorder)" using "Severe dementia (disorder) (SNOMEDCT Code 428351000124105)")] Dementia
       where Dementia.prevalencePeriod overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
 ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)"] PROMIS10MentalScore,
-  ["Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)"] PROMIS10PhysicalScore
+  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
+  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
   let PROMIS10MentalScoreTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
@@ -83,8 +83,8 @@ Numerator:
     and PROMIS10MentalScore.result is not null
   return Max({ PROMIS10MentalScoreTime, PROMIS10PhysicalScoreTime }) InitialPROMIS10Time,
     from
-  ["Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)"] PROMIS10MentalScore,
-  ["Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)"] PROMIS10PhysicalScore
+  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
+  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
   let PROMIS10MentalScoreTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
@@ -103,18 +103,18 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: PROMIS-29 Sleep disturbance score T-score" using "PROMIS-29 Sleep disturbance score T-score (LOINC Code 71955-9)"] Promis29Sleep,
-  ["Assessment, Performed: PROMIS-29 Satisfaction with participation in social roles score T-score" using "PROMIS-29 Satisfaction with participation in social roles score T-score (LOINC Code 71957-5)"] Promis29SocialRoles,
-  ["Assessment, Performed: PROMIS-29 Physical function score T-score" using "PROMIS-29 Physical function score T-score (LOINC Code 71959-1)"] Promis29Physical,
-  ["Assessment, Performed: PROMIS-29 Pain interference score T-score" using "PROMIS-29 Pain interference score T-score (LOINC Code 71961-7)"] Promis29Pain,
-  ["Assessment, Performed: PROMIS-29 Fatigue score T-score" using "PROMIS-29 Fatigue score T-score (LOINC Code 71963-3)"] Promis29Fatigue,
-  ["Assessment, Performed: PROMIS-29 Depression score T-score" using "PROMIS-29 Depression score T-score (LOINC Code 71965-8)"] Promis29Depression,
-  ["Assessment, Performed: PROMIS-29 Anxiety score T-score" using "PROMIS-29 Anxiety score T-score (LOINC Code 71967-4)"] Promis29Anxiety
+  [("Assessment, Performed: PROMIS-29 Sleep disturbance score T-score" using "PROMIS-29 Sleep disturbance score T-score (LOINC Code 71955-9)")] Promis29Sleep,
+  [("Assessment, Performed: PROMIS-29 Satisfaction with participation in social roles score T-score" using "PROMIS-29 Satisfaction with participation in social roles score T-score (LOINC Code 71957-5)")] Promis29SocialRoles,
+  [("Assessment, Performed: PROMIS-29 Physical function score T-score" using "PROMIS-29 Physical function score T-score (LOINC Code 71959-1)")] Promis29Physical,
+  [("Assessment, Performed: PROMIS-29 Pain interference score T-score" using "PROMIS-29 Pain interference score T-score (LOINC Code 71961-7)")] Promis29Pain,
+  [("Assessment, Performed: PROMIS-29 Fatigue score T-score" using "PROMIS-29 Fatigue score T-score (LOINC Code 71963-3)")] Promis29Fatigue,
+  [("Assessment, Performed: PROMIS-29 Depression score T-score" using "PROMIS-29 Depression score T-score (LOINC Code 71965-8)")] Promis29Depression,
+  [("Assessment, Performed: PROMIS-29 Anxiety score T-score" using "PROMIS-29 Anxiety score T-score (LOINC Code 71967-4)")] Promis29Anxiety
   let Promis29SleepTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Promis29Sleep.relevantDatetime, Promis29Sleep.relevantPeriod ),
@@ -151,13 +151,13 @@ Numerator:
     and Promis29Sleep.result is not null
   return Max({ Promis29SleepTime, Promis29SocialRolesTime, Promis29PhysicalTime, Promis29PainTime, Promis29FatigueTime, Promis29DepressionTime, Promis29AnxietyTime }) InitialPROMIS29Time,
     from
-  ["Assessment, Performed: PROMIS-29 Sleep disturbance score T-score" using "PROMIS-29 Sleep disturbance score T-score (LOINC Code 71955-9)"] Promis29Sleep,
-  ["Assessment, Performed: PROMIS-29 Satisfaction with participation in social roles score T-score" using "PROMIS-29 Satisfaction with participation in social roles score T-score (LOINC Code 71957-5)"] Promis29SocialRoles,
-  ["Assessment, Performed: PROMIS-29 Physical function score T-score" using "PROMIS-29 Physical function score T-score (LOINC Code 71959-1)"] Promis29Physical,
-  ["Assessment, Performed: PROMIS-29 Pain interference score T-score" using "PROMIS-29 Pain interference score T-score (LOINC Code 71961-7)"] Promis29Pain,
-  ["Assessment, Performed: PROMIS-29 Fatigue score T-score" using "PROMIS-29 Fatigue score T-score (LOINC Code 71963-3)"] Promis29Fatigue,
-  ["Assessment, Performed: PROMIS-29 Depression score T-score" using "PROMIS-29 Depression score T-score (LOINC Code 71965-8)"] Promis29Depression,
-  ["Assessment, Performed: PROMIS-29 Anxiety score T-score" using "PROMIS-29 Anxiety score T-score (LOINC Code 71967-4)"] Promis29Anxiety
+  [("Assessment, Performed: PROMIS-29 Sleep disturbance score T-score" using "PROMIS-29 Sleep disturbance score T-score (LOINC Code 71955-9)")] Promis29Sleep,
+  [("Assessment, Performed: PROMIS-29 Satisfaction with participation in social roles score T-score" using "PROMIS-29 Satisfaction with participation in social roles score T-score (LOINC Code 71957-5)")] Promis29SocialRoles,
+  [("Assessment, Performed: PROMIS-29 Physical function score T-score" using "PROMIS-29 Physical function score T-score (LOINC Code 71959-1)")] Promis29Physical,
+  [("Assessment, Performed: PROMIS-29 Pain interference score T-score" using "PROMIS-29 Pain interference score T-score (LOINC Code 71961-7)")] Promis29Pain,
+  [("Assessment, Performed: PROMIS-29 Fatigue score T-score" using "PROMIS-29 Fatigue score T-score (LOINC Code 71963-3)")] Promis29Fatigue,
+  [("Assessment, Performed: PROMIS-29 Depression score T-score" using "PROMIS-29 Depression score T-score (LOINC Code 71965-8)")] Promis29Depression,
+  [("Assessment, Performed: PROMIS-29 Anxiety score T-score" using "PROMIS-29 Anxiety score T-score (LOINC Code 71967-4)")] Promis29Anxiety
   let Promis29SleepTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Promis29Sleep.relevantDatetime, Promis29Sleep.relevantPeriod ),
@@ -201,13 +201,13 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
@@ -219,8 +219,8 @@ Numerator:
     and VR12PhysicalAssessment.result is not null
   return Max({ VR12MentalAssessmentTime, VR12PhysicalAssessmentTime }) InitialVR12ObliqueTime,
     from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
@@ -239,13 +239,13 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
@@ -257,8 +257,8 @@ Numerator:
     and VR12PhysicalAssessment.result is not null
   return Max({ VR12MentalAssessmentTime, VR12PhysicalAssessmentTime }) InitialVR12OrthogonalTime,
     from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
@@ -277,13 +277,13 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: VR-36 Mental component summary (MCS) score - oblique method T-score" using "VR-36 Mental component summary (MCS) score - oblique method T-score (LOINC Code 71990-6)"] VR36MentalAssessment,
-  ["Assessment, Performed: VR-36 Physical component summary (PCS) score - oblique method T-score" using "VR-36 Physical component summary (PCS) score - oblique method T-score (LOINC Code 71989-8)"] VR36PhysicalAssessment
+  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - oblique method T-score" using "VR-36 Mental component summary (MCS) score - oblique method T-score (LOINC Code 71990-6)")] VR36MentalAssessment,
+  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - oblique method T-score" using "VR-36 Physical component summary (PCS) score - oblique method T-score (LOINC Code 71989-8)")] VR36PhysicalAssessment
   let VR36MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
@@ -295,8 +295,8 @@ Numerator:
     and VR36PhysicalAssessment.result is not null
   return Max({ VR36MentalAssessmentTime, VR36PhysicalAssessmentTime }) InitialVR36ObliqueTime,
     from
-  ["Assessment, Performed: VR-36 Mental component summary (MCS) score - oblique method T-score" using "VR-36 Mental component summary (MCS) score - oblique method T-score (LOINC Code 71990-6)"] VR36MentalAssessment,
-  ["Assessment, Performed: VR-36 Physical component summary (PCS) score - oblique method T-score" using "VR-36 Physical component summary (PCS) score - oblique method T-score (LOINC Code 71989-8)"] VR36PhysicalAssessment
+  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - oblique method T-score" using "VR-36 Mental component summary (MCS) score - oblique method T-score (LOINC Code 71990-6)")] VR36MentalAssessment,
+  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - oblique method T-score" using "VR-36 Physical component summary (PCS) score - oblique method T-score (LOINC Code 71989-8)")] VR36PhysicalAssessment
   let VR36MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
@@ -315,13 +315,13 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: VR-36 Mental component summary (MCS) score - orthogonal method T-score" using "VR-36 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72008-6)"] VR36MentalAssessment,
-  ["Assessment, Performed: VR-36 Physical component summary (PCS) score - orthogonal method T-score" using "VR-36 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72007-8)"] VR36PhysicalAssessment
+  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - orthogonal method T-score" using "VR-36 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72008-6)")] VR36MentalAssessment,
+  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - orthogonal method T-score" using "VR-36 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72007-8)")] VR36PhysicalAssessment
   let VR36MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
@@ -333,8 +333,8 @@ Numerator:
     and VR36PhysicalAssessment.result is not null
   return Max({ VR36MentalAssessmentTime, VR36PhysicalAssessmentTime }) InitialVR36OrthogonalTime,
     from
-  ["Assessment, Performed: VR-36 Mental component summary (MCS) score - orthogonal method T-score" using "VR-36 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72008-6)"] VR36MentalAssessment,
-  ["Assessment, Performed: VR-36 Physical component summary (PCS) score - orthogonal method T-score" using "VR-36 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72007-8)"] VR36PhysicalAssessment
+  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - orthogonal method T-score" using "VR-36 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72008-6)")] VR36MentalAssessment,
+  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - orthogonal method T-score" using "VR-36 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72007-8)")] VR36PhysicalAssessment
   let VR36MentalAssessmentTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
@@ -353,13 +353,13 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: Physical score [MLHFQ]" using "Physical score [MLHFQ] (LOINC Code 85618-7)"] MLHFQPhysical,
-  ["Assessment, Performed: Emotional score [MLHFQ]" using "Emotional score [MLHFQ] (LOINC Code 85609-6)"] MLHFQEmotional
+  [("Assessment, Performed: Physical score [MLHFQ]" using "Physical score [MLHFQ] (LOINC Code 85618-7)")] MLHFQPhysical,
+  [("Assessment, Performed: Emotional score [MLHFQ]" using "Emotional score [MLHFQ] (LOINC Code 85609-6)")] MLHFQEmotional
   let MLHFQPhysicalTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( MLHFQPhysical.relevantDatetime, MLHFQPhysical.relevantPeriod ),
@@ -371,8 +371,8 @@ Numerator:
     and MLHFQPhysical.result is not null
   return Max({ MLHFQPhysicalTime, MLHFQEmotionalTime }) InitialMLHFQTime,
     from
-  ["Assessment, Performed: Physical score [MLHFQ]" using "Physical score [MLHFQ] (LOINC Code 85618-7)"] MLHFQPhysical,
-  ["Assessment, Performed: Emotional score [MLHFQ]" using "Emotional score [MLHFQ] (LOINC Code 85609-6)"] MLHFQEmotional
+  [("Assessment, Performed: Physical score [MLHFQ]" using "Physical score [MLHFQ] (LOINC Code 85618-7)")] MLHFQPhysical,
+  [("Assessment, Performed: Emotional score [MLHFQ]" using "Emotional score [MLHFQ] (LOINC Code 85609-6)")] MLHFQEmotional
   let MLHFQPhysicalTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( MLHFQPhysical.relevantDatetime, MLHFQPhysical.relevantPeriod ),
@@ -391,13 +391,13 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]" using "Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12] (LOINC Code 86923-0)"] KCCQ12Item,
-  ["Assessment, Performed: Overall summary score [KCCQ-12]" using "Overall summary score [KCCQ-12] (LOINC Code 86924-8)"] KCCQ12Summary
+  [("Assessment, Performed: Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]" using "Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12] (LOINC Code 86923-0)")] KCCQ12Item,
+  [("Assessment, Performed: Overall summary score [KCCQ-12]" using "Overall summary score [KCCQ-12] (LOINC Code 86924-8)")] KCCQ12Summary
   let KCCQ12ItemTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KCCQ12Item.relevantDatetime, KCCQ12Item.relevantPeriod ),
@@ -409,8 +409,8 @@ Numerator:
     and KCCQ12Item.result is not null
   return Max({ KCCQ12ItemTime, KCCQ12SummaryTime }) InitialKCCQ12Time,
     from
-  ["Assessment, Performed: Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]" using "Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12] (LOINC Code 86923-0)"] KCCQ12Item,
-  ["Assessment, Performed: Overall summary score [KCCQ-12]" using "Overall summary score [KCCQ-12] (LOINC Code 86924-8)"] KCCQ12Summary
+  [("Assessment, Performed: Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]" using "Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12] (LOINC Code 86923-0)")] KCCQ12Item,
+  [("Assessment, Performed: Overall summary score [KCCQ-12]" using "Overall summary score [KCCQ-12] (LOINC Code 86924-8)")] KCCQ12Summary
   let KCCQ12ItemTime: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KCCQ12Item.relevantDatetime, KCCQ12Item.relevantPeriod ),
@@ -429,17 +429,17 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
     from
-  ["Assessment, Performed: Quality of life score [KCCQ]" using "Quality of life score [KCCQ] (LOINC Code 72189-4)"] KCCQLifeQuality,
-  ["Assessment, Performed: Symptom stability score [KCCQ]" using "Symptom stability score [KCCQ] (LOINC Code 72194-4)"] KCCQSymptomStability,
-  ["Assessment, Performed: Self-efficacy score [KCCQ]" using "Self-efficacy score [KCCQ] (LOINC Code 72190-2)"] KCCQSelfEfficacy,
-  ["Assessment, Performed: Total symptom score [KCCQ]" using "Total symptom score [KCCQ] (LOINC Code 72191-0)"] KCCQSymptoms,
-  ["Assessment, Performed: Physical limitation score [KCCQ]" using "Physical limitation score [KCCQ] (LOINC Code 72195-1)"] KCCQPhysicalLimits,
-  ["Assessment, Performed: Social limitation score [KCCQ]" using "Social limitation score [KCCQ] (LOINC Code 72196-9)"] KCCQSocialLimits
+  [("Assessment, Performed: Quality of life score [KCCQ]" using "Quality of life score [KCCQ] (LOINC Code 72189-4)")] KCCQLifeQuality,
+  [("Assessment, Performed: Symptom stability score [KCCQ]" using "Symptom stability score [KCCQ] (LOINC Code 72194-4)")] KCCQSymptomStability,
+  [("Assessment, Performed: Self-efficacy score [KCCQ]" using "Self-efficacy score [KCCQ] (LOINC Code 72190-2)")] KCCQSelfEfficacy,
+  [("Assessment, Performed: Total symptom score [KCCQ]" using "Total symptom score [KCCQ] (LOINC Code 72191-0)")] KCCQSymptoms,
+  [("Assessment, Performed: Physical limitation score [KCCQ]" using "Physical limitation score [KCCQ] (LOINC Code 72195-1)")] KCCQPhysicalLimits,
+  [("Assessment, Performed: Social limitation score [KCCQ]" using "Social limitation score [KCCQ] (LOINC Code 72196-9)")] KCCQSocialLimits
   let KCCQLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KCCQLifeQuality.relevantDatetime, KCCQLifeQuality.relevantPeriod ),
@@ -471,12 +471,12 @@ Numerator:
     and KCCQLifeQuality.result is not null
   return Max({ KCCQLifeQualityTime, KCCQSymptomStabilityTime, KCCQSelfEfficacyTime, KCCQSymptomsTime, KCCQPhysicalLimitsTime, KCCQSocialLimitsTime }) InitialKCCQAssessmentTime,
     from
-  ["Assessment, Performed: Quality of life score [KCCQ]" using "Quality of life score [KCCQ] (LOINC Code 72189-4)"] KCCQLifeQuality,
-  ["Assessment, Performed: Symptom stability score [KCCQ]" using "Symptom stability score [KCCQ] (LOINC Code 72194-4)"] KCCQSymptomStability,
-  ["Assessment, Performed: Self-efficacy score [KCCQ]" using "Self-efficacy score [KCCQ] (LOINC Code 72190-2)"] KCCQSelfEfficacy,
-  ["Assessment, Performed: Total symptom score [KCCQ]" using "Total symptom score [KCCQ] (LOINC Code 72191-0)"] KCCQSymptoms,
-  ["Assessment, Performed: Physical limitation score [KCCQ]" using "Physical limitation score [KCCQ] (LOINC Code 72195-1)"] KCCQPhysicalLimits,
-  ["Assessment, Performed: Social limitation score [KCCQ]" using "Social limitation score [KCCQ] (LOINC Code 72196-9)"] KCCQSocialLimits
+  [("Assessment, Performed: Quality of life score [KCCQ]" using "Quality of life score [KCCQ] (LOINC Code 72189-4)")] KCCQLifeQuality,
+  [("Assessment, Performed: Symptom stability score [KCCQ]" using "Symptom stability score [KCCQ] (LOINC Code 72194-4)")] KCCQSymptomStability,
+  [("Assessment, Performed: Self-efficacy score [KCCQ]" using "Self-efficacy score [KCCQ] (LOINC Code 72190-2)")] KCCQSelfEfficacy,
+  [("Assessment, Performed: Total symptom score [KCCQ]" using "Total symptom score [KCCQ] (LOINC Code 72191-0)")] KCCQSymptoms,
+  [("Assessment, Performed: Physical limitation score [KCCQ]" using "Physical limitation score [KCCQ] (LOINC Code 72195-1)")] KCCQPhysicalLimits,
+  [("Assessment, Performed: Social limitation score [KCCQ]" using "Social limitation score [KCCQ] (LOINC Code 72196-9)")] KCCQSocialLimits
   let KCCQLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KCCQLifeQuality.relevantDatetime, KCCQLifeQuality.relevantPeriod ),
@@ -515,17 +515,17 @@ Numerator:
     return ValidEncounters
 ) )
   or ( exists ( from
-    ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+    ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period ValidEncounters,
-    ["Assessment, Performed: Overall summary score [KCCQ]" using "Overall summary score [KCCQ] (LOINC Code 71940-1)"] KCCQSummaryScore
+    [("Assessment, Performed: Overall summary score [KCCQ]" using "Overall summary score [KCCQ] (LOINC Code 71940-1)")] KCCQSummaryScore
   let KCCQSummaryScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KCCQSummaryScore.relevantDatetime, KCCQSummaryScore.relevantPeriod )
   where KCCQSummaryScore.result is not null
   return Max({ KCCQSummaryScoreTime }) InitialKCCQTotalScore,
-    ["Assessment, Performed: Overall summary score [KCCQ]" using "Overall summary score [KCCQ] (LOINC Code 71940-1)"] KCCQSummaryScore
+    [("Assessment, Performed: Overall summary score [KCCQ]" using "Overall summary score [KCCQ] (LOINC Code 71940-1)")] KCCQSummaryScore
   let KCCQSummaryScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KCCQSummaryScore.relevantDatetime, KCCQSummaryScore.relevantPeriod )

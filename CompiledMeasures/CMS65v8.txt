@@ -2,11 +2,11 @@
 Initial Population:
 exists [Patient Characteristic Birthdate] BirthDate
 		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)in Interval[18, 85 )
-			and ( Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] LastSystolicBloodPressure
-			with First(["Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)"] InitialBloodPressureVisit
-			with ["Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)"] Hypertension
+			and ( Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] LastSystolicBloodPressure
+			with First([("Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)")] InitialBloodPressureVisit
+			with [("Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)")] Hypertension
 				such that InitialBloodPressureVisit.relevantPeriod overlaps Hypertension.prevalencePeriod
-			with ["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] SystolicBloodPressure
+			with [("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] SystolicBloodPressure
 				such that InitialBloodPressureVisit.relevantPeriod overlaps SystolicBloodPressure.relevantPeriod
 			where InitialBloodPressureVisit.relevantPeriod starts 6 months or less on or after start of Measurement Period
 			sort by start of relevantPeriod
@@ -21,11 +21,11 @@ exists [Patient Characteristic Birthdate] BirthDate
 Denominator:
 exists [Patient Characteristic Birthdate] BirthDate
 		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)in Interval[18, 85 )
-			and ( Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] LastSystolicBloodPressure
-			with First(["Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)"] InitialBloodPressureVisit
-			with ["Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)"] Hypertension
+			and ( Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] LastSystolicBloodPressure
+			with First([("Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)")] InitialBloodPressureVisit
+			with [("Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)")] Hypertension
 				such that InitialBloodPressureVisit.relevantPeriod overlaps Hypertension.prevalencePeriod
-			with ["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] SystolicBloodPressure
+			with [("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] SystolicBloodPressure
 				such that InitialBloodPressureVisit.relevantPeriod overlaps SystolicBloodPressure.relevantPeriod
 			where InitialBloodPressureVisit.relevantPeriod starts 6 months or less on or after start of Measurement Period
 			sort by start of relevantPeriod
@@ -38,33 +38,33 @@ exists [Patient Characteristic Birthdate] BirthDate
 	) is not null
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
-			where ( DischargeHospice.dischargeDisposition as Code ~ code "Discharge to home for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428361000124107)"
-					or DischargeHospice.dischargeDisposition as Code ~ code "Discharge to healthcare facility for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428371000124100)"
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
+			where ( DischargeHospice.dischargeDisposition as Code ~ (code "Discharge to home for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428361000124107)")
+					or DischargeHospice.dischargeDisposition as Code ~ (code "Discharge to healthcare facility for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428371000124100)")
 			)
 				and DischargeHospice.relevantPeriod ends during Measurement Period
 	)
-		or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+		or exists ( [("Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder
 				where HospiceOrder.authorDatetime during Measurement Period
 		)
-		or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+		or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
 				where HospicePerformed.relevantPeriod overlaps Measurement Period
 		)
-		or exists ( ["Procedure, Performed: Kidney Transplant" using "Kidney Transplant (2.16.840.1.113883.3.464.1003.109.12.1012)"]
-		union ["Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)"]
-		union ["Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)"] ) ESRDProcedures
+		or exists ( [("Procedure, Performed: Kidney Transplant" using "Kidney Transplant (2.16.840.1.113883.3.464.1003.109.12.1012)")]
+		union [("Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)")]
+		union [("Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)")] ) ESRDProcedures
 		where ESRDProcedures.relevantPeriod starts before end of Measurement Period
-		or exists ( ["Diagnosis: Pregnancy" using "Pregnancy (2.16.840.1.113883.3.526.3.378)"]
-		union ["Diagnosis: Kidney Transplant Recipient" using "Kidney Transplant Recipient (2.16.840.1.113883.3.464.1003.109.12.1029)"]
-		union ["Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)"] ) ExclusionDiagnosis
+		or exists ( [("Diagnosis: Pregnancy" using "Pregnancy (2.16.840.1.113883.3.526.3.378)")]
+		union [("Diagnosis: Kidney Transplant Recipient" using "Kidney Transplant Recipient (2.16.840.1.113883.3.464.1003.109.12.1029)")]
+		union [("Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)")] ) ExclusionDiagnosis
 		where ExclusionDiagnosis.prevalencePeriod overlaps Measurement Period
 =============================================================================================================================================================================
 Numerator:
-( Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] LastSystolicBloodPressure
-			with First(["Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)"] InitialBloodPressureVisit
-			with ["Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)"] Hypertension
+( Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] LastSystolicBloodPressure
+			with First([("Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)")] InitialBloodPressureVisit
+			with [("Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)")] Hypertension
 				such that InitialBloodPressureVisit.relevantPeriod overlaps Hypertension.prevalencePeriod
-			with ["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] SystolicBloodPressure
+			with [("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] SystolicBloodPressure
 				such that InitialBloodPressureVisit.relevantPeriod overlaps SystolicBloodPressure.relevantPeriod
 			where InitialBloodPressureVisit.relevantPeriod starts 6 months or less on or after start of Measurement Period
 			sort by start of relevantPeriod
@@ -73,12 +73,12 @@ Numerator:
 			where LastSystolicBloodPressure.result is not null
 			sort by start of relevantPeriod
 	) InitialSystolicBloodPressure
-			with Last(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] LastSystolicBloodPressure
-			with First(["Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)"] FollowupBloodPressureVisit
-			with First(["Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)"] InitialBloodPressureVisit
-			with ["Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)"] Hypertension
+			with Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] LastSystolicBloodPressure
+			with First([("Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)")] FollowupBloodPressureVisit
+			with First([("Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)")] InitialBloodPressureVisit
+			with [("Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)")] Hypertension
 				such that InitialBloodPressureVisit.relevantPeriod overlaps Hypertension.prevalencePeriod
-			with ["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)"] SystolicBloodPressure
+			with [("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] SystolicBloodPressure
 				such that InitialBloodPressureVisit.relevantPeriod overlaps SystolicBloodPressure.relevantPeriod
 			where InitialBloodPressureVisit.relevantPeriod starts 6 months or less on or after start of Measurement Period
 			sort by start of relevantPeriod

@@ -1,55 +1,55 @@
 =============================================================================================================================================================================
 Initial Population:
 AgeInYearsAt(date from start of Measurement Period)>= 18
-  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) QualifyingEncounter
+  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period
-    and QualifyingEncounter.class !~ code "virtual" ("ActCode Code (VR)") ValidQualifyingEncounter
-  with ["Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)"] PrimaryOpenAngleGlaucoma
+    and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
+  with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod
 =============================================================================================================================================================================
 Denominator:
 AgeInYearsAt(date from start of Measurement Period)>= 18
-  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) QualifyingEncounter
+  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period
-    and QualifyingEncounter.class !~ code "virtual" ("ActCode Code (VR)") ValidQualifyingEncounter
-  with ["Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)"] PrimaryOpenAngleGlaucoma
+    and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
+  with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod
 =============================================================================================================================================================================
 Denominator Exclusions:
 None
 =============================================================================================================================================================================
 Numerator:
-exists ["Diagnostic Study, Performed: Cup to Disc Ratio" using "Cup to Disc Ratio (2.16.840.1.113883.3.526.3.1333)"] CupToDiscExamPerformed
-  with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) QualifyingEncounter
+exists [("Diagnostic Study, Performed: Cup to Disc Ratio" using "Cup to Disc Ratio (2.16.840.1.113883.3.526.3.1333)")] CupToDiscExamPerformed
+  with ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period
-    and QualifyingEncounter.class !~ code "virtual" ("ActCode Code (VR)") ValidQualifyingEncounter
-  with ["Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)"] PrimaryOpenAngleGlaucoma
+    and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
+  with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterWithPOAG
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( CupToDiscExamPerformed.relevantDatetime, CupToDiscExamPerformed.relevantPeriod ) during EncounterWithPOAG.relevantPeriod
   where CupToDiscExamPerformed.result is not null
-  and exists ["Diagnostic Study, Performed: Optic Disc Exam for Structural Abnormalities" using "Optic Disc Exam for Structural Abnormalities (2.16.840.1.113883.3.526.3.1334)"] OpticDiscExamPerformed
-  with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) QualifyingEncounter
+  and exists [("Diagnostic Study, Performed: Optic Disc Exam for Structural Abnormalities" using "Optic Disc Exam for Structural Abnormalities (2.16.840.1.113883.3.526.3.1334)")] OpticDiscExamPerformed
+  with ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period
-    and QualifyingEncounter.class !~ code "virtual" ("ActCode Code (VR)") ValidQualifyingEncounter
-  with ["Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)"] PrimaryOpenAngleGlaucoma
+    and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
+  with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterWithPOAG
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
@@ -60,30 +60,30 @@ Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-exists ["Diagnostic Study, Not Performed: Cup to Disc Ratio" using "Cup to Disc Ratio (2.16.840.1.113883.3.526.3.1333)"] CupToDiscExamNotPerformed
-  with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) QualifyingEncounter
+exists [("Diagnostic Study, Not Performed: Cup to Disc Ratio" using "Cup to Disc Ratio (2.16.840.1.113883.3.526.3.1333)")] CupToDiscExamNotPerformed
+  with ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period
-    and QualifyingEncounter.class !~ code "virtual" ("ActCode Code (VR)") ValidQualifyingEncounter
-  with ["Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)"] PrimaryOpenAngleGlaucoma
+    and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
+  with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterWithPOAG
     such that CupToDiscExamNotPerformed.authorDatetime during EncounterWithPOAG.relevantPeriod
-  where CupToDiscExamNotPerformed.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
-  or exists ["Diagnostic Study, Not Performed: Optic Disc Exam for Structural Abnormalities" using "Optic Disc Exam for Structural Abnormalities (2.16.840.1.113883.3.526.3.1334)"] OpticDiscExamNotPerformed
-  with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
-  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) QualifyingEncounter
+  where CupToDiscExamNotPerformed.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
+  or exists [("Diagnostic Study, Not Performed: Optic Disc Exam for Structural Abnormalities" using "Optic Disc Exam for Structural Abnormalities (2.16.840.1.113883.3.526.3.1334)")] OpticDiscExamNotPerformed
+  with ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")]
+  union [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period
-    and QualifyingEncounter.class !~ code "virtual" ("ActCode Code (VR)") ValidQualifyingEncounter
-  with ["Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)"] PrimaryOpenAngleGlaucoma
+    and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
+  with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterWithPOAG
     such that OpticDiscExamNotPerformed.authorDatetime during EncounterWithPOAG.relevantPeriod
-  where OpticDiscExamNotPerformed.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+  where OpticDiscExamNotPerformed.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
 =============================================================================================================================================================================
 Stratification:
 None

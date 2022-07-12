@@ -183,7 +183,7 @@ namespace CQMParse
             {
                 txt = txt.Substring(0, txt.Length - ind.Length);
             }
-            return txt;
+            return $"({txt})";
         }
 
         protected Terminal(HtmlNode htmlNode)

@@ -1,72 +1,72 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ( ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-    union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-    union ["Encounter, Performed: Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure" using "Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure (CPT Code 99024)"]
-    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+exists ( ( [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+    union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+    union [("Encounter, Performed: Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure" using "Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure (CPT Code 99024)")]
+    union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+    union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
     where ValidEncounters.relevantPeriod during day of Measurement Period
 )
-  and exists ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+  and exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period )
   and AgeInYearsAt(date from start of Measurement Period)>= 19
 =============================================================================================================================================================================
 Denominator:
-exists ( ( ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-    union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-    union ["Encounter, Performed: Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure" using "Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure (CPT Code 99024)"]
-    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
-    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters
+exists ( ( [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+    union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+    union [("Encounter, Performed: Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure" using "Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure (CPT Code 99024)")]
+    union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
+    union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounters
     where ValidEncounters.relevantPeriod during day of Measurement Period
 )
-  and exists ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+  and exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period )
   and AgeInYearsAt(date from start of Measurement Period)>= 19
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+  or exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
-    where Count(["Diagnosis: Lower Body Fracture" using "Lower Body Fracture (2.16.840.1.113883.3.464.1003.113.12.1037)"] LowerBodyFracture
+    where Count([("Diagnosis: Lower Body Fracture" using "Lower Body Fracture (2.16.840.1.113883.3.464.1003.113.12.1037)")] LowerBodyFracture
         where LowerBodyFracture.prevalencePeriod starts 24 hours or less on or before start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod)
     )>= 2
 )
-  or exists ( ["Diagnosis: Severe dementia (disorder)" using "Severe dementia (disorder) (SNOMEDCT Code 428351000124105)"] Dementia
+  or exists ( [("Diagnosis: Severe dementia (disorder)" using "Severe dementia (disorder) (SNOMEDCT Code 428351000124105)")] Dementia
     where Dementia.prevalencePeriod overlaps Measurement Period
 )
 =============================================================================================================================================================================
 Numerator:
-exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+exists ( ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
@@ -74,11 +74,11 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) ) TotalKnee
     with from
-  ["Assessment, Performed: Quality of life score [KOOS]" using "Quality of life score [KOOS] (LOINC Code 72098-7)"] KOOSLifeQuality,
-  ["Assessment, Performed: Sport-recreation score [KOOS]" using "Sport-recreation score [KOOS] (LOINC Code 72099-5)"] KOOSSport,
-  ["Assessment, Performed: Activities of daily living score [KOOS]" using "Activities of daily living score [KOOS] (LOINC Code 72100-1)"] KOOSActivityScore,
-  ["Assessment, Performed: Symptoms score [KOOS]" using "Symptoms score [KOOS] (LOINC Code 72101-9)"] KOOSSymptoms,
-  ["Assessment, Performed: Pain score [KOOS]" using "Pain score [KOOS] (LOINC Code 72102-7)"] KOOSPain
+  [("Assessment, Performed: Quality of life score [KOOS]" using "Quality of life score [KOOS] (LOINC Code 72098-7)")] KOOSLifeQuality,
+  [("Assessment, Performed: Sport-recreation score [KOOS]" using "Sport-recreation score [KOOS] (LOINC Code 72099-5)")] KOOSSport,
+  [("Assessment, Performed: Activities of daily living score [KOOS]" using "Activities of daily living score [KOOS] (LOINC Code 72100-1)")] KOOSActivityScore,
+  [("Assessment, Performed: Symptoms score [KOOS]" using "Symptoms score [KOOS] (LOINC Code 72101-9)")] KOOSSymptoms,
+  [("Assessment, Performed: Pain score [KOOS]" using "Pain score [KOOS] (LOINC Code 72102-7)")] KOOSPain
   let KOOSLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KOOSLifeQuality.relevantDatetime, KOOSLifeQuality.relevantPeriod ),
@@ -106,11 +106,11 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   return Max({ KOOSLifeQualityTime, KOOSSportTime, KOOSActivityScoreTime, KOOSSymptomsTime, KOOSPainTime }) InitialKOOSAssessmentTime
       such that TotalKnee starts 90 days or less on or after InitialKOOSAssessmentTime
     with from
-  ["Assessment, Performed: Quality of life score [KOOS]" using "Quality of life score [KOOS] (LOINC Code 72098-7)"] KOOSLifeQuality,
-  ["Assessment, Performed: Sport-recreation score [KOOS]" using "Sport-recreation score [KOOS] (LOINC Code 72099-5)"] KOOSSport,
-  ["Assessment, Performed: Activities of daily living score [KOOS]" using "Activities of daily living score [KOOS] (LOINC Code 72100-1)"] KOOSActivityScore,
-  ["Assessment, Performed: Symptoms score [KOOS]" using "Symptoms score [KOOS] (LOINC Code 72101-9)"] KOOSSymptoms,
-  ["Assessment, Performed: Pain score [KOOS]" using "Pain score [KOOS] (LOINC Code 72102-7)"] KOOSPain
+  [("Assessment, Performed: Quality of life score [KOOS]" using "Quality of life score [KOOS] (LOINC Code 72098-7)")] KOOSLifeQuality,
+  [("Assessment, Performed: Sport-recreation score [KOOS]" using "Sport-recreation score [KOOS] (LOINC Code 72099-5)")] KOOSSport,
+  [("Assessment, Performed: Activities of daily living score [KOOS]" using "Activities of daily living score [KOOS] (LOINC Code 72100-1)")] KOOSActivityScore,
+  [("Assessment, Performed: Symptoms score [KOOS]" using "Symptoms score [KOOS] (LOINC Code 72101-9)")] KOOSSymptoms,
+  [("Assessment, Performed: Pain score [KOOS]" using "Pain score [KOOS] (LOINC Code 72102-7)")] KOOSPain
   let KOOSLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( KOOSLifeQuality.relevantDatetime, KOOSLifeQuality.relevantPeriod ),
@@ -140,20 +140,20 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
       end of TotalKnee + 270 days, 
       end of TotalKnee + 365 days]
 )
-  or exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+  or exists ( ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
     return if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) ) TotalKnee
-    with ( ["Assessment, Performed: Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" using "Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR] (LOINC Code 82324-5)"] KOOSJr
+    with ( [("Assessment, Performed: Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" using "Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR] (LOINC Code 82324-5)")] KOOSJr
   where KOOSJr.result is not null ) DocumentedKOOSJr
   return start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( DocumentedKOOSJr.relevantDatetime, DocumentedKOOSJr.relevantPeriod ) InitialKOOSJrAssessment
       such that TotalKnee starts 90 days or less on or after InitialKOOSJrAssessment
-    with ( ["Assessment, Performed: Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" using "Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR] (LOINC Code 82324-5)"] KOOSJr
+    with ( [("Assessment, Performed: Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" using "Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR] (LOINC Code 82324-5)")] KOOSJr
   where KOOSJr.result is not null ) DocumentedKOOSJr
   return start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
@@ -162,7 +162,7 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
       end of TotalKnee + 270 days, 
       end of TotalKnee + 365 days]
 )
-  or exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+  or exists ( ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
@@ -170,8 +170,8 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) ) TotalKnee
     with from
-  ["Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)"] PROMIS10MentalScore,
-  ["Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)"] PROMIS10PhysicalScore
+  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
+  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
   let PROMIS10MentalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
@@ -184,8 +184,8 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   return Max({ PROMIS10MentalScoreTime, PROMIS10PhysicalScoreTime }) InitialPROMIS10AssessmentTime
       such that TotalKnee starts 90 days or less on or after InitialPROMIS10AssessmentTime
     with from
-  ["Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)"] PROMIS10MentalScore,
-  ["Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)"] PROMIS10PhysicalScore
+  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
+  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
   let PROMIS10MentalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
@@ -200,7 +200,7 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
       end of TotalKnee + 270 days, 
       end of TotalKnee + 365 days]
 )
-  or exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+  or exists ( ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
@@ -208,8 +208,8 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) ) TotalKnee
     with from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
@@ -222,8 +222,8 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   return Max({ VR12MentalAssessmentTime, VR12PhysicalAssessmentTime }) InitialKneeAssessmentObliqueTime
       such that TotalKnee starts 90 days or less on or after InitialKneeAssessmentObliqueTime
     with from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
@@ -238,7 +238,7 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
       end of TotalKnee + 270 days, 
       end of TotalKnee + 365 days]
 )
-  or exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)"] TKAProcedure
+  or exists ( ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
@@ -246,8 +246,8 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   else if period is not null then period 
   else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) ) TotalKnee
     with from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
@@ -260,8 +260,8 @@ exists ( ( ["Procedure, Performed: Primary TKA Procedure" using "Primary TKA Pro
   return Max({ VR12MentalAssessmentTime, VR12PhysicalAssessmentTime }) InitialOrthogonalAssessmentTime
       such that TotalKnee starts 90 days or less on or after InitialOrthogonalAssessmentTime
     with from
-  ["Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)"] VR12MentalAssessment,
-  ["Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)"] VR12PhysicalAssessment
+  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
+  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
   let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),

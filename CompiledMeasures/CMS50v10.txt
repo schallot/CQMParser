@@ -1,14 +1,14 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	    union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-	    union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	    union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	    union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	    union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) FaceToFaceEncounter
+exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	    union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+	    union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	    union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	    union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	    union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) FaceToFaceEncounter
 	    where FaceToFaceEncounter.relevantPeriod during Measurement Period
 	)
-	  and First(((["Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)"] ReferralPerform
+	  and First((([("Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralPerform
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Measurement Period
@@ -20,7 +20,7 @@ exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1
 	  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
 	      }
 	  )
-	    union(["Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)"] ReferralOrder
+	    union([("Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralOrder
 	        where ReferralOrder.authorDatetime during Measurement Period
 	        return {
 	          identification: ReferralOrder.id,
@@ -31,15 +31,15 @@ exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1
 	) is not null
 =============================================================================================================================================================================
 Denominator:
-exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	    union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
-	    union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	    union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	    union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	    union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"] ) FaceToFaceEncounter
+exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	    union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
+	    union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	    union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	    union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	    union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")] ) FaceToFaceEncounter
 	    where FaceToFaceEncounter.relevantPeriod during Measurement Period
 	)
-	  and First(((["Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)"] ReferralPerform
+	  and First((([("Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralPerform
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Measurement Period
@@ -51,7 +51,7 @@ exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1
 	  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
 	      }
 	  )
-	    union(["Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)"] ReferralOrder
+	    union([("Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralOrder
 	        where ReferralOrder.authorDatetime during Measurement Period
 	        return {
 	          identification: ReferralOrder.id,
@@ -65,8 +65,8 @@ Denominator Exclusions:
 None
 =============================================================================================================================================================================
 Numerator:
-exists ( ["Communication, Performed: Consultant Report" using "Consultant Report (2.16.840.1.113883.3.464.1003.121.12.1006)"] ConsultantReportCommunicated
-	    with First(((["Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)"] ReferralPerform
+exists ( [("Communication, Performed: Consultant Report" using "Consultant Report (2.16.840.1.113883.3.464.1003.121.12.1006)")] ConsultantReportCommunicated
+	    with First((([("Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralPerform
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Measurement Period
@@ -78,7 +78,7 @@ exists ( ["Communication, Performed: Consultant Report" using "Consultant Report
 	  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
 	      }
 	  )
-	    union(["Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)"] ReferralOrder
+	    union([("Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralOrder
 	        where ReferralOrder.authorDatetime during Measurement Period
 	        return {
 	          identification: ReferralOrder.id,

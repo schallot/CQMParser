@@ -1,43 +1,43 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( date from BirthDate.birthDatetime, 
 	    end of Measurement Period ) = 2
 	)
-	  and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( date from BirthDate.birthDatetime, 
 	    end of Measurement Period ) = 2
 	)
-	  and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"]
-	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	  union [("Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)")]
+	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+	  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
-	    where ( DischargeHospice.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-	        or DischargeHospice.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
+	    where ( DischargeHospice.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+	        or DischargeHospice.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
 	    )
 	      and DischargeHospice.relevantPeriod ends during Measurement Period
 	)
-	  or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+	  or exists ( [("Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
-	  or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
 	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
@@ -45,92 +45,92 @@ Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter I
 =============================================================================================================================================================================
 Numerator:
 ( exists ( from
-	  ( ( ["Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)"]
-	    union ["Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)"] ) DTaPVaccination
+	  ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
+	    union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
 	    where DTaPVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) DTaPVaccination1,
-	  ( ( ["Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)"]
-	    union ["Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)"] ) DTaPVaccination
+	  ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
+	    union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
 	    where DTaPVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) DTaPVaccination2,
-	  ( ( ["Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)"]
-	    union ["Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)"] ) DTaPVaccination
+	  ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
+	    union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
 	    where DTaPVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) DTaPVaccination3,
-	  ( ( ["Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)"]
-	    union ["Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)"] ) DTaPVaccination
+	  ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
+	    union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
 	    where DTaPVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) DTaPVaccination4
 	  where DTaPVaccination2.relevantDatetime 1 day or more after day of DTaPVaccination1.relevantDatetime
 	    and DTaPVaccination3.relevantDatetime 1 day or more after day of DTaPVaccination2.relevantDatetime
 	    and DTaPVaccination4.relevantDatetime 1 day or more after day of DTaPVaccination3.relevantDatetime
 	  return DTaPVaccination1 )
-	    or exists ( ( ["Diagnosis: Anaphylactic Reaction to DTaP Vaccine" using "Anaphylactic Reaction to DTaP Vaccine (2.16.840.1.113883.3.464.1003.199.12.1031)"]
-	  union ["Diagnosis: Encephalopathy due to Childhood Vaccination" using "Encephalopathy due to Childhood Vaccination (2.16.840.1.113883.3.464.1003.114.12.1007)"] ) DTaPConditions
+	    or exists ( ( [("Diagnosis: Anaphylactic Reaction to DTaP Vaccine" using "Anaphylactic Reaction to DTaP Vaccine (2.16.840.1.113883.3.464.1003.199.12.1031)")]
+	  union [("Diagnosis: Encephalopathy due to Childhood Vaccination" using "Encephalopathy due to Childhood Vaccination (2.16.840.1.113883.3.464.1003.114.12.1007)")] ) DTaPConditions
 	  where start of DTaPConditions.prevalencePeriod during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	)
 	  and ( exists ( from
-	  ( ( ["Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)"]
-	    union ["Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)"] ) PolioVaccination
+	  ( ( [("Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)")]
+	    union [("Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)")] ) PolioVaccination
 	    where PolioVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) PolioVaccination1,
-	  ( ( ["Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)"]
-	    union ["Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)"] ) PolioVaccination
+	  ( ( [("Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)")]
+	    union [("Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)")] ) PolioVaccination
 	    where PolioVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) PolioVaccination2,
-	  ( ( ["Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)"]
-	    union ["Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)"] ) PolioVaccination
+	  ( ( [("Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)")]
+	    union [("Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)")] ) PolioVaccination
 	    where PolioVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) PolioVaccination3
 	  where PolioVaccination2.relevantDatetime 1 day or more after day of PolioVaccination1.relevantDatetime
 	    and PolioVaccination3.relevantDatetime 1 day or more after day of PolioVaccination2.relevantDatetime
 	  return PolioVaccination1 )
-	      or exists ( ( ["Diagnosis: Adverse reaction to vaccine product containing Human poliovirus antigen (disorder)" using "Adverse reaction to vaccine product containing Human poliovirus antigen (disorder) (SNOMEDCT Code 293117006)"]
-	  union ["Diagnosis: Streptomycin adverse reaction (disorder)" using "Streptomycin adverse reaction (disorder) (SNOMEDCT Code 292925004)"]
-	  union ["Diagnosis: Polymyxin B adverse reaction (disorder)" using "Polymyxin B adverse reaction (disorder) (SNOMEDCT Code 292992006)"]
-	  union ["Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)"] ) PolioConditions
+	      or exists ( ( [("Diagnosis: Adverse reaction to vaccine product containing Human poliovirus antigen (disorder)" using "Adverse reaction to vaccine product containing Human poliovirus antigen (disorder) (SNOMEDCT Code 293117006)")]
+	  union [("Diagnosis: Streptomycin adverse reaction (disorder)" using "Streptomycin adverse reaction (disorder) (SNOMEDCT Code 292925004)")]
+	  union [("Diagnosis: Polymyxin B adverse reaction (disorder)" using "Polymyxin B adverse reaction (disorder) (SNOMEDCT Code 292992006)")]
+	  union [("Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)")] ) PolioConditions
 	  where start of PolioConditions.prevalencePeriod during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
-	  and ( exists ( ( ( ["Immunization, Administered: Measles, Mumps and Rubella (MMR) Vaccine" using "Measles, Mumps and Rubella (MMR) Vaccine (2.16.840.1.113883.3.464.1003.196.12.1224)"]
-	    union ["Procedure, Performed: Measles, Mumps and Rubella (MMR) Vaccine Administered" using "Measles, Mumps and Rubella (MMR) Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1031)"] ) MMRVaccination
+	  and ( exists ( ( ( [("Immunization, Administered: Measles, Mumps and Rubella (MMR) Vaccine" using "Measles, Mumps and Rubella (MMR) Vaccine (2.16.840.1.113883.3.464.1003.196.12.1224)")]
+	    union [("Procedure, Performed: Measles, Mumps and Rubella (MMR) Vaccine Administered" using "Measles, Mumps and Rubella (MMR) Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1031)")] ) MMRVaccination
 	    where MMRVaccination.relevantDatetime during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 	) )
-	      or exists ( ( ["Diagnosis: Disorders of the Immune System" using "Disorders of the Immune System (2.16.840.1.113883.3.464.1003.120.12.1001)"]
-	  union ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
-	  union ["Diagnosis: Malignant Neoplasm of Lymphatic and Hematopoietic Tissue" using "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue (2.16.840.1.113883.3.464.1003.108.12.1009)"]
-	  union ["Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)"] ) MMRConditions
+	      or exists ( ( [("Diagnosis: Disorders of the Immune System" using "Disorders of the Immune System (2.16.840.1.113883.3.464.1003.120.12.1001)")]
+	  union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)")]
+	  union [("Diagnosis: Malignant Neoplasm of Lymphatic and Hematopoietic Tissue" using "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue (2.16.840.1.113883.3.464.1003.108.12.1009)")]
+	  union [("Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)")] ) MMRConditions
 	  where ( start of MMRConditions.prevalencePeriod during Interval[Patient.birthDatetime, date from Patient.birthDatetime + 2 years]) )
-	      or ( exists ( ( ( ["Laboratory Test, Performed: Measles Antibody Test (IgG Antibody Titer)" using "Measles Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1059)"] MeaslesTiter
+	      or ( exists ( ( ( [("Laboratory Test, Performed: Measles Antibody Test (IgG Antibody Titer)" using "Measles Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1059)")] MeaslesTiter
 	    where MeaslesTiter.result >= 1.10
 	)
-	  union ( ["Laboratory Test, Performed: Measles Antibody Test (IgG Antibody presence)" using "Measles Antibody Test (IgG Antibody presence) (2.16.840.1.113883.3.464.1003.198.12.1060)"] MeaslesIgGPresence
-	      where MeaslesIgGPresence.result as Code in valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016)
+	  union ( [("Laboratory Test, Performed: Measles Antibody Test (IgG Antibody presence)" using "Measles Antibody Test (IgG Antibody presence) (2.16.840.1.113883.3.464.1003.198.12.1060)")] MeaslesIgGPresence
+	      where MeaslesIgGPresence.result as Code in (valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016))
 	  )
-	  union ( ["Diagnosis: Measles" using "Measles (2.16.840.1.113883.3.464.1003.110.12.1053)"] MeaslesDiagnosis
+	  union ( [("Diagnosis: Measles" using "Measles (2.16.840.1.113883.3.464.1003.110.12.1053)")] MeaslesDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of MeaslesDiagnosis.prevalencePeriod }
 	  ) ) Measles
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Measles.relevantDatetime, Measles.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
-	          and exists ( ( ( ["Laboratory Test, Performed: Mumps Antibody Test (IgG Antibody Titer)" using "Mumps Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1061)"] MumpsTiter
+	          and exists ( ( ( [("Laboratory Test, Performed: Mumps Antibody Test (IgG Antibody Titer)" using "Mumps Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1061)")] MumpsTiter
 	    where MumpsTiter.result >= 1.10
 	)
-	  union ( ["Laboratory Test, Performed: Mumps Antibody Test (IgG Antibody presence)" using "Mumps Antibody Test (IgG Antibody presence) (2.16.840.1.113883.3.464.1003.198.12.1062)"] MumpsIgGPresence
-	      where MumpsIgGPresence.result as Code in valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016)
+	  union ( [("Laboratory Test, Performed: Mumps Antibody Test (IgG Antibody presence)" using "Mumps Antibody Test (IgG Antibody presence) (2.16.840.1.113883.3.464.1003.198.12.1062)")] MumpsIgGPresence
+	      where MumpsIgGPresence.result as Code in (valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016))
 	  )
-	  union ( ["Diagnosis: Mumps" using "Mumps (2.16.840.1.113883.3.464.1003.110.12.1032)"] MumpsDiagnosis
+	  union ( [("Diagnosis: Mumps" using "Mumps (2.16.840.1.113883.3.464.1003.110.12.1032)")] MumpsDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of MumpsDiagnosis.prevalencePeriod }
 	  ) ) Mumps
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( Mumps.relevantDatetime, Mumps.relevantPeriod ) during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
-	          and exists ( ( ( ["Laboratory Test, Performed: Rubella Antibody Test (IgG Antibody Titer)" using "Rubella Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1063)"] RubellaTiter
+	          and exists ( ( ( [("Laboratory Test, Performed: Rubella Antibody Test (IgG Antibody Titer)" using "Rubella Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1063)")] RubellaTiter
 	    where RubellaTiter.result >= 1.10
 	)
-	  union ( ["Laboratory Test, Performed: Rubella Antibody Test (IgG Antibody presence)" using "Rubella Antibody Test (IgG Antibody presence) (2.16.840.1.113883.3.464.1003.198.12.1064)"] RubellaIgGPresence
-	      where RubellaIgGPresence.result as Code in valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016)
+	  union ( [("Laboratory Test, Performed: Rubella Antibody Test (IgG Antibody presence)" using "Rubella Antibody Test (IgG Antibody presence) (2.16.840.1.113883.3.464.1003.198.12.1064)")] RubellaIgGPresence
+	      where RubellaIgGPresence.result as Code in (valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016))
 	  )
-	  union ( ["Diagnosis: Rubella" using "Rubella (2.16.840.1.113883.3.464.1003.110.12.1037)"] RubellaDiagnosis
+	  union ( [("Diagnosis: Rubella" using "Rubella (2.16.840.1.113883.3.464.1003.110.12.1037)")] RubellaDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of RubellaDiagnosis.prevalencePeriod }
 	  ) ) Rubella
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -138,43 +138,43 @@ Numerator:
 	  else null as Interval<DateTime> ( Rubella.relevantDatetime, Rubella.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	      )
 	  )
-	  and ( exists ( ( ( ["Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)"]
-	    union ["Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)"] ) ThreeDoseHib
+	  and ( exists ( ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
+	    union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
 	    where ThreeDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)"]
-	    union ["Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)"] ) FourDoseHib
+	  union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
+	    union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
 	    where FourDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllHibDoses1
-	  without ( ( ["Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)"]
-	    union ["Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)"] ) ThreeDoseHib
+	  without ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
+	    union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
 	    where ThreeDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)"]
-	    union ["Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)"] ) FourDoseHib
+	  union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
+	    union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
 	    where FourDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllHibDoses2
 	    such that AllHibDoses1.relevantDatetime less than 1 day before AllHibDoses2.relevantDatetime HibImmunization //union of 3 and 4 dose immunizations
 	//4 dose test
-	    let has_4_dose: Count(( ( ["Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)"]
-	    union ["Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)"] ) FourDoseHib
+	    let has_4_dose: Count(( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
+	    union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
 	    where FourDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	))> 0
 	    where ( has_4_dose //if pt had at least one 4 dose code
-	        and Count(distinct(( ( ["Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)"]
-	    union ["Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)"] ) ThreeDoseHib
+	        and Count(distinct(( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
+	    union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
 	    where ThreeDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)"]
-	    union ["Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)"] ) FourDoseHib
+	  union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
+	    union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
 	    where FourDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllHibDoses1
-	  without ( ( ["Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)"]
-	    union ["Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)"] ) ThreeDoseHib
+	  without ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
+	    union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
 	    where ThreeDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)"]
-	    union ["Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)"] ) FourDoseHib
+	  union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
+	    union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
 	    where FourDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllHibDoses2
 	    such that AllHibDoses1.relevantDatetime less than 1 day before AllHibDoses2.relevantDatetime HibVaccinations
@@ -183,20 +183,20 @@ Numerator:
 	        )>= 4 //pt must have 4 regimens (e.g., 3,3,4,4 or 4,3,4,4)
 	    )
 	      or ( has_4_dose is false //if pt did not have at least one 4 dose code
-	          and Count(distinct(( ( ["Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)"]
-	    union ["Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)"] ) ThreeDoseHib
+	          and Count(distinct(( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
+	    union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
 	    where ThreeDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)"]
-	    union ["Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)"] ) FourDoseHib
+	  union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
+	    union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
 	    where FourDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllHibDoses1
-	  without ( ( ["Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)"]
-	    union ["Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)"] ) ThreeDoseHib
+	  without ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
+	    union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
 	    where ThreeDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)"]
-	    union ["Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)"] ) FourDoseHib
+	  union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
+	    union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
 	    where FourDoseHib.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllHibDoses2
 	    such that AllHibDoses1.relevantDatetime less than 1 day before AllHibDoses2.relevantDatetime HibVaccinations
@@ -205,64 +205,64 @@ Numerator:
 	          )>= 3 //pt must have 3 regimens of 3 dose codes
 	      )
 	)
-	      or exists ( ["Diagnosis: Anaphylaxis due to Haemophilus influenzae type b vaccine (disorder)" using "Anaphylaxis due to Haemophilus influenzae type b vaccine (disorder) (SNOMEDCT Code 433621000124101)"] HibReaction
+	      or exists ( [("Diagnosis: Anaphylaxis due to Haemophilus influenzae type b vaccine (disorder)" using "Anaphylaxis due to Haemophilus influenzae type b vaccine (disorder) (SNOMEDCT Code 433621000124101)")] HibReaction
 	  where start of HibReaction.prevalencePeriod during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
 	  and ( exists ( from
-	  ( ( ["Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)"]
-	    union ["Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)"] ) HepatitisBVaccination
+	  ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
+	    union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
 	    where HepatitisBVaccination.relevantDatetime during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 	) HepatitisBVaccination1,
-	  ( ( ["Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)"]
-	    union ["Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)"] ) HepatitisBVaccination
+	  ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
+	    union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
 	    where HepatitisBVaccination.relevantDatetime during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 	) HepatitisBVaccination2,
-	  ( ( ["Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)"]
-	    union ["Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)"] ) HepatitisBVaccination
+	  ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
+	    union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
 	    where HepatitisBVaccination.relevantDatetime during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 	) HepatitisBVaccination3
 	  where HepatitisBVaccination2.relevantDatetime 1 day or more after day of HepatitisBVaccination1.relevantDatetime
 	    and HepatitisBVaccination3.relevantDatetime 1 day or more after day of HepatitisBVaccination2.relevantDatetime
 	  return HepatitisBVaccination1 )
-	      or exists ( ( ( ["Laboratory Test, Performed: Anti Hepatitis B Virus Surface Ab" using "Anti Hepatitis B Virus Surface Ab (2.16.840.1.113883.3.464.1003.198.12.1073)"] HepatitisBAntigenTest
-	    where HepatitisBAntigenTest.result as Code in valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016)
+	      or exists ( ( ( [("Laboratory Test, Performed: Anti Hepatitis B Virus Surface Ab" using "Anti Hepatitis B Virus Surface Ab (2.16.840.1.113883.3.464.1003.198.12.1073)")] HepatitisBAntigenTest
+	    where HepatitisBAntigenTest.result as Code in (valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016))
 	)
-	  union ( ["Diagnosis: Anaphylaxis due to Hepatitis B vaccine (disorder)" using "Anaphylaxis due to Hepatitis B vaccine (disorder) (SNOMEDCT Code 428321000124101)"] HepatitisBReaction
+	  union ( [("Diagnosis: Anaphylaxis due to Hepatitis B vaccine (disorder)" using "Anaphylaxis due to Hepatitis B vaccine (disorder) (SNOMEDCT Code 428321000124101)")] HepatitisBReaction
 	      return Laboratory Test, Performed { relevantDatetime: start of HepatitisBReaction.prevalencePeriod }
 	  )
-	  union ( ["Diagnosis: Anaphylactic Reaction to Common Baker's Yeast" using "Anaphylactic Reaction to Common Baker's Yeast (2.16.840.1.113883.3.464.1003.199.12.1032)"] YeastReaction
+	  union ( [("Diagnosis: Anaphylactic Reaction to Common Baker's Yeast" using "Anaphylactic Reaction to Common Baker's Yeast (2.16.840.1.113883.3.464.1003.199.12.1032)")] YeastReaction
 	      return Laboratory Test, Performed { relevantDatetime: start of YeastReaction.prevalencePeriod }
 	  )
-	  union ( ["Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.464.1003.110.12.1025)"] HepatitisBDiagnosis
+	  union ( [("Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.464.1003.110.12.1025)")] HepatitisBDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of HepatitisBDiagnosis.prevalencePeriod }
 	  ) ) HepBConditions
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HepBConditions.relevantDatetime, HepBConditions.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
-	  and ( exists ( ( ( ["Immunization, Administered: Varicella Zoster Vaccine (VZV)" using "Varicella Zoster Vaccine (VZV) (2.16.840.1.113883.3.464.1003.196.12.1170)"]
-	    union ["Procedure, Performed: Varicella Zoster Vaccine (VZV) Administered" using "Varicella Zoster Vaccine (VZV) Administered (2.16.840.1.113883.3.464.1003.110.12.1040)"] ) ChickenPoxVaccination
+	  and ( exists ( ( ( [("Immunization, Administered: Varicella Zoster Vaccine (VZV)" using "Varicella Zoster Vaccine (VZV) (2.16.840.1.113883.3.464.1003.196.12.1170)")]
+	    union [("Procedure, Performed: Varicella Zoster Vaccine (VZV) Administered" using "Varicella Zoster Vaccine (VZV) Administered (2.16.840.1.113883.3.464.1003.110.12.1040)")] ) ChickenPoxVaccination
 	    where ChickenPoxVaccination.relevantDatetime during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 	) )
-	      or exists ( ( ( ["Laboratory Test, Performed: Varicella Zoster Antibody Test (IgG Antibody Titer)" using "Varicella Zoster Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1066)"] ChickenPoxTiter
+	      or exists ( ( ( [("Laboratory Test, Performed: Varicella Zoster Antibody Test (IgG Antibody Titer)" using "Varicella Zoster Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1066)")] ChickenPoxTiter
 	    where ChickenPoxTiter.result >= 1.10
 	)
-	  union ( ["Laboratory Test, Performed: Varicella Zoster Antibody Test (IgG Antibody Presence)" using "Varicella Zoster Antibody Test (IgG Antibody Presence) (2.16.840.1.113883.3.464.1003.198.12.1067)"] ChickenPoxIgGPresence
-	      where ChickenPoxIgGPresence.result as Code in valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016)
+	  union ( [("Laboratory Test, Performed: Varicella Zoster Antibody Test (IgG Antibody Presence)" using "Varicella Zoster Antibody Test (IgG Antibody Presence) (2.16.840.1.113883.3.464.1003.198.12.1067)")] ChickenPoxIgGPresence
+	      where ChickenPoxIgGPresence.result as Code in (valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016))
 	  )
-	  union ( ["Diagnosis: Disorders of the Immune System" using "Disorders of the Immune System (2.16.840.1.113883.3.464.1003.120.12.1001)"] ImmuneDisorder
+	  union ( [("Diagnosis: Disorders of the Immune System" using "Disorders of the Immune System (2.16.840.1.113883.3.464.1003.120.12.1001)")] ImmuneDisorder
 	      return Laboratory Test, Performed { relevantDatetime: start of ImmuneDisorder.prevalencePeriod }
 	  )
-	  union ( ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"] HIV
+	  union ( [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)")] HIV
 	      return Laboratory Test, Performed { relevantDatetime: start of HIV.prevalencePeriod }
 	  )
-	  union ( ["Diagnosis: Malignant Neoplasm of Lymphatic and Hematopoietic Tissue" using "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue (2.16.840.1.113883.3.464.1003.108.12.1009)"] LymphaticMalignantNeoplasm
+	  union ( [("Diagnosis: Malignant Neoplasm of Lymphatic and Hematopoietic Tissue" using "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue (2.16.840.1.113883.3.464.1003.108.12.1009)")] LymphaticMalignantNeoplasm
 	      return Laboratory Test, Performed { relevantDatetime: start of LymphaticMalignantNeoplasm.prevalencePeriod }
 	  )
-	  union ( ["Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)"] NeomycinReaction
+	  union ( [("Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)")] NeomycinReaction
 	      return Laboratory Test, Performed { relevantDatetime: start of NeomycinReaction.prevalencePeriod }
 	  )
-	  union ( ["Diagnosis: Varicella Zoster" using "Varicella Zoster (2.16.840.1.113883.3.464.1003.110.12.1039)"] VaricellaZoster
+	  union ( [("Diagnosis: Varicella Zoster" using "Varicella Zoster (2.16.840.1.113883.3.464.1003.110.12.1039)")] VaricellaZoster
 	      return Laboratory Test, Performed { relevantDatetime: start of VaricellaZoster.prevalencePeriod }
 	  ) ) VaricellaZosterConditions
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
@@ -270,82 +270,82 @@ Numerator:
 	  else null as Interval<DateTime> ( VaricellaZosterConditions.relevantDatetime, VaricellaZosterConditions.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
 	  and ( exists ( from
-	  ( ( ["Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)"]
-	    union ["Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)"] ) PneumococcalVaccination
+	  ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
+	    union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
 	    where PneumococcalVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) PneumococcalVaccination1,
-	  ( ( ["Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)"]
-	    union ["Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)"] ) PneumococcalVaccination
+	  ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
+	    union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
 	    where PneumococcalVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) PneumococcalVaccination2,
-	  ( ( ["Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)"]
-	    union ["Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)"] ) PneumococcalVaccination
+	  ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
+	    union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
 	    where PneumococcalVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) PneumococcalVaccination3,
-	  ( ( ["Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)"]
-	    union ["Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)"] ) PneumococcalVaccination
+	  ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
+	    union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
 	    where PneumococcalVaccination.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) PneumococcalVaccination4
 	  where PneumococcalVaccination2.relevantDatetime 1 day or more after day of PneumococcalVaccination1.relevantDatetime
 	    and PneumococcalVaccination3.relevantDatetime 1 day or more after day of PneumococcalVaccination2.relevantDatetime
 	    and PneumococcalVaccination4.relevantDatetime 1 day or more after day of PneumococcalVaccination3.relevantDatetime
 	  return PneumococcalVaccination1 )
-	      or exists ( ["Diagnosis: Adverse reaction to vaccine product containing Streptococcus pneumoniae antigen (disorder)" using "Adverse reaction to vaccine product containing Streptococcus pneumoniae antigen (disorder) (SNOMEDCT Code 293116002)"] PneumococcalReaction
+	      or exists ( [("Diagnosis: Adverse reaction to vaccine product containing Streptococcus pneumoniae antigen (disorder)" using "Adverse reaction to vaccine product containing Streptococcus pneumoniae antigen (disorder) (SNOMEDCT Code 293116002)")] PneumococcalReaction
 	  where start of PneumococcalReaction.prevalencePeriod during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
-	  and ( exists ( ( ( ["Immunization, Administered: Hepatitis A Vaccine" using "Hepatitis A Vaccine (2.16.840.1.113883.3.464.1003.196.12.1215)"]
-	    union ["Procedure, Performed: Hepatitis A Vaccine Administered" using "Hepatitis A Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1041)"] ) HepatitisAVaccination
+	  and ( exists ( ( ( [("Immunization, Administered: Hepatitis A Vaccine" using "Hepatitis A Vaccine (2.16.840.1.113883.3.464.1003.196.12.1215)")]
+	    union [("Procedure, Performed: Hepatitis A Vaccine Administered" using "Hepatitis A Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1041)")] ) HepatitisAVaccination
 	    where HepatitisAVaccination.relevantDatetime during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 	) )
-	      or exists ( ( ( ["Laboratory Test, Performed: Anti Hepatitis A IgG Antigen Test" using "Anti Hepatitis A IgG Antigen Test (2.16.840.1.113883.3.464.1003.198.12.1033)"] HepatitisAAntigenTest
-	    where HepatitisAAntigenTest.result as Code in valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016)
+	      or exists ( ( ( [("Laboratory Test, Performed: Anti Hepatitis A IgG Antigen Test" using "Anti Hepatitis A IgG Antigen Test (2.16.840.1.113883.3.464.1003.198.12.1033)")] HepatitisAAntigenTest
+	    where HepatitisAAntigenTest.result as Code in (valueset "Positive Finding" (2.16.840.1.113883.3.464.1003.121.12.1016))
 	)
-	  union ( ["Diagnosis: Adverse reaction to vaccine product containing Hepatitis A virus antigen (disorder)" using "Adverse reaction to vaccine product containing Hepatitis A virus antigen (disorder) (SNOMEDCT Code 293126009)"] HepatitisAReaction
+	  union ( [("Diagnosis: Adverse reaction to vaccine product containing Hepatitis A virus antigen (disorder)" using "Adverse reaction to vaccine product containing Hepatitis A virus antigen (disorder) (SNOMEDCT Code 293126009)")] HepatitisAReaction
 	      return Laboratory Test, Performed { relevantDatetime: start of HepatitisAReaction.prevalencePeriod }
 	  )
-	  union ( ["Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.1024)"] HepatitisADiagnosis
+	  union ( [("Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.1024)")] HepatitisADiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of HepatitisADiagnosis.prevalencePeriod }
 	  ) ) HepatitisAConditions
 	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HepatitisAConditions.relevantDatetime, HepatitisAConditions.relevantPeriod ) during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
-	  and ( exists ( ( ( ["Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)"] ) TwoDoseRotavirus
+	  and ( exists ( ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
 	    where TwoDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)"] ) ThreeDoseRotavirus
+	  union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
 	    where ThreeDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllRotavirusDoses1
-	  without ( ( ["Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)"] ) TwoDoseRotavirus
+	  without ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
 	    where TwoDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)"] ) ThreeDoseRotavirus
+	  union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
 	    where ThreeDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllRotavirusDoses2
 	    such that AllRotavirusDoses1.relevantDatetime less than 1 day before AllRotavirusDoses2.relevantDatetime RotavirusImmunization
-	    let has_3_dose: Count(( ( ["Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)"] ) ThreeDoseRotavirus
+	    let has_3_dose: Count(( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
 	    where ThreeDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	))> 0
 	    where ( has_3_dose
-	        and Count(distinct(( ( ["Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)"] ) TwoDoseRotavirus
+	        and Count(distinct(( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
 	    where TwoDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)"] ) ThreeDoseRotavirus
+	  union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
 	    where ThreeDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllRotavirusDoses1
-	  without ( ( ["Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)"] ) TwoDoseRotavirus
+	  without ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
 	    where TwoDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)"] ) ThreeDoseRotavirus
+	  union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
 	    where ThreeDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllRotavirusDoses2
 	    such that AllRotavirusDoses1.relevantDatetime less than 1 day before AllRotavirusDoses2.relevantDatetime RotavirusVaccinations
@@ -354,20 +354,20 @@ Numerator:
 	        )>= 3
 	    )
 	      or ( has_3_dose is false
-	          and Count(distinct(( ( ["Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)"] ) TwoDoseRotavirus
+	          and Count(distinct(( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
 	    where TwoDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)"] ) ThreeDoseRotavirus
+	  union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
 	    where ThreeDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllRotavirusDoses1
-	  without ( ( ["Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)"] ) TwoDoseRotavirus
+	  without ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
 	    where TwoDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	)
-	  union ( ( ["Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)"]
-	    union ["Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)"] ) ThreeDoseRotavirus
+	  union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
+	    union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
 	    where ThreeDoseRotavirus.relevantDatetime during Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 	) AllRotavirusDoses2
 	    such that AllRotavirusDoses1.relevantDatetime less than 1 day before AllRotavirusDoses2.relevantDatetime RotavirusVaccinations
@@ -376,35 +376,35 @@ Numerator:
 	          )>= 2
 	      )
 	)
-	      or exists ( ( ( ["Diagnosis: Anaphylaxis due to rotavirus vaccine (disorder)" using "Anaphylaxis due to rotavirus vaccine (disorder) (SNOMEDCT Code 428331000124103)"]
-	    union ["Diagnosis: Severe Combined Immunodeficiency" using "Severe Combined Immunodeficiency (2.16.840.1.113883.3.464.1003.120.12.1007)"]
-	    union ["Diagnosis: Intussusception" using "Intussusception (2.16.840.1.113883.3.464.1003.199.12.1056)"] ) RotavirusConditions
+	      or exists ( ( ( [("Diagnosis: Anaphylaxis due to rotavirus vaccine (disorder)" using "Anaphylaxis due to rotavirus vaccine (disorder) (SNOMEDCT Code 428331000124103)")]
+	    union [("Diagnosis: Severe Combined Immunodeficiency" using "Severe Combined Immunodeficiency (2.16.840.1.113883.3.464.1003.120.12.1007)")]
+	    union [("Diagnosis: Intussusception" using "Intussusception (2.16.840.1.113883.3.464.1003.199.12.1056)")] ) RotavirusConditions
 	    where start of RotavirusConditions.prevalencePeriod during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 	) )
 	  )
 	  and ( exists ( from
-	  ( ( ["Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)"]
-	    union ["Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)"] ) InfluenzaAdministration
+	  ( ( [("Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)")]
+	    union [("Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)")] ) InfluenzaAdministration
 	    where InfluenzaAdministration.relevantDatetime during Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
 	) FluVaccination1,
-	  ( ( ["Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)"]
-	    union ["Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)"] ) InfluenzaAdministration
+	  ( ( [("Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)")]
+	    union [("Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)")] ) InfluenzaAdministration
 	    where InfluenzaAdministration.relevantDatetime during Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
 	) FluVaccination2
 	  where FluVaccination2.relevantDatetime 1 day or more after day of FluVaccination1.relevantDatetime
 	  return FluVaccination1 )
-	      or ( exists ( ["Immunization, Administered: Influenza Virus LAIV Immunization" using "Influenza Virus LAIV Immunization (2.16.840.1.113883.3.464.1003.110.12.1087)"]
-	  union ["Procedure, Performed: Influenza Virus LAIV Procedure" using "Influenza Virus LAIV Procedure (2.16.840.1.113883.3.464.1003.110.12.1088)"] ) InfluenzaAdministration
+	      or ( exists ( [("Immunization, Administered: Influenza Virus LAIV Immunization" using "Influenza Virus LAIV Immunization (2.16.840.1.113883.3.464.1003.110.12.1087)")]
+	  union [("Procedure, Performed: Influenza Virus LAIV Procedure" using "Influenza Virus LAIV Procedure (2.16.840.1.113883.3.464.1003.110.12.1088)")] ) InfluenzaAdministration
 	  where date from InfluenzaAdministration.relevantDatetime = date from Patient.birthDatetime + 2 years
-	  and exists ( ( ["Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)"]
-	    union ["Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)"] ) InfluenzaAdministration
+	  and exists ( ( [("Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)")]
+	    union [("Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)")] ) InfluenzaAdministration
 	    where InfluenzaAdministration.relevantDatetime during Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
 	) )
-	      or exists ( ( ["Diagnosis: Adverse reaction to vaccine product containing Influenza virus antigen (disorder)" using "Adverse reaction to vaccine product containing Influenza virus antigen (disorder) (SNOMEDCT Code 420113004)"]
-	  union ["Diagnosis: Malignant Neoplasm of Lymphatic and Hematopoietic Tissue" using "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue (2.16.840.1.113883.3.464.1003.108.12.1009)"]
-	  union ["Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)"]
-	  union ["Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)"]
-	  union ["Diagnosis: Disorders of the Immune System" using "Disorders of the Immune System (2.16.840.1.113883.3.464.1003.120.12.1001)"] ) InfluenzaConditions
+	      or exists ( ( [("Diagnosis: Adverse reaction to vaccine product containing Influenza virus antigen (disorder)" using "Adverse reaction to vaccine product containing Influenza virus antigen (disorder) (SNOMEDCT Code 420113004)")]
+	  union [("Diagnosis: Malignant Neoplasm of Lymphatic and Hematopoietic Tissue" using "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue (2.16.840.1.113883.3.464.1003.108.12.1009)")]
+	  union [("Diagnosis: Neomycin adverse reaction (disorder)" using "Neomycin adverse reaction (disorder) (SNOMEDCT Code 292927007)")]
+	  union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.1003)")]
+	  union [("Diagnosis: Disorders of the Immune System" using "Disorders of the Immune System (2.16.840.1.113883.3.464.1003.120.12.1001)")] ) InfluenzaConditions
 	  where start of InfluenzaConditions.prevalencePeriod during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
 =============================================================================================================================================================================

@@ -1,25 +1,25 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1120)"]
-		union ["Encounter, Performed: Preventive Care - Initial Office Visit, 0 to 17" using "Preventive Care - Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1110)"]
+exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+		union [("Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1120)")]
+		union [("Encounter, Performed: Preventive Care - Initial Office Visit, 0 to 17" using "Preventive Care - Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1110)")]
 ) ValidEncounters
-	with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 		such that months between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of ValidEncounters.relevantPeriod)<= 6
-	and exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	and exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	where months between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)< 6
 		and months between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, 
 			end of Measurement Period
 		)>= 6
 =============================================================================================================================================================================
 Denominator:
-exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1120)"]
-		union ["Encounter, Performed: Preventive Care - Initial Office Visit, 0 to 17" using "Preventive Care - Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1110)"]
+exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+		union [("Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1120)")]
+		union [("Encounter, Performed: Preventive Care - Initial Office Visit, 0 to 17" using "Preventive Care - Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.11.1110)")]
 ) ValidEncounters
-	with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 		such that months between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of ValidEncounters.relevantPeriod)<= 6
-	and exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	and exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	where months between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)< 6
 		and months between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, 
 			end of Measurement Period
@@ -29,9 +29,9 @@ Denominator Exclusions:
 None
 =============================================================================================================================================================================
 Numerator:
-exists ( ( ["Intervention, Performed: Maternal postpartum depression care (regime/therapy)" using "Maternal postpartum depression care (regime/therapy) (SNOMEDCT Code 428231000124106)"]
-		union ["Assessment, Performed: Maternal postpartum depression screening (procedure)" using "Maternal postpartum depression screening (procedure) (SNOMEDCT Code 428221000124108)"] ) DepressionScreening
-		with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( ( [("Intervention, Performed: Maternal postpartum depression care (regime/therapy)" using "Maternal postpartum depression care (regime/therapy) (SNOMEDCT Code 428231000124106)")]
+		union [("Assessment, Performed: Maternal postpartum depression screening (procedure)" using "Maternal postpartum depression screening (procedure) (SNOMEDCT Code 428221000124108)")] ) DepressionScreening
+		with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 			such that months between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, DepressionScreening.authorDatetime)<= 6
 )
 =============================================================================================================================================================================

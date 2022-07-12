@@ -1,80 +1,80 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ["Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)"] BMIEncounter
+exists [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
   where BMIEncounter.relevantPeriod during Measurement Period
-    and BMIEncounter.class !~ code "virtual" ("ActCode Code (VR)") QualifyingEncounter
+    and BMIEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) QualifyingEncounter
   where AgeInYearsAt(date from start of QualifyingEncounter.relevantPeriod)>= 18
 =============================================================================================================================================================================
 Denominator:
-exists ["Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)"] BMIEncounter
+exists [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
   where BMIEncounter.relevantPeriod during Measurement Period
-    and BMIEncounter.class !~ code "virtual" ("ActCode Code (VR)") QualifyingEncounter
+    and BMIEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) QualifyingEncounter
   where AgeInYearsAt(date from start of QualifyingEncounter.relevantPeriod)>= 18
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
-  or PalliativeCare.exists ( ["Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)"] PalliativeAssessment
+  or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
     where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 )
-or exists (["Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)"] PalliativeDiagnosis
+or exists ([("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis
 where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
-  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)"] PalliativeEncounter
+  or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)")] PalliativeEncounter
       where PalliativeEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)"] PalliativeIntervention
+  or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
   )
-  or exists ["Diagnosis: Pregnancy or Other Related Diagnoses" using "Pregnancy or Other Related Diagnoses (2.16.840.1.113883.3.600.1.1623)"] PregnancyDiagnosis
-  with ["Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)"] BMIEncounter
+  or exists [("Diagnosis: Pregnancy or Other Related Diagnoses" using "Pregnancy or Other Related Diagnoses (2.16.840.1.113883.3.600.1.1623)")] PregnancyDiagnosis
+  with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
   where BMIEncounter.relevantPeriod during Measurement Period
-    and BMIEncounter.class !~ code "virtual" ("ActCode Code (VR)") QualifyingEncounter
+    and BMIEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) QualifyingEncounter
     such that PregnancyDiagnosis.prevalencePeriod overlaps Measurement Period
 =============================================================================================================================================================================
 Numerator:
-exists ( ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)"] BMI
+exists ( [("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( BMI.relevantDatetime, BMI.relevantPeriod ) during Measurement Period
     and BMI.result >= 25 'kg/m2' HighBMI
-    with ( ( ( ["Intervention, Order: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)"]
-    union ["Intervention, Order: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)"]
-    union ["Medication, Order: Medications for Above Normal BMI" using "Medications for Above Normal BMI (2.16.840.1.113883.3.526.3.1561)"] ) HighInterventionsOrdered
-    where HighInterventionsOrdered.reason in valueset "Overweight or Obese" (2.16.840.1.113762.1.4.1047.502)
-      or ( exists ["Diagnosis: Overweight or Obese" using "Overweight or Obese (2.16.840.1.113762.1.4.1047.502)"] OverweightObese
+    with ( ( ( [("Intervention, Order: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)")]
+    union [("Intervention, Order: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)")]
+    union [("Medication, Order: Medications for Above Normal BMI" using "Medications for Above Normal BMI (2.16.840.1.113883.3.526.3.1561)")] ) HighInterventionsOrdered
+    where HighInterventionsOrdered.reason in (valueset "Overweight or Obese" (2.16.840.1.113762.1.4.1047.502))
+      or ( exists [("Diagnosis: Overweight or Obese" using "Overweight or Obese (2.16.840.1.113762.1.4.1047.502)")] OverweightObese
           where OverweightObese.prevalencePeriod starts before or on day of HighInterventionsOrdered.authorDatetime
             and not ( OverweightObese.prevalencePeriod ends before day of HighInterventionsOrdered.authorDatetime )
             and HighInterventionsOrdered.authorDatetime during Measurement Period
       )
 )
-      union ( ["Intervention, Performed: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)"] HighInterventionsPerformed
-    where HighInterventionsPerformed.reason in valueset "Overweight or Obese" (2.16.840.1.113762.1.4.1047.502)
-      or ( exists ["Diagnosis: Overweight or Obese" using "Overweight or Obese (2.16.840.1.113762.1.4.1047.502)"] OverweightObese
+      union ( [("Intervention, Performed: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)")] HighInterventionsPerformed
+    where HighInterventionsPerformed.reason in (valueset "Overweight or Obese" (2.16.840.1.113762.1.4.1047.502))
+      or ( exists [("Diagnosis: Overweight or Obese" using "Overweight or Obese (2.16.840.1.113762.1.4.1047.502)")] OverweightObese
           where OverweightObese.prevalencePeriod starts before or on day of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HighInterventionsPerformed.relevantDatetime, HighInterventionsPerformed.relevantPeriod )
@@ -90,24 +90,24 @@ exists ( ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body 
   else if period is not null then period 
   else null as Interval<DateTime>(HighBMIInterventions.relevantDatetime, HighBMIInterventions.relevantPeriod), HighBMIInterventions.authorDatetime)during Measurement Period )
 )
-  or exists ( ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)"] BMI
+  or exists ( [("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( BMI.relevantDatetime, BMI.relevantPeriod ) during Measurement Period
     and BMI.result < 18.5 'kg/m2' LowBMI
-    with ( ( ( ["Intervention, Order: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)"]
-    union ["Intervention, Order: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)"]
-    union ["Medication, Order: Medications for Below Normal BMI" using "Medications for Below Normal BMI (2.16.840.1.113883.3.526.3.1562)"] ) LowInterventionsOrdered
-    where LowInterventionsOrdered.reason in valueset "Underweight" (2.16.840.1.113883.3.526.3.1563)
-      or ( exists ["Diagnosis: Underweight" using "Underweight (2.16.840.1.113883.3.526.3.1563)"] Underweight
+    with ( ( ( [("Intervention, Order: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)")]
+    union [("Intervention, Order: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)")]
+    union [("Medication, Order: Medications for Below Normal BMI" using "Medications for Below Normal BMI (2.16.840.1.113883.3.526.3.1562)")] ) LowInterventionsOrdered
+    where LowInterventionsOrdered.reason in (valueset "Underweight" (2.16.840.1.113883.3.526.3.1563))
+      or ( exists [("Diagnosis: Underweight" using "Underweight (2.16.840.1.113883.3.526.3.1563)")] Underweight
           where Underweight.prevalencePeriod starts before or on day of LowInterventionsOrdered.authorDatetime
             and not ( Underweight.prevalencePeriod ends before day of LowInterventionsOrdered.authorDatetime )
             and LowInterventionsOrdered.authorDatetime during Measurement Period
       )
 )
-      union ( ["Intervention, Performed: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)"] LowInterventionsPerformed
-    where LowInterventionsPerformed.reason in valueset "Underweight" (2.16.840.1.113883.3.526.3.1563)
-      or ( exists ["Diagnosis: Underweight" using "Underweight (2.16.840.1.113883.3.526.3.1563)"] Underweight
+      union ( [("Intervention, Performed: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)")] LowInterventionsPerformed
+    where LowInterventionsPerformed.reason in (valueset "Underweight" (2.16.840.1.113883.3.526.3.1563))
+      or ( exists [("Diagnosis: Underweight" using "Underweight (2.16.840.1.113883.3.526.3.1563)")] Underweight
           where Underweight.prevalencePeriod starts before or on day of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( LowInterventionsPerformed.relevantDatetime, LowInterventionsPerformed.relevantPeriod )
@@ -123,7 +123,7 @@ exists ( ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body 
   else if period is not null then period 
   else null as Interval<DateTime>(LowBMIInterventions.relevantDatetime, LowBMIInterventions.relevantPeriod), LowBMIInterventions.authorDatetime)during Measurement Period )
 )
-  or exists ( ( ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)"] BMI
+  or exists ( ( [("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
     where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( BMI.relevantDatetime, BMI.relevantPeriod ) during Measurement Period
@@ -134,12 +134,12 @@ exists ( ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body 
 ) BMI
     where BMI.result included in Interval[18.5 'kg/m2', 24.9 'kg/m2']
 )
-  and not ( exists ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)"] BMI
+  and not ( exists [("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( BMI.relevantDatetime, BMI.relevantPeriod ) during Measurement Period
     and BMI.result >= 25 'kg/m2'
-      or exists ["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)"] BMI
+      or exists [("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( BMI.relevantDatetime, BMI.relevantPeriod ) during Measurement Period
@@ -150,27 +150,27 @@ Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-exists ( ["Intervention, Not Ordered: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)"]
-  union ["Intervention, Not Ordered: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)"]
-  union ["Intervention, Not Performed: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)"]
-  union ["Intervention, Not Ordered: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)"]
-  union ["Intervention, Not Performed: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)"]
-  union ["Medication, Not Ordered: Medications for Above Normal BMI" using "Medications for Above Normal BMI (2.16.840.1.113883.3.526.3.1561)"]
-  union ["Medication, Not Ordered: Medications for Below Normal BMI" using "Medications for Below Normal BMI (2.16.840.1.113883.3.526.3.1562)"] ) NoBMIFollowUp
-  with ["Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)"] BMIEncounter
+exists ( [("Intervention, Not Ordered: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)")]
+  union [("Intervention, Not Ordered: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)")]
+  union [("Intervention, Not Performed: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)")]
+  union [("Intervention, Not Ordered: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)")]
+  union [("Intervention, Not Performed: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)")]
+  union [("Medication, Not Ordered: Medications for Above Normal BMI" using "Medications for Above Normal BMI (2.16.840.1.113883.3.526.3.1561)")]
+  union [("Medication, Not Ordered: Medications for Below Normal BMI" using "Medications for Below Normal BMI (2.16.840.1.113883.3.526.3.1562)")] ) NoBMIFollowUp
+  with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
   where BMIEncounter.relevantPeriod during Measurement Period
-    and BMIEncounter.class !~ code "virtual" ("ActCode Code (VR)") QualifyingEncounter
+    and BMIEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) QualifyingEncounter
     such that NoBMIFollowUp.authorDatetime same day as start of QualifyingEncounter.relevantPeriod
-  where NoBMIFollowUp.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
-  or exists ["Physical Exam, Not Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)"] NoBMI
-  with ["Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)"] BMIEncounter
+  where NoBMIFollowUp.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
+  or exists [("Physical Exam, Not Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] NoBMI
+  with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
   where BMIEncounter.relevantPeriod during Measurement Period
-    and BMIEncounter.class !~ code "virtual" ("ActCode Code (VR)") QualifyingEncounter
+    and BMIEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) QualifyingEncounter
     such that if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( NoBMI.authorDatetime, NoBMI.relevantPeriod ) ends same day as start of QualifyingEncounter.relevantPeriod
-  where ( NoBMI.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
-      or NoBMI.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)
+  where ( NoBMI.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
+      or NoBMI.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))
   )
 =============================================================================================================================================================================
 Stratification:

@@ -1,84 +1,84 @@
 =============================================================================================================================================================================
 Initial Population:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
 	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
 	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
 	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
 	      where Diagnosis.rank = 1
-	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+	            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        )
 	  ) AllStrokeEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18
 =============================================================================================================================================================================
 Denominator:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
 	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
 	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
 	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
 	      where Diagnosis.rank = 1
-	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+	            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        )
 	  ) AllStrokeEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
 	  where exists ( EncounterWithAge.diagnoses Diagnosis
-	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        and Diagnosis.rank = 1
 	  )
 =============================================================================================================================================================================
 Denominator Exclusions:
-TJC.( ( ["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.( ( [("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
 	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
 	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
 	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
 	      where Diagnosis.rank = 1
-	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+	            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        )
 	  ) AllStrokeEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
 	  where exists ( EncounterWithAge.diagnoses Diagnosis
-	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        and Diagnosis.rank = 1
 	  ) IschemicStrokeEncounter
-	      where IschemicStrokeEncounter.dischargeDisposition in valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87)
-	        or IschemicStrokeEncounter.dischargeDisposition in valueset "Left Against Medical Advice" (2.16.840.1.113883.3.117.1.7.1.308)
-	        or IschemicStrokeEncounter.dischargeDisposition in valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309)
-	        or IschemicStrokeEncounter.dischargeDisposition in valueset "Discharged to Home for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.209)
-	        or IschemicStrokeEncounter.dischargeDisposition in valueset "Discharged to Health Care Facility for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.207)
+	      where IschemicStrokeEncounter.dischargeDisposition in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))
+	        or IschemicStrokeEncounter.dischargeDisposition in (valueset "Left Against Medical Advice" (2.16.840.1.113883.3.117.1.7.1.308))
+	        or IschemicStrokeEncounter.dischargeDisposition in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))
+	        or IschemicStrokeEncounter.dischargeDisposition in (valueset "Discharged to Home for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.209))
+	        or IschemicStrokeEncounter.dischargeDisposition in (valueset "Discharged to Health Care Facility for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.207))
 	  )
 	)
-	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
 	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
 	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
 	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
 	      where Diagnosis.rank = 1
-	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+	            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        )
 	  ) AllStrokeEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
 	  where exists ( EncounterWithAge.diagnoses Diagnosis
-	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        and Diagnosis.rank = 1
 	  ) IschemicStrokeEncounter
-	  with ["Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"]
-	  union ["Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"] ComfortMeasure
+	  with [("Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")]
+	  union [("Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")] ComfortMeasure
 	    such that Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime>(ComfortMeasure.relevantDatetime, ComfortMeasure.relevantPeriod), ComfortMeasure.authorDatetime)during Encounter Visit
-		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
 				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
 				sort by 
 				end of relevantPeriod
 		),
 		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
 				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
 				sort by 
 				end of relevantPeriod
@@ -87,63 +87,63 @@ TJC.( ( ["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Ele
 		end of Visit.relevantPeriod] ( IschemicStrokeEncounter )
 =============================================================================================================================================================================
 Numerator:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
 	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
 	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
 	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
 	      where Diagnosis.rank = 1
-	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+	            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        )
 	  ) AllStrokeEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
 	  where exists ( EncounterWithAge.diagnoses Diagnosis
-	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        and Diagnosis.rank = 1
 	  ) IschemicStrokeEncounter
-	  with ["Medication, Discharge: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)"] DischargeAntithrombotic
+	  with [("Medication, Discharge: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] DischargeAntithrombotic
 	    such that DischargeAntithrombotic.authorDatetime during IschemicStrokeEncounter.relevantPeriod
 =============================================================================================================================================================================
 Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
 	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
 	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
 	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
 	      where Diagnosis.rank = 1
-	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+	            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        )
 	  ) AllStrokeEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
 	  where exists ( EncounterWithAge.diagnoses Diagnosis
-	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        and Diagnosis.rank = 1
 	  ) IschemicStrokeEncounter
-	  with ["Medication, Not Discharged: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)"] NoAntithromboticDischarge
-	  where NoAntithromboticDischarge.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
-	    or NoAntithromboticDischarge.negationRationale in valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93) NoDischargeAntithrombotic
+	  with [("Medication, Not Discharged: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] NoAntithromboticDischarge
+	  where NoAntithromboticDischarge.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))
+	    or NoAntithromboticDischarge.negationRationale in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93)) NoDischargeAntithrombotic
 	    such that NoDischargeAntithrombotic.authorDatetime during IschemicStrokeEncounter.relevantPeriod
-	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
 	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
 	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
 	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
 	      where Diagnosis.rank = 1
-	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
-	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))
+	            or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        )
 	  ) AllStrokeEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
 	  where exists ( EncounterWithAge.diagnoses Diagnosis
-	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	      where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))
 	        and Diagnosis.rank = 1
 	  ) IschemicStrokeEncounter
-	  with ["Medication, Discharge: Pharmacological Contraindications For Antithrombotic Therapy" using "Pharmacological Contraindications For Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.52)"] Pharmacological
+	  with [("Medication, Discharge: Pharmacological Contraindications For Antithrombotic Therapy" using "Pharmacological Contraindications For Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.52)")] Pharmacological
 	    such that Pharmacological.authorDatetime during IschemicStrokeEncounter.relevantPeriod
 =============================================================================================================================================================================
 Stratification:

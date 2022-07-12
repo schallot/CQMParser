@@ -3,18 +3,18 @@ Initial Population:
 exists ( [Patient Characteristic Birthdate] BirthDate
 			where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
 	)
-		and exists AdultOutpatientEncounters.( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-		union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-		union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"] ) ValidEncounter
+		and exists AdultOutpatientEncounters.( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+		union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+		union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+		union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+		union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")] ) ValidEncounter
 		where ValidEncounter.relevantPeriod during Measurement Period
-		and ( exists ( ["Diagnosis: Acute Myocardial Infarction" using "Acute Myocardial Infarction (2.16.840.1.113883.3.464.1003.104.12.1001)"] AcuteMIDiagnosis
+		and ( exists ( [("Diagnosis: Acute Myocardial Infarction" using "Acute Myocardial Infarction (2.16.840.1.113883.3.464.1003.104.12.1001)")] AcuteMIDiagnosis
 		where AcuteMIDiagnosis.prevalencePeriod starts 12 months or less before start of Measurement Period )
-				or exists ( ["Diagnosis: Ischemic Vascular Disease" using "Ischemic Vascular Disease (2.16.840.1.113883.3.464.1003.104.12.1003)"] IschemicVascularDisease
+				or exists ( [("Diagnosis: Ischemic Vascular Disease" using "Ischemic Vascular Disease (2.16.840.1.113883.3.464.1003.104.12.1003)")] IschemicVascularDisease
 		where IschemicVascularDisease.prevalencePeriod overlaps Measurement Period )
-				or exists ( ( ["Procedure, Performed: Percutaneous Coronary Interventions" using "Percutaneous Coronary Interventions (2.16.840.1.113883.3.464.1003.104.12.1010)"]
-		union ["Procedure, Performed: Coronary Artery Bypass Graft" using "Coronary Artery Bypass Graft (2.16.840.1.113883.3.464.1003.104.12.1002)"] ) HeartProcedure
+				or exists ( ( [("Procedure, Performed: Percutaneous Coronary Interventions" using "Percutaneous Coronary Interventions (2.16.840.1.113883.3.464.1003.104.12.1010)")]
+		union [("Procedure, Performed: Coronary Artery Bypass Graft" using "Coronary Artery Bypass Graft (2.16.840.1.113883.3.464.1003.104.12.1002)")] ) HeartProcedure
 		where HeartProcedure.relevantPeriod ends 12 months or less before start of Measurement Period )
 		)
 =============================================================================================================================================================================
@@ -22,39 +22,39 @@ Denominator:
 exists ( [Patient Characteristic Birthdate] BirthDate
 			where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
 	)
-		and exists AdultOutpatientEncounters.( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-		union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
-		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-		union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"] ) ValidEncounter
+		and exists AdultOutpatientEncounters.( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+		union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
+		union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+		union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+		union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")] ) ValidEncounter
 		where ValidEncounter.relevantPeriod during Measurement Period
-		and ( exists ( ["Diagnosis: Acute Myocardial Infarction" using "Acute Myocardial Infarction (2.16.840.1.113883.3.464.1003.104.12.1001)"] AcuteMIDiagnosis
+		and ( exists ( [("Diagnosis: Acute Myocardial Infarction" using "Acute Myocardial Infarction (2.16.840.1.113883.3.464.1003.104.12.1001)")] AcuteMIDiagnosis
 		where AcuteMIDiagnosis.prevalencePeriod starts 12 months or less before start of Measurement Period )
-				or exists ( ["Diagnosis: Ischemic Vascular Disease" using "Ischemic Vascular Disease (2.16.840.1.113883.3.464.1003.104.12.1003)"] IschemicVascularDisease
+				or exists ( [("Diagnosis: Ischemic Vascular Disease" using "Ischemic Vascular Disease (2.16.840.1.113883.3.464.1003.104.12.1003)")] IschemicVascularDisease
 		where IschemicVascularDisease.prevalencePeriod overlaps Measurement Period )
-				or exists ( ( ["Procedure, Performed: Percutaneous Coronary Interventions" using "Percutaneous Coronary Interventions (2.16.840.1.113883.3.464.1003.104.12.1010)"]
-		union ["Procedure, Performed: Coronary Artery Bypass Graft" using "Coronary Artery Bypass Graft (2.16.840.1.113883.3.464.1003.104.12.1002)"] ) HeartProcedure
+				or exists ( ( [("Procedure, Performed: Percutaneous Coronary Interventions" using "Percutaneous Coronary Interventions (2.16.840.1.113883.3.464.1003.104.12.1010)")]
+		union [("Procedure, Performed: Coronary Artery Bypass Graft" using "Coronary Artery Bypass Graft (2.16.840.1.113883.3.464.1003.104.12.1002)")] ) HeartProcedure
 		where HeartProcedure.relevantPeriod ends 12 months or less before start of Measurement Period )
 		)
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
-			where ( DischargeHospice.dischargeDisposition as Code ~ code "Discharge to home for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428361000124107)"
-					or DischargeHospice.dischargeDisposition as Code ~ code "Discharge to healthcare facility for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428371000124100)"
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
+			where ( DischargeHospice.dischargeDisposition as Code ~ (code "Discharge to home for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428361000124107)")
+					or DischargeHospice.dischargeDisposition as Code ~ (code "Discharge to healthcare facility for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428371000124100)")
 			)
 				and DischargeHospice.relevantPeriod ends during Measurement Period
 	)
-		or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+		or exists ( [("Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder
 				where HospiceOrder.authorDatetime during Measurement Period
 		)
-		or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+		or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
 				where HospicePerformed.relevantPeriod overlaps Measurement Period
 		)
-		or exists ["Medication, Active: Anticoagulant Medications" using "Anticoagulant Medications (2.16.840.1.113883.3.464.1003.196.12.1283)"] ActiveAnticoagulant
+		or exists [("Medication, Active: Anticoagulant Medications" using "Anticoagulant Medications (2.16.840.1.113883.3.464.1003.196.12.1283)")] ActiveAnticoagulant
 		where ActiveAnticoagulant.relevantPeriod overlaps Measurement Period
 =============================================================================================================================================================================
 Numerator:
-exists ["Medication, Active: Aspirin and Other Antiplatelets" using "Aspirin and Other Antiplatelets (2.16.840.1.113883.3.464.1003.196.12.1211)"] ActiveAntiplatelet
+exists [("Medication, Active: Aspirin and Other Antiplatelets" using "Aspirin and Other Antiplatelets (2.16.840.1.113883.3.464.1003.196.12.1211)")] ActiveAntiplatelet
 		where ActiveAntiplatelet.relevantPeriod overlaps Measurement Period
 =============================================================================================================================================================================
 Numerator Exclusions:

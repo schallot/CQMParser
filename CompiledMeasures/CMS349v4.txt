@@ -1,35 +1,35 @@
 =============================================================================================================================================================================
 Initial Population:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[15, 65]
 	)
-	  and exists ( ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] ) Encounter
+	  and exists ( [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")] ) Encounter
 	  where Encounter.relevantPeriod during Measurement Period
 =============================================================================================================================================================================
 Denominator:
-exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[15, 65]
 	)
-	  and exists ( ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-	  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] ) Encounter
+	  and exists ( [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+	  union [("Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+	  union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")] ) Encounter
 	  where Encounter.relevantPeriod during Measurement Period
 =============================================================================================================================================================================
 Denominator Exclusions:
-exists ( ["Diagnosis: Indicators of Human Immunodeficiency Virus (HIV)" using "Indicators of Human Immunodeficiency Virus (HIV) (2.16.840.1.113762.1.4.1056.54)"] HIVIndicators
+exists ( [("Diagnosis: Indicators of Human Immunodeficiency Virus (HIV)" using "Indicators of Human Immunodeficiency Virus (HIV) (2.16.840.1.113762.1.4.1056.54)")] HIVIndicators
 	    where HIVIndicators.prevalencePeriod starts before start of Measurement Period
 	)
 =============================================================================================================================================================================
 Numerator:
-( exists ( ["Laboratory Test, Performed: Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag)" using "Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag) (2.16.840.1.113762.1.4.1056.50)"]
-	  union ["Laboratory Test, Performed: HIV 1 and 2 tests - Meaningful Use set" using "HIV 1 and 2 tests - Meaningful Use set (LOINC Code 75622-1)"] ) HIVTest
-	  where exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+( exists ( [("Laboratory Test, Performed: Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag)" using "Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag) (2.16.840.1.113762.1.4.1056.50)")]
+	  union [("Laboratory Test, Performed: HIV 1 and 2 tests - Meaningful Use set" using "HIV 1 and 2 tests - Meaningful Use set (LOINC Code 75622-1)")] ) HIVTest
+	  where exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	      where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( HIVTest.relevantDatetime, HIVTest.relevantPeriod ) ) in Interval[15, 65]

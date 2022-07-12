@@ -1,30 +1,30 @@
 =============================================================================================================================================================================
 Initial Population:
 AgeInYearsAt(date from start of Measurement Period)in Interval[50, 63]
-  and exists ( ["Patient Characteristic Sex: Female" using "Female (AdministrativeGender Code F)"] )
-  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounters
+  and exists ( [("Patient Characteristic Sex: Female" using "Female (AdministrativeGender Code F)")] )
+  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period
 =============================================================================================================================================================================
 Denominator:
 AgeInYearsAt(date from start of Measurement Period)in Interval[50, 63]
-  and exists ( ["Patient Characteristic Sex: Female" using "Female (AdministrativeGender Code F)"] )
-  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
-  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
-  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
-  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
-  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounters
+  and exists ( [("Patient Characteristic Sex: Female" using "Female (AdministrativeGender Code F)")] )
+  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
+  union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]
+  union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)")]
+  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
+  union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period
 =============================================================================================================================================================================
 Denominator Exclusions:
-First(["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)"] BMI
+First([("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
     where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)during Measurement Period
@@ -34,7 +34,7 @@ First(["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mas
   else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 ) FirstBMI
   where FirstBMI.result <= 20 'kg/m2' is not null
-  or First(["Assessment, Performed: Alcoholic drinks per drinking day - Reported" using "Alcoholic drinks per drinking day - Reported (LOINC Code 11287-0)"] AverageDrinks
+  or First([("Assessment, Performed: Alcoholic drinks per drinking day - Reported" using "Alcoholic drinks per drinking day - Reported (LOINC Code 11287-0)")] AverageDrinks
     where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime>(AverageDrinks.relevantDatetime, AverageDrinks.relevantPeriod)during Measurement Period
@@ -43,29 +43,29 @@ First(["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mas
   else if period is not null then period 
   else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
 ) is not null
-  or exists ["Diagnosis: Osteoporosis" using "Osteoporosis (2.16.840.1.113883.3.464.1003.113.12.1038)"] OsteoporosisDiagnosis
+  or exists [("Diagnosis: Osteoporosis" using "Osteoporosis (2.16.840.1.113883.3.464.1003.113.12.1038)")] OsteoporosisDiagnosis
   where OsteoporosisDiagnosis.prevalencePeriod starts before start of Measurement Period
-  or exists ["Diagnosis: Osteopenia" using "Osteopenia (2.16.840.1.113883.3.464.1003.113.12.1049)"] OsteopeniaDiagnosis
+  or exists [("Diagnosis: Osteopenia" using "Osteopenia (2.16.840.1.113883.3.464.1003.113.12.1049)")] OsteopeniaDiagnosis
   where OsteopeniaDiagnosis.prevalencePeriod starts before start of Measurement Period
-  or exists ( ( ["Procedure, Performed: Gastric Bypass Surgery" using "Gastric Bypass Surgery (2.16.840.1.113883.3.464.1003.198.12.1050)"] GastricBypass
+  or exists ( ( [("Procedure, Performed: Gastric Bypass Surgery" using "Gastric Bypass Surgery (2.16.840.1.113883.3.464.1003.198.12.1050)")] GastricBypass
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( GastricBypass.relevantDatetime, GastricBypass.relevantPeriod ) ends before start of Measurement Period
   )
-    union ( ["Medication, Active: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)"] AromataseInhibitorActive
+    union ( [("Medication, Active: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)")] AromataseInhibitorActive
         where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( AromataseInhibitorActive.relevantDatetime, AromataseInhibitorActive.relevantPeriod ) starts before start of Measurement Period
     )
-    union ( ["Medication, Order: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)"] AromataseInhibitorOrder
+    union ( [("Medication, Order: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)")] AromataseInhibitorOrder
         where AromataseInhibitorOrder.authorDatetime before start of Measurement Period
     )
-    union ["Assessment, Performed: History of hip fracture in parent" using "History of hip fracture in parent (2.16.840.1.113883.3.464.1003.113.12.1040)"] ParentFractureHistory
+    union [("Assessment, Performed: History of hip fracture in parent" using "History of hip fracture in parent (2.16.840.1.113883.3.464.1003.113.12.1040)")] ParentFractureHistory
   where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( ParentFractureHistory.relevantDatetime, ParentFractureHistory.relevantPeriod ) before start of Measurement Period
 )
-  or Sum(( collapse ( ["Medication, Active: Glucocorticoids (oral only)" using "Glucocorticoids (oral only) (2.16.840.1.113883.3.464.1003.196.12.1266)"] Glucocorticoid
+  or Sum(( collapse ( [("Medication, Active: Glucocorticoids (oral only)" using "Glucocorticoids (oral only) (2.16.840.1.113883.3.464.1003.196.12.1266)")] Glucocorticoid
     where Glucocorticoid.relevantPeriod starts before 
     end of Measurement Period
 ).relevantPeriod per day ) GlucocorticoidIntervals
@@ -75,61 +75,61 @@ First(["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mas
   ) + 1) >= 90
   or exists ( Diagnosis Dx
   where Dx.prevalencePeriod starts on or before day of 
-  end of Measurement Period(["Diagnosis: Osteoporotic Fractures" using "Osteoporotic Fractures (2.16.840.1.113883.3.464.1003.113.12.1050)"]
-        union ["Diagnosis: Malabsorption Syndromes" using "Malabsorption Syndromes (2.16.840.1.113883.3.464.1003.199.12.1050)"]
-        union ["Diagnosis: Chronic Malnutrition" using "Chronic Malnutrition (2.16.840.1.113883.3.464.1003.199.12.1036)"]
-        union ["Diagnosis: Chronic Liver Disease" using "Chronic Liver Disease (2.16.840.1.113883.3.464.1003.199.12.1035)"]
-        union ["Diagnosis: Rheumatoid Arthritis" using "Rheumatoid Arthritis (2.16.840.1.113883.3.464.1003.113.12.1005)"]
-        union ["Diagnosis: Hyperthyroidism" using "Hyperthyroidism (2.16.840.1.113883.3.464.1003.117.12.1015)"]
-        union ["Diagnosis: Type 1 Diabetes" using "Type 1 Diabetes (2.16.840.1.113883.3.464.1003.103.12.1020)"]
-        union ["Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)"]
-        union ["Diagnosis: Osteogenesis Imperfecta" using "Osteogenesis Imperfecta (2.16.840.1.113883.3.464.1003.113.12.1044)"]
-        union ["Diagnosis: Ankylosing Spondylitis" using "Ankylosing Spondylitis (2.16.840.1.113883.3.464.1003.113.12.1045)"]
-        union ["Diagnosis: Psoriatic Arthritis" using "Psoriatic Arthritis (2.16.840.1.113883.3.464.1003.113.12.1046)"]
-        union ["Diagnosis: Ehlers Danlos Syndrome" using "Ehlers Danlos Syndrome (2.16.840.1.113883.3.464.1003.113.12.1047)"]
-        union ["Diagnosis: Cushings Syndrome" using "Cushings Syndrome (2.16.840.1.113883.3.464.1003.117.12.1009)"]
-        union ["Diagnosis: Hyperparathyroidism" using "Hyperparathyroidism (2.16.840.1.113883.3.464.1003.117.12.1016)"]
-        union ["Diagnosis: Marfan's Syndrome" using "Marfan's Syndrome (2.16.840.1.113883.3.464.1003.113.12.1048)"]
-        union ["Diagnosis: Lupus" using "Lupus (2.16.840.1.113883.3.464.1003.117.12.1010)"]
-        union ["Diagnosis: Multiple Myeloma" using "Multiple Myeloma (2.16.840.1.113883.3.464.1003.1011)"]
-        union ["Diagnosis: Premature Menopause" using "Premature Menopause (2.16.840.1.113883.3.464.1003.1013)"]
-        union ["Diagnosis: Eating Disorders" using "Eating Disorders (2.16.840.1.113883.3.464.1003.1039)"]
-        union ["Diagnosis: Amenorrhea" using "Amenorrhea (2.16.840.1.113883.3.464.1003.1022)"]
+  end of Measurement Period([("Diagnosis: Osteoporotic Fractures" using "Osteoporotic Fractures (2.16.840.1.113883.3.464.1003.113.12.1050)")]
+        union [("Diagnosis: Malabsorption Syndromes" using "Malabsorption Syndromes (2.16.840.1.113883.3.464.1003.199.12.1050)")]
+        union [("Diagnosis: Chronic Malnutrition" using "Chronic Malnutrition (2.16.840.1.113883.3.464.1003.199.12.1036)")]
+        union [("Diagnosis: Chronic Liver Disease" using "Chronic Liver Disease (2.16.840.1.113883.3.464.1003.199.12.1035)")]
+        union [("Diagnosis: Rheumatoid Arthritis" using "Rheumatoid Arthritis (2.16.840.1.113883.3.464.1003.113.12.1005)")]
+        union [("Diagnosis: Hyperthyroidism" using "Hyperthyroidism (2.16.840.1.113883.3.464.1003.117.12.1015)")]
+        union [("Diagnosis: Type 1 Diabetes" using "Type 1 Diabetes (2.16.840.1.113883.3.464.1003.103.12.1020)")]
+        union [("Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)")]
+        union [("Diagnosis: Osteogenesis Imperfecta" using "Osteogenesis Imperfecta (2.16.840.1.113883.3.464.1003.113.12.1044)")]
+        union [("Diagnosis: Ankylosing Spondylitis" using "Ankylosing Spondylitis (2.16.840.1.113883.3.464.1003.113.12.1045)")]
+        union [("Diagnosis: Psoriatic Arthritis" using "Psoriatic Arthritis (2.16.840.1.113883.3.464.1003.113.12.1046)")]
+        union [("Diagnosis: Ehlers Danlos Syndrome" using "Ehlers Danlos Syndrome (2.16.840.1.113883.3.464.1003.113.12.1047)")]
+        union [("Diagnosis: Cushings Syndrome" using "Cushings Syndrome (2.16.840.1.113883.3.464.1003.117.12.1009)")]
+        union [("Diagnosis: Hyperparathyroidism" using "Hyperparathyroidism (2.16.840.1.113883.3.464.1003.117.12.1016)")]
+        union [("Diagnosis: Marfan's Syndrome" using "Marfan's Syndrome (2.16.840.1.113883.3.464.1003.113.12.1048)")]
+        union [("Diagnosis: Lupus" using "Lupus (2.16.840.1.113883.3.464.1003.117.12.1010)")]
+        union [("Diagnosis: Multiple Myeloma" using "Multiple Myeloma (2.16.840.1.113883.3.464.1003.1011)")]
+        union [("Diagnosis: Premature Menopause" using "Premature Menopause (2.16.840.1.113883.3.464.1003.1013)")]
+        union [("Diagnosis: Eating Disorders" using "Eating Disorders (2.16.840.1.113883.3.464.1003.1039)")]
+        union [("Diagnosis: Amenorrhea" using "Amenorrhea (2.16.840.1.113883.3.464.1003.1022)")]
     )
   )
   or exists Procedure Proc
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of 
-  end of Measurement Period(["Procedure, Performed: Chemotherapy" using "Chemotherapy (2.16.840.1.113883.3.526.3.485)"])
+  end of Measurement Period([("Procedure, Performed: Chemotherapy" using "Chemotherapy (2.16.840.1.113883.3.526.3.485)")])
   or exists ( Procedure Proc
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of 
-  end of Measurement Period(["Procedure, Performed: Bilateral Oophorectomy" using "Bilateral Oophorectomy (2.16.840.1.113883.3.526.3.471)"]))
+  end of Measurement Period([("Procedure, Performed: Bilateral Oophorectomy" using "Bilateral Oophorectomy (2.16.840.1.113883.3.526.3.471)")]))
   or exists ( Procedure Proc
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of 
-  end of Measurement Period(["Procedure, Performed: Evidence of Bilateral Oophorectomy" using "Evidence of Bilateral Oophorectomy (2.16.840.1.113883.3.464.1003.1048)"]))
+  end of Measurement Period([("Procedure, Performed: Evidence of Bilateral Oophorectomy" using "Evidence of Bilateral Oophorectomy (2.16.840.1.113883.3.464.1003.1048)")]))
   or ( exists ( Procedure Proc
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of 
-  end of Measurement Period((["Procedure, Performed: Unilateral Oophorectomy, Unspecified Laterality" using "Unilateral Oophorectomy, Unspecified Laterality (2.16.840.1.113883.3.464.1003.1035)"] UnilateralOophorectomy
-            where UnilateralOophorectomy.anatomicalLocationSite ~ code "Right (qualifier value)" ("SNOMEDCT Code (24028007)")
+  end of Measurement Period(([("Procedure, Performed: Unilateral Oophorectomy, Unspecified Laterality" using "Unilateral Oophorectomy, Unspecified Laterality (2.16.840.1.113883.3.464.1003.1035)")] UnilateralOophorectomy
+            where UnilateralOophorectomy.anatomicalLocationSite ~ (code "Right (qualifier value)" ("SNOMEDCT Code (24028007)"))
         )
-          union ["Procedure, Performed: Unilateral Oophorectomy Right" using "Unilateral Oophorectomy Right (2.16.840.1.113883.3.464.1003.1032)"]
+          union [("Procedure, Performed: Unilateral Oophorectomy Right" using "Unilateral Oophorectomy Right (2.16.840.1.113883.3.464.1003.1032)")]
       )
     )
       and exists ( Procedure Proc
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of 
-  end of Measurement Period((["Procedure, Performed: Unilateral Oophorectomy, Unspecified Laterality" using "Unilateral Oophorectomy, Unspecified Laterality (2.16.840.1.113883.3.464.1003.1035)"] UnilateralOophorectomy
-              where UnilateralOophorectomy.anatomicalLocationSite ~ code "Left (qualifier value)" ("SNOMEDCT Code (7771000)")
+  end of Measurement Period(([("Procedure, Performed: Unilateral Oophorectomy, Unspecified Laterality" using "Unilateral Oophorectomy, Unspecified Laterality (2.16.840.1.113883.3.464.1003.1035)")] UnilateralOophorectomy
+              where UnilateralOophorectomy.anatomicalLocationSite ~ (code "Left (qualifier value)" ("SNOMEDCT Code (7771000)"))
           )
-            union ["Procedure, Performed: Unilateral Oophorectomy Left" using "Unilateral Oophorectomy Left (2.16.840.1.113883.3.464.1003.1028)"]
+            union [("Procedure, Performed: Unilateral Oophorectomy Left" using "Unilateral Oophorectomy Left (2.16.840.1.113883.3.464.1003.1028)")]
         )
       )
   )
@@ -137,32 +137,32 @@ First(["Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mas
   where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of 
-  end of Measurement Period(["Procedure, Performed: Major Transplant" using "Major Transplant (2.16.840.1.113883.3.464.1003.198.12.1075)"]
-    union ["Procedure, Performed: Kidney Transplant" using "Kidney Transplant (2.16.840.1.113883.3.464.1003.109.12.1012)"]
-    union ["Procedure, Performed: Bone Marrow Transplant" using "Bone Marrow Transplant (2.16.840.1.113883.3.666.5.336)"]
+  end of Measurement Period([("Procedure, Performed: Major Transplant" using "Major Transplant (2.16.840.1.113883.3.464.1003.198.12.1075)")]
+    union [("Procedure, Performed: Kidney Transplant" using "Kidney Transplant (2.16.840.1.113883.3.464.1003.109.12.1012)")]
+    union [("Procedure, Performed: Bone Marrow Transplant" using "Bone Marrow Transplant (2.16.840.1.113883.3.666.5.336)")]
 )
 =============================================================================================================================================================================
 Numerator:
-exists ["Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.1051)"] DXA
+exists [("Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.1051)")] DXA
   where DXA.authorDatetime during Measurement Period
   sort by authorDatetime asc
 =============================================================================================================================================================================
 Numerator Exclusions:
-exists ( ( ["Assessment, Performed: Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment" using "Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment (LOINC Code 90265-0)"] FRAX
+exists ( ( [("Assessment, Performed: Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment" using "Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment (LOINC Code 90265-0)")] FRAX
     where FRAX.result >= 8.4 '%'
 )
-  union ( ["Assessment, Performed: Osteoporosis Risk Assessment Instrument" using "Osteoporosis Risk Assessment Instrument (LOINC Code 98139-9)"] ORAI
+  union ( [("Assessment, Performed: Osteoporosis Risk Assessment Instrument" using "Osteoporosis Risk Assessment Instrument (LOINC Code 98139-9)")] ORAI
       where ORAI.result >= 9
   )
-  union ( ["Assessment, Performed: Osteoporosis Index of Risk panel" using "Osteoporosis Index of Risk panel (LOINC Code 98133-2)"] OSIRIS
+  union ( [("Assessment, Performed: Osteoporosis Index of Risk panel" using "Osteoporosis Index of Risk panel (LOINC Code 98133-2)")] OSIRIS
       where OSIRIS.result < 1.0
   )
-  union ( ["Assessment, Performed: Osteoporosis Self-Assessment Tool" using "Osteoporosis Self-Assessment Tool (LOINC Code 98146-4)"] OST
+  union ( [("Assessment, Performed: Osteoporosis Self-Assessment Tool" using "Osteoporosis Self-Assessment Tool (LOINC Code 98146-4)")] OST
       where OST.result < 2.0
   ) ) RiskAssessment
   where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
-  else null as Interval<DateTime> ( RiskAssessment.relevantDatetime, RiskAssessment.relevantPeriod ) before First(["Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.1051)"] DXA
+  else null as Interval<DateTime> ( RiskAssessment.relevantDatetime, RiskAssessment.relevantPeriod ) before First([("Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.1051)")] DXA
   where DXA.authorDatetime during Measurement Period
   sort by authorDatetime asc).authorDatetime
 =============================================================================================================================================================================

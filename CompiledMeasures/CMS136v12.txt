@@ -4,29 +4,29 @@ AgeInYearsAt(date from start of Interval[DateTime((year from start of Measuremen
   and AgeInYearsAt(date from 
     end of Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   )<= 12
-  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"] ) ValidEncounters
+  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during Measurement Period
-  and First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  and First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) is not null
-  and not exists ["Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ActiveADHDMedication
-  with First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  and not exists [("Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ActiveADHDMedication
+  with First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) InitialADHDMedication
     such that Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( ActiveADHDMedication.relevantDatetime, ActiveADHDMedication.relevantPeriod ) ) overlaps Interval[date from Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime)- 120 days, date from Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime))
-  and not exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientStay
+  and not exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientStay
     where exists ( InpatientStay.diagnoses EncounterDiagnoses
         where ( EncounterDiagnoses.rank = 1
-            and EncounterDiagnoses.code in valueset "Mental Behavioral and Neurodevelopmental Disorders" (2.16.840.1.113883.3.464.1003.105.12.1203)
+            and EncounterDiagnoses.code in (valueset "Mental Behavioral and Neurodevelopmental Disorders" (2.16.840.1.113883.3.464.1003.105.12.1203))
         )
     )
 ) InpatientStay
-  with First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  with First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) InitialADHDMedication
     such that InpatientStay.relevantPeriod starts 30 days or less after day of Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime)
@@ -36,82 +36,82 @@ AgeInYearsAt(date from start of Interval[DateTime((year from start of Measuremen
   and AgeInYearsAt(date from 
     end of Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   )<= 12
-  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"] ) ValidEncounters
+  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during Measurement Period
-  and First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  and First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) is not null
-  and not exists ["Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ActiveADHDMedication
-  with First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  and not exists [("Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ActiveADHDMedication
+  with First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) InitialADHDMedication
     such that Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( ActiveADHDMedication.relevantDatetime, ActiveADHDMedication.relevantPeriod ) ) overlaps Interval[date from Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime)- 120 days, date from Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime))
-  and not exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientStay
+  and not exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientStay
     where exists ( InpatientStay.diagnoses EncounterDiagnoses
         where ( EncounterDiagnoses.rank = 1
-            and EncounterDiagnoses.code in valueset "Mental Behavioral and Neurodevelopmental Disorders" (2.16.840.1.113883.3.464.1003.105.12.1203)
+            and EncounterDiagnoses.code in (valueset "Mental Behavioral and Neurodevelopmental Disorders" (2.16.840.1.113883.3.464.1003.105.12.1203))
         )
     )
 ) InpatientStay
-  with First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  with First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) InitialADHDMedication
     such that InpatientStay.relevantPeriod starts 30 days or less after day of Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime)
 =============================================================================================================================================================================
 Denominator Exclusions:
-Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
-    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
-        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
+        or InpatientEncounter.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))
     )
       and InpatientEncounter.relevantPeriod ends during day of Measurement Period
 )
-  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+  or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
       where HospiceEncounter.relevantPeriod overlaps Measurement Period
   )
-  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
-      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+  or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
+      where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
         and if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+  or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
-  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+  or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
       where if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
-  or exists ( ["Diagnosis: Narcolepsy" using "Narcolepsy (2.16.840.1.113883.3.464.1003.114.12.1011)"] Narcolepsy
+  or exists ( [("Diagnosis: Narcolepsy" using "Narcolepsy (2.16.840.1.113883.3.464.1003.114.12.1011)")] Narcolepsy
   where Narcolepsy.prevalencePeriod starts on or before 
   end Measurement Period )
 =============================================================================================================================================================================
 Numerator:
-exists ( ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
-    union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
-    union ["Encounter, Performed: Behavioral Health Follow up Visit" using "Behavioral Health Follow up Visit (2.16.840.1.113883.3.464.1003.101.12.1054)"]
-    union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
-    union ( ["Encounter, Performed: Psychotherapy and Pharmacologic Management" using "Psychotherapy and Pharmacologic Management (2.16.840.1.113883.3.464.1003.101.12.1055)"] PsychPharmManagement
+exists ( ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+    union [("Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)")]
+    union [("Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)")]
+    union [("Encounter, Performed: Behavioral Health Follow up Visit" using "Behavioral Health Follow up Visit (2.16.840.1.113883.3.464.1003.101.12.1054)")]
+    union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)")]
+    union ( [("Encounter, Performed: Psychotherapy and Pharmacologic Management" using "Psychotherapy and Pharmacologic Management (2.16.840.1.113883.3.464.1003.101.12.1055)")] PsychPharmManagement
         where exists ( PsychPharmManagement.facilityLocations Location
-            where Location.code in valueset "Ambulatory" (2.16.840.1.113883.3.464.1003.122.12.1003)
+            where Location.code in (valueset "Ambulatory" (2.16.840.1.113883.3.464.1003.122.12.1003))
         )
     )
-    union ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
-    union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
-    union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-    union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
-    union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-    union ["Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
-    union ["Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
-    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
+    union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
+    union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+    union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")]
+    union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+    union [("Encounter, Performed: Psych Visit Diagnostic Evaluation" using "Psych Visit Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)")]
+    union [("Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
+    union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
 ) ValidNumeratorEncounter
-    with First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+    with First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) InitialADHDMedication
       such that ValidNumeratorEncounter.relevantPeriod starts 30 days or less after day of Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime)
@@ -128,29 +128,29 @@ AgeInYearsAt(date from start of Interval[DateTime((year from start of Measuremen
   and AgeInYearsAt(date from 
     end of Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   )<= 12
-  and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
-  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
-  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
-  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"] ) ValidEncounters
+  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
+  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
+  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
+  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during Measurement Period
-  and First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  and First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) is not null
-  and not exists ["Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ActiveADHDMedication
-  with First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  and not exists [("Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ActiveADHDMedication
+  with First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) InitialADHDMedication
     such that Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
   else if period is not null then period 
   else null as Interval<DateTime> ( ActiveADHDMedication.relevantDatetime, ActiveADHDMedication.relevantPeriod ) ) overlaps Interval[date from Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime)- 120 days, date from Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime))
-  and not exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientStay
+  and not exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientStay
     where exists ( InpatientStay.diagnoses EncounterDiagnoses
         where ( EncounterDiagnoses.rank = 1
-            and EncounterDiagnoses.code in valueset "Mental Behavioral and Neurodevelopmental Disorders" (2.16.840.1.113883.3.464.1003.105.12.1203)
+            and EncounterDiagnoses.code in (valueset "Mental Behavioral and Neurodevelopmental Disorders" (2.16.840.1.113883.3.464.1003.105.12.1203))
         )
     )
 ) InpatientStay
-  with First(["Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ADHDMedicationOrder
+  with First([("Medication, Order: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ADHDMedicationOrder
   where Coalesce(ADHDMedicationOrder.relevantPeriod.low, ADHDMedicationOrder.authorDatetime)during Interval[DateTime((year from start of Measurement Period - 1), 3, 1, 0, 0, 0, 0, 0), ( DateTime(year from start of Measurement Period, 3, 1, 23, 59, 59, 0, 0)) - 1 day]
   sort by Coalesce(relevantPeriod.low, authorDatetime)asc) InitialADHDMedication
     such that InpatientStay.relevantPeriod starts 30 days or less after day of Coalesce(InitialADHDMedication.relevantPeriod.low, InitialADHDMedication.authorDatetime)

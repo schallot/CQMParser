@@ -1,24 +1,24 @@
 =============================================================================================================================================================================
 Initial Population:
-["Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)"] ValidEncounter
+[("Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator:
-["Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)"] ValidEncounter
+[("Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
 	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator Exclusions:
 None
 =============================================================================================================================================================================
 Numerator:
-["Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)"] ValidEncounter
+[("Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ( ["Procedure, Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)"]
-	    union ["Intervention, Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)"] ) MedicationsDocumented
+	  with ( [("Procedure, Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)")]
+	    union [("Intervention, Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)")] ) MedicationsDocumented
 	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
 	  else if period is not null then period 
 	  else null as Interval<DateTime> ( MedicationsDocumented.relevantDatetime, MedicationsDocumented.relevantPeriod ) during QualifyingEncounter.relevantPeriod
@@ -27,12 +27,12 @@ Numerator Exclusions:
 None
 =============================================================================================================================================================================
 Denominator Exceptions:
-["Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)"] ValidEncounter
+[("Encounter, Performed: Encounter to Document Medications" using "Encounter to Document Medications (2.16.840.1.113883.3.600.1.1834)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	  with ( ["Procedure, Not Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)"]
-	    union ["Intervention, Not Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)"] ) MedicationsNotDocumented
+	  with ( [("Procedure, Not Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)")]
+	    union [("Intervention, Not Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)")] ) MedicationsNotDocumented
 	    such that MedicationsNotDocumented.authorDatetime during QualifyingEncounter.relevantPeriod
-	      and MedicationsNotDocumented.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+	      and MedicationsNotDocumented.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
 =============================================================================================================================================================================
 Stratification:
 None

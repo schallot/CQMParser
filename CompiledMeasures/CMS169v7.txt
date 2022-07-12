@@ -2,85 +2,85 @@
 Initial Population:
 exists [Patient Characteristic Birthdate] BirthDate
 		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
-			and exists ( ( ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			and exists ( ( ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] Psychotherapy
+			with [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] Psychotherapy
 				such that IndexEncounter.relevantPeriod starts 42 days or less on or before start of Psychotherapy.relevantPeriod
 					and IndexEncounter !~ Psychotherapy
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
 					such that IndexEncounter.relevantPeriod starts 42 days or less on or before Treatment.authorDatetime
 		)
-			except ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			except ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"] OutpatientEncounter
-		with ( ["Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] ActiveBHMedication
-			union ( ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			with ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")] OutpatientEncounter
+		with ( [("Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] ActiveBHMedication
+			union ( [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 					return Medication, Active { relevantPeriod: Diagnoses.prevalencePeriod }
 			)
 	) MedicationDiagnosis
 			such that OutpatientEncounter.relevantPeriod during MedicationDiagnosis.relevantPeriod
-				union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] OutpatientPsychotherapy
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] RelevantDiagnoses
+				union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] OutpatientPsychotherapy
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] RelevantDiagnoses
 			such that OutpatientPsychotherapy.relevantPeriod during RelevantDiagnoses.prevalencePeriod ) PriorEncounter
 				such that IndexEncounter.relevantPeriod starts 180 days or less on or after start of PriorEncounter.relevantPeriod
 					and IndexEncounter !~ PriorEncounter
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] BipolarUnipolarDiagnoses
+				with [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] BipolarUnipolarDiagnoses
 			such that BehavioralEncounter.relevantPeriod includes start of BipolarUnipolarDiagnoses.prevalencePeriod PriorEncounterIncludesDiagnosis
 					such that IndexEncounter.relevantPeriod starts 180 days or less on or after PriorEncounterIncludesDiagnosis.relevantPeriod
 						and PriorEncounterIncludesDiagnosis !~ IndexEncounter
 		)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
@@ -91,85 +91,85 @@ exists [Patient Characteristic Birthdate] BirthDate
 Denominator:
 exists [Patient Characteristic Birthdate] BirthDate
 		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
-			and exists ( ( ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			and exists ( ( ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] Psychotherapy
+			with [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] Psychotherapy
 				such that IndexEncounter.relevantPeriod starts 42 days or less on or before start of Psychotherapy.relevantPeriod
 					and IndexEncounter !~ Psychotherapy
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
 					such that IndexEncounter.relevantPeriod starts 42 days or less on or before Treatment.authorDatetime
 		)
-			except ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			except ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"] OutpatientEncounter
-		with ( ["Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] ActiveBHMedication
-			union ( ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			with ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")] OutpatientEncounter
+		with ( [("Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] ActiveBHMedication
+			union ( [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 					return Medication, Active { relevantPeriod: Diagnoses.prevalencePeriod }
 			)
 	) MedicationDiagnosis
 			such that OutpatientEncounter.relevantPeriod during MedicationDiagnosis.relevantPeriod
-				union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] OutpatientPsychotherapy
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] RelevantDiagnoses
+				union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] OutpatientPsychotherapy
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] RelevantDiagnoses
 			such that OutpatientPsychotherapy.relevantPeriod during RelevantDiagnoses.prevalencePeriod ) PriorEncounter
 				such that IndexEncounter.relevantPeriod starts 180 days or less on or after start of PriorEncounter.relevantPeriod
 					and IndexEncounter !~ PriorEncounter
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] BipolarUnipolarDiagnoses
+				with [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] BipolarUnipolarDiagnoses
 			such that BehavioralEncounter.relevantPeriod includes start of BipolarUnipolarDiagnoses.prevalencePeriod PriorEncounterIncludesDiagnosis
 					such that IndexEncounter.relevantPeriod starts 180 days or less on or after PriorEncounterIncludesDiagnosis.relevantPeriod
 						and PriorEncounterIncludesDiagnosis !~ IndexEncounter
 		)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
@@ -182,183 +182,183 @@ None
 =============================================================================================================================================================================
 Numerator:
 exists ( from
-			["Procedure, Performed: BH Assessment for Alcohol or Other Drugs" using "BH Assessment for Alcohol or Other Drugs (2.16.840.1.113883.3.1257.1.1604)"] SubstanceAbuseAssessment,
-		( ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			[("Procedure, Performed: BH Assessment for Alcohol or Other Drugs" using "BH Assessment for Alcohol or Other Drugs (2.16.840.1.113883.3.1257.1.1604)")] SubstanceAbuseAssessment,
+		( ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] Psychotherapy
+			with [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] Psychotherapy
 				such that IndexEncounter.relevantPeriod starts 42 days or less on or before start of Psychotherapy.relevantPeriod
 					and IndexEncounter !~ Psychotherapy
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
 					such that IndexEncounter.relevantPeriod starts 42 days or less on or before Treatment.authorDatetime
 		)
-			except ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			except ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"] OutpatientEncounter
-		with ( ["Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] ActiveBHMedication
-			union ( ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			with ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")] OutpatientEncounter
+		with ( [("Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] ActiveBHMedication
+			union ( [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 					return Medication, Active { relevantPeriod: Diagnoses.prevalencePeriod }
 			)
 	) MedicationDiagnosis
 			such that OutpatientEncounter.relevantPeriod during MedicationDiagnosis.relevantPeriod
-				union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] OutpatientPsychotherapy
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] RelevantDiagnoses
+				union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] OutpatientPsychotherapy
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] RelevantDiagnoses
 			such that OutpatientPsychotherapy.relevantPeriod during RelevantDiagnoses.prevalencePeriod ) PriorEncounter
 				such that IndexEncounter.relevantPeriod starts 180 days or less on or after start of PriorEncounter.relevantPeriod
 					and IndexEncounter !~ PriorEncounter
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] BipolarUnipolarDiagnoses
+				with [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] BipolarUnipolarDiagnoses
 			such that BehavioralEncounter.relevantPeriod includes start of BipolarUnipolarDiagnoses.prevalencePeriod PriorEncounterIncludesDiagnosis
 					such that IndexEncounter.relevantPeriod starts 180 days or less on or after PriorEncounterIncludesDiagnosis.relevantPeriod
 						and PriorEncounterIncludesDiagnosis !~ IndexEncounter
 		)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
 					such that IndexEncounter.relevantPeriod starts 180 days or less on or after Treatment.authorDatetime
 		)
 	) QualifiedEncounter,
-		( ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+		( ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	)
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] PsychotherapyEncounter ) InclusiveTreatments
-		with ( ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] PsychotherapyEncounter ) InclusiveTreatments
+		with ( ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] Psychotherapy
+			with [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] Psychotherapy
 				such that IndexEncounter.relevantPeriod starts 42 days or less on or before start of Psychotherapy.relevantPeriod
 					and IndexEncounter !~ Psychotherapy
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
 					such that IndexEncounter.relevantPeriod starts 42 days or less on or before Treatment.authorDatetime
 		)
-			except ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			except ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"] OutpatientEncounter
-		with ( ["Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] ActiveBHMedication
-			union ( ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			with ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")] OutpatientEncounter
+		with ( [("Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] ActiveBHMedication
+			union ( [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 					return Medication, Active { relevantPeriod: Diagnoses.prevalencePeriod }
 			)
 	) MedicationDiagnosis
 			such that OutpatientEncounter.relevantPeriod during MedicationDiagnosis.relevantPeriod
-				union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] OutpatientPsychotherapy
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] RelevantDiagnoses
+				union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] OutpatientPsychotherapy
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] RelevantDiagnoses
 			such that OutpatientPsychotherapy.relevantPeriod during RelevantDiagnoses.prevalencePeriod ) PriorEncounter
 				such that IndexEncounter.relevantPeriod starts 180 days or less on or after start of PriorEncounter.relevantPeriod
 					and IndexEncounter !~ PriorEncounter
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] BipolarUnipolarDiagnoses
+				with [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] BipolarUnipolarDiagnoses
 			such that BehavioralEncounter.relevantPeriod includes start of BipolarUnipolarDiagnoses.prevalencePeriod PriorEncounterIncludesDiagnosis
 					such that IndexEncounter.relevantPeriod starts 180 days or less on or after PriorEncounterIncludesDiagnosis.relevantPeriod
 						and PriorEncounterIncludesDiagnosis !~ IndexEncounter
 		)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
@@ -369,97 +369,97 @@ exists ( from
 				and InclusiveTreatments !~ QualifiedEncounters QualifiedTreatment
 			where SubstanceAbuseAssessment.relevantPeriod starts same or after start of QualifiedEncounter.relevantPeriod
 				and SubstanceAbuseAssessment.relevantPeriod ends same or before QualifiedTreatment.authorDatetime
-				and not exists ( ( ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				and not exists ( ( ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	)
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] PsychotherapyEncounter ) InclusiveTreatments
-		with ( ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] PsychotherapyEncounter ) InclusiveTreatments
+		with ( ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] Psychotherapy
+			with [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] Psychotherapy
 				such that IndexEncounter.relevantPeriod starts 42 days or less on or before start of Psychotherapy.relevantPeriod
 					and IndexEncounter !~ Psychotherapy
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
 					such that IndexEncounter.relevantPeriod starts 42 days or less on or before Treatment.authorDatetime
 		)
-			except ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			except ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-			with ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"] OutpatientEncounter
-		with ( ["Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] ActiveBHMedication
-			union ( ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+			with ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")] OutpatientEncounter
+		with ( [("Medication, Active: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Active: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] ActiveBHMedication
+			union ( [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 					return Medication, Active { relevantPeriod: Diagnoses.prevalencePeriod }
 			)
 	) MedicationDiagnosis
 			such that OutpatientEncounter.relevantPeriod during MedicationDiagnosis.relevantPeriod
-				union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] OutpatientPsychotherapy
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] RelevantDiagnoses
+				union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] OutpatientPsychotherapy
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] RelevantDiagnoses
 			such that OutpatientPsychotherapy.relevantPeriod during RelevantDiagnoses.prevalencePeriod ) PriorEncounter
 				such that IndexEncounter.relevantPeriod starts 180 days or less on or after start of PriorEncounter.relevantPeriod
 					and IndexEncounter !~ PriorEncounter
 	)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] BipolarUnipolarDiagnoses
+				with [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] BipolarUnipolarDiagnoses
 			such that BehavioralEncounter.relevantPeriod includes start of BipolarUnipolarDiagnoses.prevalencePeriod PriorEncounterIncludesDiagnosis
 					such that IndexEncounter.relevantPeriod starts 180 days or less on or after PriorEncounterIncludesDiagnosis.relevantPeriod
 						and PriorEncounterIncludesDiagnosis !~ IndexEncounter
 		)
-		union ( ["Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)"]
-		union ["Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)"] BehavioralEncounter
-		with ["Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)"]
-		union ["Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)"] Diagnoses
+		union ( [("Encounter, Performed: BH Outpatient encounter" using "BH Outpatient encounter (2.16.840.1.113883.3.464.1.49)")]
+		union [("Encounter, Performed: BH Outpatient Psychotherapy" using "BH Outpatient Psychotherapy (2.16.840.1.113883.3.1257.1.973)")] BehavioralEncounter
+		with [("Diagnosis: BH Condition Involving Bipolar Disorder" using "BH Condition Involving Bipolar Disorder (2.16.840.1.113883.3.1257.1.1504)")]
+		union [("Diagnosis: BH Condition Involving Unipolar Depression" using "BH Condition Involving Unipolar Depression (2.16.840.1.113883.3.1257.1.1505)")] Diagnoses
 			such that BehavioralEncounter.relevantPeriod overlaps before Diagnoses.prevalencePeriod
 		where BehavioralEncounter.relevantPeriod starts during Interval[start of Measurement Period, start of Measurement Period + 323 days] IndexEncounter
-				with ( ["Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProcedureOrdered
-			union ( ["Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)"]
-		union ["Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)"] ProceduresPerformed
+				with ( [("Procedure, Order: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Order: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProcedureOrdered
+			union ( [("Procedure, Performed: BH Electroconvulsive Therapy" using "BH Electroconvulsive Therapy (2.16.840.1.113883.3.1257.1.1533)")]
+		union [("Procedure, Performed: BH Counseling for Depression" using "BH Counseling for Depression (2.16.840.1.113883.3.1257.1.1616)")] ProceduresPerformed
 					return Procedure, Order { authorDatetime: start of ProceduresPerformed.relevantPeriod }
 			)
-			union ( ["Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)"]
-		union ["Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)"] MedicationsOrdered
+			union ( [("Medication, Order: BH Antidepressant Medication" using "BH Antidepressant Medication (2.16.840.1.113883.3.1257.1.972)")]
+		union [("Medication, Order: BH Mood Stabilizer Medication" using "BH Mood Stabilizer Medication (2.16.840.1.113883.3.1257.1.950)")] MedicationsOrdered
 					return Procedure, Order { authorDatetime: MedicationsOrdered.authorDatetime }
 			)
 	) Treatment
