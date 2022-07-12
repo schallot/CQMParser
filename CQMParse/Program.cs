@@ -24,10 +24,20 @@ string GetCMSDir()
     throw new Exception("Could not find directory containing CQM Measure Files.  Expected it to be named CMS");
 }
 
+string GetOutputDir()
+{
+    var dir = Path.Combine(Path.GetDirectoryName(GetCMSDir()), "CompiledMeasures");
+    if (!Directory.Exists(dir))
+    {
+        Directory.CreateDirectory(dir);
+    }
+    return dir;
+}
+
 
 if (args.Any())
 {
-    var outputDir = GetAppDir();
+    var outputDir = GetOutputDir();
 
     foreach(var arg in args)
     {
@@ -39,10 +49,11 @@ if (args.Any())
 else
 {
     var cmsDir = GetCMSDir();
+    var outputDir = GetOutputDir();
     var files = Directory.GetFiles(cmsDir).Where(x=>Path.GetExtension(x).Equals(".html", StringComparison.InvariantCultureIgnoreCase));
     foreach(var f in files)
     {
         var m = new Measure(new Uri(f));
-        m.WriteSummary(cmsDir);
+        m.WriteSummary(outputDir);
     }
 }
