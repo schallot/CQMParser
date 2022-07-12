@@ -8,7 +8,7 @@ This tool is designed to take an eCQM document, and recursively find and replace
 
 	"Encounter with Antithrombotic Therapy"
 
-This tool [expands this line](https://github.com/schallot/CQMParser/blob/master/CMS/CMS72v10.txt) out as
+This tool [expands this line](https://github.com/schallot/CQMParser/blob/master/CompiledMeasures/CMS72v10.txt) out as
 
 	TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
 			where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
@@ -48,4 +48,4 @@ If run with no command-line arguments, the tool looks at the [CMS folder](https:
 
 	CQMParse https://ecqi.healthit.gov/sites/default/files/ecqm/measures/CMS104v11.html
 	
-should generate an output similar to [CMS104v11.txt](https://github.com/schallot/CQMParser/blob/master/CMS/CMS104v11.txt).  The results will be written to the CMS directory.  If a file is already present for the measure, it will be overwritten.
+should generate an output similar to [CMS104v11.txt](https://github.com/schallot/CQMParser/blob/master/CompiledMeasures/CMS104v11.txt).  The results will be written to the CompiledMeasures directory.  If a file is already present for the measure, it will be overwritten.
