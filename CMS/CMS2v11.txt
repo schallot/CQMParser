@@ -1,0 +1,256 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 12
+	  and exists ( ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period )
+=============================================================================================================================================================================
+Denominator:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 12
+	  and exists ( ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period )
+=============================================================================================================================================================================
+Denominator Exclusions:
+exists ( ["Diagnosis: Bipolar Diagnosis" using "Bipolar Diagnosis (2.16.840.1.113883.3.600.450)"]
+	  union ["Diagnosis: Depression Diagnosis" using "Depression Diagnosis (2.16.840.1.113883.3.600.145)"] ) DiagnosisBipolarorDepression
+	  with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	    such that DiagnosisBipolarorDepression.prevalencePeriod starts before QualifyingEncounter.relevantPeriod
+=============================================================================================================================================================================
+Numerator:
+( exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 17
+	    and ( ( Last(["Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)"] AdolescentDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdolescentDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) AdolescentScreen
+	    where AdolescentScreen.result ~ code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)")
+	) is not null
+	        or exists from
+	  Last(["Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)"] AdolescentDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdolescentDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) LastAdolescentScreen,
+	  ["Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)"]
+	  union ["Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)"]
+	  union ["Intervention, Performed: Follow Up for Adolescent Depression" using "Follow Up for Adolescent Depression (2.16.840.1.113883.3.526.3.1569)"] FollowUpPositiveAdolescentScreen,
+	  ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	    and LastAdolescentScreen.result ~ code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)")
+	    and ( FollowUpPositiveAdolescentScreen.authorDatetime same day as 
+	      end of QualifyingEncounter.relevantPeriod
+	        or start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod ) same day as 
+	        end of QualifyingEncounter.relevantPeriod
+	    )
+	    )
+	)
+	  or ( exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) = 17
+	      and ( ( Last(["Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)"] AdolescentDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdolescentDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) AdolescentScreen
+	    where AdolescentScreen.result ~ code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)")
+	) is not null
+	          or exists from
+	  Last(["Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)"] AdolescentDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdolescentDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) LastAdolescentScreen,
+	  ["Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)"]
+	  union ["Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)"]
+	  union ["Intervention, Performed: Follow Up for Adolescent Depression" using "Follow Up for Adolescent Depression (2.16.840.1.113883.3.526.3.1569)"] FollowUpPositiveAdolescentScreen,
+	  ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	    and LastAdolescentScreen.result ~ code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)")
+	    and ( FollowUpPositiveAdolescentScreen.authorDatetime same day as 
+	      end of QualifyingEncounter.relevantPeriod
+	        or start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod ) same day as 
+	        end of QualifyingEncounter.relevantPeriod
+	    )
+	          or ( Last(["Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)"] AdultDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdultDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) AdultScreen
+	    where AdultScreen.result ~ code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)")
+	) is not null
+	          or exists from
+	  Last(["Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)"] AdultDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdultDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) LastAdultScreen,
+	  ["Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)"]
+	  union ["Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)"]
+	  union ["Intervention, Performed: Follow Up for Adult Depression" using "Follow Up for Adult Depression (2.16.840.1.113883.3.526.3.1568)"] FollowUpPositiveAdultScreen,
+	  ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	    and LastAdultScreen.result ~ code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)")
+	    and ( FollowUpPositiveAdultScreen.authorDatetime same day as 
+	      end of QualifyingEncounter.relevantPeriod
+	        or start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod ) same day as 
+	        end of QualifyingEncounter.relevantPeriod
+	    )
+	      )
+	  )
+	  or ( exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	      and ( ( Last(["Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)"] AdultDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdultDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) AdultScreen
+	    where AdultScreen.result ~ code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)")
+	) is not null
+	          or exists from
+	  Last(["Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)"] AdultDepressionScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdultDepressionScreening.result is not null
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) LastAdultScreen,
+	  ["Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)"]
+	  union ["Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)"]
+	  union ["Intervention, Performed: Follow Up for Adult Depression" using "Follow Up for Adult Depression (2.16.840.1.113883.3.526.3.1568)"] FollowUpPositiveAdultScreen,
+	  ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	    and LastAdultScreen.result ~ code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)")
+	    and ( FollowUpPositiveAdultScreen.authorDatetime same day as 
+	      end of QualifyingEncounter.relevantPeriod
+	        or start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod ) same day as 
+	        end of QualifyingEncounter.relevantPeriod
+	    )
+	      )
+	  )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+( exists ["Assessment, Not Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)"] NoAdolescentScreen
+	  with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	    such that NoAdolescentScreen.authorDatetime during QualifyingEncounter.relevantPeriod
+	  where ( NoAdolescentScreen.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)
+	      or NoAdolescentScreen.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+	  )
+	    and not exists ( ["Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)"] AdolescentScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( AdolescentScreening.relevantDatetime, AdolescentScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdolescentScreening.result is not null
+	)
+	)
+	  or ( exists ["Assessment, Not Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)"] NoAdultScreen
+	  with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	    such that NoAdultScreen.authorDatetime during QualifyingEncounter.relevantPeriod
+	  where ( NoAdultScreen.negationRationale in valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582)
+	      or NoAdultScreen.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+	  )
+	      and not exists ( ["Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)"] AdultScreening
+	    with ( ["Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( AdultScreening.relevantDatetime, AdultScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+	        and AdultScreening.result is not null
+	)
+	  )
+=============================================================================================================================================================================
+Stratification:
+None

@@ -1,0 +1,328 @@
+=============================================================================================================================================================================
+Initial Population:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18
+=============================================================================================================================================================================
+Denominator:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  )
+=============================================================================================================================================================================
+Denominator Exclusions:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  where difference in days between start of Value and end of Value(Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](Encounter)) ( IschemicStrokeEncounter ) < 2
+	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  with TJC.["Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"]
+	  union ["Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"] ComfortMeasures
+	    such that Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(ComfortMeasures.relevantDatetime, ComfortMeasures.relevantPeriod), ComfortMeasures.authorDatetime)during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter ) )
+	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  with ["Medication, Administered: Thrombolytic (t-PA) Therapy" using "Thrombolytic (t-PA) Therapy (2.16.840.1.113883.3.117.1.7.1.226)"]
+	  union ["Procedure, Performed: Intravenous or Intra-arterial Thrombolytic (t-PA) Therapy" using "Intravenous or Intra-arterial Thrombolytic (t-PA) Therapy (2.16.840.1.113762.1.4.1045.21)"] ThrombolyticTherapy
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( ThrombolyticTherapy.relevantDatetime, ThrombolyticTherapy.relevantPeriod ) starts during Interval[start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter ) - 24 hours, 
+	    end of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter ) )
+	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  where exists IschemicStrokeEncounter.diagnoses Diagnosis
+	    where Diagnosis.code in valueset "Intravenous or Intra arterial Thrombolytic (tPA) Therapy Prior to Arrival" (2.16.840.1.113762.1.4.1110.21)
+	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  with [Diagnosis: valueset "Intravenous or Intra arterial Thrombolytic (tPA) Therapy Prior to Arrival" (2.16.840.1.113762.1.4.1110.21)] PriorTPA
+	    such that PriorTPA.authorDatetime during Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter )
+=============================================================================================================================================================================
+Numerator:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  with ["Medication, Administered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)"] Antithrombotic
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( Antithrombotic.relevantDatetime, Antithrombotic.relevantPeriod ) starts during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter ) )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  with ["Medication, Not Ordered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)"] NoAntithromboticOrder
+	  where NoAntithromboticOrder.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
+	    or NoAntithromboticOrder.negationRationale in valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93)
+	  union ["Medication, Not Administered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)"] NoAntithromboticGiven
+	  where NoAntithromboticGiven.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
+	    or NoAntithromboticGiven.negationRationale in valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93) NoAntithrombotic
+	    such that NoAntithrombotic.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter ) )
+	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  with ["Medication, Administered: Pharmacological Contraindications For Antithrombotic Therapy" using "Pharmacological Contraindications For Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.52)"] PharmacologicalContraindications
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( PharmacologicalContraindications.relevantDatetime, PharmacologicalContraindications.relevantPeriod ) starts during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter ) )
+	  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+	  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+	    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+	  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+	      where Diagnosis.rank = 1
+	        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+	            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        )
+	  ) AllStrokeEncounter
+	  with ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod ) >= 18 EncounterWithAge
+	  where exists ( EncounterWithAge.diagnoses Diagnosis
+	      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+	        and Diagnosis.rank = 1
+	  ) IschemicStrokeEncounter
+	  with ["Laboratory Test, Performed: INR" using "INR (2.16.840.1.113883.3.117.1.7.1.213)"] INR
+	    such that INR.resultDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue ), DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( StartValue + 2 days ) ) ( start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( IschemicStrokeEncounter ) )
+	      and INR.result > 3.5
+=============================================================================================================================================================================
+Stratification:
+None

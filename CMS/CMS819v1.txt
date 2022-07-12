@@ -1,0 +1,127 @@
+=============================================================================================================================================================================
+Initial Population:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientHospitalization
+  where InpatientHospitalization.relevantPeriod ends during day of Measurement Period
+    and AgeInYearsAt(date from start of Encounter Visit
+	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+			sort by 
+			end of relevantPeriod
+	),
+	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+			sort by 
+			end of relevantPeriod
+	)
+	return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+	end of Visit.relevantPeriod](InpatientHospitalization))>= 18 InpatientEncounter
+  with ["Medication, Administered: Opioids, All" using "Opioids, All (2.16.840.1.113762.1.4.1196.226)"] OpioidGiven
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidGiven.relevantDatetime, OpioidGiven.relevantPeriod ) starts during Global.HospitalizationWithObservation ( InpatientEncounter )
+=============================================================================================================================================================================
+Denominator:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientHospitalization
+  where InpatientHospitalization.relevantPeriod ends during day of Measurement Period
+    and AgeInYearsAt(date from start of Encounter Visit
+	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+			sort by 
+			end of relevantPeriod
+	),
+	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+			sort by 
+			end of relevantPeriod
+	)
+	return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+	end of Visit.relevantPeriod](InpatientHospitalization))>= 18 InpatientEncounter
+  with ["Medication, Administered: Opioids, All" using "Opioids, All (2.16.840.1.113762.1.4.1196.226)"] OpioidGiven
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidGiven.relevantDatetime, OpioidGiven.relevantPeriod ) starts during Global.HospitalizationWithObservation ( InpatientEncounter )
+=============================================================================================================================================================================
+Denominator Exclusions:
+None
+=============================================================================================================================================================================
+Numerator:
+// Opioids administered before opioid antagonist AND excludes opioid antagonist administered in operating room 
+from
+  ["Medication, Administered: Opioid Antagonist" using "Opioid Antagonist (2.16.840.1.113762.1.4.1248.119)"] OpioidAntagonistGiven,
+  ["Medication, Administered: Opioids, All" using "Opioids, All (2.16.840.1.113762.1.4.1196.226)"] OpioidGiven,
+  ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientHospitalization
+  where InpatientHospitalization.relevantPeriod ends during day of Measurement Period
+    and AgeInYearsAt(date from start of Encounter Visit
+	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+			sort by 
+			end of relevantPeriod
+	),
+	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+			sort by 
+			end of relevantPeriod
+	)
+	return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+	end of Visit.relevantPeriod](InpatientHospitalization))>= 18 InpatientEncounter
+  with ["Medication, Administered: Opioids, All" using "Opioids, All (2.16.840.1.113762.1.4.1196.226)"] OpioidGiven
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidGiven.relevantDatetime, OpioidGiven.relevantPeriod ) starts during Global.HospitalizationWithObservation ( InpatientEncounter ) EncounterWithQualifyingAge
+  where not exists ( EncounterWithQualifyingAge.facilityLocations EncounterLocation
+      where EncounterLocation.code ~ code "Operating Room/Suite" ("HSLOC Code (1096-7)")
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidAntagonistGiven.relevantDatetime, OpioidAntagonistGiven.relevantPeriod ) starts during EncounterLocation.locationPeriod
+  )
+    and ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidAntagonistGiven.relevantDatetime, OpioidAntagonistGiven.relevantPeriod ) starts during Encounter Visit
+	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+			sort by 
+			end of relevantPeriod
+	),
+	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+			sort by 
+			end of relevantPeriod
+	)
+	return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+	end of Visit.relevantPeriod] ( EncounterWithQualifyingAge )
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidGiven.relevantDatetime, OpioidGiven.relevantPeriod ) starts during Encounter Visit
+	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+			sort by 
+			end of relevantPeriod
+	),
+	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+			sort by 
+			end of relevantPeriod
+	)
+	return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+	end of Visit.relevantPeriod] ( EncounterWithQualifyingAge )
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidGiven.relevantDatetime, OpioidGiven.relevantPeriod ) ends 12 hours or less before start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( OpioidAntagonistGiven.relevantDatetime, OpioidAntagonistGiven.relevantPeriod )
+    )
+  return EncounterWithQualifyingAge
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

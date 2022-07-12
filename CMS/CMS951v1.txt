@@ -1,0 +1,96 @@
+=============================================================================================================================================================================
+Initial Population:
+AgeInYearsAt(date from start of Measurement Period)in Interval[18, 75]
+  and exists ( ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+    where Diabetes.prevalencePeriod overlaps Measurement Period
+)
+  and exists ( ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+    union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+    union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+    union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+    union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+    where ValidEncounter.relevantPeriod during Measurement Period
+)
+=============================================================================================================================================================================
+Denominator:
+AgeInYearsAt(date from start of Measurement Period)in Interval[18, 75]
+  and exists ( ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+    where Diabetes.prevalencePeriod overlaps Measurement Period
+)
+  and exists ( ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+    union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+    union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+    union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+    union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+    where ValidEncounter.relevantPeriod during Measurement Period
+)
+=============================================================================================================================================================================
+Denominator Exclusions:
+exists ( ["Diagnosis: Chronic Kidney Disease, Stage 5" using "Chronic Kidney Disease, Stage 5 (2.16.840.1.113883.3.526.3.1002)"]
+  union ["Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)"] ) CKDOrESRD
+  where CKDOrESRD.prevalencePeriod overlaps Measurement Period
+  or Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
+        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+    )
+      and InpatientEncounter.relevantPeriod ends during day of Measurement Period
+)
+  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+      where HospiceEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
+      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+      where HospiceOrder.authorDatetime during day of Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+  )
+  or PalliativeCare.exists ( ["Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)"] PalliativeAssessment
+    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
+)
+or exists (["Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)"] PalliativeDiagnosis
+where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
+  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)"] PalliativeEncounter
+      where PalliativeEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)"] PalliativeIntervention
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
+  )
+=============================================================================================================================================================================
+Numerator:
+exists ( ["Laboratory Test, Performed: Estimated Glomerular Filtration Rate" using "Estimated Glomerular Filtration Rate (2.16.840.1.113883.3.6929.3.1000)"] eGFRTest
+    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( eGFRTest.relevantDatetime, eGFRTest.relevantPeriod ) during Measurement Period
+      and eGFRTest.result is not null
+)
+  and exists ( ["Laboratory Test, Performed: Urine Albumin Creatinine Ratio" using "Urine Albumin Creatinine Ratio (2.16.840.1.113883.3.6929.3.1007)"] uACRTest
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( uACRTest.relevantDatetime, uACRTest.relevantPeriod ) during Measurement Period
+        and uACRTest.result is not null
+  )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

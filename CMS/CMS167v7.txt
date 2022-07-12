@@ -1,0 +1,69 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ( [Patient Characteristic Birthdate] BirthDate
+			where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+	)
+		and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+		union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+		union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) FaceToFaceEncounter
+		where FaceToFaceEncounter.relevantPeriod during Measurement Period FaceToFaceEncounter
+		with ["Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)"] DiabeticRetinopathy
+			such that DiabeticRetinopathy.prevalencePeriod overlaps FaceToFaceEncounter.relevantPeriod
+=============================================================================================================================================================================
+Denominator:
+exists ( [Patient Characteristic Birthdate] BirthDate
+			where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+	)
+		and exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+		union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+		union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) FaceToFaceEncounter
+		where FaceToFaceEncounter.relevantPeriod during Measurement Period FaceToFaceEncounter
+		with ["Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)"] DiabeticRetinopathy
+			such that DiabeticRetinopathy.prevalencePeriod overlaps FaceToFaceEncounter.relevantPeriod
+=============================================================================================================================================================================
+Denominator Exclusions:
+None
+=============================================================================================================================================================================
+Numerator:
+exists ["Diagnostic Study, Performed: Macular Exam" using "Macular Exam (2.16.840.1.113883.3.526.3.1251)"] MacularExam
+		with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+		union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+		union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) FaceToFaceEncounter
+		where FaceToFaceEncounter.relevantPeriod during Measurement Period FaceToFaceEncounter
+		with ["Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)"] DiabeticRetinopathy
+			such that DiabeticRetinopathy.prevalencePeriod overlaps FaceToFaceEncounter.relevantPeriod EncounterDiabeticRetinopathy
+			such that MacularExam.relevantPeriod during EncounterDiabeticRetinopathy.relevantPeriod
+		where exists ( MacularExam.components Component
+				where Component.result in valueset "Level of Severity of Retinopathy Findings" using "2.16.840.1.113883.3.526.3.1283"
+		)
+			and exists MacularExam.components Component
+				where ( Component.result in valueset "Macular Edema Findings Absent" using "2.16.840.1.113883.3.526.3.1284"
+						or Component.result in valueset "Macular Edema Findings Present" using "2.16.840.1.113883.3.526.3.1320"
+				)
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists ["Diagnostic Study, Not Performed: Macular Exam" using "Macular Exam (2.16.840.1.113883.3.526.3.1251)"] NoMacularExam
+		with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+		union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+		union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] ) FaceToFaceEncounter
+		where FaceToFaceEncounter.relevantPeriod during Measurement Period FaceToFaceEncounter
+		with ["Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)"] DiabeticRetinopathy
+			such that DiabeticRetinopathy.prevalencePeriod overlaps FaceToFaceEncounter.relevantPeriod EncounterDiabeticRetinopathy
+			such that NoMacularExam.authorDatetime during EncounterDiabeticRetinopathy.relevantPeriod
+		where ( NoMacularExam.negationRationale in valueset "Medical Reason" using "2.16.840.1.113883.3.526.3.1007"
+				or NoMacularExam.negationRationale in valueset "Patient Reason" using "2.16.840.1.113883.3.526.3.1008"
+		)
+=============================================================================================================================================================================
+Stratification:
+None

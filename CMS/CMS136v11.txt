@@ -1,0 +1,127 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
+	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"] ) ValidEncounter
+	  where ValidEncounter.relevantPeriod during Measurement Period )
+	    and First(["Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] FirstADHDMedication
+	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) is not null
+=============================================================================================================================================================================
+Denominator:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
+	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"] ) ValidEncounter
+	  where ValidEncounter.relevantPeriod during Measurement Period )
+	    and First(["Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] FirstADHDMedication
+	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) is not null
+=============================================================================================================================================================================
+Denominator Exclusions:
+Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
+	    where ( DischargeHospice.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
+	        or DischargeHospice.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+	    )
+	      and DischargeHospice.relevantPeriod ends during Measurement Period
+	)
+	  or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+	      where HospiceOrder.authorDatetime during Measurement Period
+	  )
+	  or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	  )
+	  or exists ( ["Diagnosis: Narcolepsy" using "Narcolepsy (2.16.840.1.113883.3.464.1003.114.12.1011)"] Narcolepsy
+	  where Narcolepsy.prevalencePeriod starts before 
+	  end Measurement Period )
+	  or exists ( ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientStay
+	    where exists ( InpatientStay.diagnoses EncounterDiagnoses
+	        where ( EncounterDiagnoses.rank = 1
+	            and EncounterDiagnoses.code in valueset "Mental Behavioral and Neurodevelopmental Disorders" (2.16.840.1.113883.3.464.1003.105.12.1203)
+	        )
+	    )
+	) InpatientStay
+	  with First(["Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] FirstADHDMedication
+	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) InitialADHDMedication
+	    such that InpatientStay.relevantPeriod starts 30 days or less on or after InitialADHDMedication.relevantDatetime )
+	  or exists ( ["Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] ActiveADHDMedication
+	  with First(["Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] FirstADHDMedication
+	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) InitialADHDMedication
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( ActiveADHDMedication.relevantDatetime, ActiveADHDMedication.relevantPeriod ) starts 120 days or less before InitialADHDMedication.relevantDatetime )
+=============================================================================================================================================================================
+Numerator:
+exists ( ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	    union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	    union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+	    union ["Encounter, Performed: Behavioral Health Follow-up Visit" using "Behavioral Health Follow-up Visit (2.16.840.1.113883.3.464.1003.101.12.1054)"]
+	    union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+	    union ( ["Encounter, Performed: Psychotherapy and Pharmacologic Management" using "Psychotherapy and Pharmacologic Management (2.16.840.1.113883.3.464.1003.101.12.1055)"] PsychPharmMgmt
+	        where exists ( PsychPharmMgmt.facilityLocations Location
+	            where Location.code in valueset "Ambulatory" (2.16.840.1.113883.3.464.1003.122.12.1003)
+	        )
+	    )
+	    union ["Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)"]
+	    union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+	    union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	    union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+	    union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+	    union ["Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
+	    union ["Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+	    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+	) ValidNumeratorEncounter
+	    with First(["Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] FirstADHDMedication
+	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) InitialADHDMedication
+	      such that ValidNumeratorEncounter.relevantPeriod starts 30 days or less on or after InitialADHDMedication.relevantDatetime
+	) )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Population Criteria 1:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
+	    and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"] ) ValidEncounter
+	  where ValidEncounter.relevantPeriod during Measurement Period )
+	    and First(["Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)"] FirstADHDMedication
+	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) is not null
+=============================================================================================================================================================================
+Stratification:
+None

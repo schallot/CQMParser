@@ -1,0 +1,873 @@
+=============================================================================================================================================================================
+Initial Population:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+	    such that Diabetes.prevalencePeriod starts before 
+	    end of Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Medication, Administered: Hypoglycemics Treatment Medications] HypoglycemicMed
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( HypoglycemicMed.relevantDatetime, HypoglycemicMed.relevantPeriod ) starts during Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab
+	    such that BloodGlucoseLab.relevantDatetime during Hospitalization.hospitalizationPeriod
+	      and BloodGlucoseLab.result >= 200 'mg/dL'
+	  return Hospitalization.encounter
+=============================================================================================================================================================================
+Denominator:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+	    such that Diabetes.prevalencePeriod starts before 
+	    end of Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Medication, Administered: Hypoglycemics Treatment Medications] HypoglycemicMed
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( HypoglycemicMed.relevantDatetime, HypoglycemicMed.relevantPeriod ) starts during Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab
+	    such that BloodGlucoseLab.relevantDatetime during Hospitalization.hospitalizationPeriod
+	      and BloodGlucoseLab.result >= 200 'mg/dL'
+	  return Hospitalization.encounter
+=============================================================================================================================================================================
+Denominator Exclusions:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  with First([Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] FirstBloodGlucose
+	    with(["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18)InpatientEncounter
+	      such that FirstBloodGlucose.relevantDatetime during Interval[(start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter)- 1 hour),(start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter)+ 6 hours)]
+	    sort by relevantDatetime
+	) FirstGlucoseResult
+	    such that FirstGlucoseResult.result >= 1000 'mg/dL'
+=============================================================================================================================================================================
+Numerator:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+	    such that Diabetes.prevalencePeriod starts before 
+	    end of Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Medication, Administered: Hypoglycemics Treatment Medications] HypoglycemicMed
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( HypoglycemicMed.relevantDatetime, HypoglycemicMed.relevantPeriod ) starts during Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab
+	    such that BloodGlucoseLab.relevantDatetime during Hospitalization.hospitalizationPeriod
+	      and BloodGlucoseLab.result >= 200 'mg/dL'
+	  return Hospitalization.encounter EligibleInpatientHospitalization
+	  let period: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( EligibleInpatientHospitalization ),
+	  relevantPeriod: Interval[start of Period, Min({ 
+	  end of Period, start of Period + 10 days }
+	)](period)
+	  return Tuple {
+	    encounter: EligibleInpatientHospitalization,
+	    hospitalizationPeriod: period,
+	    relevantPeriod: relevantPeriod,
+	    relevantDays: ( ( expand { Interval[1, duration in days between start of Period and 
+	end of Period]} ) DayNumber
+	  return 
+	  end of DayNumber(Period)) DayIndex
+	  let startPeriod: start of Period + ( 24 hours * ( DayIndex - 1 ) ),
+	  endPeriod: if ( hours between startPeriod and 
+	    end of Period < 24
+	  ) then startPeriod 
+	    else start of Period + ( 24 hours * DayIndex )
+	  return Tuple {
+	    dayIndex: DayIndex,
+	    dayPeriod: Interval[startPeriod, endPeriod )
+	  }(relevantPeriod)
+	  } InpatientHospitalDays
+	  return Tuple {
+	    encounter: InpatientHospitalDays.encounter,
+	    relevantPeriod: InpatientHospitalDays.relevantPeriod,
+	    relevantDays: ( InpatientHospitalDays.relevantDays EncounterDay
+	        return Tuple {
+	          dayIndex: EncounterDay.dayIndex,
+	          dayPeriod: EncounterDay.dayPeriod,
+	          hasSevereResult: exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab1
+	              where BloodGlucoseLab1.result > 300 'mg/dL'
+	                and BloodGlucoseLab1.relevantDatetime during EncounterDay.dayPeriod
+	          ),
+	          hasElevatedResult: exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab2
+	              where BloodGlucoseLab2.result >= 200 'mg/dL'
+	                and BloodGlucoseLab2.relevantDatetime during EncounterDay.dayPeriod
+	          ),
+	          hasNoGlucoseTest: not exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab3
+	              where BloodGlucoseLab3.relevantDatetime during EncounterDay.dayPeriod
+	          )
+	        }
+	    )
+	  } EncounterWithResultDays
+	  let eligibleEventDays: EncounterWithResultDays.relevantDays EncounterDay
+	    where EncounterDay.dayIndex > 1
+	    return Tuple {
+	      dayIndex: EncounterDay.dayIndex,
+	      dayPeriod: EncounterDay.dayPeriod,
+	      hasHyperglycemicEvent: ( EncounterDay.hasSevereResult
+	          or ( EncounterDay.hasNoGlucoseTest
+	              and EncounterWithResultDays.relevantDays[EncounterDay.dayIndex - 2].hasElevatedResult
+	              and EncounterWithResultDays.relevantDays[EncounterDay.dayIndex - 3].hasElevatedResult
+	          )
+	      )
+	    }
+	  return Tuple {
+	    encounter: EncounterWithResultDays.encounter,
+	    relevantPeriod: EncounterWithResultDays.relevantPeriod,
+	    eligibleEventDays: eligibleEventDays
+	  } HyperglycemicEventDays
+	  where exists ( HyperglycemicEventDays.eligibleEventDays EligibleEventDay
+	      where EligibleEventDay.hasHyperglycemicEvent
+	  )
+	  return HyperglycemicEventDays.encounter
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Measure Observation 1    :
+Sum (
+	  singleton from ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+	    such that Diabetes.prevalencePeriod starts before 
+	    end of Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Medication, Administered: Hypoglycemics Treatment Medications] HypoglycemicMed
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( HypoglycemicMed.relevantDatetime, HypoglycemicMed.relevantPeriod ) starts during Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab
+	    such that BloodGlucoseLab.relevantDatetime during Hospitalization.hospitalizationPeriod
+	      and BloodGlucoseLab.result >= 200 'mg/dL'
+	  return Hospitalization.encounter EligibleInpatientHospitalization
+	  let period: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( EligibleInpatientHospitalization ),
+	  relevantPeriod: Interval[start of Period, Min({ 
+	  end of Period, start of Period + 10 days }
+	)](period)
+	  return Tuple {
+	    encounter: EligibleInpatientHospitalization,
+	    hospitalizationPeriod: period,
+	    relevantPeriod: relevantPeriod,
+	    relevantDays: ( ( expand { Interval[1, duration in days between start of Period and 
+	end of Period]} ) DayNumber
+	  return 
+	  end of DayNumber(Period)) DayIndex
+	  let startPeriod: start of Period + ( 24 hours * ( DayIndex - 1 ) ),
+	  endPeriod: if ( hours between startPeriod and 
+	    end of Period < 24
+	  ) then startPeriod 
+	    else start of Period + ( 24 hours * DayIndex )
+	  return Tuple {
+	    dayIndex: DayIndex,
+	    dayPeriod: Interval[startPeriod, endPeriod )
+	  }(relevantPeriod)
+	  } InpatientHospitalDays
+	  return Tuple {
+	    encounter: InpatientHospitalDays.encounter,
+	    relevantPeriod: InpatientHospitalDays.relevantPeriod,
+	    relevantDays: ( InpatientHospitalDays.relevantDays EncounterDay
+	        return Tuple {
+	          dayIndex: EncounterDay.dayIndex,
+	          dayPeriod: EncounterDay.dayPeriod,
+	          hasSevereResult: exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab1
+	              where BloodGlucoseLab1.result > 300 'mg/dL'
+	                and BloodGlucoseLab1.relevantDatetime during EncounterDay.dayPeriod
+	          ),
+	          hasElevatedResult: exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab2
+	              where BloodGlucoseLab2.result >= 200 'mg/dL'
+	                and BloodGlucoseLab2.relevantDatetime during EncounterDay.dayPeriod
+	          ),
+	          hasNoGlucoseTest: not exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab3
+	              where BloodGlucoseLab3.relevantDatetime during EncounterDay.dayPeriod
+	          )
+	        }
+	    )
+	  } EncounterWithResultDays
+	  let eligibleEventDays: EncounterWithResultDays.relevantDays EncounterDay
+	    where EncounterDay.dayIndex > 1
+	    return Tuple {
+	      dayIndex: EncounterDay.dayIndex,
+	      dayPeriod: EncounterDay.dayPeriod,
+	      hasHyperglycemicEvent: ( EncounterDay.hasSevereResult
+	          or ( EncounterDay.hasNoGlucoseTest
+	              and EncounterWithResultDays.relevantDays[EncounterDay.dayIndex - 2].hasElevatedResult
+	              and EncounterWithResultDays.relevantDays[EncounterDay.dayIndex - 3].hasElevatedResult
+	          )
+	      )
+	    }
+	  return Tuple {
+	    encounter: EncounterWithResultDays.encounter,
+	    relevantPeriod: EncounterWithResultDays.relevantPeriod,
+	    eligibleEventDays: eligibleEventDays
+	  } EncounterWithEventDays
+	    where EncounterWithEventDays.encounter = QualifyingEncounter
+	    return Count(EncounterWithEventDays.eligibleEventDays)
+	)
+	)
+=============================================================================================================================================================================
+Measure Observation 2    :
+Sum (
+	  singleton from ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with ["Diagnosis: Diabetes" using "Diabetes (2.16.840.1.113883.3.464.1003.103.12.1001)"] Diabetes
+	    such that Diabetes.prevalencePeriod starts before 
+	    end of Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Medication, Administered: Hypoglycemics Treatment Medications] HypoglycemicMed
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( HypoglycemicMed.relevantDatetime, HypoglycemicMed.relevantPeriod ) starts during Hospitalization.hospitalizationPeriod
+	  return Hospitalization.encounter
+	  union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+	  where InpatientEncounter.relevantPeriod ends during day of Measurement Period
+	    and AgeInYearsAt(date from start of Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod](InpatientEncounter))>= 18 InpatientHospitalization
+	  return Tuple {
+	    encounter: InpatientHospitalization,
+	    hospitalizationPeriod: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( InpatientHospitalization )
+	  } Hospitalization
+	  with [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab
+	    such that BloodGlucoseLab.relevantDatetime during Hospitalization.hospitalizationPeriod
+	      and BloodGlucoseLab.result >= 200 'mg/dL'
+	  return Hospitalization.encounter EligibleInpatientHospitalization
+	  let period: Encounter Visit
+		let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+				sort by 
+				end of relevantPeriod
+		),
+		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+		EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+				sort by 
+				end of relevantPeriod
+		)
+		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+		end of Visit.relevantPeriod] ( EligibleInpatientHospitalization ),
+	  relevantPeriod: Interval[start of Period, Min({ 
+	  end of Period, start of Period + 10 days }
+	)](period)
+	  return Tuple {
+	    encounter: EligibleInpatientHospitalization,
+	    hospitalizationPeriod: period,
+	    relevantPeriod: relevantPeriod,
+	    relevantDays: ( ( expand { Interval[1, duration in days between start of Period and 
+	end of Period]} ) DayNumber
+	  return 
+	  end of DayNumber(Period)) DayIndex
+	  let startPeriod: start of Period + ( 24 hours * ( DayIndex - 1 ) ),
+	  endPeriod: if ( hours between startPeriod and 
+	    end of Period < 24
+	  ) then startPeriod 
+	    else start of Period + ( 24 hours * DayIndex )
+	  return Tuple {
+	    dayIndex: DayIndex,
+	    dayPeriod: Interval[startPeriod, endPeriod )
+	  }(relevantPeriod)
+	  } InpatientHospitalDays
+	  return Tuple {
+	    encounter: InpatientHospitalDays.encounter,
+	    relevantPeriod: InpatientHospitalDays.relevantPeriod,
+	    relevantDays: ( InpatientHospitalDays.relevantDays EncounterDay
+	        return Tuple {
+	          dayIndex: EncounterDay.dayIndex,
+	          dayPeriod: EncounterDay.dayPeriod,
+	          hasSevereResult: exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab1
+	              where BloodGlucoseLab1.result > 300 'mg/dL'
+	                and BloodGlucoseLab1.relevantDatetime during EncounterDay.dayPeriod
+	          ),
+	          hasElevatedResult: exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab2
+	              where BloodGlucoseLab2.result >= 200 'mg/dL'
+	                and BloodGlucoseLab2.relevantDatetime during EncounterDay.dayPeriod
+	          ),
+	          hasNoGlucoseTest: not exists ( [Laboratory Test, Performed: Glucose Lab Test Mass Per Volume] BloodGlucoseLab3
+	              where BloodGlucoseLab3.relevantDatetime during EncounterDay.dayPeriod
+	          )
+	        }
+	    )
+	  } EncounterWithResultDays
+	  let eligibleEventDays: EncounterWithResultDays.relevantDays EncounterDay
+	    where EncounterDay.dayIndex > 1
+	    return Tuple {
+	      dayIndex: EncounterDay.dayIndex,
+	      dayPeriod: EncounterDay.dayPeriod,
+	      hasHyperglycemicEvent: ( EncounterDay.hasSevereResult
+	          or ( EncounterDay.hasNoGlucoseTest
+	              and EncounterWithResultDays.relevantDays[EncounterDay.dayIndex - 2].hasElevatedResult
+	              and EncounterWithResultDays.relevantDays[EncounterDay.dayIndex - 3].hasElevatedResult
+	          )
+	      )
+	    }
+	  return Tuple {
+	    encounter: EncounterWithResultDays.encounter,
+	    relevantPeriod: EncounterWithResultDays.relevantPeriod,
+	    eligibleEventDays: eligibleEventDays
+	  } EncounterWithEventDays
+	    where EncounterWithEventDays.encounter = QualifyingEncounter
+	    return Count(EncounterWithEventDays.eligibleEventDays EligibleEventDay
+	        where EligibleEventDay.hasHyperglycemicEvent
+	    )
+	)
+	)

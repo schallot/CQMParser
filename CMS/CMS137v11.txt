@@ -1,0 +1,420 @@
+=============================================================================================================================================================================
+Initial Population:
+AgeInYearsAt(date from start of Measurement Period)>= 13
+  and First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) is not null
+  and not exists ( ( ["Intervention, Performed: Substance Use Disorder Treatment" using "Substance Use Disorder Treatment (2.16.840.1.113883.3.464.1003.106.12.1005)"]
+    union ["Intervention, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+    union ["Procedure, Performed: Substance Use Disorder Long Acting Medication Administration" using "Substance Use Disorder Long Acting Medication Administration (2.16.840.1.113883.3.464.1003.1156)"]
+    union ["Procedure, Performed: Substance Use Disorder Short Acting Medication Administration" using "Substance Use Disorder Short Acting Medication Administration (2.16.840.1.113883.3.464.1003.1157)"] ) Interventions
+    with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+)
+  union ( ( ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+)
+      except ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"] ) QualifyingEncounter
+      where ( exists QualifyingEncounter.diagnoses Diagnosis
+          where Diagnosis.code in valueset "Substance Use Disorder" (2.16.840.1.113883.3.464.1003.106.12.1001)
+      ) ) EncounterWithDiagnosis
+      with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+        such that EncounterWithDiagnosis.relevantPeriod starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+  )
+  union ( ( ["Medication, Order: Substance Use Disorder Long Acting Medication" using "Substance Use Disorder Long Acting Medication (2.16.840.1.113883.3.464.1003.1149)"]
+      union ["Medication, Order: Substance Use Disorder Short Acting Medication" using "Substance Use Disorder Short Acting Medication (2.16.840.1.113883.3.464.1003.1150)"] ) SUDMedication
+      with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+        such that SUDMedication.authorDatetime 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+  )
+=============================================================================================================================================================================
+Denominator:
+AgeInYearsAt(date from start of Measurement Period)>= 13
+  and First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) is not null
+  and not exists ( ( ["Intervention, Performed: Substance Use Disorder Treatment" using "Substance Use Disorder Treatment (2.16.840.1.113883.3.464.1003.106.12.1005)"]
+    union ["Intervention, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+    union ["Procedure, Performed: Substance Use Disorder Long Acting Medication Administration" using "Substance Use Disorder Long Acting Medication Administration (2.16.840.1.113883.3.464.1003.1156)"]
+    union ["Procedure, Performed: Substance Use Disorder Short Acting Medication Administration" using "Substance Use Disorder Short Acting Medication Administration (2.16.840.1.113883.3.464.1003.1157)"] ) Interventions
+    with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+)
+  union ( ( ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+)
+      except ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"] ) QualifyingEncounter
+      where ( exists QualifyingEncounter.diagnoses Diagnosis
+          where Diagnosis.code in valueset "Substance Use Disorder" (2.16.840.1.113883.3.464.1003.106.12.1001)
+      ) ) EncounterWithDiagnosis
+      with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+        such that EncounterWithDiagnosis.relevantPeriod starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+  )
+  union ( ( ["Medication, Order: Substance Use Disorder Long Acting Medication" using "Substance Use Disorder Long Acting Medication (2.16.840.1.113883.3.464.1003.1149)"]
+      union ["Medication, Order: Substance Use Disorder Short Acting Medication" using "Substance Use Disorder Short Acting Medication (2.16.840.1.113883.3.464.1003.1150)"] ) SUDMedication
+      with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+        such that SUDMedication.authorDatetime 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+  )
+=============================================================================================================================================================================
+Denominator Exclusions:
+Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
+        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+    )
+      and InpatientEncounter.relevantPeriod ends during day of Measurement Period
+)
+  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+      where HospiceEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
+      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+      where HospiceOrder.authorDatetime during day of Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+  )
+=============================================================================================================================================================================
+Numerator:
+exists ["Intervention, Performed: Substance Use Disorder Treatment" using "Substance Use Disorder Treatment (2.16.840.1.113883.3.464.1003.106.12.1005)"]
+  union ["Intervention, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+  union ( ( ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+      union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) TelehealthEncounter
+      where exists TelehealthEncounter.diagnoses Diagnosis
+        where Diagnosis.code in valueset "Substance Use Disorder" (2.16.840.1.113883.3.464.1003.106.12.1001)
+  ) PsychosocialVisit
+  let treatmentDate: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( PsychosocialVisit.relevantDatetime, PsychosocialVisit.relevantPeriod )
+  with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+    such that treatmentDate during Interval[date from start of FirstSUDEpisode.relevantPeriod, date from start of FirstSUDEpisode.relevantPeriod + 14 days )
+      and PsychosocialVisit.id !~ FirstSUDEpisode.id
+  return all treatmentDate
+  or exists ( ( ["Medication, Order: Substance Use Disorder Short Acting Medication" using "Substance Use Disorder Short Acting Medication (2.16.840.1.113883.3.464.1003.1150)"]
+    union ["Medication, Order: Substance Use Disorder Long Acting Medication" using "Substance Use Disorder Long Acting Medication (2.16.840.1.113883.3.464.1003.1149)"] ) SUDMedication
+    let treatmentDate: date from SUDMedication.authorDatetime
+    with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+      such that treatmentDate during Interval[date from start of FirstSUDEpisode.relevantPeriod, date from start of FirstSUDEpisode.relevantPeriod + 14 days )
+    return all treatmentDate
+)
+  union ( ( ["Procedure, Performed: Substance Use Disorder Short Acting Medication Administration" using "Substance Use Disorder Short Acting Medication Administration (2.16.840.1.113883.3.464.1003.1157)"]
+      union ["Procedure, Performed: Substance Use Disorder Long Acting Medication Administration" using "Substance Use Disorder Long Acting Medication Administration (2.16.840.1.113883.3.464.1003.1156)"] ) SUDMedAdministration
+      let treatmentDate: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( SUDMedAdministration.relevantDatetime, SUDMedAdministration.relevantPeriod )
+      with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+        such that treatmentDate during Interval[date from start of FirstSUDEpisode.relevantPeriod, date from start of FirstSUDEpisode.relevantPeriod + 14 days )
+      return all treatmentDate
+  )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Population Criteria 1:
+AgeInYearsAt(date from start of Measurement Period)>= 13
+  and First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) is not null
+  and not exists ( ( ["Intervention, Performed: Substance Use Disorder Treatment" using "Substance Use Disorder Treatment (2.16.840.1.113883.3.464.1003.106.12.1005)"]
+    union ["Intervention, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+    union ["Procedure, Performed: Substance Use Disorder Long Acting Medication Administration" using "Substance Use Disorder Long Acting Medication Administration (2.16.840.1.113883.3.464.1003.1156)"]
+    union ["Procedure, Performed: Substance Use Disorder Short Acting Medication Administration" using "Substance Use Disorder Short Acting Medication Administration (2.16.840.1.113883.3.464.1003.1157)"] ) Interventions
+    with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+)
+  union ( ( ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+)
+      except ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"] ) QualifyingEncounter
+      where ( exists QualifyingEncounter.diagnoses Diagnosis
+          where Diagnosis.code in valueset "Substance Use Disorder" (2.16.840.1.113883.3.464.1003.106.12.1001)
+      ) ) EncounterWithDiagnosis
+      with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+        such that EncounterWithDiagnosis.relevantPeriod starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+  )
+  union ( ( ["Medication, Order: Substance Use Disorder Long Acting Medication" using "Substance Use Disorder Long Acting Medication (2.16.840.1.113883.3.464.1003.1149)"]
+      union ["Medication, Order: Substance Use Disorder Short Acting Medication" using "Substance Use Disorder Short Acting Medication (2.16.840.1.113883.3.464.1003.1150)"] ) SUDMedication
+      with First((( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+    union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+    union ["Encounter, Performed: Initial Hospital Observation Care" using "Initial Hospital Observation Care (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+    union ["Encounter, Performed: Initial Hospital Inpatient Visit" using "Initial Hospital Inpatient Visit (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient Same Day Discharge" using "Discharge Services Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+    union ["Encounter, Performed: Discharge Services Hospital Inpatient" using "Discharge Services Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+    union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+    union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+))ValidEncounters
+    with ["Diagnosis: Substance Use Disorder" using "Substance Use Disorder (2.16.840.1.113883.3.464.1003.106.12.1001)"] SUDDiagnosis
+      such that ValidEncounters.relevantPeriod during Measurement Period
+        and SUDDiagnosis.prevalencePeriod starts during ValidEncounters.relevantPeriod
+        and SUDDiagnosis.prevalencePeriod starts 47 days or more before day of 
+        end of Measurement Period
+    sort by start of relevantPeriod
+) FirstSUDEpisode
+        such that SUDMedication.authorDatetime 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+  )
+=============================================================================================================================================================================
+Stratification 1:
+AgeInYearsAt(date from start of Measurement Period)in Interval[13, 17]
+=============================================================================================================================================================================
+Stratification 2:
+AgeInYearsAt(date from start of Measurement Period)in Interval[18, 64]
+=============================================================================================================================================================================
+Stratification 3:
+AgeInYearsAt(date from start of Measurement Period)>= 65

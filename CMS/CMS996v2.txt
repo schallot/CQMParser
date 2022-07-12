@@ -1,0 +1,243 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ["Patient Characteristic Birthdate: Birthdate" using "Birthdate (LOINC Code 21112-8)"] BirthDate
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    and exists ( ( ["Encounter, Performed: STEMI (01)" using "STEMI (01) (2.16.840.1.113883.3.3157.4017)"] STEMIVisit
+	    where STEMIVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	) )
+	    and exists ( ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	) )
+=============================================================================================================================================================================
+Denominator:
+
+exists ["Patient Characteristic Birthdate: Birthdate" using "Birthdate (LOINC Code 21112-8)"] BirthDate
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    and exists ( ( ["Encounter, Performed: STEMI (01)" using "STEMI (01) (2.16.840.1.113883.3.3157.4017)"] STEMIVisit
+	    where STEMIVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	) )
+	    and exists ( ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	) )
+=============================================================================================================================================================================
+Denominator Exclusions:
+
+	
+	ED*/
+	exists ( ( ["Encounter, Performed: Mortality in ED" using "Mortality in ED (2.16.840.1.113883.3.3157.4040)"]
+	    union ["Encounter, Performed: Mortality in ED (2)" using "Mortality in ED (2) (2.16.840.1.113883.3.3157.4041)"] ) edmort
+	    where edmort.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	)
+	
+	/*Active and Recent Bleeding*/
+	  or exists ( ["Encounter, Performed: Active Bleeding or Bleeding Diathesis (Excluding Menses) (01)" using "Active Bleeding or Bleeding Diathesis (Excluding Menses) (01) (2.16.840.1.113883.3.3157.4036)"] activebleed
+	      where activebleed.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/* Ischemic Stroke*/
+	  or exists ( ["Encounter, Performed: Ischemic Stroke (01)" using "Ischemic Stroke (01) (2.16.840.1.113883.3.464.1003.104.12.1024)"] IschemicStroke
+	      where IschemicStroke.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	
+	/*Malignant Intracranial Neoplasm*/
+	  or exists ( ["Encounter, Performed: Malignant Intracranial Neoplasm" using "Malignant Intracranial Neoplasm (2.16.840.1.113883.3.3157.4009)"] malig
+	      where malig.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	  or exists ( ["Encounter, Performed: Malignant Intracranial Neoplasm (2)" using "Malignant Intracranial Neoplasm (2) (2.16.840.1.113883.3.3157.4010)"] malig2
+	      where malig2.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Cerebral Vascular Lesion*/
+	  or exists ( ["Encounter, Performed: Cerebral Vascular Lesion (01)" using "Cerebral Vascular Lesion (01) (2.16.840.1.113883.3.3157.4025)"] lesion
+	      where lesion.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Non Penetrating Head Trauma*/
+	  or exists ( ["Encounter, Performed: Closed Head Trauma (01)" using "Closed Head Trauma (01) (2.16.840.1.113883.3.3157.4026)"] trauma
+	      where trauma.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/* Active Peptic Ulcer*/
+	  or exists ( ["Encounter, Performed: Active Peptic Ulcer (01)" using "Active Peptic Ulcer (01) (2.16.840.1.113883.3.3157.4031)"] ulcer
+	      where ulcer.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Pregnancy*/
+	  or exists ( ["Encounter, Performed: Pregnancy (01)" using "Pregnancy (01) (2.16.840.1.113883.3.3157.4055)"] pregnancy
+	      where pregnancy.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/* Allergic Reaction*/
+	  or exists ( ["Encounter, Performed: Streptokinase adverse reaction (disorder)" using "Streptokinase adverse reaction (disorder) (SNOMEDCT Code 293571007)"]
+	  union ["Encounter, Performed: Allergy to anistreplase (finding)" using "Allergy to anistreplase (finding) (SNOMEDCT Code 295111009)"]
+	  union ["Encounter, Performed: Allergy to streptokinase (finding)" using "Allergy to streptokinase (finding) (SNOMEDCT Code 295108008)"]
+	  union ["Encounter, Performed: Anistreplase adverse reaction (disorder)" using "Anistreplase adverse reaction (disorder) (SNOMEDCT Code 293574004)"] AllergicEncounter
+	    where AllergicEncounter.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod )
+	
+	/*Endotracheal Intubation*/
+	  or exists ( ["Encounter, Performed: Endotracheal Intubation (01)" using "Endotracheal Intubation (01) (2.16.840.1.113762.1.4.1045.69)"] intubation
+	      where intubation.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	
+	/*Anticoagulant Medications*/
+	  or exists ( ["Encounter, Performed: Anticoagulant Medications, Oral" using "Anticoagulant Medications, Oral (2.16.840.1.113883.3.3157.4045)"] AMO
+	      where AMO.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Dementia*/
+	  or exists ( ["Encounter, Performed: Dementia (01)" using "Dementia (01) (2.16.840.1.113883.3.3157.4043)"] Dementia
+	      where Dementia.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Major Surgical Procedure*/
+	  or exists ( ["Encounter, Performed: Major Surgical Procedure (01)" using "Major Surgical Procedure (01) (2.16.840.1.113883.3.3157.4056)"] majorsurg
+	      where majorsurg.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	 
+	
+	/*Neurological Impairment*/
+	  or exists ( ["Encounter, Performed: Neurologic impairment" using "Neurologic impairment (2.16.840.1.113883.3.464.1003.114.12.1012)"] neuroimpairment
+	      where neuroimpairment.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Mechanical Circulatory Assist*/
+	  or exists ( ["Encounter, Performed: Mechanical Circulatory Assist Device (01)" using "Mechanical Circulatory Assist Device (01) (2.16.840.1.113883.3.3157.4052)"] mechanicaldevice
+	      where mechanicaldevice.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Cardiopulmonary Arrest*/
+	  or exists ( ["Encounter, Performed: Cardiopulmonary Arrest (01)" using "Cardiopulmonary Arrest (01) (2.16.840.1.113883.3.3157.4048)"] cardioarrest
+	      where cardioarrest.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	
+	/*Intracranial or Intraspinal Surgery*/
+	  or exists ( ["Encounter, Performed: Major Surgical Procedure (01)" using "Major Surgical Procedure (01) (2.16.840.1.113883.3.3157.4056)"] MajorSurg
+	      where MajorSurg.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+	
+	/*Aortic Dissection*/
+	  or exists ( ["Encounter, Performed: Aortic Dissection (01)" using "Aortic Dissection (01) (2.16.840.1.113883.3.3157.4028)"] aor1
+	      where aor1.relevantPeriod during ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	).relevantPeriod
+	  )
+=============================================================================================================================================================================
+Numerator:
+exists ( ( ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	) ) EDVisit
+	    with ["Encounter, Performed: Fibrinolytic Therapy (01)" using "Fibrinolytic Therapy (01) (2.16.840.1.113883.3.3157.4020)"] FIBRO
+	      such that FIBRO.relevantPeriod starts 30 minutes or less after start of EDVisit.relevantPeriod
+	)
+	  or exists ( ( ["Encounter, Performed: Patient transfer (procedure)" using "Patient transfer (procedure) (SNOMEDCT Code 107724000)"] ) Transfer
+	      with ( ( ["Encounter, Performed: STEMI (01)" using "STEMI (01) (2.16.840.1.113883.3.3157.4017)"] STEMIVisit
+	    where STEMIVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	) ) STEMIED
+	        such that Transfer.relevantPeriod starts 45 minutes or less after start of STEMIED.relevantPeriod
+	  )
+	  or exists ( ( ( ["Encounter, Performed: ED (01)" using "ED (01) (2.16.840.1.113883.3.464.1003.101.12.1085)"] EDVisit
+	    where EDVisit.relevantPeriod during Measurement Period
+	    sort by 
+	    end of relevantPeriod desc
+	) ) EDVisit
+	      with ( ["Encounter, Performed: Percutaneous Coronary Intervention (01)" using "Percutaneous Coronary Intervention (01) (2.16.840.1.113883.3.3157.2000.5)"] ) PCIVISIT
+	        such that PCIVISIT.relevantPeriod starts 90 minutes or less after start of EDVisit.relevantPeriod
+	  )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

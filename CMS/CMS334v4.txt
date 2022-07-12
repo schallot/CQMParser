@@ -1,0 +1,2003 @@
+=============================================================================================================================================================================
+Initial Population:
+PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge)
+=============================================================================================================================================================================
+Denominator:
+( PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) >= 37
+  union PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) is null
+    and Last(["Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)"] EstimatedGestationalAge
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedGestationalAge.relevantDatetime, EstimatedGestationalAge.relevantPeriod)24 hours or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedGestationalAge.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as Quantity ( DeliveryEncounter ) >= 37 weeks
+  intersect PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where exists ( DeliveryEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in valueset "Delivery of Singleton" (2.16.840.1.113762.1.4.1045.99)
+  ) ) SingletonEncounterGE37Weeks
+  where ( ( Last(["Assessment, Performed: [#] Pregnancies" using "[#] Pregnancies (LOINC Code 11996-6)"] Gravida
+    where Gravida.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Gravida.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 1 )
+      or ( Last(["Assessment, Performed: [#] Parity" using "[#] Parity (LOINC Code 11977-6)"] Parity
+    where Parity.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Parity.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      or ( ( Last(["Assessment, Performed: [#] Births.preterm" using "[#] Births.preterm (LOINC Code 11637-6)"] PretermBirth
+    where PretermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and PretermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+          and ( Last(["Assessment, Performed: [#] Births.term" using "[#] Births.term (LOINC Code 11639-2)"] TermBirth
+    where TermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and TermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      )
+  )
+=============================================================================================================================================================================
+Denominator Exclusions:
+( PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) >= 37
+  union PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) is null
+    and Last(["Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)"] EstimatedGestationalAge
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedGestationalAge.relevantDatetime, EstimatedGestationalAge.relevantPeriod)24 hours or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedGestationalAge.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as Quantity ( DeliveryEncounter ) >= 37 weeks
+  intersect PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where exists ( DeliveryEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in valueset "Delivery of Singleton" (2.16.840.1.113762.1.4.1045.99)
+  ) ) SingletonEncounterGE37Weeks
+  where ( ( Last(["Assessment, Performed: [#] Pregnancies" using "[#] Pregnancies (LOINC Code 11996-6)"] Gravida
+    where Gravida.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Gravida.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 1 )
+      or ( Last(["Assessment, Performed: [#] Parity" using "[#] Parity (LOINC Code 11977-6)"] Parity
+    where Parity.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Parity.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      or ( ( Last(["Assessment, Performed: [#] Births.preterm" using "[#] Births.preterm (LOINC Code 11637-6)"] PretermBirth
+    where PretermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and PretermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+          and ( Last(["Assessment, Performed: [#] Births.term" using "[#] Births.term (LOINC Code 11639-2)"] TermBirth
+    where TermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and TermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      )
+  ) QualifyingEncounter
+  let LastAbnormalPresentation: Last(["Assessment, Performed: Abnormal Presentation" using "Abnormal Presentation (2.16.840.1.113762.1.4.1045.105)"] AbnormalPresentation
+      where Earliest(NormalizeInterval(pointInTime, period))(AbnormalPresentation.relevantDatetime, AbnormalPresentation.relevantPeriod)before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(QualifyingEncounter)
+      sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+  )
+  where exists ( QualifyingEncounter.diagnoses EncounterDiagnosis
+      where EncounterDiagnosis.code in valueset "Abnormal Presentation" (2.16.840.1.113762.1.4.1045.105)
+  )
+    or Earliest(NormalizeInterval(pointInTime, period)) ( LastAbnormalPresentation.relevantDatetime, LastAbnormalPresentation.relevantPeriod ) during QualifyingEncounter.relevantPeriod
+  union ( PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) >= 37
+  union PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) is null
+    and Last(["Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)"] EstimatedGestationalAge
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedGestationalAge.relevantDatetime, EstimatedGestationalAge.relevantPeriod)24 hours or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedGestationalAge.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as Quantity ( DeliveryEncounter ) >= 37 weeks
+  intersect PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where exists ( DeliveryEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in valueset "Delivery of Singleton" (2.16.840.1.113762.1.4.1045.99)
+  ) ) SingletonEncounterGE37Weeks
+  where ( ( Last(["Assessment, Performed: [#] Pregnancies" using "[#] Pregnancies (LOINC Code 11996-6)"] Gravida
+    where Gravida.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Gravida.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 1 )
+      or ( Last(["Assessment, Performed: [#] Parity" using "[#] Parity (LOINC Code 11977-6)"] Parity
+    where Parity.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Parity.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      or ( ( Last(["Assessment, Performed: [#] Births.preterm" using "[#] Births.preterm (LOINC Code 11637-6)"] PretermBirth
+    where PretermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and PretermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+          and ( Last(["Assessment, Performed: [#] Births.term" using "[#] Births.term (LOINC Code 11639-2)"] TermBirth
+    where TermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and TermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      )
+  ) QualifyingEncounter
+  where exists QualifyingEncounter.diagnoses EncounterDiagnosis
+    where EncounterDiagnosis.code in valueset "Placenta Previa" (2.16.840.1.113762.1.4.1110.37)
+=============================================================================================================================================================================
+Numerator:
+( PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) >= 37
+  union PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where // Age = (280-(Estimated Delivery Date minus Reference Date/Delivery Date))/7
+( 280 - ( difference in days between Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)and //While clinically, the Estimated Delivery Date (EDD) is reported as date only, the Quality Data Model does not support Date only at this time. Therefore, the DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) function is used to convert date only to date and time.  Time is populated as 0000.
+if //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)is not null then DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( //This function identifies the last time the Estimated Delivery Date was assessed 42 weeks or less prior to or on delivery and stores the result of that assessment.  
+Last(["Assessment, Performed: Delivery date Estimated" using "Delivery date Estimated (LOINC Code 11778-8)"] EstimatedDateOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedDateOfDelivery.relevantDatetime, EstimatedDateOfDelivery.relevantPeriod)42 weeks or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedDateOfDelivery.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result(Encounter)) 
+  else null(Encounter)) ) div 7 ( DeliveryEncounter ) is null
+    and Last(["Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)"] EstimatedGestationalAge
+    where Earliest(NormalizeInterval(pointInTime, period))(EstimatedGestationalAge.relevantDatetime, EstimatedGestationalAge.relevantPeriod)24 hours or less before or on Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and EstimatedGestationalAge.result is not null
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as Quantity ( DeliveryEncounter ) >= 37 weeks
+  intersect PCMaternal.["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with ["Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)"] DeliveryProcedure
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](EncounterWithAge) DeliveryEncounter
+  where exists ( DeliveryEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in valueset "Delivery of Singleton" (2.16.840.1.113762.1.4.1045.99)
+  ) ) SingletonEncounterGE37Weeks
+  where ( ( Last(["Assessment, Performed: [#] Pregnancies" using "[#] Pregnancies (LOINC Code 11996-6)"] Gravida
+    where Gravida.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Gravida.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 1 )
+      or ( Last(["Assessment, Performed: [#] Parity" using "[#] Parity (LOINC Code 11977-6)"] Parity
+    where Parity.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and Parity.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      or ( ( Last(["Assessment, Performed: [#] Births.preterm" using "[#] Births.preterm (LOINC Code 11637-6)"] PretermBirth
+    where PretermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and PretermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+          and ( Last(["Assessment, Performed: [#] Births.term" using "[#] Births.term (LOINC Code 11639-2)"] TermBirth
+    where TermBirth.relevantDatetime 42 weeks or less before Last(["Assessment, Performed: Date and time of obstetric delivery" using "Date and time of obstetric delivery (LOINC Code 93857-1)"] TimeOfDelivery
+    where Earliest(NormalizeInterval(pointInTime, period))(TimeOfDelivery.relevantDatetime, TimeOfDelivery.relevantPeriod)during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+      and TimeOfDelivery.result as DateTime during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod](Encounter)
+    sort by Earliest(NormalizeInterval(pointInTime, period))(relevantDatetime, relevantPeriod)
+).result as DateTime(Encounter)
+      and TermBirth.result is not null
+    sort by relevantDatetime
+).result as Integer(SingletonEncounterGE37Weeks)= 0 )
+      )
+  ) QualifyingEncounter
+  with ["Procedure, Performed: Cesarean Birth" using "Cesarean Birth (2.16.840.1.113883.3.117.1.7.1.282)"] CSection
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( CSection.relevantDatetime, CSection.relevantPeriod ) during //HospitalizationWithEDOBTriageObservation returns the total interval from the start of any immediately prior emergency department visit or OB Triage visit through the observation visit to the discharge of the given encounter.
+Encounter Visit
+  let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+      where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+      sort by 
+      end of relevantPeriod
+  ),
+  VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+  EDOBTriageVisit: Last(["Encounter, Performed: ED Visit and OB Triage" using "ED Visit and OB Triage (2.16.840.1.113762.1.4.1029.369)"] LastEDOBTriage
+      where LastEDOBTriage.relevantPeriod ends 1 hour or less on or before VisitStart
+      sort by 
+      end of relevantPeriod
+  )
+  return Interval[Coalesce(start of EDOBTriageVisit.relevantPeriod, VisitStart), 
+  end of Visit.relevantPeriod] ( QualifyingEncounter )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

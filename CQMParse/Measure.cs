@@ -21,9 +21,6 @@ namespace CQMParse
         public CodeNode[] OtherPopulationCriteria { get; }
 
         (int measureNumber, string versionString, int versionNumber) MeasureId { get; }
-        public int MeasureNumber { get; }
-        public string VersionString { get; }
-        public int VersionNumber { get; }
         
 
         private (int measureNumber, string versionString, int versionNumber) GetMeasureId(HtmlDocument doc)
@@ -74,7 +71,7 @@ namespace CQMParse
         public Measure(HtmlDocument doc, Uri uri)
         {
             SourceLocation = uri;
-            MeasureId = GetMeasureId(doc);
+            MeasureId = GetMeasureId(doc);            
             var codeNodes = CodeNode.GetCodeNodes(doc.DocumentNode);
 
             //foreach (var cn in codeNodes)
@@ -123,7 +120,7 @@ namespace CQMParse
         {
             Console.WriteLine($"Processing measure {SourceLocation.LocalPath}");
             var s = GetSummary();
-            var path = Path.Combine(outputDirectory, $"CMS{MeasureNumber}v{VersionNumber}.txt");
+            var path = Path.Combine(outputDirectory, $"CMS{MeasureId.measureNumber}v{MeasureId.versionNumber}.txt");
             if (File.Exists(path))
             {
                 File.Delete(path);

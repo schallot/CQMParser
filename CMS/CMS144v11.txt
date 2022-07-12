@@ -1,0 +1,462 @@
+=============================================================================================================================================================================
+Initial Population:
+AgeInYearsAt(date from start of Measurement Period)>= 18
+  and Count(( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Patient Provider Interaction" using "Patient Provider Interaction (2.16.840.1.113883.3.526.3.1012)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during Measurement Period)>= 2
+  and exists ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period
+=============================================================================================================================================================================
+Denominator:
+AgeInYearsAt(date from start of Measurement Period)>= 18
+  and Count(( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Patient Provider Interaction" using "Patient Provider Interaction (2.16.840.1.113883.3.526.3.1012)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during Measurement Period)>= 2
+  and exists ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period
+  and exists ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod
+=============================================================================================================================================================================
+Denominator Exclusions:
+exists ["Procedure, Performed: Heart Transplant" using "Heart Transplant (2.16.840.1.113762.1.4.1178.33)"] HeartTransplant
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HeartTransplant.relevantDatetime, HeartTransplant.relevantPeriod ) ) starts before 
+    end of ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Diagnosis: Heart Transplant Related Diagnoses" using "Heart Transplant Related Diagnoses (2.16.840.1.113762.1.4.1178.56)"] HeartTransplantCondition
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HeartTransplantCondition.authorDatetime, HeartTransplantCondition.prevalencePeriod ) ) starts before 
+    end of ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Procedure, Performed: Left Ventricular Assist Device Placement" using "Left Ventricular Assist Device Placement (2.16.840.1.113762.1.4.1178.61)"] LVADOutpatient
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( LVADOutpatient.relevantDatetime, LVADOutpatient.relevantPeriod ) ) starts before 
+    end of ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Diagnosis: Left Ventricular Assist Device Related Diagnoses" using "Left Ventricular Assist Device Related Diagnoses (2.16.840.1.113762.1.4.1178.58)"] LVADCondition
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( LVADCondition.authorDatetime, LVADCondition.prevalencePeriod ) ) starts before 
+    end of ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+=============================================================================================================================================================================
+Numerator:
+exists ["Medication, Order: Beta Blocker Therapy for LVSD" using "Beta Blocker Therapy for LVSD (2.16.840.1.113883.3.526.3.1184)"] BetaBlockerOrdered
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that BetaBlockerOrdered.authorDatetime during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Medication, Active: Beta Blocker Therapy for LVSD" using "Beta Blocker Therapy for LVSD (2.16.840.1.113883.3.526.3.1184)"] ActiveBetaBlocker
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that ActiveBetaBlocker.relevantPeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists from
+  ["Physical Exam, Performed: Heart Rate" using "Heart Rate (2.16.840.1.113883.3.526.3.1176)"] HeartRate,
+  ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+  let PriorHeartRate: Last(["Physical Exam, Performed: Heart Rate" using "Heart Rate (2.16.840.1.113883.3.526.3.1176)"] MostRecentPriorHeartRate
+      where(if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod))during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+        and(if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod))before if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(HeartRate.relevantDatetime, HeartRate.relevantPeriod)
+      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+  )
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HeartRate.relevantDatetime, HeartRate.relevantPeriod ) during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+    and HeartRate.result < 50 '{beats}/min'
+    and PriorHeartRate.result < 50 '{beats}/min'
+  or exists ["Medication, Not Ordered: Beta Blocker Therapy for LVSD" using "Beta Blocker Therapy for LVSD (2.16.840.1.113883.3.526.3.1184)"] NoBetaBlockerOrdered
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that NoBetaBlockerOrdered.authorDatetime during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  where ( NoBetaBlockerOrdered.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+      or NoBetaBlockerOrdered.negationRationale in valueset "Patient Reason" (2.16.840.1.113883.3.526.3.1008)
+  )
+  or exists ["Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.366)"] Arrhythmia
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that Arrhythmia.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Diagnosis: Hypotension" using "Hypotension (2.16.840.1.113883.3.526.3.370)"] Hypotension
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that Hypotension.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Diagnosis: Asthma" using "Asthma (2.16.840.1.113883.3.526.3.362)"] Asthma
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that Asthma.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ( ["Diagnosis: Allergy to Beta Blocker Therapy" using "Allergy to Beta Blocker Therapy (2.16.840.1.113883.3.526.3.1177)"]
+  union ["Diagnosis: Intolerance to Beta Blocker Therapy" using "Intolerance to Beta Blocker Therapy (2.16.840.1.113883.3.526.3.1178)"] ) BetaBlockerAllergyOrIntoleranceDiagnosis
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that BetaBlockerAllergyOrIntoleranceDiagnosis.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Diagnosis: Bradycardia" using "Bradycardia (2.16.840.1.113883.3.526.3.412)"] Bradycardia
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that Bradycardia.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ( ["Allergy/Intolerance: Beta Blocker Therapy Ingredient" using "Beta Blocker Therapy Ingredient (2.16.840.1.113883.3.526.3.1493)"]
+  union ["Allergy/Intolerance: Substance with beta adrenergic receptor antagonist mechanism of action (substance)" using "Substance with beta adrenergic receptor antagonist mechanism of action (substance) (SNOMEDCT Code 373254001)"] ) BetaBlockerAllergyIntolerance
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that BetaBlockerAllergyIntolerance.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  or exists ["Diagnosis: Atrioventricular Block" using "Atrioventricular Block (2.16.840.1.113883.3.526.3.367)"] AtrioventricularBlock
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that AtrioventricularBlock.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  and not exists ["Diagnosis: Cardiac Pacer in Situ" using "Cardiac Pacer in Situ (2.16.840.1.113883.3.526.3.368)"] CardiacPacerDiagnosis
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that CardiacPacerDiagnosis.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+  and not exists ["Procedure, Performed: Cardiac Pacer" using "Cardiac Pacer (2.16.840.1.113762.1.4.1178.53)"] ImplantedCardiacPacer
+  with ( ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) QualifyingEncounter
+  with ["Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)"] HeartFailure
+    such that HeartFailure.prevalencePeriod overlaps QualifyingEncounter.relevantPeriod
+  where QualifyingEncounter.relevantPeriod during Measurement Period HFOutpatientEncounter
+  with ( ["Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)"] EjectionFraction
+    where EjectionFraction.result <= 40 '%'
+)
+  union ["Diagnosis: Moderate or Severe LVSD" using "Moderate or Severe LVSD (2.16.840.1.113883.3.526.3.1090)"]
+  union ( ["Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)"] LVSD
+      where LVSD.severity in valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092)
+  ) LVSDFindings
+    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
+    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ImplantedCardiacPacer.relevantDatetime, ImplantedCardiacPacer.relevantPeriod ) ) starts before 
+    end of ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+=============================================================================================================================================================================
+Stratification:
+None

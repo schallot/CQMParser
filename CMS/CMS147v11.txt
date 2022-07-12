@@ -1,0 +1,122 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	)
+	  and ( exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+	  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Patient Provider Interaction" using "Patient Provider Interaction (2.16.840.1.113883.3.526.3.1012)"]
+	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+	  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"]
+	  union ["Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
+	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+	  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period
+	      or exists ["Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)"] Hemodialysis
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
+	      or exists ["Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)"] PeritonealDialysis
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
+	  )
+=============================================================================================================================================================================
+Denominator:
+exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	)
+	  and ( exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+	  union ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Patient Provider Interaction" using "Patient Provider Interaction (2.16.840.1.113883.3.526.3.1012)"]
+	  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+	  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"]
+	  union ["Encounter, Performed: Discharge Services - Nursing Facility" using "Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
+	  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+	  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+	  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+	  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) QualifyingEncounter
+	  where QualifyingEncounter.relevantPeriod during Measurement Period
+	      or exists ["Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)"] Hemodialysis
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
+	      or exists ["Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)"] PeritonealDialysis
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
+	  )
+	  and ( exists ["Encounter, Performed: Encounter-Influenza" using "Encounter-Influenza (2.16.840.1.113883.3.526.3.1252)"] FluEncounter
+	  where FluEncounter.relevantPeriod starts during Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	      or exists ["Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)"] FluSeasonHemodialysis
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( FluSeasonHemodialysis.relevantDatetime, FluSeasonHemodialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	      or exists ["Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)"] FluSeasonPeritonealDialysis
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( FluSeasonPeritonealDialysis.relevantDatetime, FluSeasonPeritonealDialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	  )
+=============================================================================================================================================================================
+Denominator Exclusions:
+None
+=============================================================================================================================================================================
+Numerator:
+exists ["Procedure, Performed: Influenza Vaccination" using "Influenza Vaccination (2.16.840.1.113883.3.526.3.402)"] FluVaccination
+	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( FluVaccination.relevantDatetime, FluVaccination.relevantPeriod ) during Interval[start of Measurement Period - 5 months, start of Measurement Period + 3 months )
+	  or exists ["Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.526.3.1254)"] AdministeredFluVaccine
+	  where AdministeredFluVaccine.relevantDatetime during Interval[start of Measurement Period - 5 months, start of Measurement Period + 3 months )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists ["Procedure, Not Performed: Influenza Vaccination" using "Influenza Vaccination (2.16.840.1.113883.3.526.3.402)"] NoFluVaccination
+	  where NoFluVaccination.authorDatetime during Interval[start of Measurement Period - 5 months, start of Measurement Period + 3 months )
+	    and ( NoFluVaccination.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+	        or NoFluVaccination.negationRationale in valueset "Patient Reason" (2.16.840.1.113883.3.526.3.1008)
+	        or NoFluVaccination.negationRationale in valueset "System Reason" (2.16.840.1.113883.3.526.3.1009)
+	        or NoFluVaccination.negationRationale in valueset "Influenza Vaccination Declined" (2.16.840.1.113883.3.526.3.1255)
+	    )
+	  or exists ["Immunization, Not Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.526.3.1254)"] NoFluVaccine
+	  where NoFluVaccine.authorDatetime during Interval[start of Measurement Period - 5 months, start of Measurement Period + 3 months )
+	    and ( NoFluVaccine.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+	        or NoFluVaccine.negationRationale in valueset "Patient Reason" (2.16.840.1.113883.3.526.3.1008)
+	        or NoFluVaccine.negationRationale in valueset "System Reason" (2.16.840.1.113883.3.526.3.1009)
+	        or NoFluVaccine.negationRationale in valueset "Influenza Vaccination Declined" (2.16.840.1.113883.3.526.3.1255)
+	    )
+	  or exists ["Diagnosis: Allergy to Eggs" using "Allergy to Eggs (2.16.840.1.113883.3.526.3.1253)"] EggAllergy
+	  where EggAllergy.prevalencePeriod overlaps after Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	  or exists ["Allergy/Intolerance: Egg Substance" using "Egg Substance (2.16.840.1.113883.3.526.3.1537)"] AllergyEggSubstance
+	  where AllergyEggSubstance.prevalencePeriod overlaps after Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	  or exists ["Diagnosis: Allergy to Influenza Vaccine" using "Allergy to Influenza Vaccine (2.16.840.1.113883.3.526.3.1256)"] FluVaccineAllergyDiagnosis
+	  where FluVaccineAllergyDiagnosis.prevalencePeriod overlaps after Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	  or exists ["Diagnosis: Intolerance to Influenza Vaccine" using "Intolerance to Influenza Vaccine (2.16.840.1.113883.3.526.3.1257)"] FluVaccineIntoleranceDiagnosis
+	  where FluVaccineIntoleranceDiagnosis.prevalencePeriod overlaps after Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	  or exists ["Allergy/Intolerance: Influenza Vaccination" using "Influenza Vaccination (2.16.840.1.113883.3.526.3.402)"] FluVaccinationIntolerance
+	  where FluVaccinationIntolerance.prevalencePeriod overlaps after Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+	  or exists ["Allergy/Intolerance: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.526.3.1254)"] FluVaccineAllergyIntolerance
+	  where FluVaccineAllergyIntolerance.prevalencePeriod overlaps after Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+=============================================================================================================================================================================
+Stratification:
+None

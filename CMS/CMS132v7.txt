@@ -1,0 +1,80 @@
+=============================================================================================================================================================================
+Initial Population:
+["Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)"] CataractSurgery
+		where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
+		where exists ( [Patient Characteristic Birthdate] BirthDate
+				where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+		)
+=============================================================================================================================================================================
+Denominator:
+["Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)"] CataractSurgery
+		where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
+		where exists ( [Patient Characteristic Birthdate] BirthDate
+				where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+		)
+=============================================================================================================================================================================
+Denominator Exclusions:
+["Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)"] CataractSurgery
+		where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
+		with ["Procedure, Performed: Prior Pars Plana Vitrectomy" using "Prior Pars Plana Vitrectomy (2.16.840.1.113883.3.526.3.1434)"] ParsPlanaVitrectomy
+			such that ParsPlanaVitrectomy.relevantPeriod starts before end of CataractSurgeryPerformed.relevantPeriod
+		union ["Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)"] CataractSurgery
+		where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
+		with ["Medication, Active: Use of Systemic Sympathetic alpha-1a Antagonist Medication for Treatment of Prostatic Hypertrophy" using "Use of Systemic Sympathetic alpha-1a Antagonist Medication for Treatment of Prostatic Hypertrophy (2.16.840.1.113883.3.526.3.1442)"] ActiveSympatheticAlpha1aAntagonist
+			such that ActiveSympatheticAlpha1aAntagonist.relevantPeriod overlaps before CataractSurgeryPerformed.relevantPeriod
+		union ["Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)"] CataractSurgery
+		where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
+		with ( ["Diagnosis: Acute and Subacute Iridocyclitis" using "Acute and Subacute Iridocyclitis (2.16.840.1.113883.3.526.3.1241)"]
+			union ["Diagnosis: Adhesions and Disruptions of Iris and Ciliary Body" using "Adhesions and Disruptions of Iris and Ciliary Body (2.16.840.1.113883.3.526.3.1405)"]
+			union ["Diagnosis: Anomalies of Pupillary Function" using "Anomalies of Pupillary Function (2.16.840.1.113883.3.526.3.1406)"]
+			union ["Diagnosis: Aphakia and Other Disorders of Lens" using "Aphakia and Other Disorders of Lens (2.16.840.1.113883.3.526.3.1407)"]
+			union ["Diagnosis: Burn Confined to Eye and Adnexa" using "Burn Confined to Eye and Adnexa (2.16.840.1.113883.3.526.3.1409)"]
+			union ["Diagnosis: Cataract Secondary to Ocular Disorders" using "Cataract Secondary to Ocular Disorders (2.16.840.1.113883.3.526.3.1410)"]
+			union ["Diagnosis: Cataract, Congenital" using "Cataract, Congenital (2.16.840.1.113883.3.526.3.1412)"]
+			union ["Diagnosis: Cataract, Mature or Hypermature" using "Cataract, Mature or Hypermature (2.16.840.1.113883.3.526.3.1413)"]
+			union ["Diagnosis: Cataract, Posterior Polar" using "Cataract, Posterior Polar (2.16.840.1.113883.3.526.3.1414)"]
+			union ["Diagnosis: Central Corneal Ulcer" using "Central Corneal Ulcer (2.16.840.1.113883.3.526.3.1428)"]
+			union ["Diagnosis: Certain Types of Iridocyclitis" using "Certain Types of Iridocyclitis (2.16.840.1.113883.3.526.3.1415)"]
+			union ["Diagnosis: Chronic Iridocyclitis" using "Chronic Iridocyclitis (2.16.840.1.113883.3.526.3.1416)"]
+			union ["Diagnosis: Cloudy Cornea" using "Cloudy Cornea (2.16.840.1.113883.3.526.3.1417)"]
+			union ["Diagnosis: Corneal Edema" using "Corneal Edema (2.16.840.1.113883.3.526.3.1418)"]
+			union ["Diagnosis: Corneal Opacity and Other Disorders of Cornea" using "Corneal Opacity and Other Disorders of Cornea (2.16.840.1.113883.3.526.3.1419)"]
+			union ["Diagnosis: Cysts of Iris, Ciliary Body, and Anterior Chamber" using "Cysts of Iris, Ciliary Body, and Anterior Chamber (2.16.840.1.113883.3.526.3.1420)"]
+			union ["Diagnosis: Enophthalmos" using "Enophthalmos (2.16.840.1.113883.3.526.3.1421)"]
+			union ["Diagnosis: Glaucoma" using "Glaucoma (2.16.840.1.113883.3.526.3.1423)"]
+			union ["Diagnosis: Hereditary Corneal Dystrophies" using "Hereditary Corneal Dystrophies (2.16.840.1.113883.3.526.3.1424)"]
+			union ["Diagnosis: High Hyperopia" using "High Hyperopia (2.16.840.1.113883.3.526.3.1425)"]
+			union ["Diagnosis: Hypotony of Eye" using "Hypotony of Eye (2.16.840.1.113883.3.526.3.1426)"]
+			union ["Diagnosis: Injury to Optic Nerve and Pathways" using "Injury to Optic Nerve and Pathways (2.16.840.1.113883.3.526.3.1427)"]
+			union ["Diagnosis: Morgagnian Cataract" using "Morgagnian Cataract (2.16.840.1.113883.3.526.3.1558)"]
+			union ["Diagnosis: Open Wound of Eyeball" using "Open Wound of Eyeball (2.16.840.1.113883.3.526.3.1430)"]
+			union ["Diagnosis: Pathologic Myopia" using "Pathologic Myopia (2.16.840.1.113883.3.526.3.1432)"]
+			union ["Diagnosis: Posterior Lenticonus" using "Posterior Lenticonus (2.16.840.1.113883.3.526.3.1433)"]
+			union ["Diagnosis: Pseudoexfoliation Syndrome" using "Pseudoexfoliation Syndrome (2.16.840.1.113883.3.526.3.1435)"]
+			union ["Diagnosis: Retrolental Fibroplasias" using "Retrolental Fibroplasias (2.16.840.1.113883.3.526.3.1438)"]
+			union ["Diagnosis: Traumatic Cataract" using "Traumatic Cataract (2.16.840.1.113883.3.526.3.1443)"]
+			union ["Diagnosis: Uveitis" using "Uveitis (2.16.840.1.113883.3.526.3.1444)"]
+			union ["Diagnosis: Vascular Disorders of Iris and Ciliary Body" using "Vascular Disorders of Iris and Ciliary Body (2.16.840.1.113883.3.526.3.1445)"] ) ComorbidDiagnosis
+			such that ComorbidDiagnosis.prevalencePeriod overlaps before CataractSurgeryPerformed.relevantPeriod
+=============================================================================================================================================================================
+Numerator:
+["Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)"] CataractSurgery
+		where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
+		with ( ["Procedure, Performed: Aspiration and Injection Procedures" using "Aspiration and Injection Procedures (2.16.840.1.113883.3.526.3.1408)"]
+			union ["Procedure, Performed: Excision of Adhesions" using "Excision of Adhesions (2.16.840.1.113883.3.526.3.1422)"]
+			union ["Procedure, Performed: Lens Procedure" using "Lens Procedure (2.16.840.1.113883.3.526.3.1429)"]
+			union ["Procedure, Performed: Removal Procedures" using "Removal Procedures (2.16.840.1.113883.3.526.3.1436)"]
+			union ["Procedure, Performed: Retinal Repair Procedures" using "Retinal Repair Procedures (2.16.840.1.113883.3.526.3.1437)"]
+			union ["Procedure, Performed: Revision Procedures" using "Revision Procedures (2.16.840.1.113883.3.526.3.1439)"]
+			union ["Procedure, Performed: Scleral Procedures" using "Scleral Procedures (2.16.840.1.113883.3.526.3.1440)"]
+			union ["Procedure, Performed: Vitreous Procedures" using "Vitreous Procedures (2.16.840.1.113883.3.526.3.1447)"] ) SurgicalComplicationProcedure
+			such that SurgicalComplicationProcedure.relevantPeriod starts 30 days or less after day of end of CataractSurgeryPerformed.relevantPeriod
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

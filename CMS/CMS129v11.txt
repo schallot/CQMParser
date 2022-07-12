@@ -1,0 +1,128 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ["Diagnosis: Prostate Cancer" using "Prostate Cancer (2.16.840.1.113883.3.526.3.319)"] ProstateCancer
+	  where ProstateCancer.prevalencePeriod overlaps Measurement Period
+=============================================================================================================================================================================
+Denominator:
+exists ["Diagnosis: Prostate Cancer" using "Prostate Cancer (2.16.840.1.113883.3.526.3.319)"] ProstateCancer
+	  where ProstateCancer.prevalencePeriod overlaps Measurement Period
+	  and First(["Procedure, Performed: Prostate Cancer Treatment" using "Prostate Cancer Treatment (2.16.840.1.113883.3.526.3.398)"] ProstateCancerTreatment
+	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(ProstateCancerTreatment.relevantDatetime, ProstateCancerTreatment.relevantPeriod)ends during Measurement Period
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) is not null
+	  and ( Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] ProstateCancerStaging
+	    with First(["Procedure, Performed: Prostate Cancer Treatment" using "Prostate Cancer Treatment (2.16.840.1.113883.3.526.3.398)"] ProstateCancerTreatment
+	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(ProstateCancerTreatment.relevantDatetime, ProstateCancerTreatment.relevantPeriod)ends during Measurement Period
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) FirstProstateCancerTreatment
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(ProstateCancerStaging.relevantDatetime, ProstateCancerStaging.relevantPeriod)starts before start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(FirstProstateCancerTreatment.relevantDatetime, FirstProstateCancerTreatment.relevantPeriod)
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	)) LastProstateCancerStaging
+	  where ( LastProstateCancerStaging.result ~ code "T1a: Prostate tumor incidental histologic finding in 5% or less of tissue resected (finding)" ("SNOMEDCT Code (369833007)")
+	      or LastProstateCancerStaging.result ~ code "T1b: Prostate tumor incidental histologic finding in > 5% of tissue resected (finding)" ("SNOMEDCT Code (369834001)")
+	      or LastProstateCancerStaging.result ~ code "Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)" ("SNOMEDCT Code (433351000124101)")
+	      or LastProstateCancerStaging.result ~ code "Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)" ("SNOMEDCT Code (433361000124104)")
+	  ) is not null
+	  and ( Last(["Laboratory Test, Performed: Prostate Specific Antigen Test" using "Prostate Specific Antigen Test (2.16.840.1.113883.3.526.3.401)"] PSATest
+	    with ( Last(["Procedure, Performed: Cancer staging (tumor staging)" using "Cancer staging (tumor staging) (SNOMEDCT Code 258232002)"] ProstateCancerStaging
+	    with First(["Procedure, Performed: Prostate Cancer Treatment" using "Prostate Cancer Treatment (2.16.840.1.113883.3.526.3.398)"] ProstateCancerTreatment
+	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(ProstateCancerTreatment.relevantDatetime, ProstateCancerTreatment.relevantPeriod)ends during Measurement Period
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) FirstProstateCancerTreatment
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(ProstateCancerStaging.relevantDatetime, ProstateCancerStaging.relevantPeriod)starts before start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(FirstProstateCancerTreatment.relevantDatetime, FirstProstateCancerTreatment.relevantPeriod)
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	)) LastProstateCancerStaging
+	  where ( LastProstateCancerStaging.result ~ code "T1a: Prostate tumor incidental histologic finding in 5% or less of tissue resected (finding)" ("SNOMEDCT Code (369833007)")
+	      or LastProstateCancerStaging.result ~ code "T1b: Prostate tumor incidental histologic finding in > 5% of tissue resected (finding)" ("SNOMEDCT Code (369834001)")
+	      or LastProstateCancerStaging.result ~ code "Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)" ("SNOMEDCT Code (433351000124101)")
+	      or LastProstateCancerStaging.result ~ code "Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)" ("SNOMEDCT Code (433361000124104)")
+	  ) MostRecentProstateCancerStaging
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(PSATest.relevantDatetime, PSATest.relevantPeriod)starts before if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(MostRecentProstateCancerStaging.relevantDatetime, MostRecentProstateCancerStaging.relevantPeriod)
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	)) LastPSATest
+	  return LastPSATest.result < 10 'ng/mL'
+	  and ( Last(["Laboratory Test, Performed: Gleason score in Specimen Qualitative" using "Gleason score in Specimen Qualitative (LOINC Code 35266-6)"] GleasonScore
+	    with First(["Procedure, Performed: Prostate Cancer Treatment" using "Prostate Cancer Treatment (2.16.840.1.113883.3.526.3.398)"] ProstateCancerTreatment
+	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(ProstateCancerTreatment.relevantDatetime, ProstateCancerTreatment.relevantPeriod)ends during Measurement Period
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	) FirstProstateCancerTreatment
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(GleasonScore.relevantDatetime, GleasonScore.relevantPeriod)starts before start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(FirstProstateCancerTreatment.relevantDatetime, FirstProstateCancerTreatment.relevantPeriod)
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	)) LastGleasonScore
+	  return LastGleasonScore.result <= 6
+=============================================================================================================================================================================
+Denominator Exclusions:
+None
+=============================================================================================================================================================================
+Numerator:
+not exists ["Diagnostic Study, Performed: Bone Scan" using "Bone Scan (2.16.840.1.113883.3.526.3.320)"] BoneScan
+	  with ["Diagnosis: Prostate Cancer" using "Prostate Cancer (2.16.840.1.113883.3.526.3.319)"] ProstateCancer
+	  where ProstateCancer.prevalencePeriod overlaps Measurement Period ActiveProstateCancer
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( BoneScan.relevantDatetime, BoneScan.relevantPeriod ) starts after start of ActiveProstateCancer.prevalencePeriod
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists ["Diagnosis: Pain Related to Prostate Cancer" using "Pain Related to Prostate Cancer (2.16.840.1.113883.3.526.3.451)"] ProstateCancerPain
+	  with ["Diagnosis: Prostate Cancer" using "Prostate Cancer (2.16.840.1.113883.3.526.3.319)"] ProstateCancer
+	  where ProstateCancer.prevalencePeriod overlaps Measurement Period ActiveProstateCancer
+	    such that ProstateCancerPain.prevalencePeriod starts after start of ActiveProstateCancer.prevalencePeriod
+	  or exists ["Procedure, Performed: Salvage Therapy" using "Salvage Therapy (2.16.840.1.113883.3.526.3.399)"] SalvageTherapy
+	  with ["Diagnosis: Prostate Cancer" using "Prostate Cancer (2.16.840.1.113883.3.526.3.319)"] ProstateCancer
+	  where ProstateCancer.prevalencePeriod overlaps Measurement Period ActiveProstateCancer
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( SalvageTherapy.relevantDatetime, SalvageTherapy.relevantPeriod ) starts after start of ActiveProstateCancer.prevalencePeriod
+	  or exists ["Diagnostic Study, Performed: Bone Scan" using "Bone Scan (2.16.840.1.113883.3.526.3.320)"] BoneScan
+	  with ["Diagnosis: Prostate Cancer" using "Prostate Cancer (2.16.840.1.113883.3.526.3.319)"] ProstateCancer
+	  where ProstateCancer.prevalencePeriod overlaps Measurement Period ActiveProstateCancer
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( BoneScan.relevantDatetime, BoneScan.relevantPeriod ) starts after start of ActiveProstateCancer.prevalencePeriod BoneScanAfterDiagnosis
+	  where BoneScanAfterDiagnosis.reason ~ code "Procedure reason record (record artifact)" ("SNOMEDCT Code (433611000124109)")
+=============================================================================================================================================================================
+Stratification:
+None

@@ -1,0 +1,144 @@
+=============================================================================================================================================================================
+Initial Population:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		where difference in days between start of Value and end of Value(Encounter.relevantPeriod)<= 120
+			and Encounter.relevantPeriod ends during Measurement Period
+		intersect ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Encounter.relevantPeriod)>= 18
+				and Encounter.principalDiagnosis in valueset "Acute or Evolving MI" using "2.16.840.1.113883.3.666.5.3022"
+=============================================================================================================================================================================
+Denominator:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		where difference in days between start of Value and end of Value(Encounter.relevantPeriod)<= 120
+			and Encounter.relevantPeriod ends during Measurement Period
+		intersect ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Encounter.relevantPeriod)>= 18
+				and Encounter.principalDiagnosis in valueset "Acute or Evolving MI" using "2.16.840.1.113883.3.666.5.3022" QualifyingEncounter
+		let FirstPCI: First(["Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)"] FirstPCI
+				where FirstPCI.relevantPeriod starts on or after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+				sort by start of relevantPeriod
+		)
+		with ["Diagnostic Study, Performed: Electrocardiogram (ECG)" using "Electrocardiogram (ECG) (2.16.840.1.113883.3.666.5.735)"] ECG
+			such that ECG.relevantPeriod starts during ( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) X
+		return if X is null then Encounter.relevantPeriod else Interval[start of X.relevantPeriod, end of Encounter.relevantPeriod](QualifyingEncounter)
+				or ECG.relevantPeriod starts 1 hour or less on or before start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+		where FirstPCI.relevantPeriod starts 1440 minutes or less on or after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+			and not exists ( ["Medication, Administered: Fibrinolytic Therapy" using "Fibrinolytic Therapy (2.16.840.1.113883.3.666.5.736)"] FibrinolyticTherapy
+					where FibrinolyticTherapy.relevantPeriod starts after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+						and FibrinolyticTherapy.relevantPeriod starts before start of FirstPCI.relevantPeriod
+			)
+=============================================================================================================================================================================
+Denominator Exclusions:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		where difference in days between start of Value and end of Value(Encounter.relevantPeriod)<= 120
+			and Encounter.relevantPeriod ends during Measurement Period
+		intersect ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Encounter.relevantPeriod)>= 18
+				and Encounter.principalDiagnosis in valueset "Acute or Evolving MI" using "2.16.840.1.113883.3.666.5.3022" QualifyingEncounter
+		let FirstPCI: First(["Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)"] FirstPCI
+				where FirstPCI.relevantPeriod starts on or after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+				sort by start of relevantPeriod
+		)
+		with ["Diagnostic Study, Performed: Electrocardiogram (ECG)" using "Electrocardiogram (ECG) (2.16.840.1.113883.3.666.5.735)"] ECG
+			such that ECG.relevantPeriod starts during ( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) X
+		return if X is null then Encounter.relevantPeriod else Interval[start of X.relevantPeriod, end of Encounter.relevantPeriod](QualifyingEncounter)
+				or ECG.relevantPeriod starts 1 hour or less on or before start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+		where FirstPCI.relevantPeriod starts 1440 minutes or less on or after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+			and not exists ( ["Medication, Administered: Fibrinolytic Therapy" using "Fibrinolytic Therapy (2.16.840.1.113883.3.666.5.736)"] FibrinolyticTherapy
+					where FibrinolyticTherapy.relevantPeriod starts after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+						and FibrinolyticTherapy.relevantPeriod starts before start of FirstPCI.relevantPeriod
+			) DenominatorEncounter
+		where DenominatorEncounter.admissionSource in valueset "Ambulatory surgical center" using "2.16.840.1.113883.3.666.5.687"
+			or DenominatorEncounter.admissionSource in valueset "Transfer From Outpatient" using "2.16.840.1.113883.3.67.1.101.950"
+			or DenominatorEncounter.admissionSource in valueset "Transfer From Emergency Department (ED) Locations" using "2.16.840.1.113883.3.666.5.3006"
+			or DenominatorEncounter.admissionSource in valueset "Transfer From Inpatient" using "2.16.840.1.113883.3.666.5.3013"
+=============================================================================================================================================================================
+Numerator:
+["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		where difference in days between start of Value and end of Value(Encounter.relevantPeriod)<= 120
+			and Encounter.relevantPeriod ends during Measurement Period
+		intersect ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Encounter.relevantPeriod)>= 18
+				and Encounter.principalDiagnosis in valueset "Acute or Evolving MI" using "2.16.840.1.113883.3.666.5.3022" QualifyingEncounter
+		with ["Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)"] PCI
+			such that PCI.relevantPeriod starts 90 minutes or less on or after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(QualifyingEncounter)
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		where difference in days between start of Value and end of Value(Encounter.relevantPeriod)<= 120
+			and Encounter.relevantPeriod ends during Measurement Period Encounter
+		with ( ["Procedure, Performed: Endotracheal Intubation" using "Endotracheal Intubation (2.16.840.1.113762.1.4.1045.69)"]
+			union ["Procedure, Performed: Aortic balloon pump insertion" using "Aortic balloon pump insertion (2.16.840.1.113883.3.666.5.1151)"]
+			union ["Procedure, Performed: Ventricular Assist Device placement" using "Ventricular Assist Device placement (2.16.840.1.113883.3.666.5.3015)"]
+	) ExceptionProcedures
+			such that ExceptionProcedures.relevantPeriod starts 90 minutes or less on or after start of First((( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) EDEncounter
+		return if EDEncounter is null then Encounter.facilityLocations else flatten { EDEncounter.facilityLocations, Encounter.facilityLocations }(Encounter))HospitalLocation
+			sort by start of locationPeriod
+	).locationPeriod(Encounter)
+			union ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] Encounter
+		where difference in days between start of Value and end of Value(Encounter.relevantPeriod)<= 120
+			and Encounter.relevantPeriod ends during Measurement Period Encounter
+		with ["Diagnosis: Cardiopulmonary arrest" using "Cardiopulmonary arrest (2.16.840.1.113883.3.666.5.748)"] CardiacArrest
+			such that CardiacArrest.prevalencePeriod starts 90 minutes or less on or after start of Global.Hospitalization(Encounter)
+	)
+=============================================================================================================================================================================
+Stratification:
+None

@@ -1,0 +1,209 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
+	    and First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) is not null
+=============================================================================================================================================================================
+Denominator:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
+	    and First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) is not null
+=============================================================================================================================================================================
+Denominator Exclusions:
+Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
+	    where ( DischargeHospice.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
+	        or DischargeHospice.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+	    )
+	      and DischargeHospice.relevantPeriod ends during Measurement Period
+	)
+	  or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+	      where HospiceOrder.authorDatetime during Measurement Period
+	  )
+	  or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	  )
+	  or exists ( ( ["Intervention, Performed: Alcohol and Drug Dependence Treatment" using "Alcohol and Drug Dependence Treatment (2.16.840.1.113883.3.464.1003.106.12.1005)"]
+	    union ["Intervention, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"] ) Interventions
+	    with First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) FirstDiagnosis
+	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before start of FirstDiagnosis.prevalencePeriod
+	)
+	  union ( ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters QualifyingEncounter
+	      where ( exists QualifyingEncounter.diagnoses Diagnosis
+	          where Diagnosis.code in valueset "Alcohol and Drug Dependence" (2.16.840.1.113883.3.464.1003.106.12.1001)
+	      ) ) EncounterWithDiagnosis
+	      with First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) FirstDiagnosis
+	        such that EncounterWithDiagnosis.relevantPeriod starts 60 days or less before start of FirstDiagnosis.prevalencePeriod
+	  )
+	  union ( ["Medication, Order: Opiate Antagonists" using "Opiate Antagonists (2.16.840.1.113883.3.464.1003.198.12.1132)"] Opiates
+	      with First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) FirstDiagnosis
+	        such that Opiates.authorDatetime 60 days or less before start of FirstDiagnosis.prevalencePeriod
+	  )
+=============================================================================================================================================================================
+Numerator:
+exists ["Intervention, Performed: Alcohol and Drug Dependence Treatment" using "Alcohol and Drug Dependence Treatment (2.16.840.1.113883.3.464.1003.106.12.1005)"]
+	  union ["Intervention, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+	  union ( ( ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	      union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) TelehealthEncounter
+	      where exists TelehealthEncounter.diagnoses Diagnosis
+	        where Diagnosis.code in valueset "Alcohol and Drug Dependence" (2.16.840.1.113883.3.464.1003.106.12.1001)
+	  ) TreatmentInitiatedWithIntervention
+	  with First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) FirstDiagnosed
+	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime> ( TreatmentInitiatedWithIntervention.relevantDatetime, TreatmentInitiatedWithIntervention.relevantPeriod ) starts 14 days or less after day of start of FirstDiagnosed.prevalencePeriod
+	  or exists ["Medication, Order: Opiate Antagonists" using "Opiate Antagonists (2.16.840.1.113883.3.464.1003.198.12.1132)"] TreatmentInitiatedWithMedication
+	  with First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) FirstDiagnosed
+	    such that TreatmentInitiatedWithMedication.authorDatetime 14 days or less on or after day of start of FirstDiagnosed.prevalencePeriod
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Population Criteria 1:
+exists ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
+	    and First(["Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)"] DependenceDiagnosis
+	    with(( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+	  union ["Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)"]
+	  union ["Encounter, Performed: Hospital Observation Care - Initial" using "Hospital Observation Care - Initial (2.16.840.1.113883.3.464.1003.101.12.1002)"]
+	  union ["Encounter, Performed: Hospital Inpatient Visit - Initial" using "Hospital Inpatient Visit - Initial (2.16.840.1.113883.3.464.1003.101.12.1004)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient Same Day Discharge" using "Discharge Services - Hospital Inpatient Same Day Discharge (2.16.840.1.113883.3.464.1003.101.12.1006)"]
+	  union ["Encounter, Performed: Discharge Services - Hospital Inpatient" using "Discharge Services - Hospital Inpatient (2.16.840.1.113883.3.464.1003.101.12.1007)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) ValidEncounters)ValidEncounter
+	      such that ValidEncounter.relevantPeriod during Measurement Period
+	        and DependenceDiagnosis.prevalencePeriod starts during ValidEncounter.relevantPeriod
+	        and DependenceDiagnosis.prevalencePeriod starts 47 days or more before day of 
+	        end of Measurement Period
+	    sort by start of prevalencePeriod
+	) is not null
+=============================================================================================================================================================================
+Stratification 1:
+exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[13, 17]
+	)
+=============================================================================================================================================================================
+Stratification 2:
+exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	)

@@ -1,0 +1,56 @@
+=============================================================================================================================================================================
+Initial Population:
+Last(["Procedure, Performed: Delivery - Procedure" using "Delivery - Procedure (2.16.840.1.113762.1.4.1078.5)"] LastDeliveryProcedure
+			where LastDeliveryProcedure.relevantPeriod during Measurement Period
+			sort by start of relevantPeriod
+	) MostRecentDelivery
+		where exists ( ["Diagnosis: Delivery - Diagnosis" using "Delivery - Diagnosis (2.16.840.1.113883.3.67.1.101.1.278)"] DeliveryDiagnosis
+				where MostRecentDelivery.relevantPeriod overlaps DeliveryDiagnosis.prevalencePeriod
+		) is not null
+		and AgeInYearsAt(start of Measurement Period)>= 12
+		and exists ( ["Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)"] )
+=============================================================================================================================================================================
+Denominator:
+Last(["Procedure, Performed: Delivery - Procedure" using "Delivery - Procedure (2.16.840.1.113762.1.4.1078.5)"] LastDeliveryProcedure
+			where LastDeliveryProcedure.relevantPeriod during Measurement Period
+			sort by start of relevantPeriod
+	) MostRecentDelivery
+		where exists ( ["Diagnosis: Delivery - Diagnosis" using "Delivery - Diagnosis (2.16.840.1.113883.3.67.1.101.1.278)"] DeliveryDiagnosis
+				where MostRecentDelivery.relevantPeriod overlaps DeliveryDiagnosis.prevalencePeriod
+		) is not null
+		and AgeInYearsAt(start of Measurement Period)>= 12
+		and exists ( ["Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)"] )
+=============================================================================================================================================================================
+Denominator Exclusions:
+None
+=============================================================================================================================================================================
+Numerator:
+exists ( ["Laboratory Test, Performed: HBsAg" using "HBsAg (2.16.840.1.113883.3.67.1.101.1.279)"] HBsAGLabTest
+			with Last(["Procedure, Performed: Delivery - Procedure" using "Delivery - Procedure (2.16.840.1.113762.1.4.1078.5)"] LastDeliveryProcedure
+			where LastDeliveryProcedure.relevantPeriod during Measurement Period
+			sort by start of relevantPeriod
+	) MostRecentDelivery
+		where exists ( ["Diagnosis: Delivery - Diagnosis" using "Delivery - Diagnosis (2.16.840.1.113883.3.67.1.101.1.278)"] DeliveryDiagnosis
+				where MostRecentDelivery.relevantPeriod overlaps DeliveryDiagnosis.prevalencePeriod
+		) DeliveryOverlapsDiagnosis
+				such that HBsAGLabTest.relevantPeriod starts 280 days or less on or before start of DeliveryOverlapsDiagnosis.relevantPeriod
+	)
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists ( ["Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.67.1.101.1.269)"] HepatitisB
+			with Last(["Procedure, Performed: Delivery - Procedure" using "Delivery - Procedure (2.16.840.1.113762.1.4.1078.5)"] LastDeliveryProcedure
+			where LastDeliveryProcedure.relevantPeriod during Measurement Period
+			sort by start of relevantPeriod
+	) MostRecentDelivery
+		where exists ( ["Diagnosis: Delivery - Diagnosis" using "Delivery - Diagnosis (2.16.840.1.113883.3.67.1.101.1.278)"] DeliveryDiagnosis
+				where MostRecentDelivery.relevantPeriod overlaps DeliveryDiagnosis.prevalencePeriod
+		) DeliveryOverlapsDiagnosis
+				such that HepatitisB.prevalencePeriod starts 365 days or less before start of DeliveryOverlapsDiagnosis.relevantPeriod
+					or HepatitisB.prevalencePeriod ends 365 days or less before start of DeliveryOverlapsDiagnosis.relevantPeriod
+	)
+=============================================================================================================================================================================
+Stratification:
+None

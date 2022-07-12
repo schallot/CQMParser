@@ -1,0 +1,90 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ( ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] DepressionEncounter
+		with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
+		union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+		where DepressionEncounter.relevantPeriod ends during Measurement Period
+			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] )
+=============================================================================================================================================================================
+Denominator:
+exists ( ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] DepressionEncounter
+		with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
+		union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+		where DepressionEncounter.relevantPeriod ends during Measurement Period
+			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] )
+=============================================================================================================================================================================
+Denominator Exclusions:
+exists ( ["Intervention, Order: Palliative Care" using "Palliative Care (2.16.840.1.113883.3.600.1.1579)"] OrderedPalliativeCare
+		where OrderedPalliativeCare.authorDatetime before end of Interval[start of Measurement Period + 8 months, end of Measurement Period] )
+		or exists ( ["Encounter, Performed: Palliative care encounter" using "Palliative care encounter (2.16.840.1.113883.3.600.1.1575)"] PalliativeCareEncounter
+		where PalliativeCareEncounter.relevantPeriod overlaps Interval[start of Measurement Period + 8 months, end of Measurement Period] )
+		or exists ( ["Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"] EncounterLongTermCare
+		where EncounterLongTermCare.relevantPeriod overlaps Interval[start of Measurement Period + 8 months, end of Measurement Period] )
+		or exists ( [Patient Characteristic Expired] Deceased
+		where Deceased.expiredDatetime in Interval[start of Measurement Period + 8 months, end of Measurement Period] )
+		or exists ( ( ["Diagnosis: Bipolar Disorder" using "Bipolar Disorder (2.16.840.1.113883.3.67.1.101.1.128)"]
+		union ["Diagnosis: Personality Disorder" using "Personality Disorder (2.16.840.1.113883.3.67.1.101.1.246)"]
+		union ["Diagnosis: Schizophrenia or Psychotic Disorder" using "Schizophrenia or Psychotic Disorder (2.16.840.1.113883.3.464.1003.105.12.1104)"]
+		union ["Diagnosis: Pervasive Developmental Disorder" using "Pervasive Developmental Disorder (2.16.840.1.113883.3.464.1003.105.12.1152)"] ) DisorderDiagnoses
+		with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] DepressionEncounter
+		with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
+		union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+		where DepressionEncounter.relevantPeriod ends during Measurement Period
+			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] DepressionEncounter
+			such that DisorderDiagnoses.prevalencePeriod overlaps DepressionEncounter.relevantPeriod )
+=============================================================================================================================================================================
+Numerator:
+exists ( ["Assessment, Performed: Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]" using "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] (LOINC version 2.63 Code 44261-6)"] DepressionAssessment
+			where DepressionAssessment.result is not null
+				and DepressionAssessment.authorDatetime in Interval[start of Measurement Period + 8 months, end of Measurement Period]
+	)
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Population Criteria 1:
+exists ( ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] DepressionEncounter
+		with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
+		union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+		where DepressionEncounter.relevantPeriod ends during Measurement Period
+			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] )
+=============================================================================================================================================================================
+Stratification 1:
+[Patient Characteristic Birthdate] Birthdate
+		with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] DepressionEncounter
+		with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
+		union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+		where DepressionEncounter.relevantPeriod ends during Measurement Period
+			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] DepressionEncounter
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+				and years between ToDate(BirthDateTime)and ToDate(AsOf)(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)< 18
+=============================================================================================================================================================================
+Stratification 2:
+[Patient Characteristic Birthdate] Birthdate
+		with ["Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)"] DepressionEncounter
+		with ["Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)"]
+		union ["Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)"] Depression
+			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+		where DepressionEncounter.relevantPeriod ends during Measurement Period
+			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] DepressionEncounter
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 18

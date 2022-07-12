@@ -1,0 +1,78 @@
+=============================================================================================================================================================================
+Initial Population:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
+		where NonElectiveEncounter.principalDiagnosis in valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212"
+			or NonElectiveEncounter.principalDiagnosis in valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247" AllStrokeEncounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18
+=============================================================================================================================================================================
+Denominator:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
+		where NonElectiveEncounter.principalDiagnosis in valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212"
+			or NonElectiveEncounter.principalDiagnosis in valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247" AllStrokeEncounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+		where EncounterWithAge.dischargeDisposition in valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82"
+=============================================================================================================================================================================
+Denominator Exclusions:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
+		where NonElectiveEncounter.principalDiagnosis in valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212"
+			or NonElectiveEncounter.principalDiagnosis in valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247" AllStrokeEncounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+		where EncounterWithAge.dischargeDisposition in valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82" HomeOrPoliceDischarge
+		with TJC.["Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"]
+		union ["Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"] ComfortMeasures
+			such that Coalesce(start of ComfortMeasures.relevantPeriod, ComfortMeasures.authorDatetime)during ( singleton from ( ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] EDVisit
+			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
+	) ) X
+		return if X is null then Encounter.relevantPeriod else Interval[start of X.relevantPeriod, end of Encounter.relevantPeriod](HomeOrPoliceDischarge)
+=============================================================================================================================================================================
+Numerator:
+( TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
+		where NonElectiveEncounter.principalDiagnosis in valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212"
+			or NonElectiveEncounter.principalDiagnosis in valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247" AllStrokeEncounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+		where EncounterWithAge.dischargeDisposition in valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82" HomeOrPoliceDischarge
+			with ["Communication: From Provider To Patient: Activation of Emergency Medical System Education" using "Activation of Emergency Medical System Education (2.16.840.1.113883.3.117.1.7.1.377)"] EMSEducation
+				such that EMSEducation.authorDatetime during HomeOrPoliceDischarge.relevantPeriod
+			with ["Communication: From Provider To Patient: Instructions for Follow Up After Discharge" using "Instructions for Follow Up After Discharge (2.16.840.1.113883.3.117.1.7.1.378)"] FollowUpInstructions
+				such that FollowUpInstructions.authorDatetime during HomeOrPoliceDischarge.relevantPeriod
+			with ["Communication: From Provider To Patient: Prescribed Medications Education" using "Prescribed Medications Education (2.16.840.1.113883.3.117.1.7.1.379)"] MedicationEducation
+				such that MedicationEducation.authorDatetime during HomeOrPoliceDischarge.relevantPeriod
+			with ["Communication: From Provider To Patient: Risk Factors Education" using "Risk Factors Education (2.16.840.1.113883.3.117.1.7.1.380)"] RiskEducation
+				such that RiskEducation.authorDatetime during HomeOrPoliceDischarge.relevantPeriod
+			with ["Communication: From Provider To Patient: Warning Signs and Symptoms Education" using "Warning Signs and Symptoms Education (2.16.840.1.113883.3.117.1.7.1.381)"] WarningSigns
+				such that WarningSigns.authorDatetime during HomeOrPoliceDischarge.relevantPeriod
+			with ["Communication: From Provider To Patient: Written Information Given" using "Written Information Given (2.16.840.1.113883.3.117.1.7.1.415)"] WrittenInformation
+				such that WrittenInformation.authorDatetime during HomeOrPoliceDischarge.relevantPeriod
+	)
+		union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
+		where NonElectiveEncounter.principalDiagnosis in valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212"
+			or NonElectiveEncounter.principalDiagnosis in valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247" AllStrokeEncounter
+		with [Patient Characteristic Birthdate] BirthDate
+			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+		where EncounterWithAge.dischargeDisposition in valueset "Discharge To Home Or Police Custody" using "2.16.840.1.113883.3.117.1.7.1.82" EncounterDischarge
+		with ["Communication: From Provider To Patient, Not Done: Written Information Given" using "Written Information Given (2.16.840.1.113883.3.117.1.7.1.415)"] NoWrittenInformation
+		where NoWrittenInformation.negationRationale in valueset "Patient Refusal" using "2.16.840.1.113883.3.117.1.7.1.93" NoWrittenInformation
+			such that NoWrittenInformation.authorDatetime during EncounterDischarge.relevantPeriod
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

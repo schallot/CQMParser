@@ -1,0 +1,244 @@
+=============================================================================================================================================================================
+Initial Population:
+AgeInYearsAt(date from 
+  end of Measurement Period
+)in Interval[18, 85]
+  and exists ["Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)"] Hypertension
+  where Hypertension.prevalencePeriod overlaps Interval[start of Measurement Period, start of Measurement Period + 6 months )
+  and exists AdultOutpatientEncounters.( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"] 
+  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during day of Measurement Period
+=============================================================================================================================================================================
+Denominator:
+AgeInYearsAt(date from 
+  end of Measurement Period
+)in Interval[18, 85]
+  and exists ["Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)"] Hypertension
+  where Hypertension.prevalencePeriod overlaps Interval[start of Measurement Period, start of Measurement Period + 6 months )
+  and exists AdultOutpatientEncounters.( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"] 
+  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during day of Measurement Period
+=============================================================================================================================================================================
+Denominator Exclusions:
+Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
+        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+    )
+      and InpatientEncounter.relevantPeriod ends during day of Measurement Period
+)
+  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+      where HospiceEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
+      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+      where HospiceOrder.authorDatetime during day of Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+  )
+  or exists ( ( ["Diagnosis: Pregnancy" using "Pregnancy (2.16.840.1.113883.3.526.3.378)"]
+  union ["Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)"]
+  union ["Diagnosis: Kidney Transplant Recipient" using "Kidney Transplant Recipient (2.16.840.1.113883.3.464.1003.109.12.1029)"]
+  union ["Diagnosis: Chronic Kidney Disease, Stage 5" using "Chronic Kidney Disease, Stage 5 (2.16.840.1.113883.3.526.3.1002)"] ) PregnancyESRDDiagnosis
+  where PregnancyESRDDiagnosis.prevalencePeriod overlaps Measurement Period )
+  or exists ( ( ["Procedure, Performed: Kidney Transplant" using "Kidney Transplant (2.16.840.1.113883.3.464.1003.109.12.1012)"]
+  union ["Procedure, Performed: Dialysis Services" using "Dialysis Services (2.16.840.1.113883.3.464.1003.109.12.1013)"] ) ESRDProcedure
+  where 
+  end of if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ESRDProcedure.relevantDatetime, ESRDProcedure.relevantPeriod ) on or before 
+  end of Measurement Period )
+  or exists ( ["Encounter, Performed: ESRD Monthly Outpatient Services" using "ESRD Monthly Outpatient Services (2.16.840.1.113883.3.464.1003.109.12.1014)"] ESRDEncounter
+  where ESRDEncounter.relevantPeriod starts on or before 
+  end of Measurement Period )
+  or AIFrailLTCF.( AgeInYearsAt(date from 
+    end of Measurement Period
+  )in Interval[66, 80]
+    and exists ( ["Device, Order: Frailty Device" using "Frailty Device (2.16.840.1.113883.3.464.1003.118.12.1300)"] FrailtyDeviceOrder
+    where FrailtyDeviceOrder.authorDatetime during day of Measurement Period
+)
+  or exists ( ["Assessment, Performed: Medical equipment used" using "Medical equipment used (LOINC Code 98181-1)"] EquipmentUsed
+      where EquipmentUsed.result in valueset "Frailty Device" (2.16.840.1.113883.3.464.1003.118.12.1300)
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( EquipmentUsed.relevantDatetime, EquipmentUsed.relevantPeriod ) ends during day of Measurement Period
+  )
+  or exists ( ["Diagnosis: Frailty Diagnosis" using "Frailty Diagnosis (2.16.840.1.113883.3.464.1003.113.12.1074)"] FrailtyDiagnosis
+      where FrailtyDiagnosis.prevalencePeriod overlaps Measurement Period
+  )
+  or exists ( ["Encounter, Performed: Frailty Encounter" using "Frailty Encounter (2.16.840.1.113883.3.464.1003.101.12.1088)"] FrailtyEncounter
+      where FrailtyEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Symptom: Frailty Symptom" using "Frailty Symptom (2.16.840.1.113883.3.464.1003.113.12.1075)"] FrailtySymptom
+      where FrailtySymptom.prevalencePeriod overlaps Measurement Period
+  )
+    and ( exists (
+from
+  ( ["Encounter, Performed: Outpatient" using "Outpatient (2.16.840.1.113883.3.464.1003.101.12.1087)"]
+  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
+  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+  union ["Encounter, Performed: Nonacute Inpatient" using "Nonacute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1084)"] ) OutpatientEncounter
+  where exists ( OutpatientEncounter.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082)
+  )
+    and OutpatientEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 1 year, 
+    end of Measurement Period] OutpatientEncounter1,
+  ( ["Encounter, Performed: Outpatient" using "Outpatient (2.16.840.1.113883.3.464.1003.101.12.1087)"]
+  union ["Encounter, Performed: Observation" using "Observation (2.16.840.1.113883.3.464.1003.101.12.1086)"]
+  union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"]
+  union ["Encounter, Performed: Nonacute Inpatient" using "Nonacute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1084)"] ) OutpatientEncounter
+  where exists ( OutpatientEncounter.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082)
+  )
+    and OutpatientEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 1 year, 
+    end of Measurement Period] OutpatientEncounter2
+  where OutpatientEncounter2.relevantPeriod ends 1 day or more after day of 
+  end of OutpatientEncounter1.relevantPeriod
+  return OutpatientEncounter1
+  )
+        or exists( ["Encounter, Performed: Acute Inpatient" using "Acute Inpatient (2.16.840.1.113883.3.464.1003.101.12.1083)"] InpatientEncounter
+  where exists ( InpatientEncounter.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Advanced Illness" (2.16.840.1.113883.3.464.1003.110.12.1082)
+  )
+    and InpatientEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 1 year, 
+    end of Measurement Period])
+        or exists (["Medication, Active: Dementia Medications" using "Dementia Medications (2.16.840.1.113883.3.464.1003.196.12.1510)"] DementiaMedication
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( DementiaMedication.relevantDatetime, DementiaMedication.relevantPeriod ) overlaps Interval[start of Measurement Period - 1 year, 
+  end of Measurement Period])
+    )
+)
+  or ( AgeInYearsAt(date from 
+      end of Measurement Period
+    )>= 81
+      and exists ( ["Device, Order: Frailty Device" using "Frailty Device (2.16.840.1.113883.3.464.1003.118.12.1300)"] FrailtyDeviceOrder
+    where FrailtyDeviceOrder.authorDatetime during day of Measurement Period
+)
+  or exists ( ["Assessment, Performed: Medical equipment used" using "Medical equipment used (LOINC Code 98181-1)"] EquipmentUsed
+      where EquipmentUsed.result in valueset "Frailty Device" (2.16.840.1.113883.3.464.1003.118.12.1300)
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( EquipmentUsed.relevantDatetime, EquipmentUsed.relevantPeriod ) ends during day of Measurement Period
+  )
+  or exists ( ["Diagnosis: Frailty Diagnosis" using "Frailty Diagnosis (2.16.840.1.113883.3.464.1003.113.12.1074)"] FrailtyDiagnosis
+      where FrailtyDiagnosis.prevalencePeriod overlaps Measurement Period
+  )
+  or exists ( ["Encounter, Performed: Frailty Encounter" using "Frailty Encounter (2.16.840.1.113883.3.464.1003.101.12.1088)"] FrailtyEncounter
+      where FrailtyEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Symptom: Frailty Symptom" using "Frailty Symptom (2.16.840.1.113883.3.464.1003.113.12.1075)"] FrailtySymptom
+      where FrailtySymptom.prevalencePeriod overlaps Measurement Period
+  )
+  )
+  or AIFrailLTCF.( AgeInYearsAt(date from 
+    end of Measurement Period
+  )>= 66
+)
+  and ( ( Last(["Assessment, Performed: Housing status" using "Housing status (LOINC Code 71802-3)"] HousingStatus
+        where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(HousingStatus.relevantDatetime, HousingStatus.relevantPeriod)ends on or before 
+        end of Measurement Period
+        sort by 
+        end of if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)asc
+    )) LastHousingStatus
+      where LastHousingStatus.result ~ code "Lives in a nursing home (finding)" ("SNOMEDCT Code (160734000)")
+  ) is not null
+  or PalliativeCare.exists ( ["Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)"] PalliativeAssessment
+    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
+)
+or exists (["Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)"] PalliativeDiagnosis
+where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
+  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)"] PalliativeEncounter
+      where PalliativeEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)"] PalliativeIntervention
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
+  )
+=============================================================================================================================================================================
+Numerator:
+First(["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+  without ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"] ) DisqualifyingEncounter
+    such that Latest(NormalizeInterval(pointInTime, period)) ( SystolicBP.relevantDatetime, SystolicBP.relevantPeriod ) during day of DisqualifyingEncounter.relevantPeriod
+  where SystolicBP.result.unit = 'mm[Hg]'
+    and Latest(NormalizeInterval(pointInTime, period)) ( SystolicBP.relevantDatetime, SystolicBP.relevantPeriod ) during day of Measurement Period SBPReading
+    where Latest(NormalizeInterval(pointInTime, period))(SBPReading.relevantDatetime, SBPReading.relevantPeriod)same day as Last(( ["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+  without ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"] ) DisqualifyingEncounter
+    such that Latest(NormalizeInterval(pointInTime, period)) ( DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod ) during day of DisqualifyingEncounter.relevantPeriod
+  where DiastolicBP.result.unit = 'mm[Hg]'
+    and Latest(NormalizeInterval(pointInTime, period)) ( DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod ) during day of Measurement Period DBPExam
+    return date from Latest(NormalizeInterval(pointInTime, period)) ( DBPExam.relevantDatetime, DBPExam.relevantPeriod )
+)
+  intersect ( ["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+  without ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"] ) DisqualifyingEncounter
+    such that Latest(NormalizeInterval(pointInTime, period)) ( SystolicBP.relevantDatetime, SystolicBP.relevantPeriod ) during day of DisqualifyingEncounter.relevantPeriod
+  where SystolicBP.result.unit = 'mm[Hg]'
+    and Latest(NormalizeInterval(pointInTime, period)) ( SystolicBP.relevantDatetime, SystolicBP.relevantPeriod ) during day of Measurement Period SBPExam
+      return date from Latest(NormalizeInterval(pointInTime, period)) ( SBPExam.relevantDatetime, SBPExam.relevantPeriod )
+  ) BPDays
+    sort asc
+)
+    sort by(result as Quantity)
+).result < 140 'mm[Hg]'
+  and First(["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+  without ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"] ) DisqualifyingEncounter
+    such that Latest(NormalizeInterval(pointInTime, period)) ( DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod ) during day of DisqualifyingEncounter.relevantPeriod
+  where DiastolicBP.result.unit = 'mm[Hg]'
+    and Latest(NormalizeInterval(pointInTime, period)) ( DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod ) during day of Measurement Period DBPReading
+    where Latest(NormalizeInterval(pointInTime, period))(DBPReading.relevantDatetime, DBPReading.relevantPeriod)same day as Last(( ["Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)"] DiastolicBP
+  without ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"] ) DisqualifyingEncounter
+    such that Latest(NormalizeInterval(pointInTime, period)) ( DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod ) during day of DisqualifyingEncounter.relevantPeriod
+  where DiastolicBP.result.unit = 'mm[Hg]'
+    and Latest(NormalizeInterval(pointInTime, period)) ( DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod ) during day of Measurement Period DBPExam
+    return date from Latest(NormalizeInterval(pointInTime, period)) ( DBPExam.relevantDatetime, DBPExam.relevantPeriod )
+)
+  intersect ( ["Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)"] SystolicBP
+  without ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"]
+    union ["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)"] ) DisqualifyingEncounter
+    such that Latest(NormalizeInterval(pointInTime, period)) ( SystolicBP.relevantDatetime, SystolicBP.relevantPeriod ) during day of DisqualifyingEncounter.relevantPeriod
+  where SystolicBP.result.unit = 'mm[Hg]'
+    and Latest(NormalizeInterval(pointInTime, period)) ( SystolicBP.relevantDatetime, SystolicBP.relevantPeriod ) during day of Measurement Period SBPExam
+      return date from Latest(NormalizeInterval(pointInTime, period)) ( SBPExam.relevantDatetime, SBPExam.relevantPeriod )
+  ) BPDays
+    sort asc
+)
+    sort by(result as Quantity)
+).result < 90 'mm[Hg]'
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

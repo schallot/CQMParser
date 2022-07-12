@@ -1,0 +1,118 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	)
+	  and ( Count(( ["Encounter, Performed: Health behavior intervention, individual, face-to-face; initial 30 minutes" using "Health behavior intervention, individual, face-to-face; initial 30 minutes (CPT Code 96158)"]
+	  union ["Encounter, Performed: Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)" using "Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making) (CPT Code 96156)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Occupational Therapy Evaluation" using "Occupational Therapy Evaluation (2.16.840.1.113883.3.526.3.1011)"]
+	  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"]
+	  union ["Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
+	  union ["Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+	  union ["Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)"]
+	  union ["Encounter, Performed: Speech and Hearing Evaluation" using "Speech and Hearing Evaluation (2.16.840.1.113883.3.526.3.1530)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) OfficeBasedEncounter
+	  where OfficeBasedEncounter.relevantPeriod during Measurement Period)>= 2
+	      or exists ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+	  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"]
+	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"] ) PreventiveEncounter
+	  where PreventiveEncounter.relevantPeriod during Measurement Period
+	  )
+=============================================================================================================================================================================
+Denominator:
+exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	)
+	  and ( Count(( ["Encounter, Performed: Health behavior intervention, individual, face-to-face; initial 30 minutes" using "Health behavior intervention, individual, face-to-face; initial 30 minutes (CPT Code 96158)"]
+	  union ["Encounter, Performed: Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)" using "Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making) (CPT Code 96156)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Occupational Therapy Evaluation" using "Occupational Therapy Evaluation (2.16.840.1.113883.3.526.3.1011)"]
+	  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"]
+	  union ["Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
+	  union ["Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+	  union ["Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)"]
+	  union ["Encounter, Performed: Speech and Hearing Evaluation" using "Speech and Hearing Evaluation (2.16.840.1.113883.3.526.3.1530)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) OfficeBasedEncounter
+	  where OfficeBasedEncounter.relevantPeriod during Measurement Period)>= 2
+	      or exists ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+	  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"]
+	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"] ) PreventiveEncounter
+	  where PreventiveEncounter.relevantPeriod during Measurement Period
+	  )
+=============================================================================================================================================================================
+Denominator Exclusions:
+None
+=============================================================================================================================================================================
+Numerator:
+( Last(["Assessment, Performed: Tobacco Use Screening" using "Tobacco Use Screening (2.16.840.1.113883.3.526.3.1278)"] TobaccoUseScreening
+	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(TobaccoUseScreening.relevantDatetime, TobaccoUseScreening.relevantPeriod)during Measurement Period
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	)) MostRecentTobaccoUseScreening
+	  where MostRecentTobaccoUseScreening.result in valueset "Tobacco Non-User" (2.16.840.1.113883.3.526.3.1189) is not null
+	  or ( Last(["Assessment, Performed: Tobacco Use Screening" using "Tobacco Use Screening (2.16.840.1.113883.3.526.3.1278)"] TobaccoUseScreening
+	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(TobaccoUseScreening.relevantDatetime, TobaccoUseScreening.relevantPeriod)during Measurement Period
+	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+	  else if period is not null then period 
+	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	)) MostRecentTobaccoUseScreening
+	  where MostRecentTobaccoUseScreening.result in valueset "Tobacco User" (2.16.840.1.113883.3.526.3.1170) is not null
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists ["Assessment, Not Performed: Tobacco Use Screening" using "Tobacco Use Screening (2.16.840.1.113883.3.526.3.1278)"] NoTobaccoUseScreening
+	  where NoTobaccoUseScreening.authorDatetime during Measurement Period
+	    and NoTobaccoUseScreening.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+	  or exists ( ["Diagnosis: Limited Life Expectancy" using "Limited Life Expectancy (2.16.840.1.113883.3.526.3.1259)"] LimitedLifeExpectancy
+	    where LimitedLifeExpectancy.prevalencePeriod overlaps after Measurement Period
+	)
+=============================================================================================================================================================================
+Population Criteria 1:
+exists ( ["Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)"] BirthDate
+	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	)
+	  and ( Count(( ["Encounter, Performed: Health behavior intervention, individual, face-to-face; initial 30 minutes" using "Health behavior intervention, individual, face-to-face; initial 30 minutes (CPT Code 96158)"]
+	  union ["Encounter, Performed: Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)" using "Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making) (CPT Code 96156)"]
+	  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+	  union ["Encounter, Performed: Occupational Therapy Evaluation" using "Occupational Therapy Evaluation (2.16.840.1.113883.3.526.3.1011)"]
+	  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+	  union ["Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)"]
+	  union ["Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)"]
+	  union ["Encounter, Performed: Psych Visit - Diagnostic Evaluation" using "Psych Visit - Diagnostic Evaluation (2.16.840.1.113883.3.526.3.1492)"]
+	  union ["Encounter, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)"]
+	  union ["Encounter, Performed: Psychoanalysis" using "Psychoanalysis (2.16.840.1.113883.3.526.3.1141)"]
+	  union ["Encounter, Performed: Speech and Hearing Evaluation" using "Speech and Hearing Evaluation (2.16.840.1.113883.3.526.3.1530)"]
+	  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"]
+	  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"] ) OfficeBasedEncounter
+	  where OfficeBasedEncounter.relevantPeriod during Measurement Period)>= 2
+	      or exists ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+	  union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+	  union ["Encounter, Performed: Preventive Care Services - Group Counseling" using "Preventive Care Services - Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+	  union ["Encounter, Performed: Preventive Care Services - Other" using "Preventive Care Services - Other (2.16.840.1.113883.3.464.1003.101.12.1030)"]
+	  union ["Encounter, Performed: Preventive Care Services-Individual Counseling" using "Preventive Care Services-Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+	  union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"] ) PreventiveEncounter
+	  where PreventiveEncounter.relevantPeriod during Measurement Period
+	  )
+=============================================================================================================================================================================
+Stratification:
+None

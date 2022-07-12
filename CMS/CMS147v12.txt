@@ -1,0 +1,130 @@
+=============================================================================================================================================================================
+Initial Population:
+AgeInMonthsAt(date from start of Measurement Period)>= 6
+  and ( exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Patient Provider Interaction" using "Patient Provider Interaction (2.16.840.1.113883.3.526.3.1012)"]
+  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
+  union ["Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"]
+  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounters
+  where ValidEncounters.relevantPeriod during day of Measurement Period
+      or exists ["Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)"] Hemodialysis
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
+      or exists ["Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)"] PeritonealDialysis
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
+  )
+=============================================================================================================================================================================
+Denominator:
+AgeInMonthsAt(date from start of Measurement Period)>= 6
+  and ( exists ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Patient Provider Interaction" using "Patient Provider Interaction (2.16.840.1.113883.3.526.3.1012)"]
+  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
+  union ["Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal." using "Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)"]
+  union ["Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)"]
+  union ["Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)"] ) ValidEncounters
+  where ValidEncounters.relevantPeriod during day of Measurement Period
+      or exists ["Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)"] Hemodialysis
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
+      or exists ["Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)"] PeritonealDialysis
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
+  )
+  and ( exists ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Care Services in Long Term Residential Facility" using "Care Services in Long Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)"]
+  union ["Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)"]
+  union ["Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
+  union ["Encounter, Performed: Preventive Care Services Group Counseling" using "Preventive Care Services Group Counseling (2.16.840.1.113883.3.464.1003.101.12.1027)"]
+  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+  union ["Encounter, Performed: Discharge Services Nursing Facility" using "Discharge Services Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)"]
+  union ["Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)"]
+  union ["Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"] ) FluEncounter
+  where FluEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+      or exists ["Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)"] FluSeasonHemodialysis
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( FluSeasonHemodialysis.relevantDatetime, FluSeasonHemodialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+      or exists ["Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)"] FluSeasonPeritonealDialysis
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( FluSeasonPeritonealDialysis.relevantDatetime, FluSeasonPeritonealDialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+  )
+=============================================================================================================================================================================
+Denominator Exclusions:
+Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
+        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+    )
+      and InpatientEncounter.relevantPeriod ends during day of Measurement Period
+)
+  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+      where HospiceEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
+      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+      where HospiceOrder.authorDatetime during day of Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+  )
+=============================================================================================================================================================================
+Numerator:
+exists ( ["Procedure, Performed: Influenza Vaccination" using "Influenza Vaccination (2.16.840.1.113883.3.526.3.402)"]
+  union ["Procedure, Performed: Influenza Virus LAIV Procedure" using "Influenza Virus LAIV Procedure (2.16.840.1.113883.3.464.1003.110.12.1088)"] ) FluVaccination
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( FluVaccination.relevantDatetime, FluVaccination.relevantPeriod ) during day of Interval[start of Measurement Period - 6 months, start of Measurement Period + 6 months )
+  or exists ( ["Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.526.3.1254)"]
+  union ["Immunization, Administered: Influenza Virus LAIV Immunization" using "Influenza Virus LAIV Immunization (2.16.840.1.113883.3.464.1003.110.12.1087)"] ) AdministeredFluVaccine
+  where AdministeredFluVaccine.relevantDatetime during day of Interval[start of Measurement Period - 6 months, start of Measurement Period + 6 months )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+None

@@ -1,0 +1,175 @@
+=============================================================================================================================================================================
+Initial Population:
+exists ( ( ["Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)"]
+    union ["Diagnosis: Cerebrovascular Disease Stroke or TIA" using "Cerebrovascular Disease Stroke or TIA (2.16.840.1.113762.1.4.1047.44)"]
+    union ["Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)"]
+    union ["Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)"]
+    union ["Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)"] ) ASCVDDiagnosis
+    where ASCVDDiagnosis.prevalencePeriod overlaps Measurement Period
+)
+  union ( ( ["Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)"]
+      union ["Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)"]
+      union ["Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)"]
+      union ["Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)"] ) ASCVDProcedure
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
+      end of Measurement Period
+  )
+  and exists ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
+  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during Measurement Period
+=============================================================================================================================================================================
+Denominator:
+exists ( ( ["Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)"]
+    union ["Diagnosis: Cerebrovascular Disease Stroke or TIA" using "Cerebrovascular Disease Stroke or TIA (2.16.840.1.113762.1.4.1047.44)"]
+    union ["Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)"]
+    union ["Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)"]
+    union ["Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)"] ) ASCVDDiagnosis
+    where ASCVDDiagnosis.prevalencePeriod overlaps Measurement Period
+)
+  union ( ( ["Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)"]
+      union ["Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)"]
+      union ["Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)"]
+      union ["Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)"] ) ASCVDProcedure
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
+      end of Measurement Period
+  )
+  and exists ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
+  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during Measurement Period
+=============================================================================================================================================================================
+Denominator Exclusions:
+exists ( ( ["Diagnosis: Breastfeeding" using "Breastfeeding (2.16.840.1.113762.1.4.1047.73)"]
+    union ["Diagnosis: Rhabdomyolysis" using "Rhabdomyolysis (2.16.840.1.113762.1.4.1047.102)"] ) ExclusionDiagnosis
+    where ExclusionDiagnosis.prevalencePeriod overlaps Measurement Period
+)
+=============================================================================================================================================================================
+Numerator:
+exists ( ["Medication, Order: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)"]
+  union ["Medication, Order: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)"]
+  union ["Medication, Order: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)"] ) StatinOrdered
+  where StatinOrdered.authorDatetime during Measurement Period
+  or exists ( ["Medication, Active: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)"]
+  union ["Medication, Active: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)"]
+  union ["Medication, Active: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)"] ) ActiveStatin
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ActiveStatin.relevantDatetime, ActiveStatin.relevantPeriod ) overlaps Measurement Period
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists ["Allergy/Intolerance: Statin Allergen" using "Statin Allergen (2.16.840.1.113762.1.4.1110.42)"] StatinAllergy
+  where StatinAllergy.prevalencePeriod overlaps Measurement Period
+  or Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] InpatientEncounter
+    where ( InpatientEncounter.dischargeDisposition ~ code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)")
+        or InpatientEncounter.dischargeDisposition ~ code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)")
+    )
+      and InpatientEncounter.relevantPeriod ends during day of Measurement Period
+)
+  or exists ( ["Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)"] HospiceEncounter
+      where HospiceEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)"] HospiceAssessment
+      where HospiceAssessment.result ~ code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)")
+        and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospiceOrder
+      where HospiceOrder.authorDatetime during day of Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)"] HospicePerformed
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+  )
+  or PalliativeCare.exists ( ["Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)"] PalliativeAssessment
+    where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
+)
+or exists (["Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)"] PalliativeDiagnosis
+where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
+  or exists ( ["Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)"] PalliativeEncounter
+      where PalliativeEncounter.relevantPeriod overlaps Measurement Period
+  )
+  or exists ( ["Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)"] PalliativeIntervention
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
+  )
+  or exists ( ( ["Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.1024)"]
+    union ["Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.67.1.101.1.269)"]
+    union ["Diagnosis: Liver Disease" using "Liver Disease (2.16.840.1.113762.1.4.1047.42)"] ) HepatitisLiverDisease
+    where HepatitisLiverDisease.prevalencePeriod overlaps Measurement Period
+)
+  or exists ( ["Diagnosis: Statin Associated Muscle Symptoms" using "Statin Associated Muscle Symptoms (2.16.840.1.113762.1.4.1108.85)"] StatinMuscleSymptom
+    where StatinMuscleSymptom.prevalencePeriod overlaps Measurement Period
+)
+  or exists ( ["Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)"] ESRD
+    where ESRD.prevalencePeriod overlaps Measurement Period
+)
+  or exists ["Adverse Event: Statin Allergen" using "Statin Allergen (2.16.840.1.113762.1.4.1110.42)"] StatinReaction
+  where StatinReaction.relevantDatetime during Measurement Period
+  or exists ( ( ["Medication, Not Ordered: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)"]
+    union ["Medication, Not Ordered: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)"]
+    union ["Medication, Not Ordered: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)"] ) NoStatinTherapyOrdered
+    with ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
+  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
+      such that NoStatinTherapyOrdered.authorDatetime during QualifyingEncounter.relevantPeriod
+    where NoStatinTherapyOrdered.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007)
+)
+=============================================================================================================================================================================
+Population Criteria 1:
+exists ( ( ["Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)"]
+    union ["Diagnosis: Cerebrovascular Disease Stroke or TIA" using "Cerebrovascular Disease Stroke or TIA (2.16.840.1.113762.1.4.1047.44)"]
+    union ["Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)"]
+    union ["Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)"]
+    union ["Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)"] ) ASCVDDiagnosis
+    where ASCVDDiagnosis.prevalencePeriod overlaps Measurement Period
+)
+  union ( ( ["Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)"]
+      union ["Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)"]
+      union ["Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)"]
+      union ["Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)"] ) ASCVDProcedure
+      where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
+      end of Measurement Period
+  )
+  and exists ( ["Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)"]
+  union ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+  union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"]
+  union ["Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)"]
+  union ["Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+  union ["Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)"]
+  union ["Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.1026)"]
+  union ["Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during Measurement Period
+=============================================================================================================================================================================
+Stratification:
+None

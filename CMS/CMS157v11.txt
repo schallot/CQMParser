@@ -1,0 +1,141 @@
+=============================================================================================================================================================================
+Initial Population:
+from
+  ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] FaceToFaceOrTelehealthEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoBeforeEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoAfterEncounter,
+  ["Diagnosis: Cancer" using "Cancer (2.16.840.1.113883.3.526.3.1010)"] Cancer
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) starts 30 days or less on or before day of 
+  end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) starts 30 days or less on or after day of 
+    end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and not ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) same day as if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) )
+    and Cancer.prevalencePeriod overlaps FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and FaceToFaceOrTelehealthEncounter.relevantPeriod during Measurement Period
+  return FaceToFaceOrTelehealthEncounter
+=============================================================================================================================================================================
+Denominator:
+from
+  ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] FaceToFaceOrTelehealthEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoBeforeEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoAfterEncounter,
+  ["Diagnosis: Cancer" using "Cancer (2.16.840.1.113883.3.526.3.1010)"] Cancer
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) starts 30 days or less on or before day of 
+  end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) starts 30 days or less on or after day of 
+    end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and not ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) same day as if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) )
+    and Cancer.prevalencePeriod overlaps FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and FaceToFaceOrTelehealthEncounter.relevantPeriod during Measurement Period
+  return FaceToFaceOrTelehealthEncounter
+=============================================================================================================================================================================
+Denominator Exclusions:
+None
+=============================================================================================================================================================================
+Numerator:
+from
+  ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] FaceToFaceOrTelehealthEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoBeforeEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoAfterEncounter,
+  ["Diagnosis: Cancer" using "Cancer (2.16.840.1.113883.3.526.3.1010)"] Cancer
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) starts 30 days or less on or before day of 
+  end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) starts 30 days or less on or after day of 
+    end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and not ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) same day as if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) )
+    and Cancer.prevalencePeriod overlaps FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and FaceToFaceOrTelehealthEncounter.relevantPeriod during Measurement Period
+  return FaceToFaceOrTelehealthEncounter FaceToFaceOrTelehealthEncounterWithChemo
+  with ["Assessment, Performed: Standardized Pain Assessment Tool" using "Standardized Pain Assessment Tool (2.16.840.1.113883.3.526.3.1028)"] PainAssessed
+    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( PainAssessed.relevantDatetime, PainAssessed.relevantPeriod ) during FaceToFaceOrTelehealthEncounterWithChemo.relevantPeriod
+      and PainAssessed.result is not null
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Population Criteria 1:
+from
+  ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"] FaceToFaceOrTelehealthEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoBeforeEncounter,
+  ["Procedure, Performed: Chemotherapy Administration" using "Chemotherapy Administration (2.16.840.1.113883.3.526.3.1027)"] ChemoAdministration
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAdministration.relevantDatetime, ChemoAdministration.relevantPeriod ) during Interval[start of Measurement Period - 31 days, 
+  end of Measurement Period] ChemoAfterEncounter,
+  ["Diagnosis: Cancer" using "Cancer (2.16.840.1.113883.3.526.3.1010)"] Cancer
+  where if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) starts 30 days or less on or before day of 
+  end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) starts 30 days or less on or after day of 
+    end of FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and not ( if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoAfterEncounter.relevantDatetime, ChemoAfterEncounter.relevantPeriod ) same day as if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime> ( ChemoBeforeEncounter.relevantDatetime, ChemoBeforeEncounter.relevantPeriod ) )
+    and Cancer.prevalencePeriod overlaps FaceToFaceOrTelehealthEncounter.relevantPeriod
+    and FaceToFaceOrTelehealthEncounter.relevantPeriod during Measurement Period
+  return FaceToFaceOrTelehealthEncounter
+=============================================================================================================================================================================
+Stratification:
+None

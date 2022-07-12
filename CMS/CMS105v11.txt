@@ -1,0 +1,165 @@
+=============================================================================================================================================================================
+Initial Population:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18
+=============================================================================================================================================================================
+Denominator:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
+  where exists ( EncounterWithAge.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and Diagnosis.rank = 1
+  )
+=============================================================================================================================================================================
+Denominator Exclusions:
+TJC.( ( ["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
+  where exists ( EncounterWithAge.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and Diagnosis.rank = 1
+  ) IschemicStrokeEncounter
+      where IschemicStrokeEncounter.dischargeDisposition in valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87)
+        or IschemicStrokeEncounter.dischargeDisposition in valueset "Left Against Medical Advice" (2.16.840.1.113883.3.117.1.7.1.308)
+        or IschemicStrokeEncounter.dischargeDisposition in valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309)
+        or IschemicStrokeEncounter.dischargeDisposition in valueset "Discharged to Home for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.209)
+        or IschemicStrokeEncounter.dischargeDisposition in valueset "Discharged to Health Care Facility for Hospice Care" (2.16.840.1.113883.3.117.1.7.1.207)
+  )
+)
+  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
+  where exists ( EncounterWithAge.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and Diagnosis.rank = 1
+  ) IschemicStrokeEncounter
+  with ["Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"]
+  union ["Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)"] ComfortMeasure
+    such that Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval<DateTime>(ComfortMeasure.relevantDatetime, ComfortMeasure.relevantPeriod), ComfortMeasure.authorDatetime)during Encounter Visit
+	let ObsVisit: Last(["Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)"] LastObs
+			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
+			sort by 
+			end of relevantPeriod
+	),
+	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
+	EDVisit: Last(["Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)"] LastED
+			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
+			sort by 
+			end of relevantPeriod
+	)
+	return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
+	end of Visit.relevantPeriod] ( IschemicStrokeEncounter )
+=============================================================================================================================================================================
+Numerator:
+TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
+  where exists ( EncounterWithAge.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and Diagnosis.rank = 1
+  ) IschemicStrokeEncounter
+  with ["Medication, Discharge: Statin Grouper" using "Statin Grouper (2.16.840.1.113762.1.4.1110.19)"] DischargeStatin
+    such that DischargeStatin.authorDatetime during IschemicStrokeEncounter.relevantPeriod
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+( TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
+  where exists ( EncounterWithAge.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and Diagnosis.rank = 1
+  ) IschemicStrokeEncounter
+    with ["Medication, Not Discharged: Statin Grouper" using "Statin Grouper (2.16.840.1.113762.1.4.1110.19)"] NoStatinDischarge
+  where NoStatinDischarge.negationRationale in valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473)
+    or NoStatinDischarge.negationRationale in valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93) NoDischargeStatin
+      such that NoDischargeStatin.authorDatetime during IschemicStrokeEncounter.relevantPeriod
+)
+  union ( TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
+  where exists ( EncounterWithAge.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and Diagnosis.rank = 1
+  ) IschemicStrokeEncounter
+      with ["Allergy/Intolerance: Statin Allergen" using "Statin Allergen (2.16.840.1.113762.1.4.1110.42)"] StatinAllergy
+        such that StatinAllergy.prevalencePeriod starts on or before 
+        end of IschemicStrokeEncounter.relevantPeriod
+  )
+  union TJC.["Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)"] NonElectiveEncounter
+  where difference in days between start of Value and end of Value ( NonElectiveEncounter.relevantPeriod ) <= 120
+    and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter
+  where exists ( NonElectiveEncounter.diagnoses Diagnosis
+      where Diagnosis.rank = 1
+        and ( Diagnosis.code in valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212)
+            or Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        )
+  ) AllStrokeEncounter
+  where AgeInYearsAt(date from(start of AllStrokeEncounter.relevantPeriod))>= 18 EncounterWithAge
+  where exists ( EncounterWithAge.diagnoses Diagnosis
+      where Diagnosis.code in valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247)
+        and Diagnosis.rank = 1
+  ) IschemicStrokeEncounter
+  where Max(["Laboratory Test, Performed: LDL-c" using "LDL-c (2.16.840.1.113883.3.117.1.7.1.215)"] Ldl
+      where Ldl.resultDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)(start of IschemicStrokeEncounter.relevantPeriod - 30 days), 
+      end of IschemicStrokeEncounter.relevantPeriod]
+      return Ldl.result as Quantity
+  )< 70 'mg/dL'
+=============================================================================================================================================================================
+Stratification:
+None

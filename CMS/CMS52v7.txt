@@ -1,0 +1,118 @@
+=============================================================================================================================================================================
+Initial Population:
+exists [Patient Characteristic Birthdate] BirthDate
+		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 6
+			and exists ( ["Diagnosis: HIV 1" using "HIV 1 (2.16.840.1.113883.3.464.1003.120.12.1004)"] HIV
+		where HIV.prevalencePeriod starts before end of Measurement Period )
+			and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Preventive Care- Initial Office Visit, 0 to 17" using "Preventive Care- Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) ValidEncounter
+		where ValidEncounter.relevantPeriod during Measurement Period FollowupVisit
+		with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Preventive Care- Initial Office Visit, 0 to 17" using "Preventive Care- Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) ValidEncounter
+		where ValidEncounter.relevantPeriod during Measurement Period PriorVisit
+			such that FollowupVisit.authorDatetime 90 days or more on or after day of PriorVisit.authorDatetime )
+			and exists ( ["Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.1.113883.3.464.1003.121.12.1004)"] CD4Count
+		where ( CD4Count.result as Quantity ) < 200 '/mm3'
+			and CD4Count.relevantPeriod ends 9 months or less after start of Measurement Period )
+=============================================================================================================================================================================
+Denominator:
+exists [Patient Characteristic Birthdate] BirthDate
+		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 6
+			and exists ( ["Diagnosis: HIV 1" using "HIV 1 (2.16.840.1.113883.3.464.1003.120.12.1004)"] HIV
+		where HIV.prevalencePeriod starts before end of Measurement Period )
+			and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Preventive Care- Initial Office Visit, 0 to 17" using "Preventive Care- Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) ValidEncounter
+		where ValidEncounter.relevantPeriod during Measurement Period FollowupVisit
+		with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Preventive Care- Initial Office Visit, 0 to 17" using "Preventive Care- Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) ValidEncounter
+		where ValidEncounter.relevantPeriod during Measurement Period PriorVisit
+			such that FollowupVisit.authorDatetime 90 days or more on or after day of PriorVisit.authorDatetime )
+			and exists ( ["Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.1.113883.3.464.1003.121.12.1004)"] CD4Count
+		where ( CD4Count.result as Quantity ) < 200 '/mm3'
+			and CD4Count.relevantPeriod ends 9 months or less after start of Measurement Period )
+=============================================================================================================================================================================
+Denominator Exclusions:
+Hospice.exists ( ["Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)"] DischargeHospice
+			where ( DischargeHospice.dischargeDisposition as Code ~ code "Discharge to home for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428361000124107)"
+					or DischargeHospice.dischargeDisposition as Code ~ code "Discharge to healthcare facility for hospice care (procedure)" using "SNOMEDCT version 2017-09 Code (428371000124100)"
+			)
+				and DischargeHospice.relevantPeriod ends during Measurement Period
+	)
+		or exists ( ["Intervention, Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospiceOrder
+				where HospiceOrder.authorDatetime during Measurement Period
+		)
+		or exists ( ["Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)"] HospicePerformed
+				where HospicePerformed.relevantPeriod overlaps Measurement Period
+		)
+=============================================================================================================================================================================
+Numerator:
+exists ["Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.1.113883.3.464.1003.121.12.1004)"] CD4Count
+		where ( CD4Count.result as Quantity ) < 200 '/mm3'
+			and CD4Count.relevantPeriod ends 9 months or less after start of Measurement Period CD4Under200
+		with ["Medication, Order: Pneumocystis Jiroveci Pneumonia (PCP) Prophylaxis" using "Pneumocystis Jiroveci Pneumonia (PCP) Prophylaxis (2.16.840.1.113883.3.464.1003.196.12.1076)"] PCPProphylaxis
+			such that PCPProphylaxis.authorDatetime 3 months or less after end of CD4Under200.relevantPeriod
+		or exists ( from
+	["Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.1.113883.3.464.1003.121.12.1004)"] CD4Count
+		where ( CD4Count.result as Quantity ) < 200 '/mm3'
+			and CD4Count.relevantPeriod ends 9 months or less after start of Measurement Period CD4CountUnder200,
+		["Medication, Order: Dapsone 100 MG / Pyrimethamine 12.5 MG Oral Tablet" using "Dapsone 100 MG / Pyrimethamine 12.5 MG Oral Tablet (RXNORM version 2018-01 Code 105337)"] DapsoneOrder,
+		["Medication, Order: Leucovorin" using "Leucovorin (2.16.840.1.113883.3.464.1003.196.12.1205)"] LeucovorinOrder
+		where DapsoneOrder.authorDatetime occurs 3 months or less after end CD4CountUnder200.relevantPeriod
+			and LeucovorinOrder.authorDatetime occurs 3 months or less after end CD4CountUnder200.relevantPeriod
+			and DapsoneOrder.authorDatetime same day as LeucovorinOrder.authorDatetime
+		return CD4CountUnder200 )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+exists ( ["Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.1.113883.3.464.1003.121.12.1004)"] CD4Count
+		where ( CD4Count.result as Quantity ) < 200 '/mm3'
+			and CD4Count.relevantPeriod ends 9 months or less after start of Measurement Period FirstCD4Count
+			with ["Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.1.113883.3.464.1003.121.12.1004)"] SecondCD4Count
+				such that SecondCD4Count.authorDatetime less than 3 months after day of FirstCD4Count.authorDatetime
+					and SecondCD4Count.result >= 200 '/mm3'
+	)
+=============================================================================================================================================================================
+Population Criteria 1:
+exists [Patient Characteristic Birthdate] BirthDate
+		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 6
+			and exists ( ["Diagnosis: HIV 1" using "HIV 1 (2.16.840.1.113883.3.464.1003.120.12.1004)"] HIV
+		where HIV.prevalencePeriod starts before end of Measurement Period )
+			and exists ( ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Preventive Care- Initial Office Visit, 0 to 17" using "Preventive Care- Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) ValidEncounter
+		where ValidEncounter.relevantPeriod during Measurement Period FollowupVisit
+		with ( ["Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)"]
+		union ["Encounter, Performed: Preventive Care- Initial Office Visit, 0 to 17" using "Preventive Care- Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)"]
+		union ["Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)"]
+		union ["Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up" using "Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)"]
+		union ["Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)"]
+		union ["Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)"] ) ValidEncounter
+		where ValidEncounter.relevantPeriod during Measurement Period PriorVisit
+			such that FollowupVisit.authorDatetime 90 days or more on or after day of PriorVisit.authorDatetime )
+			and exists ( ["Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.1.113883.3.464.1003.121.12.1004)"] CD4Count
+		where ( CD4Count.result as Quantity ) < 200 '/mm3'
+			and CD4Count.relevantPeriod ends 9 months or less after start of Measurement Period )
+=============================================================================================================================================================================
+Stratification:
+None
