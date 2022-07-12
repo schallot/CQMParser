@@ -23,9 +23,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 18
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod )
 =============================================================================================================================================================================
 Denominator:
@@ -52,9 +50,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 18
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod )
   and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
   union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
@@ -71,9 +67,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 18
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -82,9 +76,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 18
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -107,9 +99,7 @@ exists [("Medication, Order: Beta Blocker Therapy for LVSD" using "Beta Blocker 
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -118,9 +108,7 @@ exists [("Medication, Order: Beta Blocker Therapy for LVSD" using "Beta Blocker 
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that BetaBlockerForLVSDOrdered.authorDatetime during CADEncounterModerateOrSevereLVSD.relevantPeriod
   or exists [("Medication, Active: Beta Blocker Therapy for LVSD" using "Beta Blocker Therapy for LVSD (2.16.840.1.113883.3.526.3.1184)")] ActiveBetaBlockerForLVSD
@@ -139,9 +127,7 @@ exists [("Medication, Order: Beta Blocker Therapy for LVSD" using "Beta Blocker 
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -150,9 +136,7 @@ exists [("Medication, Order: Beta Blocker Therapy for LVSD" using "Beta Blocker 
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that ActiveBetaBlockerForLVSD.relevantPeriod overlaps after CADEncounterModerateOrSevereLVSD.relevantPeriod
 =============================================================================================================================================================================
@@ -176,9 +160,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -187,9 +169,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that Arrhythmia.prevalencePeriod overlaps CADEncounterModerateOrSevereLVSD.relevantPeriod
   or exists [("Diagnosis: Asthma" using "Asthma (2.16.840.1.113883.3.526.3.362)")] Asthma
@@ -208,9 +188,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -219,9 +197,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that Asthma.prevalencePeriod overlaps CADEncounterModerateOrSevereLVSD.relevantPeriod
   or exists [("Diagnosis: Bradycardia" using "Bradycardia (2.16.840.1.113883.3.526.3.412)")] Bradycardia
@@ -240,9 +216,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -251,9 +225,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that Bradycardia.prevalencePeriod overlaps CADEncounterModerateOrSevereLVSD.relevantPeriod
   or exists [("Diagnosis: Hypotension" using "Hypotension (2.16.840.1.113883.3.526.3.370)")] Hypotension
@@ -272,9 +244,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -283,9 +253,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that Hypotension.prevalencePeriod overlaps CADEncounterModerateOrSevereLVSD.relevantPeriod
   or exists from
@@ -305,9 +273,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -316,26 +282,14 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
   let PriorHeartRate: Last([("Physical Exam, Performed: Heart Rate" using "Heart Rate (2.16.840.1.113883.3.526.3.1176)")] MostRecentPriorHeartRate
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod)during CADEncounterModerateOrSevereLVSD.relevantPeriod
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod)before if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(HeartRate.relevantDatetime, HeartRate.relevantPeriod)
-      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+      where Global.NormalizeInterval(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod)during CADEncounterModerateOrSevereLVSD.relevantPeriod
+        and Global.NormalizeInterval(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod)before Global.NormalizeInterval(HeartRate.relevantDatetime, HeartRate.relevantPeriod)
+      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
   )
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HeartRate.relevantDatetime, HeartRate.relevantPeriod ) during CADEncounterModerateOrSevereLVSD.relevantPeriod
+  where Global.NormalizeInterval ( HeartRate.relevantDatetime, HeartRate.relevantPeriod ) during CADEncounterModerateOrSevereLVSD.relevantPeriod
     and HeartRate.result < 50 '{beats}/min'
     and PriorHeartRate.result < 50 '{beats}/min'
   or exists ( [("Allergy/Intolerance: Beta Blocker Therapy Ingredient" using "Beta Blocker Therapy Ingredient (2.16.840.1.113883.3.526.3.1493)")]
@@ -355,9 +309,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -366,9 +318,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that BetaBlockerAllergyIntolerance.prevalencePeriod overlaps after CADEncounterModerateOrSevereLVSD.relevantPeriod
   or exists ( [("Diagnosis: Allergy to Beta Blocker Therapy" using "Allergy to Beta Blocker Therapy (2.16.840.1.113883.3.526.3.1177)")]
@@ -388,9 +338,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -399,9 +347,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that BetaBlockerAllergyOrIntoleranceDiagnosis.prevalencePeriod overlaps after CADEncounterModerateOrSevereLVSD.relevantPeriod
   or exists [("Medication, Not Ordered: Beta Blocker Therapy for LVSD" using "Beta Blocker Therapy for LVSD (2.16.840.1.113883.3.526.3.1184)")] NoBetaBlockerForLVSDOrdered
@@ -420,9 +366,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -431,9 +375,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that NoBetaBlockerForLVSDOrdered.authorDatetime during CADEncounterModerateOrSevereLVSD.relevantPeriod
   where ( NoBetaBlockerForLVSDOrdered.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
@@ -456,9 +398,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -467,9 +407,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that AtrioventricularBlock.prevalencePeriod overlaps CADEncounterModerateOrSevereLVSD.relevantPeriod
   and not exists [("Diagnosis: Cardiac Pacer in Situ" using "Cardiac Pacer in Situ (2.16.840.1.113883.3.526.3.368)")] CardiacPacerDiagnosis
@@ -488,9 +426,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -499,9 +435,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
     such that CardiacPacerDiagnosis.prevalencePeriod overlaps after CADEncounterModerateOrSevereLVSD.relevantPeriod
   and not exists [("Procedure, Performed: Cardiac Pacer" using "Cardiac Pacer (2.16.840.1.113762.1.4.1178.53)")] ImplantedCardiacPacer
@@ -520,9 +454,7 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod EncounterWithCADProxy
   with ( [("Diagnostic Study, Performed: Ejection Fraction" using "Ejection Fraction (2.16.840.1.113883.3.526.3.1134)")] EjectionFraction
     where EjectionFraction.result <= 40 '%'
@@ -531,13 +463,9 @@ exists [("Diagnosis: Arrhythmia" using "Arrhythmia (2.16.840.1.113883.3.526.3.36
   union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
       where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
   ) LVSDFindings
-    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
     end of EncounterWithCADProxy.relevantPeriod CADEncounterModerateOrSevereLVSD
-    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ImplantedCardiacPacer.relevantDatetime, ImplantedCardiacPacer.relevantPeriod ) ) starts before 
+    such that ( Global.NormalizeInterval ( ImplantedCardiacPacer.relevantDatetime, ImplantedCardiacPacer.relevantPeriod ) ) starts before 
     end of CADEncounterModerateOrSevereLVSD.relevantPeriod
 =============================================================================================================================================================================
 Population Criteria 1:
@@ -564,9 +492,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 18
   union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
   with [("Procedure, Performed: Cardiac Surgery" using "Cardiac Surgery (2.16.840.1.113883.3.526.3.371)")] CardiacSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
+    such that Global.NormalizeInterval ( CardiacSurgery.relevantDatetime, CardiacSurgery.relevantPeriod ) starts before 
     end of ValidQualifyingEncounter.relevantPeriod )
 =============================================================================================================================================================================
 Stratification:

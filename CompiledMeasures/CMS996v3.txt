@@ -58,12 +58,8 @@ Denominator Exclusions:
       and EDEncounter.relevantPeriod during Measurement Period EDwSTEMI
   with ( [("Procedure, Performed: Endotracheal Intubation" using "Endotracheal Intubation (2.16.840.1.113762.1.4.1045.69)")]
     union [("Procedure, Performed: Mechanical Circulatory Assist Device" using "Mechanical Circulatory Assist Device (2.16.840.1.113883.3.3157.4052)")] ) AirwayProcedure
-    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( AirwayProcedure.relevantDatetime, AirwayProcedure.relevantPeriod ) starts during EDwSTEMI.relevantPeriod
-        or if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( AirwayProcedure.relevantDatetime, AirwayProcedure.relevantPeriod ) starts 24 hours or less before start of EDwSTEMI.relevantPeriod
+    such that ( Global.NormalizeInterval ( AirwayProcedure.relevantDatetime, AirwayProcedure.relevantPeriod ) starts during EDwSTEMI.relevantPeriod
+        or Global.NormalizeInterval ( AirwayProcedure.relevantDatetime, AirwayProcedure.relevantPeriod ) starts 24 hours or less before start of EDwSTEMI.relevantPeriod
     )
   union 
 
@@ -77,9 +73,7 @@ Denominator Exclusions:
     such that ( DxSTEMI.prevalencePeriod starts during EDEncounter.relevantPeriod )
       and EDEncounter.relevantPeriod during Measurement Period EDwSTEMI
   with [("Procedure, Performed: Major Surgical Procedure" using "Major Surgical Procedure (2.16.840.1.113883.3.3157.4056)")] MajorSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( MajorSurgery.relevantDatetime, MajorSurgery.relevantPeriod ) starts 21 days or less before 
+    such that Global.NormalizeInterval ( MajorSurgery.relevantDatetime, MajorSurgery.relevantPeriod ) starts 21 days or less before 
     end of EDwSTEMI.relevantPeriod
   union 
 
@@ -111,9 +105,7 @@ Denominator Exclusions:
     such that ( DxSTEMI.prevalencePeriod starts during EDEncounter.relevantPeriod )
       and EDEncounter.relevantPeriod during Measurement Period EDwSTEMI
   with [("Procedure, Performed: Intracranial or Intraspinal surgery" using "Intracranial or Intraspinal surgery (2.16.840.1.113762.1.4.1170.2)")] CranialorSpinalSurgery
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CranialorSpinalSurgery.relevantDatetime, CranialorSpinalSurgery.relevantPeriod ) starts 90 days or less before start of EDwSTEMI.relevantPeriod
+    such that Global.NormalizeInterval ( CranialorSpinalSurgery.relevantDatetime, CranialorSpinalSurgery.relevantPeriod ) starts 90 days or less before start of EDwSTEMI.relevantPeriod
   union 
 
 [("Encounter, Performed: Emergency Department Visit (1010)" using "Emergency Department Visit (1010) (2.16.840.1.113883.3.464.1003.101.12.1010)")] EDEncounter
@@ -126,9 +118,7 @@ Denominator Exclusions:
     such that ( DxSTEMI.prevalencePeriod starts during EDEncounter.relevantPeriod )
       and EDEncounter.relevantPeriod during Measurement Period EDwSTEMI
   with [("Medication, Active: Anticoagulant Medications, Oral" using "Anticoagulant Medications, Oral (2.16.840.1.113883.3.3157.4045)")] OralAnticoagulant
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( OralAnticoagulant.relevantDatetime, OralAnticoagulant.relevantPeriod ) overlaps before EDwSTEMI.relevantPeriod
+    such that Global.NormalizeInterval ( OralAnticoagulant.relevantDatetime, OralAnticoagulant.relevantPeriod ) overlaps before EDwSTEMI.relevantPeriod
   union 
 
 [("Encounter, Performed: Emergency Department Visit (1010)" using "Emergency Department Visit (1010) (2.16.840.1.113883.3.464.1003.101.12.1010)")] EDEncounter
@@ -199,19 +189,7 @@ Numerator:
     such that ( DxSTEMI.prevalencePeriod starts during EDEncounter.relevantPeriod )
       and EDEncounter.relevantPeriod during Measurement Period EDwSTEMI
   with [("Medication, Administered: Fibrinolytic Therapy" using "Fibrinolytic Therapy (2.16.840.1.113883.3.3157.4019)")] Fibrinolytic
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Fibrinolytic.relevantDatetime, Fibrinolytic.relevantPeriod ) starts 30 minutes or less after start of First((Encounter Visit
-	let EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-			where LastED.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-			sort by 
-			end of relevantPeriod
-	)
-	return if EDVisit is null then Visit.facilityLocations 
-		else flatten { EDVisit.facilityLocations, Visit.facilityLocations }(Encounter))HospitalLocation
-		where HospitalLocation.code in (valueset "Emergency Department Visit" (2.16.840.1.113883.3.117.1.7.1.292))
-		sort by start of locationPeriod
-).locationPeriod ( EDwSTEMI )
+    such that Global.NormalizeInterval ( Fibrinolytic.relevantDatetime, Fibrinolytic.relevantPeriod ) starts 30 minutes or less after Global.EmergencyDepartmentArrivalTime ( EDwSTEMI )
     union 
 
 
@@ -225,19 +203,7 @@ Numerator:
     such that ( DxSTEMI.prevalencePeriod starts during EDEncounter.relevantPeriod )
       and EDEncounter.relevantPeriod during Measurement Period EDwSTEMI
   with [("Procedure, Performed: Percutaneous Coronary Intervention" using "Percutaneous Coronary Intervention (2.16.840.1.113883.3.3157.2000.5)")] PCI
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PCI.relevantDatetime, PCI.relevantPeriod ) starts 90 minutes or less after start of First((Encounter Visit
-	let EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-			where LastED.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-			sort by 
-			end of relevantPeriod
-	)
-	return if EDVisit is null then Visit.facilityLocations 
-		else flatten { EDVisit.facilityLocations, Visit.facilityLocations }(Encounter))HospitalLocation
-		where HospitalLocation.code in (valueset "Emergency Department Visit" (2.16.840.1.113883.3.117.1.7.1.292))
-		sort by start of locationPeriod
-).locationPeriod ( EDwSTEMI )
+    such that Global.NormalizeInterval ( PCI.relevantDatetime, PCI.relevantPeriod ) starts 90 minutes or less after Global.EmergencyDepartmentArrivalTime ( EDwSTEMI )
     union 
 
 
@@ -250,27 +216,8 @@ Numerator:
   with [("Diagnosis: STEMI" using "STEMI (2.16.840.1.113883.3.3157.4017)")] DxSTEMI
     such that ( DxSTEMI.prevalencePeriod starts during EDEncounter.relevantPeriod )
       and EDEncounter.relevantPeriod during Measurement Period EDwSTEMI
-  with ( end of Last((Encounter Visit
-	let EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-			where LastED.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-			sort by 
-			end of relevantPeriod
-	)
-	return if EDVisit is null then Visit.facilityLocations 
-		else flatten { EDVisit.facilityLocations, Visit.facilityLocations }(Encounter))HospitalLocation
-		sort by start of locationPeriod
-).locationPeriod ( EDwSTEMI ) ) Departure
-    such that Departure 45 minutes or less after start of First((Encounter Visit
-	let EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-			where LastED.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-			sort by 
-			end of relevantPeriod
-	)
-	return if EDVisit is null then Visit.facilityLocations 
-		else flatten { EDVisit.facilityLocations, Visit.facilityLocations }(Encounter))HospitalLocation
-		where HospitalLocation.code in (valueset "Emergency Department Visit" (2.16.840.1.113883.3.117.1.7.1.292))
-		sort by start of locationPeriod
-).locationPeriod ( EDwSTEMI )
+  with ( Global.HospitalDepartureTime ( EDwSTEMI ) ) Departure
+    such that Departure 45 minutes or less after Global.EmergencyDepartmentArrivalTime ( EDwSTEMI )
       and EDwSTEMI.dischargeDisposition in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))
 )
 =============================================================================================================================================================================

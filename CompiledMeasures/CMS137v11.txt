@@ -39,9 +39,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 13
         end of Measurement Period
     sort by start of relevantPeriod
 ) FirstSUDEpisode
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+      such that Global.NormalizeInterval ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
 )
   union ( ( ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
     union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
@@ -139,9 +137,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 13
         end of Measurement Period
     sort by start of relevantPeriod
 ) FirstSUDEpisode
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+      such that Global.NormalizeInterval ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
 )
   union ( ( ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
     union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
@@ -211,17 +207,13 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
@@ -232,9 +224,7 @@ exists [("Intervention, Performed: Substance Use Disorder Treatment" using "Subs
       where exists TelehealthEncounter.diagnoses Diagnosis
         where Diagnosis.code in (valueset "Substance Use Disorder" (2.16.840.1.113883.3.464.1003.106.12.1001))
   ) PsychosocialVisit
-  let treatmentDate: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PsychosocialVisit.relevantDatetime, PsychosocialVisit.relevantPeriod )
+  let treatmentDate: date from start of Global.NormalizeInterval ( PsychosocialVisit.relevantDatetime, PsychosocialVisit.relevantPeriod )
   with First((( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
     union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
     union [("Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)")]
@@ -280,9 +270,7 @@ exists [("Intervention, Performed: Substance Use Disorder Treatment" using "Subs
 )
   union ( ( [("Procedure, Performed: Substance Use Disorder Short Acting Medication Administration" using "Substance Use Disorder Short Acting Medication Administration (2.16.840.1.113883.3.464.1003.1157)")]
       union [("Procedure, Performed: Substance Use Disorder Long Acting Medication Administration" using "Substance Use Disorder Long Acting Medication Administration (2.16.840.1.113883.3.464.1003.1156)")] ) SUDMedAdministration
-      let treatmentDate: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( SUDMedAdministration.relevantDatetime, SUDMedAdministration.relevantPeriod )
+      let treatmentDate: date from start of Global.NormalizeInterval ( SUDMedAdministration.relevantDatetime, SUDMedAdministration.relevantPeriod )
       with First((( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
     union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
     union [("Encounter, Performed: Detoxification Visit" using "Detoxification Visit (2.16.840.1.113883.3.464.1003.101.12.1059)")]
@@ -350,9 +338,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 13
         end of Measurement Period
     sort by start of relevantPeriod
 ) FirstSUDEpisode
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
+      such that Global.NormalizeInterval ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before day of start of FirstSUDEpisode.relevantPeriod
 )
   union ( ( ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
     union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]

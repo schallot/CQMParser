@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 66
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 66
 	)
 	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
@@ -18,7 +18,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 66
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 66
 	)
 	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
@@ -44,16 +44,14 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 =============================================================================================================================================================================
 Numerator:
 exists ( ( ( [("Immunization, Administered: Pneumococcal Polysaccharide 23 Vaccine" using "Pneumococcal Polysaccharide 23 Vaccine (2.16.840.1.113883.3.464.1003.110.12.1089)")]
 	    union [("Procedure, Performed: Pneumococcal polysaccharide vaccine, 23-valent (PPSV23), adult or immunosuppressed patient dosage, when administered to individuals 2 years or older, for subcutaneous or intramuscular use" using "Pneumococcal polysaccharide vaccine, 23-valent (PPSV23), adult or immunosuppressed patient dosage, when administered to individuals 2 years or older, for subcutaneous or intramuscular use (CPT Code 90732)")] ) PneumococcalVaccination
 	    with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, PneumococcalVaccination.relevantDatetime ) >= 60 ) VaccinationAfter60
+	      such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, PneumococcalVaccination.relevantDatetime ) >= 60 ) VaccinationAfter60
 	    where VaccinationAfter60.relevantDatetime on or before 
 	    end of Measurement Period
 	)

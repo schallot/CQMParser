@@ -24,7 +24,7 @@ from
 	    or URI.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 	  return QualifyingEncounter EncounterWithURI
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
+	    such that Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
 	  return EncounterWithURI
 =============================================================================================================================================================================
 Denominator:
@@ -52,7 +52,7 @@ from
 	    or URI.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 	  return QualifyingEncounter EncounterWithURI
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
+	    such that Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
 	  return EncounterWithURI
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -80,7 +80,7 @@ from
 	    or URI.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 	  return QualifyingEncounter EncounterWithURI
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
+	    such that Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
 	  return EncounterWithURI InitialPopulation
 	  where Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
 	    where ( DischargeHospice.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))
@@ -92,9 +92,7 @@ from
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  union from
 	  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
@@ -120,9 +118,7 @@ from
 	    or URI.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 	  return QualifyingEncounter EncounterWithURI
 	  with [("Medication, Active: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] ActiveAntibiotic
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( ActiveAntibiotic.relevantDatetime, ActiveAntibiotic.relevantPeriod ) overlaps Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value) ( ( start of EncounterWithURI.relevantPeriod ) - 30 days ), start of EncounterWithURI.relevantPeriod]
+	    such that Global.NormalizeInterval ( ActiveAntibiotic.relevantDatetime, ActiveAntibiotic.relevantPeriod ) overlaps Interval[Global.ToDate ( ( start of EncounterWithURI.relevantPeriod ) - 30 days ), start of EncounterWithURI.relevantPeriod]
 	  return EncounterWithURI
 	  union ( from
 	  ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
@@ -238,8 +234,8 @@ from
 	    or URI.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 	  return QualifyingEncounter EncounterWithURI
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) <= 17
+	    such that Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 3
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) <= 17
 	  return EncounterWithURI
 =============================================================================================================================================================================
 Stratification 2:
@@ -267,7 +263,7 @@ from
 	    or URI.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 	  return QualifyingEncounter EncounterWithURI
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[18, 64]
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[18, 64]
 	  return EncounterWithURI
 =============================================================================================================================================================================
 Stratification 3:
@@ -295,5 +291,5 @@ from
 	    or URI.prevalencePeriod overlaps before QualifyingEncounter.relevantPeriod
 	  return QualifyingEncounter EncounterWithURI
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 65
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 65
 	  return EncounterWithURI

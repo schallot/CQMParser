@@ -70,12 +70,8 @@ exists ( ( [("Diagnostic Study, Order: DEXA Dual Energy Xray Absorptiometry, Bon
 ) FirstADTMP
     such that OrderTwelveMonthADT.authorDatetime on or after FirstADTMP
       and OrderTwelveMonthADT.authorDatetime during Measurement Period OrderTwelveMonthsADT
-          such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 3 months or less after OrderTwelveMonthsADT.authorDatetime
-            or if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 2 years or less before OrderTwelveMonthsADT.authorDatetime
+          such that Global.NormalizeInterval ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 3 months or less after OrderTwelveMonthsADT.authorDatetime
+            or Global.NormalizeInterval ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 2 years or less before OrderTwelveMonthsADT.authorDatetime
     )
 )
 =============================================================================================================================================================================

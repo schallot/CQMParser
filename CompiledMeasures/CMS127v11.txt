@@ -41,28 +41,20 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
 exists ( ( [("Immunization, Administered: Adult Pneumococcal Vaccine" using "Adult Pneumococcal Vaccine (2.16.840.1.113883.3.464.1003.1161)")]
     union [("Procedure, Performed: Adult Pneumococcal Vaccine Administered" using "Adult Pneumococcal Vaccine Administered (2.16.840.1.113883.3.464.1003.1162)")] ) PneumococcalVaccination
-    where AgeInYearsAt(date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod))>= 60
-      and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) on or before day of 
+    where AgeInYearsAt(date from start of Global.NormalizeInterval(PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod))>= 60
+      and Global.NormalizeInterval ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) on or before day of 
       end of Measurement Period
 )
 =============================================================================================================================================================================

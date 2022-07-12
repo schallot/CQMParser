@@ -29,13 +29,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdolescentDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) AdolescentScreen
     where AdolescentScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))
 ) is not null
@@ -45,13 +41,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdolescentDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) LastAdolescentScreen,
   [("Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)")]
   union [("Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)")]
@@ -60,16 +52,10 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+  where Global.NormalizeInterval ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
     and LastAdolescentScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))
-    and ( ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
-        or ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)2 days or less after day of 
+    and ( ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
+        or ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)2 days or less after day of 
           end of QualifyingEncounter.relevantPeriod
         )
     )
@@ -81,13 +67,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdolescentDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) AdolescentScreen
     where AdolescentScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))
 ) is not null
@@ -97,13 +79,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdolescentDepressionScreening.relevantDatetime, AdolescentDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdolescentDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) LastAdolescentScreen,
   [("Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)")]
   union [("Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)")]
@@ -112,16 +90,10 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+  where Global.NormalizeInterval ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
     and LastAdolescentScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))
-    and ( ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
-        or ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)2 days or less after day of 
+    and ( ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
+        or ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.relevantPeriod), FollowUpPositiveAdolescentScreen.authorDatetime)2 days or less after day of 
           end of QualifyingEncounter.relevantPeriod
         )
     )
@@ -130,13 +102,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdultDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) AdultScreen
     where AdultScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))
 ) is not null
@@ -146,13 +114,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdultDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) LastAdultScreen,
   [("Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)")]
   union [("Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)")]
@@ -161,16 +125,10 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+  where Global.NormalizeInterval ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
     and LastAdultScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))
-    and ( ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
-        or ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)2 days or less after day of 
+    and ( ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
+        or ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)2 days or less after day of 
           end of QualifyingEncounter.relevantPeriod
         )
     )
@@ -182,13 +140,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdultDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) AdultScreen
     where AdultScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))
 ) is not null
@@ -198,13 +152,9 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval(AdultDepressionScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdultDepressionScreening.result is not null
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) LastAdultScreen,
   [("Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)")]
   union [("Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)")]
@@ -213,16 +163,10 @@ Numerator:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+  where Global.NormalizeInterval ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
     and LastAdultScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))
-    and ( ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
-        or ( Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)2 days or less after day of 
+    and ( ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)same day as start of QualifyingEncounter.relevantPeriod )
+        or ( Coalesce(start of Global.NormalizeInterval(FollowUpPositiveAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPeriod), FollowUpPositiveAdultScreen.authorDatetime)2 days or less after day of 
           end of QualifyingEncounter.relevantPeriod
         )
     )
@@ -247,9 +191,7 @@ Denominator Exceptions:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( AdolescentScreening.relevantDatetime, AdolescentScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval ( AdolescentScreening.relevantDatetime, AdolescentScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdolescentScreening.result is not null
 )
 )
@@ -267,9 +209,7 @@ Denominator Exceptions:
   union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) QualifyingEncounter
   where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( AdultScreening.relevantDatetime, AdultScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval ( AdultScreening.relevantDatetime, AdultScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod
         and AdultScreening.result is not null
 )
   )

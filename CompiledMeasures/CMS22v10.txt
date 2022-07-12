@@ -3,13 +3,13 @@ Initial Population:
 [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator:
 [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator Exclusions:
 [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
@@ -21,40 +21,24 @@ Numerator:
 [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result included in Interval[1 'mm[Hg]', 120 'mm[Hg]' )
 	    and EncounterLastDiastolicBP.result included in Interval[1 'mm[Hg]', 80 'mm[Hg]' )
 	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where ( EncounterLastSystolicBP.result included in Interval[120 'mm[Hg]', 129 'mm[Hg]']
 	      and EncounterLastDiastolicBP.result < 80 'mm[Hg]'
@@ -74,20 +58,12 @@ Numerator:
 	  union ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where ( EncounterLastSystolicBP.result included in Interval[120 'mm[Hg]', 129 'mm[Hg]']
 	      and EncounterLastDiastolicBP.result < 80 'mm[Hg]'
@@ -99,20 +75,12 @@ Numerator:
 	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
@@ -121,20 +89,12 @@ Numerator:
 	  except [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'
@@ -156,20 +116,12 @@ Numerator:
 	  union ( ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where EncounterLastSystolicBP.result in Interval[130 'mm[Hg]', 139 'mm[Hg]']
 	      or EncounterLastDiastolicBP.result in Interval[80 'mm[Hg]', 89 'mm[Hg]']
@@ -180,20 +132,12 @@ Numerator:
 	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'
@@ -220,20 +164,12 @@ Numerator:
 	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where EncounterLastSystolicBP.result in Interval[130 'mm[Hg]', 139 'mm[Hg]']
 	      or EncounterLastDiastolicBP.result in Interval[80 'mm[Hg]', 89 'mm[Hg]']
@@ -244,20 +180,12 @@ Numerator:
 	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'
@@ -271,20 +199,12 @@ Numerator:
 	  union ( ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where EncounterLastSystolicBP.result >= 140 'mm[Hg]'
 	      or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
@@ -292,20 +212,12 @@ Numerator:
 	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'
@@ -333,20 +245,12 @@ Numerator:
 	  union ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where EncounterLastSystolicBP.result >= 140 'mm[Hg]'
 	      or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
@@ -354,20 +258,12 @@ Numerator:
 	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'
@@ -393,20 +289,12 @@ Denominator Exceptions:
 	  union ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where ( EncounterLastSystolicBP.result included in Interval[120 'mm[Hg]', 129 'mm[Hg]']
 	      and EncounterLastDiastolicBP.result < 80 'mm[Hg]'
@@ -426,20 +314,12 @@ Denominator Exceptions:
 	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where ( EncounterLastSystolicBP.result >= 130 'mm[Hg]'
 	        or EncounterLastDiastolicBP.result >= 80 'mm[Hg]'
@@ -448,20 +328,12 @@ Denominator Exceptions:
 	  except [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'
@@ -482,20 +354,12 @@ Denominator Exceptions:
 	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where EncounterLastSystolicBP.result in Interval[130 'mm[Hg]', 139 'mm[Hg]']
 	      or EncounterLastDiastolicBP.result in Interval[80 'mm[Hg]', 89 'mm[Hg]']
@@ -506,20 +370,12 @@ Denominator Exceptions:
 	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'
@@ -545,20 +401,12 @@ Denominator Exceptions:
 	  union ( ( [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	    let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    ),
 	    EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
-	        sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	        where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends during QualifyingEncounter.relevantPeriod
+	        sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	    )
 	    where EncounterLastSystolicBP.result >= 140 'mm[Hg]'
 	      or EncounterLastDiastolicBP.result >= 90 'mm[Hg]'
@@ -566,20 +414,12 @@ Denominator Exceptions:
 	  intersect [("Encounter, Performed: Encounter to Screen for Blood Pressure" using "Encounter to Screen for Blood Pressure (2.16.840.1.113883.3.600.1920)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
 	  let EncounterLastSystolicBP: Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC Code 8480-6)")] SystolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(SystolicBP.relevantDatetime, SystolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  ),
 	  EncounterLastDiastolicBP: Last([("Physical Exam, Performed: Diastolic blood pressure" using "Diastolic blood pressure (LOINC Code 8462-4)")] DiastolicBP
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where Global.NormalizeInterval(DiastolicBP.relevantDatetime, DiastolicBP.relevantPeriod)ends 1 year or less before start of QualifyingEncounter.relevantPeriod
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
 	  where EncounterLastSystolicBP.result > 0 'mm[Hg]'
 	    and EncounterLastDiastolicBP.result > 0 'mm[Hg]'

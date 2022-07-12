@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [Patient Characteristic Birthdate] BirthDate
-			where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+			where Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)>= 18
 	)
 		and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 		union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
@@ -14,7 +14,7 @@ exists ( [Patient Characteristic Birthdate] BirthDate
 =============================================================================================================================================================================
 Denominator:
 exists ( [Patient Characteristic Birthdate] BirthDate
-			where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+			where Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)>= 18
 	)
 		and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 		union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]

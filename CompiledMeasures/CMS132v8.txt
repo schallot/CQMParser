@@ -3,13 +3,13 @@ Initial Population:
 [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery
 	where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
 	with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-		such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+		such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)>= 18
 =============================================================================================================================================================================
 Denominator:
 [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery
 	where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed
 	with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-		such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 18
+		such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)>= 18
 =============================================================================================================================================================================
 Denominator Exclusions:
 [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery

@@ -8,11 +8,9 @@ exists ( ( [("Encounter, Performed: Outpatient Consultation" using "Outpatient C
 	    where ValidEncounters.relevantPeriod during Measurement Period
 	)
 	  and exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period )
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period )
 	  and exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	      where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 19
+	      where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 19
 	  )
 =============================================================================================================================================================================
 Denominator:
@@ -24,11 +22,9 @@ exists ( ( [("Encounter, Performed: Outpatient Consultation" using "Outpatient C
 	    where ValidEncounters.relevantPeriod during Measurement Period
 	)
 	  and exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period )
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period )
 	  and exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	      where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 19
+	      where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 19
 	  )
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -42,14 +38,10 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TKAProcedure
 	    where Count([("Diagnosis: Fracture - Lower Body" using "Fracture - Lower Body (2.16.840.1.113883.3.464.1003.113.12.1037)")] LowerBodyFracture
 	        where LowerBodyFracture.prevalencePeriod starts less than 1 day on or before TKAProcedure.relevantPeriod
 	    )>= 2
@@ -60,30 +52,18 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 =============================================================================================================================================================================
 Numerator:
 exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
 	    with from
 	  [("Assessment, Performed: Quality of life score [KOOS]" using "Quality of life score [KOOS] (LOINC Code 72098-7)")] KOOSLifeQuality,
 	  [("Assessment, Performed: Sport-recreation score [KOOS]" using "Sport-recreation score [KOOS] (LOINC Code 72099-5)")] KOOSSport,
 	  [("Assessment, Performed: Activities of daily living score [KOOS]" using "Activities of daily living score [KOOS] (LOINC Code 72100-1)")] KOOSActivityScore,
 	  [("Assessment, Performed: Symptoms score [KOOS]" using "Symptoms score [KOOS] (LOINC Code 72101-9)")] KOOSSymptoms,
 	  [("Assessment, Performed: Pain score [KOOS]" using "Pain score [KOOS] (LOINC Code 72102-7)")] KOOSPain
-	  let KOOSLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSLifeQuality.relevantDatetime, KOOSLifeQuality.relevantPeriod ),
-	  KOOSSportTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSSport.relevantDatetime, KOOSSport.relevantPeriod ),
-	  KOOSActivityScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSActivityScore.relevantDatetime, KOOSActivityScore.relevantPeriod ),
-	  KOOSSymptomsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSSymptoms.relevantDatetime, KOOSSymptoms.relevantPeriod ),
-	  KOOSPainTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSPain.relevantDatetime, KOOSPain.relevantPeriod )
+	  let KOOSLifeQualityTime: start of Global.NormalizeInterval ( KOOSLifeQuality.relevantDatetime, KOOSLifeQuality.relevantPeriod ),
+	  KOOSSportTime: start of Global.NormalizeInterval ( KOOSSport.relevantDatetime, KOOSSport.relevantPeriod ),
+	  KOOSActivityScoreTime: start of Global.NormalizeInterval ( KOOSActivityScore.relevantDatetime, KOOSActivityScore.relevantPeriod ),
+	  KOOSSymptomsTime: start of Global.NormalizeInterval ( KOOSSymptoms.relevantDatetime, KOOSSymptoms.relevantPeriod ),
+	  KOOSPainTime: start of Global.NormalizeInterval ( KOOSPain.relevantDatetime, KOOSPain.relevantPeriod )
 	  where KOOSLifeQualityTime same day as KOOSSportTime
 	    and KOOSSport.result is not null
 	    and KOOSLifeQualityTime same day as KOOSActivityScoreTime
@@ -101,21 +81,11 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	  [("Assessment, Performed: Activities of daily living score [KOOS]" using "Activities of daily living score [KOOS] (LOINC Code 72100-1)")] KOOSActivityScore,
 	  [("Assessment, Performed: Symptoms score [KOOS]" using "Symptoms score [KOOS] (LOINC Code 72101-9)")] KOOSSymptoms,
 	  [("Assessment, Performed: Pain score [KOOS]" using "Pain score [KOOS] (LOINC Code 72102-7)")] KOOSPain
-	  let KOOSLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSLifeQuality.relevantDatetime, KOOSLifeQuality.relevantPeriod ),
-	  KOOSSportTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSSport.relevantDatetime, KOOSSport.relevantPeriod ),
-	  KOOSActivityScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSActivityScore.relevantDatetime, KOOSActivityScore.relevantPeriod ),
-	  KOOSSymptomsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSSymptoms.relevantDatetime, KOOSSymptoms.relevantPeriod ),
-	  KOOSPainTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KOOSPain.relevantDatetime, KOOSPain.relevantPeriod )
+	  let KOOSLifeQualityTime: start of Global.NormalizeInterval ( KOOSLifeQuality.relevantDatetime, KOOSLifeQuality.relevantPeriod ),
+	  KOOSSportTime: start of Global.NormalizeInterval ( KOOSSport.relevantDatetime, KOOSSport.relevantPeriod ),
+	  KOOSActivityScoreTime: start of Global.NormalizeInterval ( KOOSActivityScore.relevantDatetime, KOOSActivityScore.relevantPeriod ),
+	  KOOSSymptomsTime: start of Global.NormalizeInterval ( KOOSSymptoms.relevantDatetime, KOOSSymptoms.relevantPeriod ),
+	  KOOSPainTime: start of Global.NormalizeInterval ( KOOSPain.relevantDatetime, KOOSPain.relevantPeriod )
 	  where KOOSLifeQualityTime same day as KOOSSportTime
 	    and KOOSSport.result is not null
 	    and KOOSLifeQualityTime same day as KOOSActivityScoreTime
@@ -131,9 +101,7 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	      end of TotalKnee.relevantPeriod + 365 days]
 	)
 	  or exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
 	    with ( [("Assessment, Performed: Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR]" using "Knee injury and osteoarthritis outcome score for joint replacement [KOOSJR] (LOINC Code 82324-5)")] KOOSJr
 	    where KOOSJr.result is not null
 	) InitialKOOSJrAssessment
@@ -146,18 +114,12 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	      end of TotalKnee.relevantPeriod + 365 days]
 	)
 	  or exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
 	    with from
 	  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
 	  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
-	  let PROMIS10MentalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
-	  PROMIS10PhysicalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
+	  let PROMIS10MentalScoreTime: start of Global.NormalizeInterval ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
+	  PROMIS10PhysicalScoreTime: start of Global.NormalizeInterval ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
 	  where PROMIS10MentalScoreTime same day as PROMIS10PhysicalScoreTime
 	    and PROMIS10PhysicalScore.result is not null
 	    and PROMIS10MentalScore.result is not null
@@ -166,12 +128,8 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	    with from
 	  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
 	  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
-	  let PROMIS10MentalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
-	  PROMIS10PhysicalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
+	  let PROMIS10MentalScoreTime: start of Global.NormalizeInterval ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
+	  PROMIS10PhysicalScoreTime: start of Global.NormalizeInterval ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
 	  where PROMIS10MentalScoreTime same day as PROMIS10PhysicalScoreTime
 	    and PROMIS10PhysicalScore.result is not null
 	    and PROMIS10MentalScore.result is not null
@@ -181,18 +139,12 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	      end of TotalKnee.relevantPeriod + 365 days]
 	)
 	  or exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
 	    with from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null
@@ -201,12 +153,8 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	    with from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null
@@ -216,18 +164,12 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	      end of TotalKnee.relevantPeriod + 365 days]
 	)
 	  or exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Procedure (2.16.840.1.113883.3.464.1003.198.12.1007)")] TKAProcedure
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
+	  where Global.NormalizeInterval ( TKAProcedure.relevantDatetime, TKAProcedure.relevantPeriod ) starts 12 months or less before start of Measurement Period TotalKnee
 	    with from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null
@@ -236,12 +178,8 @@ exists ( [("Procedure, Performed: Primary TKA Procedure" using "Primary TKA Proc
 	    with from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null

@@ -1,8 +1,8 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 20
+	    where Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) < 20
 	)
 	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
@@ -16,8 +16,8 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 20
+	    where Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) < 20
 	)
 	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Preventive Care - Established Office Visit, 0 to 17" using "Preventive Care - Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
@@ -40,16 +40,12 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 =============================================================================================================================================================================
 Numerator:
 exists ( [("Procedure, Performed: Fluoride Varnish Application for Children" using "Fluoride Varnish Application for Children (2.16.840.1.113883.3.464.1003.125.12.1002)")] FluorideApplication
-	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( FluorideApplication.relevantDatetime, FluorideApplication.relevantPeriod ) during Measurement Period
+	    where Global.NormalizeInterval ( FluorideApplication.relevantDatetime, FluorideApplication.relevantPeriod ) during Measurement Period
 	)
 =============================================================================================================================================================================
 Numerator Exclusions:
@@ -60,14 +56,14 @@ None
 =============================================================================================================================================================================
 Stratification 1:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) <= 4
+	    where Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) <= 4
 	)
 =============================================================================================================================================================================
 Stratification 2:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[5, 11]
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[5, 11]
 =============================================================================================================================================================================
 Stratification 3:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[12, 20 )
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[12, 20 )

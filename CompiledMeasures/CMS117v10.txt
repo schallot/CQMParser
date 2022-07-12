@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( date from BirthDate.birthDatetime, 
+	    where Global.CalendarAgeInYearsAt ( date from BirthDate.birthDatetime, 
 	    end of Measurement Period ) = 2
 	)
 	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -15,7 +15,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( date from BirthDate.birthDatetime, 
+	    where Global.CalendarAgeInYearsAt ( date from BirthDate.birthDatetime, 
 	    end of Measurement Period ) = 2
 	)
 	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -38,9 +38,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 =============================================================================================================================================================================
 Numerator:
@@ -109,9 +107,7 @@ Numerator:
 	  union ( [("Diagnosis: Measles" using "Measles (2.16.840.1.113883.3.464.1003.110.12.1053)")] MeaslesDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of MeaslesDiagnosis.prevalencePeriod }
 	  ) ) Measles
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Measles.relevantDatetime, Measles.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
+	  where Global.NormalizeInterval ( Measles.relevantDatetime, Measles.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	          and exists ( ( ( [("Laboratory Test, Performed: Mumps Antibody Test (IgG Antibody Titer)" using "Mumps Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1061)")] MumpsTiter
 	    where MumpsTiter.result >= 1.10
 	)
@@ -121,9 +117,7 @@ Numerator:
 	  union ( [("Diagnosis: Mumps" using "Mumps (2.16.840.1.113883.3.464.1003.110.12.1032)")] MumpsDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of MumpsDiagnosis.prevalencePeriod }
 	  ) ) Mumps
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Mumps.relevantDatetime, Mumps.relevantPeriod ) during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
+	  where Global.NormalizeInterval ( Mumps.relevantDatetime, Mumps.relevantPeriod ) during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	          and exists ( ( ( [("Laboratory Test, Performed: Rubella Antibody Test (IgG Antibody Titer)" using "Rubella Antibody Test (IgG Antibody Titer) (2.16.840.1.113883.3.464.1003.198.12.1063)")] RubellaTiter
 	    where RubellaTiter.result >= 1.10
 	)
@@ -133,9 +127,7 @@ Numerator:
 	  union ( [("Diagnosis: Rubella" using "Rubella (2.16.840.1.113883.3.464.1003.110.12.1037)")] RubellaDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of RubellaDiagnosis.prevalencePeriod }
 	  ) ) Rubella
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Rubella.relevantDatetime, Rubella.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
+	  where Global.NormalizeInterval ( Rubella.relevantDatetime, Rubella.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	      )
 	  )
 	  and ( exists ( ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
@@ -236,9 +228,7 @@ Numerator:
 	  union ( [("Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.464.1003.110.12.1025)")] HepatitisBDiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of HepatitisBDiagnosis.prevalencePeriod }
 	  ) ) HepBConditions
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HepBConditions.relevantDatetime, HepBConditions.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
+	  where Global.NormalizeInterval ( HepBConditions.relevantDatetime, HepBConditions.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
 	  and ( exists ( ( ( [("Immunization, Administered: Varicella Zoster Vaccine (VZV)" using "Varicella Zoster Vaccine (VZV) (2.16.840.1.113883.3.464.1003.196.12.1170)")]
 	    union [("Procedure, Performed: Varicella Zoster Vaccine (VZV) Administered" using "Varicella Zoster Vaccine (VZV) Administered (2.16.840.1.113883.3.464.1003.110.12.1040)")] ) ChickenPoxVaccination
@@ -265,9 +255,7 @@ Numerator:
 	  union ( [("Diagnosis: Varicella Zoster" using "Varicella Zoster (2.16.840.1.113883.3.464.1003.110.12.1039)")] VaricellaZoster
 	      return Laboratory Test, Performed { relevantDatetime: start of VaricellaZoster.prevalencePeriod }
 	  ) ) VaricellaZosterConditions
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VaricellaZosterConditions.relevantDatetime, VaricellaZosterConditions.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
+	  where Global.NormalizeInterval ( VaricellaZosterConditions.relevantDatetime, VaricellaZosterConditions.relevantPeriod ) ends during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
 	  and ( exists ( from
 	  ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
@@ -306,9 +294,7 @@ Numerator:
 	  union ( [("Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.1024)")] HepatitisADiagnosis
 	      return Laboratory Test, Performed { relevantDatetime: start of HepatitisADiagnosis.prevalencePeriod }
 	  ) ) HepatitisAConditions
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HepatitisAConditions.relevantDatetime, HepatitisAConditions.relevantPeriod ) during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
+	  where Global.NormalizeInterval ( HepatitisAConditions.relevantDatetime, HepatitisAConditions.relevantPeriod ) during Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
 	  )
 	  and ( exists ( ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
 	    union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus

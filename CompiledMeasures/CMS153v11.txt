@@ -16,9 +16,7 @@ AgeInYearsAt(date from
 ) )
   and ( ( exists ( [("Assessment, Performed: Have you ever had vaginal intercourse [PhenX]" using "Have you ever had vaginal intercourse [PhenX] (LOINC Code 64728-9)")] SexualActivityAssessment
     where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-      and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) on or before 
+      and Global.NormalizeInterval ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) on or before 
       end of Measurement Period
 ) )
       or ( exists ( ( [("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1018)")]
@@ -44,9 +42,7 @@ AgeInYearsAt(date from
     where SexualActivityDiagnostics.authorDatetime during day of Measurement Period
 ) )
       or ( exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1017)")] ProceduresForSexualActivity
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during day of Measurement Period
+    where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during day of Measurement Period
 ) )
   )
 =============================================================================================================================================================================
@@ -67,9 +63,7 @@ AgeInYearsAt(date from
 ) )
   and ( ( exists ( [("Assessment, Performed: Have you ever had vaginal intercourse [PhenX]" using "Have you ever had vaginal intercourse [PhenX] (LOINC Code 64728-9)")] SexualActivityAssessment
     where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-      and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) on or before 
+      and Global.NormalizeInterval ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) on or before 
       end of Measurement Period
 ) )
       or ( exists ( ( [("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1018)")]
@@ -95,9 +89,7 @@ AgeInYearsAt(date from
     where SexualActivityDiagnostics.authorDatetime during day of Measurement Period
 ) )
       or ( exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1017)")] ProceduresForSexualActivity
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during day of Measurement Period
+    where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during day of Measurement Period
 ) )
   )
 =============================================================================================================================================================================
@@ -113,17 +105,13 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   or ( ( exists ( ( [("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.1011)")] PregnancyTest
       with [("Diagnostic Study, Order: XRay Study" using "XRay Study (2.16.840.1.113883.3.464.1003.198.12.1034)")] XrayOrder
@@ -138,9 +126,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 ) )
       and not ( exists ( [("Assessment, Performed: Have you ever had vaginal intercourse [PhenX]" using "Have you ever had vaginal intercourse [PhenX] (LOINC Code 64728-9)")] SexualActivityAssessment
     where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-      and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) on or before 
+      and Global.NormalizeInterval ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) on or before 
       end of Measurement Period
 ) )
       and not ( exists ( ( [("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1018)")]
@@ -163,15 +149,13 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
     where SexualActivityDiagnostics.authorDatetime during day of Measurement Period
 ) )
       and not ( exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1017)")] ProceduresForSexualActivity
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during day of Measurement Period
+    where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during day of Measurement Period
 ) )
   )
 =============================================================================================================================================================================
 Numerator:
 exists ( [("Laboratory Test, Performed: Chlamydia Screening" using "Chlamydia Screening (2.16.840.1.113883.3.464.1003.110.12.1052)")] ChlamydiaTest
-    where Latest(NormalizeInterval(pointInTime, period)) ( ChlamydiaTest.relevantDatetime, ChlamydiaTest.relevantPeriod ) during day of Measurement Period
+    where Global.LatestOf ( ChlamydiaTest.relevantDatetime, ChlamydiaTest.relevantPeriod ) during day of Measurement Period
       and ChlamydiaTest.result is not null
 )
 =============================================================================================================================================================================

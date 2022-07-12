@@ -74,12 +74,8 @@ exists ( ( [("Diagnostic Study, Order: DEXA Dual Energy Xray Absorptiometry, Bon
 	    end of Measurement Period
 	    sort ascending
 	) ADTTherapyStartDate
-	          such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 3 months or less after ADTTherapyStartDate
-	            or if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 2 years or less before ADTTherapyStartDate
+	          such that Global.NormalizeInterval ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 3 months or less after ADTTherapyStartDate
+	            or Global.NormalizeInterval ( DEXAPerformed.relevantDatetime, DEXAPerformed.relevantPeriod ) 2 years or less before ADTTherapyStartDate
 	    )
 	)
 =============================================================================================================================================================================

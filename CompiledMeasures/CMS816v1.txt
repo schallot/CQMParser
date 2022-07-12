@@ -2,48 +2,18 @@
 Initial Population:
 [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Encounter Visit
-		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
-				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-				sort by 
-				end of relevantPeriod
-		),
-		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
-				sort by 
-				end of relevantPeriod
-		)
-		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
-		end of Visit.relevantPeriod] ( InpatientEncounter ) ) >= 18
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Global.HospitalizationWithObservation ( InpatientEncounter ) ) >= 18
 	  where InpatientEncounter.relevantPeriod ends during Measurement Period QualifyingEncounter
 	  with [("Medication, Administered: Hypoglycemics Severe Hypoglycemia" using "Hypoglycemics Severe Hypoglycemia (2.16.840.1.113762.1.4.1196.393)")] HypoglycemicMedicationAdministration
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HypoglycemicMedicationAdministration.relevantDatetime, HypoglycemicMedicationAdministration.relevantPeriod ) starts during Global.HospitalizationWithObservation ( QualifyingEncounter )
+	    such that Global.NormalizeInterval ( HypoglycemicMedicationAdministration.relevantDatetime, HypoglycemicMedicationAdministration.relevantPeriod ) starts during Global.HospitalizationWithObservation ( QualifyingEncounter )
 =============================================================================================================================================================================
 Denominator:
 [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Encounter Visit
-		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
-				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-				sort by 
-				end of relevantPeriod
-		),
-		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
-				sort by 
-				end of relevantPeriod
-		)
-		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
-		end of Visit.relevantPeriod] ( InpatientEncounter ) ) >= 18
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Global.HospitalizationWithObservation ( InpatientEncounter ) ) >= 18
 	  where InpatientEncounter.relevantPeriod ends during Measurement Period QualifyingEncounter
 	  with [("Medication, Administered: Hypoglycemics Severe Hypoglycemia" using "Hypoglycemics Severe Hypoglycemia (2.16.840.1.113762.1.4.1196.393)")] HypoglycemicMedicationAdministration
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HypoglycemicMedicationAdministration.relevantDatetime, HypoglycemicMedicationAdministration.relevantPeriod ) starts during Global.HospitalizationWithObservation ( QualifyingEncounter )
+	    such that Global.NormalizeInterval ( HypoglycemicMedicationAdministration.relevantDatetime, HypoglycemicMedicationAdministration.relevantPeriod ) starts during Global.HospitalizationWithObservation ( QualifyingEncounter )
 =============================================================================================================================================================================
 Denominator Exclusions:
 None
@@ -51,77 +21,19 @@ None
 Numerator:
 [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Encounter Visit
-		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
-				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-				sort by 
-				end of relevantPeriod
-		),
-		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
-				sort by 
-				end of relevantPeriod
-		)
-		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
-		end of Visit.relevantPeriod] ( InpatientEncounter ) ) >= 18
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Global.HospitalizationWithObservation ( InpatientEncounter ) ) >= 18
 	  where InpatientEncounter.relevantPeriod ends during Measurement Period QualifyingEncounter
 	  with [("Medication, Administered: Hypoglycemics Severe Hypoglycemia" using "Hypoglycemics Severe Hypoglycemia (2.16.840.1.113762.1.4.1196.393)")] HypoglycemicMedicationAdministration
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HypoglycemicMedicationAdministration.relevantDatetime, HypoglycemicMedicationAdministration.relevantPeriod ) starts during Global.HospitalizationWithObservation ( QualifyingEncounter ) QualifyingEncounter
+	    such that Global.NormalizeInterval ( HypoglycemicMedicationAdministration.relevantDatetime, HypoglycemicMedicationAdministration.relevantPeriod ) starts during Global.HospitalizationWithObservation ( QualifyingEncounter ) QualifyingEncounter
 	  where exists ( [("Laboratory Test, Performed: Glucose lab test" using "Glucose lab test (2.16.840.1.113762.1.4.1045.134)")] BloodGlucoseLab
 	      with [("Medication, Administered: Hypoglycemics Severe Hypoglycemia" using "Hypoglycemics Severe Hypoglycemia (2.16.840.1.113762.1.4.1196.393)")] HypoglycemicMeds
-	        such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HypoglycemicMeds.relevantDatetime, HypoglycemicMeds.relevantPeriod ) starts 24 hours or less before or on BloodGlucoseLab.relevantDatetime
-	          and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HypoglycemicMeds.relevantDatetime, HypoglycemicMeds.relevantPeriod ) starts during Encounter Visit
-		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
-				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-				sort by 
-				end of relevantPeriod
-		),
-		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
-				sort by 
-				end of relevantPeriod
-		)
-		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
-		end of Visit.relevantPeriod] ( QualifyingEncounter )
+	        such that Global.NormalizeInterval ( HypoglycemicMeds.relevantDatetime, HypoglycemicMeds.relevantPeriod ) starts 24 hours or less before or on BloodGlucoseLab.relevantDatetime
+	          and Global.NormalizeInterval ( HypoglycemicMeds.relevantDatetime, HypoglycemicMeds.relevantPeriod ) starts during Global.HospitalizationWithObservation ( QualifyingEncounter )
 	      without [("Laboratory Test, Performed: Glucose lab test" using "Glucose lab test (2.16.840.1.113762.1.4.1045.134)")] FollowupBloodGlucoseLab
-	        such that FollowupBloodGlucoseLab.relevantDatetime during Encounter Visit
-		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
-				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-				sort by 
-				end of relevantPeriod
-		),
-		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
-				sort by 
-				end of relevantPeriod
-		)
-		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
-		end of Visit.relevantPeriod] ( QualifyingEncounter )
+	        such that FollowupBloodGlucoseLab.relevantDatetime during Global.HospitalizationWithObservation ( QualifyingEncounter )
 	          and FollowupBloodGlucoseLab.relevantDatetime 5 minutes or less after BloodGlucoseLab.relevantDatetime
 	          and FollowupBloodGlucoseLab.result > 80 'mg/dL'
-	      where BloodGlucoseLab.relevantDatetime during Encounter Visit
-		let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
-				where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-				sort by 
-				end of relevantPeriod
-		),
-		VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-		EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-				where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
-				sort by 
-				end of relevantPeriod
-		)
-		return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
-		end of Visit.relevantPeriod] ( QualifyingEncounter )
+	      where BloodGlucoseLab.relevantDatetime during Global.HospitalizationWithObservation ( QualifyingEncounter )
 	        and BloodGlucoseLab.result < 40 'mg/dL'
 	  )
 =============================================================================================================================================================================

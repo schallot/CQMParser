@@ -1,61 +1,61 @@
 =============================================================================================================================================================================
 Initial Population:
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+		where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period EncounterInpatient
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
+				and Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
 		with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
 			such that DeliveryProcedure.relevantPeriod starts during EnounterWithQualifyingAge.relevantPeriod
 =============================================================================================================================================================================
 Denominator:
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+		where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period EncounterInpatient
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
+				and Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
 		with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
 			such that DeliveryProcedure.relevantPeriod starts during EnounterWithQualifyingAge.relevantPeriod QualifyingEncounter
 		with [("Assessment, Performed: Time of Delivery" using "Time of Delivery (2.16.840.1.113762.1.4.1045.28)")] TimeOfDelivery
 		with [("Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)")] EstimatedGestationalAge
 		where EstimatedGestationalAge.result >= 37 weeks
 			and EstimatedGestationalAge.result < 39 weeks NearTermGestational
-			such that NearTermGestational.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezone from Value)(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
+			such that NearTermGestational.authorDatetime during Interval[Global.ToDate(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
 			such that GestationalAge.authorDatetime during QualifyingEncounter.relevantPeriod
 =============================================================================================================================================================================
 Denominator Exclusions:
 ( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+		where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period EncounterInpatient
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
+				and Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
 		with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
 			such that DeliveryProcedure.relevantPeriod starts during EnounterWithQualifyingAge.relevantPeriod QualifyingEncounter
 		with [("Assessment, Performed: Time of Delivery" using "Time of Delivery (2.16.840.1.113762.1.4.1045.28)")] TimeOfDelivery
 		with [("Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)")] EstimatedGestationalAge
 		where EstimatedGestationalAge.result >= 37 weeks
 			and EstimatedGestationalAge.result < 39 weeks NearTermGestational
-			such that NearTermGestational.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezone from Value)(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
+			such that NearTermGestational.authorDatetime during Interval[Global.ToDate(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
 			such that GestationalAge.authorDatetime during QualifyingEncounter.relevantPeriod DeliveryEncounter
 			with [("Diagnosis: Conditions Possibly Justifying Elective Delivery Prior to 39 Weeks Gestation" using "Conditions Possibly Justifying Elective Delivery Prior to 39 Weeks Gestation (2.16.840.1.113883.3.117.1.7.1.286)")] DiagnosisElectiveDelivery
 				such that DiagnosisElectiveDelivery.prevalencePeriod overlaps DeliveryEncounter.relevantPeriod
 	)
 		union ( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+		where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period EncounterInpatient
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
+				and Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
 		with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
 			such that DeliveryProcedure.relevantPeriod starts during EnounterWithQualifyingAge.relevantPeriod QualifyingEncounter
 		with [("Assessment, Performed: Time of Delivery" using "Time of Delivery (2.16.840.1.113762.1.4.1045.28)")] TimeOfDelivery
 		with [("Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)")] EstimatedGestationalAge
 		where EstimatedGestationalAge.result >= 37 weeks
 			and EstimatedGestationalAge.result < 39 weeks NearTermGestational
-			such that NearTermGestational.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezone from Value)(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
+			such that NearTermGestational.authorDatetime during Interval[Global.ToDate(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
 			such that GestationalAge.authorDatetime during QualifyingEncounter.relevantPeriod DeliveryEncounter
 				where exists ( DeliveryEncounter.diagnoses Diagnoses
 						where Diagnoses in (valueset "Conditions Possibly Justifying Elective Delivery Prior to 39 Weeks Gestation" using "2.16.840.1.113883.3.117.1.7.1.286")
@@ -64,18 +64,18 @@ Denominator Exclusions:
 =============================================================================================================================================================================
 Numerator:
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+		where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period EncounterInpatient
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
+				and Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
 		with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
 			such that DeliveryProcedure.relevantPeriod starts during EnounterWithQualifyingAge.relevantPeriod QualifyingEncounter
 		with [("Assessment, Performed: Time of Delivery" using "Time of Delivery (2.16.840.1.113762.1.4.1045.28)")] TimeOfDelivery
 		with [("Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)")] EstimatedGestationalAge
 		where EstimatedGestationalAge.result >= 37 weeks
 			and EstimatedGestationalAge.result < 39 weeks NearTermGestational
-			such that NearTermGestational.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezone from Value)(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
+			such that NearTermGestational.authorDatetime during Interval[Global.ToDate(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
 			such that GestationalAge.authorDatetime during QualifyingEncounter.relevantPeriod DeliveryEncounter
 		with [("Procedure, Performed: Cesarean Birth" using "Cesarean Birth (2.16.840.1.113883.3.117.1.7.1.282)")] CSection
 		without [("Assessment, Performed: Labor" using "Labor (2.16.840.1.113883.3.117.1.7.1.281)")] Labor
@@ -94,18 +94,18 @@ Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient 
 			such that PriorUterineDiagnosis.prevalencePeriod starts before start of DeliveryEncounter.relevantPeriod
 		union from
 	Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+		where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period EncounterInpatient
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
+				and Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
 		with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
 			such that DeliveryProcedure.relevantPeriod starts during EnounterWithQualifyingAge.relevantPeriod QualifyingEncounter
 		with [("Assessment, Performed: Time of Delivery" using "Time of Delivery (2.16.840.1.113762.1.4.1045.28)")] TimeOfDelivery
 		with [("Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)")] EstimatedGestationalAge
 		where EstimatedGestationalAge.result >= 37 weeks
 			and EstimatedGestationalAge.result < 39 weeks NearTermGestational
-			such that NearTermGestational.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezone from Value)(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
+			such that NearTermGestational.authorDatetime during Interval[Global.ToDate(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
 			such that GestationalAge.authorDatetime during QualifyingEncounter.relevantPeriod DeliveryEncounter,
 	[("Medication, Administered: Oxytocin" using "Oxytocin (2.16.840.1.113762.1.4.1045.55)")]
 		union [("Medication, Administered: Dinoprostone" using "Dinoprostone (2.16.840.1.113762.1.4.1045.56)")] InductionMedication,
@@ -115,18 +115,18 @@ Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient 
 		return DeliveryEncounter
 		union from
 	Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-		where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+		where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
 			and EncounterInpatient.relevantPeriod ends during Measurement Period EncounterInpatient
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)>= 8
+				and Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of EncounterInpatient.relevantPeriod)< 65 EnounterWithQualifyingAge
 		with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
 			such that DeliveryProcedure.relevantPeriod starts during EnounterWithQualifyingAge.relevantPeriod QualifyingEncounter
 		with [("Assessment, Performed: Time of Delivery" using "Time of Delivery (2.16.840.1.113762.1.4.1045.28)")] TimeOfDelivery
 		with [("Assessment, Performed: Estimated Gestational Age at Delivery" using "Estimated Gestational Age at Delivery (2.16.840.1.113762.1.4.1045.26)")] EstimatedGestationalAge
 		where EstimatedGestationalAge.result >= 37 weeks
 			and EstimatedGestationalAge.result < 39 weeks NearTermGestational
-			such that NearTermGestational.authorDatetime during Interval[DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezone from Value)(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
+			such that NearTermGestational.authorDatetime during Interval[Global.ToDate(TimeOfDelivery.authorDatetime), TimeOfDelivery.authorDatetime] GestationalAge
 			such that GestationalAge.authorDatetime during QualifyingEncounter.relevantPeriod DeliveryEncounter,
 	[("Procedure, Performed: Artificial Rupture of Membranes" using "Artificial Rupture of Membranes (2.16.840.1.113762.1.4.1045.57)")]
 		union [("Procedure, Performed: Medical Induction of Labor" using "Medical Induction of Labor (2.16.840.1.113883.3.117.1.7.1.288)")] InductionProcedure,

@@ -17,9 +17,7 @@ Numerator:
   where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter
   with ( [("Procedure, Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)")]
     union [("Intervention, Performed: Documentation of current medications (procedure)" using "Documentation of current medications (procedure) (SNOMEDCT Code 428191000124101)")] ) MedicationsDocumented
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( MedicationsDocumented.relevantDatetime, MedicationsDocumented.relevantPeriod ) during QualifyingEncounter.relevantPeriod
+    such that Global.NormalizeInterval ( MedicationsDocumented.relevantDatetime, MedicationsDocumented.relevantPeriod ) during QualifyingEncounter.relevantPeriod
 =============================================================================================================================================================================
 Numerator Exclusions:
 None

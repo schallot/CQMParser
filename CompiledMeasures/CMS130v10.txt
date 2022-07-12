@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 75 )
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 75 )
 	      and exists ( AdultOutpatientEncounters.( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
 	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
@@ -16,7 +16,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 75 )
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 75 )
 	      and exists ( AdultOutpatientEncounters.( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
 	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
@@ -40,27 +40,21 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or exists [("Diagnosis: Malignant Neoplasm of Colon" using "Malignant Neoplasm of Colon (2.16.840.1.113883.3.464.1003.108.12.1001)")] ColorectalCancer
 	  where ColorectalCancer.prevalencePeriod starts on or before 
 	  end of Measurement Period
 	  or exists [("Procedure, Performed: Total Colectomy" using "Total Colectomy (2.16.840.1.113883.3.464.1003.198.12.1019)")] Colectomy
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Colectomy.relevantDatetime, Colectomy.relevantPeriod ) ends on or before 
+	  where Global.NormalizeInterval ( Colectomy.relevantDatetime, Colectomy.relevantPeriod ) ends on or before 
 	  end of Measurement Period
 	  or FrailtyLTI.exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 65
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 65
 	      and exists ( [("Device, Order: Frailty Device" using "Frailty Device (2.16.840.1.113883.3.464.1003.118.12.1300)")] FrailtyDeviceOrder
 	    where FrailtyDeviceOrder.authorDatetime during Measurement Period
 	)
 	  or exists ( [("Device, Applied: Frailty Device" using "Frailty Device (2.16.840.1.113883.3.464.1003.118.12.1300)")] FrailtyDeviceApplied
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( FrailtyDeviceApplied.relevantDatetime, FrailtyDeviceApplied.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( FrailtyDeviceApplied.relevantDatetime, FrailtyDeviceApplied.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or exists ( [("Diagnosis: Frailty Diagnosis" using "Frailty Diagnosis (2.16.840.1.113883.3.464.1003.113.12.1074)")] FrailtyDiagnosis
 	      where FrailtyDiagnosis.prevalencePeriod overlaps Measurement Period
@@ -100,14 +94,12 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	    and InpatientEncounter.relevantPeriod starts 2 years or less on or before 
 	    end of Measurement Period )
 	          or exists [("Medication, Active: Dementia Medications" using "Dementia Medications (2.16.840.1.113883.3.464.1003.196.12.1510)")] DementiaMed
-		where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(DementiaMed.relevantDatetime, DementiaMed.relevantPeriod) overlaps Interval[( start of Measurement Period - 1 year ), 
+		where Global.NormalizeInterval(DementiaMed.relevantDatetime, DementiaMed.relevantPeriod) overlaps Interval[( start of Measurement Period - 1 year ), 
 		end of Measurement Period]
 	      )
 	)
 	  or ( exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	      where ( years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 65 )
+	      where ( Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 65 )
 	        and FrailtyLTI.Max((collapse(collapse(( [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
 	  union [("Encounter, Performed: Nursing Facility Visit" using "Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)")] ) LongTermFacilityEncounter
 	  where LongTermFacilityEncounter.relevantPeriod overlaps Measurement Period
@@ -131,41 +123,31 @@ collapse(( [("Encounter, Performed: Care Services in Long-Term Residential Facil
 	) > 90
 	  )
 	  or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
-	    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
+	    where Global.NormalizeInterval(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 	)
 	  or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)")] PalliativeEncounter
 	      where PalliativeEncounter.relevantPeriod overlaps Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
+	      where Global.NormalizeInterval(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
 	  )
 =============================================================================================================================================================================
 Numerator:
 exists [("Procedure, Performed: Colonoscopy" using "Colonoscopy (2.16.840.1.113883.3.464.1003.108.12.1020)")] Colonoscopy
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Colonoscopy.relevantDatetime, Colonoscopy.relevantPeriod ) ends 10 years or less on or before 
+	  where Global.NormalizeInterval ( Colonoscopy.relevantDatetime, Colonoscopy.relevantPeriod ) ends 10 years or less on or before 
 	  end of Measurement Period
 	  or exists [("Laboratory Test, Performed: Fecal Occult Blood Test (FOBT)" using "Fecal Occult Blood Test (FOBT) (2.16.840.1.113883.3.464.1003.198.12.1011)")] FecalOccultResult
 	  where FecalOccultResult.result is not null
-	    and Latest(NormalizeInterval(pointInTime, period)) ( FecalOccultResult.relevantDatetime, FecalOccultResult.relevantPeriod ) during Measurement Period
+	    and Global.LatestOf ( FecalOccultResult.relevantDatetime, FecalOccultResult.relevantPeriod ) during Measurement Period
 	  or exists [("Procedure, Performed: Flexible Sigmoidoscopy" using "Flexible Sigmoidoscopy (2.16.840.1.113883.3.464.1003.198.12.1010)")] FlexibleSigmoidoscopy
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( FlexibleSigmoidoscopy.relevantDatetime, FlexibleSigmoidoscopy.relevantPeriod ) ends 5 years or less on or before 
+	  where Global.NormalizeInterval ( FlexibleSigmoidoscopy.relevantDatetime, FlexibleSigmoidoscopy.relevantPeriod ) ends 5 years or less on or before 
 	  end of Measurement Period
 	  or exists [("Laboratory Test, Performed: FIT DNA" using "FIT DNA (2.16.840.1.113883.3.464.1003.108.12.1039)")] FitDNA
 	  where FitDNA.result is not null
-	    and Latest(NormalizeInterval(pointInTime, period)) ( FitDNA.relevantDatetime, FitDNA.relevantPeriod ) 3 years or less on or before 
+	    and Global.LatestOf ( FitDNA.relevantDatetime, FitDNA.relevantPeriod ) 3 years or less on or before 
 	    end of Measurement Period
 	  or exists [("Diagnostic Study, Performed: CT Colonography" using "CT Colonography (2.16.840.1.113883.3.464.1003.108.12.1038)")] Colonography
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Colonography.relevantDatetime, Colonography.relevantPeriod ) ends 5 years or less on or before 
+	  where Global.NormalizeInterval ( Colonography.relevantDatetime, Colonography.relevantPeriod ) ends 5 years or less on or before 
 	  end of Measurement Period
 =============================================================================================================================================================================
 Numerator Exclusions:

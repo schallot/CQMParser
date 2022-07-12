@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists [Patient Characteristic Birthdate] BirthDate
-		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 6
+		where Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)>= 6
 			and exists ( [("Diagnosis: HIV 1" using "HIV 1 (2.16.840.1.113883.3.464.1003.120.12.1004)")] HIV
 		where HIV.prevalencePeriod starts before end of Measurement Period )
 			and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -25,7 +25,7 @@ exists [Patient Characteristic Birthdate] BirthDate
 =============================================================================================================================================================================
 Denominator:
 exists [Patient Characteristic Birthdate] BirthDate
-		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 6
+		where Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)>= 6
 			and exists ( [("Diagnosis: HIV 1" using "HIV 1 (2.16.840.1.113883.3.464.1003.120.12.1004)")] HIV
 		where HIV.prevalencePeriod starts before end of Measurement Period )
 			and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -92,7 +92,7 @@ exists ( [("Laboratory Test, Performed: CD4+ Count" using "CD4+ Count (2.16.840.
 =============================================================================================================================================================================
 Population Criteria 1:
 exists [Patient Characteristic Birthdate] BirthDate
-		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)>= 6
+		where Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)>= 6
 			and exists ( [("Diagnosis: HIV 1" using "HIV 1 (2.16.840.1.113883.3.464.1003.120.12.1004)")] HIV
 		where HIV.prevalencePeriod starts before end of Measurement Period )
 			and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]

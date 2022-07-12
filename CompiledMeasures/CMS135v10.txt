@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and Count(( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
@@ -21,7 +21,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and Count(( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]
@@ -53,9 +53,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -78,9 +76,7 @@ exists [("Medication, Order: ACE Inhibitor or ARB or ARNI" using "ACE Inhibitor 
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that ACEIOrARBOrARNIOrdered.authorDatetime during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Medication, Active: ACE Inhibitor or ARB or ARNI" using "ACE Inhibitor or ARB or ARNI (2.16.840.1.113883.3.526.3.1139)")] ActiveACEIOrARBOrARNI
@@ -99,9 +95,7 @@ exists [("Medication, Order: ACE Inhibitor or ARB or ARNI" using "ACE Inhibitor 
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that ActiveACEIOrARBOrARNI.relevantPeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 =============================================================================================================================================================================
@@ -125,9 +119,7 @@ exists [("Medication, Not Ordered: ACE Inhibitor or ARB or ARNI" using "ACE Inhi
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that NoACEIOrARBOrARNIOrdered.authorDatetime during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  where ( NoACEIOrARBOrARNIOrdered.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
@@ -155,9 +147,7 @@ exists [("Medication, Not Ordered: ACE Inhibitor or ARB or ARNI" using "ACE Inhi
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that ACEIOrARBOrARNIAllergyIntolerance.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists ( [("Diagnosis: Allergy to ACE Inhibitor or ARB" using "Allergy to ACE Inhibitor or ARB (2.16.840.1.113883.3.526.3.1211)")]
@@ -177,9 +167,7 @@ exists [("Medication, Not Ordered: ACE Inhibitor or ARB or ARNI" using "ACE Inhi
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that ACEIOrARBAllergyOrIntoleranceDiagnosis.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Diagnosis: Pregnancy" using "Pregnancy (2.16.840.1.113883.3.526.3.378)")] Pregnancy
@@ -198,9 +186,7 @@ exists [("Medication, Not Ordered: ACE Inhibitor or ARB or ARNI" using "ACE Inhi
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that Pregnancy.prevalencePeriod starts 9 months or less before or on start ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Diagnosis: Renal Failure Due to ACE Inhibitor" using "Renal Failure Due to ACE Inhibitor (2.16.840.1.113883.3.526.3.1151)")] RenalFailureDueToACEI
@@ -219,15 +205,13 @@ exists [("Medication, Not Ordered: ACE Inhibitor or ARB or ARNI" using "ACE Inhi
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that RenalFailureDueToACEI.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 =============================================================================================================================================================================
 Population Criteria 1:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and Count(( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.1008)")]

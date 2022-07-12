@@ -1,36 +1,24 @@
 =============================================================================================================================================================================
 Initial Population:
 [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
-	    and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
+	  where Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
+	    and Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
 	    end of Measurement Period CataractSurgeryPerformed
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator:
 [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
-	    and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
+	  where Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
+	    and Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
 	    end of Measurement Period CataractSurgeryPerformed
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 =============================================================================================================================================================================
 Denominator Exclusions:
 [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
-	    and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
+	  where Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
+	    and Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
 	    end of Measurement Period CataractSurgeryPerformed
 	  with ( [("Diagnosis: Acute and Subacute Iridocyclitis" using "Acute and Subacute Iridocyclitis (2.16.840.1.113883.3.526.3.1241)")]
 	    union [("Diagnosis: Amblyopia" using "Amblyopia (2.16.840.1.113883.3.526.3.1448)")]
@@ -87,27 +75,17 @@ Denominator Exclusions:
 	    union [("Diagnosis: Uveitis" using "Uveitis (2.16.840.1.113883.3.526.3.1444)")]
 	    union [("Diagnosis: Vascular Disorders of Iris and Ciliary Body" using "Vascular Disorders of Iris and Ciliary Body (2.16.840.1.113883.3.526.3.1445)")]
 	    union [("Diagnosis: Visual Field Defects" using "Visual Field Defects (2.16.840.1.113883.3.526.3.1446)")] ) ComorbidDiagnosis
-	    such that ComorbidDiagnosis.prevalencePeriod overlaps before if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgeryPerformed.relevantDatetime, CataractSurgeryPerformed.relevantPeriod )
+	    such that ComorbidDiagnosis.prevalencePeriod overlaps before Global.NormalizeInterval ( CataractSurgeryPerformed.relevantDatetime, CataractSurgeryPerformed.relevantPeriod )
 =============================================================================================================================================================================
 Numerator:
 [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
-	    and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
+	  where Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) during Measurement Period
+	    and Global.NormalizeInterval ( CataractSurgery.relevantDatetime, CataractSurgery.relevantPeriod ) starts 93 days or more before 
 	    end of Measurement Period CataractSurgeryPerformed
 	  with ( [("Physical Exam, Performed: Best corrected visual acuity (observable entity)" using "Best corrected visual acuity (observable entity) (SNOMEDCT Code 419775003)")]
 	    union [("Physical Exam, Performed: Best Corrected Visual Acuity Exam Using Snellen Chart" using "Best Corrected Visual Acuity Exam Using Snellen Chart (2.16.840.1.113883.3.526.3.1560)")] ) VisualAcuityExamPerformed
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VisualAcuityExamPerformed.relevantDatetime, VisualAcuityExamPerformed.relevantPeriod ) 90 days or less after day of 
-	    end of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( CataractSurgeryPerformed.relevantDatetime, CataractSurgeryPerformed.relevantPeriod )
+	    such that Global.NormalizeInterval ( VisualAcuityExamPerformed.relevantDatetime, VisualAcuityExamPerformed.relevantPeriod ) 90 days or less after day of 
+	    end of Global.NormalizeInterval ( CataractSurgeryPerformed.relevantDatetime, CataractSurgeryPerformed.relevantPeriod )
 	      and VisualAcuityExamPerformed.result in (valueset "Visual Acuity 20/40 or Better" (2.16.840.1.113883.3.526.3.1483))
 =============================================================================================================================================================================
 Numerator Exclusions:

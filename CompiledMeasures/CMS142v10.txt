@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
@@ -14,7 +14,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Ophthalmological Services" using "Ophthalmological Services (2.16.840.1.113883.3.526.3.1285)")]
@@ -33,9 +33,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	  where QualifyingEncounter.relevantPeriod during Measurement Period ValidQualifyingEncounter
 	  with [("Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)")] DiabeticRetinopathy
 	    such that DiabeticRetinopathy.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterDiabeticRetinopathy
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MacularExam.relevantDatetime, MacularExam.relevantPeriod ) during EncounterDiabeticRetinopathy.relevantPeriod
+	    such that Global.NormalizeInterval ( MacularExam.relevantDatetime, MacularExam.relevantPeriod ) during EncounterDiabeticRetinopathy.relevantPeriod
 	  where MacularExam.result is not null
 =============================================================================================================================================================================
 Denominator Exclusions:

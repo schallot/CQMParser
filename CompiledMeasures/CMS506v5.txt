@@ -2,7 +2,7 @@
 Initial Population:
 
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+  where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
   with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
@@ -12,7 +12,7 @@ Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient 
 Denominator:
 
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+  where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
   with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
@@ -23,7 +23,7 @@ Denominator Exclusions:
 
 
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+  where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
   with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
@@ -34,7 +34,7 @@ Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient 
   )
     or exists ( 
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+  where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
   with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
@@ -45,26 +45,11 @@ Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient 
     )
     or exists ( [("Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")]
   union [("Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] PalliativeOrHospiceCare
-        where Coalesce(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PalliativeOrHospiceCare.relevantDatetime, PalliativeOrHospiceCare.relevantPeriod), PalliativeOrHospiceCare.authorDatetime)during Encounter Visit
-	let ObsVisit: Last([("Encounter, Performed: Observation Services" using "Observation Services (2.16.840.1.113762.1.4.1111.143)")] LastObs
-			where LastObs.relevantPeriod ends 1 hour or less on or before start of Visit.relevantPeriod
-			sort by 
-			end of relevantPeriod
-	),
-	VisitStart: Coalesce(start of ObsVisit.relevantPeriod, start of Visit.relevantPeriod),
-	EDVisit: Last([("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] LastED
-			where LastED.relevantPeriod ends 1 hour or less on or before VisitStart
-			sort by 
-			end of relevantPeriod
-	)
-	return Interval[Coalesce(start of EDVisit.relevantPeriod, VisitStart), 
-	end of Visit.relevantPeriod] ( InpatientEncounter )
+        where Coalesce(start of Global.NormalizeInterval(PalliativeOrHospiceCare.relevantDatetime, PalliativeOrHospiceCare.relevantPeriod), PalliativeOrHospiceCare.authorDatetime)during Global.HospitalizationWithObservation ( InpatientEncounter )
     )
     or exists ( 
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+  where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
   with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
@@ -79,7 +64,7 @@ Numerator:
 
 ( 
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+  where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
   with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]
@@ -93,7 +78,7 @@ Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient 
 )
   union ( 
 Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
-  where difference in days between start of Value and end of Value(EncounterInpatient.relevantPeriod)<= 120
+  where LengthInDays(EncounterInpatient.relevantPeriod)<= 120
     and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter
   where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeriod)>= 18 InpatientEncounter
   with ( [("Medication, Discharge: Schedule II & III Opioid Medications" using "Schedule II & III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]

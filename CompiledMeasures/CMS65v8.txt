@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists [Patient Characteristic Birthdate] BirthDate
-		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)in Interval[18, 85 )
+		where Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)in Interval[18, 85 )
 			and ( Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] LastSystolicBloodPressure
 			with First([("Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)")] InitialBloodPressureVisit
 			with [("Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)")] Hypertension
@@ -20,7 +20,7 @@ exists [Patient Characteristic Birthdate] BirthDate
 =============================================================================================================================================================================
 Denominator:
 exists [Patient Characteristic Birthdate] BirthDate
-		where years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of Measurement Period)in Interval[18, 85 )
+		where Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of Measurement Period)in Interval[18, 85 )
 			and ( Last([("Physical Exam, Performed: Systolic blood pressure" using "Systolic blood pressure (LOINC version 2.63 Code 8480-6)")] LastSystolicBloodPressure
 			with First([("Encounter, Performed: Blood Pressure Visit" using "Blood Pressure Visit (2.16.840.1.113883.3.464.1003.101.12.1056)")] InitialBloodPressureVisit
 			with [("Diagnosis: Essential Hypertension" using "Essential Hypertension (2.16.840.1.113883.3.464.1003.104.12.1011)")] Hypertension

@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 64 )
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 64 )
 	    and exists ( [("Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)")] )
 	    and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
@@ -14,7 +14,7 @@ exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC
 =============================================================================================================================================================================
 Denominator:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 64 )
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[50, 64 )
 	    and exists ( [("Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)")] )
 	    and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up" using "Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")]
@@ -27,7 +27,7 @@ exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC
 =============================================================================================================================================================================
 Denominator Exclusions:
 singleton from ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    let Age: years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ),
+	    let Age: Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ),
 	    NumberOfRiskFactors: Count(( { First(Diagnosis Dx
 	    where Dx.prevalencePeriod starts on or before day of 
 	    end of Measurement Period
@@ -53,37 +53,23 @@ singleton from ( [("Patient Characteristic Birthdate: Birth date" using "Birth d
 	  where PathologicalFracture.prevalencePeriod starts on or before day of 
 	  end of Measurement Period
 	  union [("Assessment, Performed: History of hip fracture in parent" using "History of hip fracture in parent (2.16.840.1.113883.3.464.1003.113.12.1040)")] ParentFractureHistory
-	  where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( ParentFractureHistory.relevantDatetime, ParentFractureHistory.relevantPeriod ) before start of Measurement Period
+	  where start of Global.NormalizeInterval ( ParentFractureHistory.relevantDatetime, ParentFractureHistory.relevantPeriod ) before start of Measurement Period
 	  union [("Diagnosis: Osteopenia" using "Osteopenia (2.16.840.1.113883.3.464.1003.113.12.1049)")] OsteopeniaDiagnosis
 	  where OsteopeniaDiagnosis.prevalencePeriod starts before start Measurement Period
 	  union { First([("Assessment, Performed: Tobacco Use Screening" using "Tobacco Use Screening (2.16.840.1.113883.3.526.3.1278)")] TobaccoScreen
 	    where TobaccoScreen.result in (valueset "Current Tobacco Smoker" (2.16.840.1.113883.3.600.2390))
-	      and start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(TobaccoScreen.relevantDatetime, TobaccoScreen.relevantPeriod)during Measurement Period
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      and start of Global.NormalizeInterval(TobaccoScreen.relevantDatetime, TobaccoScreen.relevantPeriod)during Measurement Period
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	)}
 	  union { First([("Assessment, Performed: Average Number of Drinks per Drinking Day" using "Average Number of Drinks per Drinking Day (2.16.840.1.113883.3.464.1003.106.12.1018)")] AverageDrinks
-	    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(AverageDrinks.relevantDatetime, AverageDrinks.relevantPeriod)during Measurement Period
+	    where start of Global.NormalizeInterval(AverageDrinks.relevantDatetime, AverageDrinks.relevantPeriod)during Measurement Period
 	      and AverageDrinks.result > 2 '{drinks}/d'
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	)}
 	  union { First([("Physical Exam, Performed: BMI Ratio" using "BMI Ratio (2.16.840.1.113883.3.600.1.1490)")] BMI
-	    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)during Measurement Period
+	    where start of Global.NormalizeInterval(BMI.relevantDatetime, BMI.relevantPeriod)during Measurement Period
 	      and BMI.result is not null
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	)} FirstBMI
 	  where FirstBMI.result <= 20 'kg/m2'
 	  union [("Patient Characteristic Race: White" using "White (2.16.840.1.113883.3.464.1003.123.12.1007)")]) + ( if Sum(( collapse ( [("Medication, Active: Glucocorticoids (oral only)" using "Glucocorticoids (oral only) (2.16.840.1.113883.3.464.1003.196.12.1266)")] Glucocorticoid
@@ -122,23 +108,17 @@ singleton from ( [("Patient Characteristic Birthdate: Birth date" using "Birth d
 	  where IndependentRiskDiagnosis.prevalencePeriod starts before 
 	  end Measurement Period
 	  or exists ( ( [("Procedure, Performed: Gastric Bypass Surgery" using "Gastric Bypass Surgery (2.16.840.1.113883.3.464.1003.198.12.1050)")] GastricBypass
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( GastricBypass.relevantDatetime, GastricBypass.relevantPeriod ) ends before start of Measurement Period
+	      where Global.NormalizeInterval ( GastricBypass.relevantDatetime, GastricBypass.relevantPeriod ) ends before start of Measurement Period
 	  )
 	    union ( [("Medication, Active: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)")] AromataseInhibitorActive
-	        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AromataseInhibitorActive.relevantDatetime, AromataseInhibitorActive.relevantPeriod ) starts before start of Measurement Period
+	        where Global.NormalizeInterval ( AromataseInhibitorActive.relevantDatetime, AromataseInhibitorActive.relevantPeriod ) starts before start of Measurement Period
 	    )
 	    union ( [("Medication, Order: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.1265)")] AromataseInhibitorOrder
 	        where AromataseInhibitorOrder.authorDatetime before start of Measurement Period
 	    )
 	    union [("Assessment, Performed: Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment" using "Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment (LOINC Code 90265-0)")] ProbabilityAssessment
 	  where ProbabilityAssessment.result >= 8.4 '%'
-	    and start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( ProbabilityAssessment.relevantDatetime, ProbabilityAssessment.relevantPeriod ) before start of Measurement Period
+	    and start of Global.NormalizeInterval ( ProbabilityAssessment.relevantDatetime, ProbabilityAssessment.relevantPeriod ) before start of Measurement Period
 	)
 =============================================================================================================================================================================
 Numerator:

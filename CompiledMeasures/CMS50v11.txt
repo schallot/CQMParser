@@ -9,15 +9,11 @@ exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.
     where Encounter.relevantPeriod during Measurement Period
 )
   and First((([("Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralPerform
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Interval[start of Measurement Period, start of Measurement Period + 10 months]
+      where Global.NormalizeInterval(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Interval[start of Measurement Period, start of Measurement Period + 10 months]
       return {
         identification: ReferralPerform.id,
         dateIntervention: 
-        end of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
+        end of Global.NormalizeInterval(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
       }
   )
     union([("Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralOrder
@@ -40,15 +36,11 @@ exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.
     where Encounter.relevantPeriod during Measurement Period
 )
   and First((([("Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralPerform
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Interval[start of Measurement Period, start of Measurement Period + 10 months]
+      where Global.NormalizeInterval(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Interval[start of Measurement Period, start of Measurement Period + 10 months]
       return {
         identification: ReferralPerform.id,
         dateIntervention: 
-        end of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
+        end of Global.NormalizeInterval(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
       }
   )
     union([("Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralOrder
@@ -67,15 +59,11 @@ None
 Numerator:
 exists ( [("Communication, Performed: Consultant Report" using "Consultant Report (2.16.840.1.113883.3.464.1003.121.12.1006)")] ConsultantReportCommunicated
     with First((([("Intervention, Performed: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralPerform
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Interval[start of Measurement Period, start of Measurement Period + 10 months]
+      where Global.NormalizeInterval(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)ends during Interval[start of Measurement Period, start of Measurement Period + 10 months]
       return {
         identification: ReferralPerform.id,
         dateIntervention: 
-        end of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
+        end of Global.NormalizeInterval(ReferralPerform.relevantDatetime, ReferralPerform.relevantPeriod)
       }
   )
     union([("Intervention, Order: Referral" using "Referral (2.16.840.1.113883.3.464.1003.101.12.1046)")] ReferralOrder

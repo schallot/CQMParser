@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and Count(( [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
 	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
@@ -21,7 +21,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and Count(( [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
 	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
@@ -53,9 +53,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -78,9 +76,7 @@ exists [("Medication, Order: Beta Blocker Therapy for LVSD" using "Beta Blocker 
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that BetaBlockerOrdered.authorDatetime during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Medication, Active: Beta Blocker Therapy for LVSD" using "Beta Blocker Therapy for LVSD (2.16.840.1.113883.3.526.3.1184)")] ActiveBetaBlocker
@@ -99,9 +95,7 @@ exists [("Medication, Order: Beta Blocker Therapy for LVSD" using "Beta Blocker 
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that ActiveBetaBlocker.relevantPeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 =============================================================================================================================================================================
@@ -126,26 +120,14 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	  let PriorHeartRate: Last([("Physical Exam, Performed: Heart Rate" using "Heart Rate (2.16.840.1.113883.3.526.3.1176)")] MostRecentPriorHeartRate
-	      where(if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod))during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
-	        and(if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod))before if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(HeartRate.relevantDatetime, HeartRate.relevantPeriod)
-	      sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	      where(Global.NormalizeInterval(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod))during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+	        and(Global.NormalizeInterval(MostRecentPriorHeartRate.relevantDatetime, MostRecentPriorHeartRate.relevantPeriod))before Global.NormalizeInterval(HeartRate.relevantDatetime, HeartRate.relevantPeriod)
+	      sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	  )
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HeartRate.relevantDatetime, HeartRate.relevantPeriod ) during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
+	  where Global.NormalizeInterval ( HeartRate.relevantDatetime, HeartRate.relevantPeriod ) during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	    and HeartRate.result < 50 '{beats}/min'
 	    and PriorHeartRate.result < 50 '{beats}/min'
 	  or exists [("Medication, Not Ordered: Beta Blocker Therapy for LVSD" using "Beta Blocker Therapy for LVSD (2.16.840.1.113883.3.526.3.1184)")] NoBetaBlockerOrdered
@@ -164,9 +146,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that NoBetaBlockerOrdered.authorDatetime during ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  where ( NoBetaBlockerOrdered.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
@@ -189,9 +169,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that Arrhythmia.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Diagnosis: Hypotension" using "Hypotension (2.16.840.1.113883.3.526.3.370)")] Hypotension
@@ -210,9 +188,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that Hypotension.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Diagnosis: Asthma" using "Asthma (2.16.840.1.113883.3.526.3.362)")] Asthma
@@ -231,9 +207,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that Asthma.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists ( [("Diagnosis: Allergy to Beta Blocker Therapy" using "Allergy to Beta Blocker Therapy (2.16.840.1.113883.3.526.3.1177)")]
@@ -253,9 +227,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that BetaBlockerAllergyOrIntoleranceDiagnosis.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Diagnosis: Bradycardia" using "Bradycardia (2.16.840.1.113883.3.526.3.412)")] Bradycardia
@@ -274,9 +246,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that Bradycardia.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists ( [("Allergy/Intolerance: Beta Blocker Therapy Ingredient" using "Beta Blocker Therapy Ingredient (2.16.840.1.113883.3.526.3.1493)")]
@@ -296,9 +266,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that BetaBlockerAllergyIntolerance.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  or exists [("Diagnosis: Atrioventricular Block" using "Atrioventricular Block (2.16.840.1.113883.3.526.3.367)")] AtrioventricularBlock
@@ -317,9 +285,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that AtrioventricularBlock.prevalencePeriod overlaps ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  and not exists [("Diagnosis: Cardiac Pacer in Situ" using "Cardiac Pacer in Situ (2.16.840.1.113883.3.526.3.368)")] CardiacPacerDiagnosis
@@ -338,9 +304,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that CardiacPacerDiagnosis.prevalencePeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	  and not exists [("Device, Applied: Cardiac Pacer" using "Cardiac Pacer (2.16.840.1.113883.3.526.3.1193)")] ImplantedCardiacPacer
@@ -359,9 +323,7 @@ exists from
 	  union ( [("Diagnosis: Left ventricular systolic dysfunction (disorder)" using "Left ventricular systolic dysfunction (disorder) (SNOMEDCT Code 134401001)")] LVSD
 	      where LVSD.severity in (valueset "Moderate or Severe" (2.16.840.1.113883.3.526.3.1092))
 	  ) LVSDFindings
-	    such that Coalesce(LVSDFindings.prevalencePeriod, if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
+	    such that Coalesce(LVSDFindings.prevalencePeriod, Global.NormalizeInterval(LVSDFindings.relevantDatetime, LVSDFindings.relevantPeriod))starts before 
 	    end of HFOutpatientEncounter.relevantPeriod ModerateOrSevereLVSDHFOutpatientEncounter
 	    such that ImplantedCardiacPacer.relevantPeriod overlaps after ModerateOrSevereLVSDHFOutpatientEncounter.relevantPeriod
 	      or ImplantedCardiacPacer.relevantDatetime before 
@@ -369,7 +331,7 @@ exists from
 =============================================================================================================================================================================
 Population Criteria 1:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and Count(( [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")]
 	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]

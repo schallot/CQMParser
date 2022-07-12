@@ -214,9 +214,13 @@ namespace CQMParse
                                 segments.Add(new PlainTextSegment(s.segment));
                             }
 
-                            if (!c.IsBeingPopulated)
+                            if (!c.IsBeingPopulated && !c.IsFunction)
                             {
                                 segments.AddRange(c.SubSegments);
+                            }
+                            else if (!c.IsBeingPopulated && c.IsFunction)
+                            {
+                                segments.Add(new PlainTextSegment(s.segment));
                             }
                         }
                     }

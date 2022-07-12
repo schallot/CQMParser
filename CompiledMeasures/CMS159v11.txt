@@ -1,24 +1,16 @@
 =============================================================================================================================================================================
 Initial Population:
-AgeInYearsAt(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
+AgeInYearsAt(start of Global.NormalizeInterval(First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
   with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
@@ -26,38 +18,24 @@ AgeInYearsAt(start of if pointInTime is not null then Interval[pointInTime, poin
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod))>= 12
 =============================================================================================================================================================================
 Denominator:
-AgeInYearsAt(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
+AgeInYearsAt(start of Global.NormalizeInterval(First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
   with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
@@ -65,16 +43,10 @@ AgeInYearsAt(start of if pointInTime is not null then Interval[pointInTime, poin
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod))>= 12
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -90,20 +62,12 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
 )
   or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter
@@ -115,27 +79,17 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
         end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
@@ -143,20 +97,12 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
@@ -168,26 +114,16 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
       end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
@@ -195,26 +131,16 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
   )
   or exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
+    where Global.NormalizeInterval ( PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
     end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
@@ -222,20 +148,12 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
 )
   or exists ( [("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis
@@ -247,20 +165,12 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
   )
   or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)")] PalliativeEncounter
@@ -272,26 +182,16 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
   )
   or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
+      where Global.NormalizeInterval ( PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod ) overlaps Interval[start of Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ), 
       end of First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
@@ -299,20 +199,12 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]]
   )
   or exists ( [("Encounter, Performed: Care Services in Long-Term Residential Facility" using "Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)")] EncounterLongTermCare
@@ -324,20 +216,12 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]
 )
   or exists ( [("Patient Characteristic Expired: Dead (finding)" using "Dead (finding) (SNOMEDCT Code 419099009)")] Deceased
@@ -349,20 +233,12 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]
 )
   or exists ( ( [("Diagnosis: Bipolar Disorder" using "Bipolar Disorder (2.16.840.1.113883.3.67.1.101.1.128)")]
@@ -377,52 +253,32 @@ exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatien
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]
 )
 =============================================================================================================================================================================
 Numerator:
 Last([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
-    where ToDate(start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod))during First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
+    where ToDate(start of Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod))during First([("Assessment, Performed: PHQ 9 and PHQ 9M Tools" using "PHQ 9 and PHQ 9M Tools (2.16.840.1.113883.3.67.1.101.1.263)")] DepressionAssessment
   where DepressionAssessment.result > 9 DepressionAssessment
     with [("Encounter, Performed: Contact or Office Visit" using "Contact or Office Visit (2.16.840.1.113762.1.4.1080.5)")] ValidEncounter
   with [("Diagnosis: Major Depression Including Remission" using "Major Depression Including Remission (2.16.840.113883.3.67.1.101.3.2444)")]
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) FirstIndexAssessment
-  let YearAfterIndexAssessment: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
+  let YearAfterIndexAssessment: date from start of Global.NormalizeInterval ( FirstIndexAssessment.relevantDatetime, FirstIndexAssessment.relevantPeriod ) + 12 months
   return Interval[YearAfterIndexAssessment - 60 days, YearAfterIndexAssessment + 60 days]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).result < 5
 =============================================================================================================================================================================
 Numerator Exclusions:
@@ -440,20 +296,12 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) IndexAssessment
-      such that AgeInYearsAt(date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(IndexAssessment.relevantDatetime, IndexAssessment.relevantPeriod))in Interval[12, 17]
+      such that AgeInYearsAt(date from start of Global.NormalizeInterval(IndexAssessment.relevantDatetime, IndexAssessment.relevantPeriod))in Interval[12, 17]
 )
 =============================================================================================================================================================================
 Stratification 2:
@@ -465,18 +313,10 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
   union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
     such that ValidEncounter.relevantPeriod overlaps Depression.prevalencePeriod
       and ValidEncounter.relevantPeriod ends during Interval[start of Measurement Period - 14 months, start of Measurement Period - 2 months ) DepressionEncounter
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
+      such that Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)is not null
+        and Global.NormalizeInterval(DepressionAssessment.relevantDatetime, DepressionAssessment.relevantPeriod)during Interval[ToDate((start of DepressionEncounter.relevantPeriod)- 7 days), 
         end of DepressionEncounter.relevantPeriod]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ) IndexAssessment
-      such that AgeInYearsAt(date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(IndexAssessment.relevantDatetime, IndexAssessment.relevantPeriod))>= 18
+      such that AgeInYearsAt(date from start of Global.NormalizeInterval(IndexAssessment.relevantDatetime, IndexAssessment.relevantPeriod))>= 18
 )

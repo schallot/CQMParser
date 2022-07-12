@@ -5,7 +5,7 @@ exists ( [("Encounter, Performed: Contact or Office Visit" using "Contact or Off
 		union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
 		where DepressionEncounter.relevantPeriod ends during Measurement Period
 			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] )
 =============================================================================================================================================================================
@@ -15,7 +15,7 @@ exists ( [("Encounter, Performed: Contact or Office Visit" using "Contact or Off
 		union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
 		where DepressionEncounter.relevantPeriod ends during Measurement Period
 			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] )
 =============================================================================================================================================================================
@@ -37,7 +37,7 @@ exists ( [("Intervention, Order: Palliative Care" using "Palliative Care (2.16.8
 		union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
 		where DepressionEncounter.relevantPeriod ends during Measurement Period
 			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] DepressionEncounter
 			such that DisorderDiagnoses.prevalencePeriod overlaps DepressionEncounter.relevantPeriod )
@@ -60,7 +60,7 @@ exists ( [("Encounter, Performed: Contact or Office Visit" using "Contact or Off
 		union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
 		where DepressionEncounter.relevantPeriod ends during Measurement Period
 			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] )
 =============================================================================================================================================================================
@@ -71,11 +71,11 @@ Stratification 1:
 		union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
 		where DepressionEncounter.relevantPeriod ends during Measurement Period
 			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] DepressionEncounter
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
-				and years between ToDate(BirthDateTime)and ToDate(AsOf)(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)< 18
+			such that Global.CalendarAgeInYearsAt(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+				and Global.CalendarAgeInYearsAt(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)< 18
 =============================================================================================================================================================================
 Stratification 2:
 [Patient Characteristic Birthdate] Birthdate
@@ -84,7 +84,7 @@ Stratification 2:
 		union [("Diagnosis: Dysthymia" using "Dysthymia (2.16.840.1.113883.3.67.1.101.1.254)")] Depression
 			such that DepressionEncounter.relevantPeriod overlaps Depression.prevalencePeriod
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 12
 		where DepressionEncounter.relevantPeriod ends during Measurement Period
 			and end of DepressionEncounter.relevantPeriod in Interval[start of Measurement Period + 8 months, end of Measurement Period] DepressionEncounter
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 18
+			such that Global.CalendarAgeInYearsAt(Birthdate.birthDatetime, start of DepressionEncounter.relevantPeriod)>= 18

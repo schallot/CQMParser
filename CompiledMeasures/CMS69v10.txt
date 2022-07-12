@@ -3,14 +3,14 @@ Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] Birthdate
 	    with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( Birthdate.birthDatetime, start of QualifyingEncounter.relevantPeriod ) >= 18
+	      such that Global.CalendarAgeInYearsAt ( Birthdate.birthDatetime, start of QualifyingEncounter.relevantPeriod ) >= 18
 	)
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] Birthdate
 	    with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	      such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( Birthdate.birthDatetime, start of QualifyingEncounter.relevantPeriod ) >= 18
+	      such that Global.CalendarAgeInYearsAt ( Birthdate.birthDatetime, start of QualifyingEncounter.relevantPeriod ) >= 18
 	)
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -25,9 +25,7 @@ exists ( ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care 
 	        union [("Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] ) PalliativeInterventions
 	        with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	          such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PalliativeInterventions.relevantDatetime, PalliativeInterventions.relevantPeriod ) starts on or before 
+	          such that Global.NormalizeInterval ( PalliativeInterventions.relevantDatetime, PalliativeInterventions.relevantPeriod ) starts on or before 
 	          end of QualifyingEncounter.relevantPeriod
 	    )
 	      union ( [("Encounter, Performed: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeCarePerformed
@@ -44,96 +42,64 @@ Numerator:
 Last([("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
 	    with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
+	      such that Global.NormalizeInterval(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
 	      end of QualifyingEncounter.relevantPeriod
 	        and BMI.result >= 0 'kg/m2'
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) MostRecentBMI
 	  where MostRecentBMI.result included in Interval[18.5 'kg/m2', 25 'kg/m2' ) is not null
 	  or Last([("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
 	    with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
+	      such that Global.NormalizeInterval(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
 	      end of QualifyingEncounter.relevantPeriod
 	        and BMI.result >= 0 'kg/m2'
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) MostRecentBMI
 	  with ( ( ( [("Intervention, Order: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)")]
 	      union [("Intervention, Order: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)")] ) ReferralHighBMI
 	      where ReferralHighBMI.reason in (valueset "Overweight or Obese" (2.16.840.1.113762.1.4.1047.502))
 	  )
 	    union [("Medication, Order: Medications for Above Normal BMI" using "Medications for Above Normal BMI (2.16.840.1.113883.3.526.3.1561)")] ) HighBMIIntervention
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) ends 12 months or less on or before day of HighBMIIntervention.authorDatetime
+	    such that Global.NormalizeInterval ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) ends 12 months or less on or before day of HighBMIIntervention.authorDatetime
 	  where MostRecentBMI.result >= 25 'kg/m2' is not null
 	  or Last([("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
 	    with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
+	      such that Global.NormalizeInterval(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
 	      end of QualifyingEncounter.relevantPeriod
 	        and BMI.result >= 0 'kg/m2'
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) MostRecentBMI
 	  with [("Intervention, Performed: Follow Up for Above Normal BMI" using "Follow Up for Above Normal BMI (2.16.840.1.113883.3.600.1.1525)")] AboveNormalFollowUp
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) ends 12 months or less on or before day of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AboveNormalFollowUp.relevantDatetime, AboveNormalFollowUp.relevantPeriod )
+	    such that Global.NormalizeInterval ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) ends 12 months or less on or before day of start of Global.NormalizeInterval ( AboveNormalFollowUp.relevantDatetime, AboveNormalFollowUp.relevantPeriod )
 	      and AboveNormalFollowUp.reason in (valueset "Overweight or Obese" (2.16.840.1.113762.1.4.1047.502))
 	  where MostRecentBMI.result >= 25 'kg/m2' is not null
 	  or Last([("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
 	    with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
+	      such that Global.NormalizeInterval(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
 	      end of QualifyingEncounter.relevantPeriod
 	        and BMI.result >= 0 'kg/m2'
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) MostRecentBMI
 	  with ( ( ( [("Intervention, Order: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)")]
 	      union [("Intervention, Order: Referrals Where Weight Assessment May Occur" using "Referrals Where Weight Assessment May Occur (2.16.840.1.113883.3.600.1.1527)")] ) ReferralLowBMI
 	      where ReferralLowBMI.reason ~ (code "Underweight (finding)" ("SNOMEDCT Code (248342006)"))
 	  )
 	    union [("Medication, Order: Medications for Below Normal BMI" using "Medications for Below Normal BMI (2.16.840.1.113883.3.526.3.1562)")] ) LowBMIIntervention
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) 12 months or less on or before day of LowBMIIntervention.authorDatetime
+	    such that Global.NormalizeInterval ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) 12 months or less on or before day of LowBMIIntervention.authorDatetime
 	  where MostRecentBMI.result < 18.5 'kg/m2' is not null
 	  or Last([("Physical Exam, Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] BMI
 	    with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
+	      such that Global.NormalizeInterval(BMI.relevantDatetime, BMI.relevantPeriod)ends 12 months or less on or before day of 
 	      end of QualifyingEncounter.relevantPeriod
 	        and BMI.result >= 0 'kg/m2'
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) MostRecentBMI
 	  with [("Intervention, Performed: Follow Up for Below Normal BMI" using "Follow Up for Below Normal BMI (2.16.840.1.113883.3.600.1.1528)")] BelowNormalFollowUp
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) ends 12 months or less on or before day of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( BelowNormalFollowUp.relevantDatetime, BelowNormalFollowUp.relevantPeriod )
+	    such that Global.NormalizeInterval ( MostRecentBMI.relevantDatetime, MostRecentBMI.relevantPeriod ) ends 12 months or less on or before day of start of Global.NormalizeInterval ( BelowNormalFollowUp.relevantDatetime, BelowNormalFollowUp.relevantPeriod )
 	      and BelowNormalFollowUp.reason ~ (code "Underweight (finding)" ("SNOMEDCT Code (248342006)"))
 	  where MostRecentBMI.result < 18.5 'kg/m2' is not null
 =============================================================================================================================================================================
@@ -155,9 +121,7 @@ exists ( [("Intervention, Not Ordered: Referrals Where Weight Assessment May Occ
 	  or exists [("Physical Exam, Not Performed: Body mass index (BMI) [Ratio]" using "Body mass index (BMI) [Ratio] (LOINC Code 39156-5)")] NoBMI
 	  with [("Encounter, Performed: Encounter to Evaluate BMI" using "Encounter to Evaluate BMI (2.16.840.1.113883.3.600.1.1751)")] BMIEncounter
 	  where BMIEncounter.relevantPeriod during Measurement Period QualifyingEncounter
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( NoBMI.authorDatetime, NoBMI.relevantPeriod ) ends same day as start of QualifyingEncounter.relevantPeriod
+	    such that Global.NormalizeInterval ( NoBMI.authorDatetime, NoBMI.relevantPeriod ) ends same day as start of QualifyingEncounter.relevantPeriod
 	  where ( NoBMI.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))
 	      or NoBMI.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))
 	  )

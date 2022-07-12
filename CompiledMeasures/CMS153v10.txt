@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[16, 24 )
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[16, 24 )
 	)
 	  and exists ( [("Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)")] )
 	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -15,9 +15,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 	  and ( exists ( ( [("Assessment, Performed: Sexually Active" using "Sexually Active (2.16.840.1.113883.3.464.1003.121.12.1040)")] SexualActivityAssessment
 	    where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-	      and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) before 
+	      and Global.NormalizeInterval ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) before 
 	      end of Measurement Period
 	) )
 	      or exists ( ( ( [("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1018)")]
@@ -38,14 +36,12 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	      or exists ( [("Diagnostic Study, Order: Diagnostic Studies During Pregnancy" using "Diagnostic Studies During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.1008)")] SexualActivityDiagnostics
 	  where SexualActivityDiagnostics.authorDatetime during Measurement Period )
 	      or exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1017)")] ProceduresForSexualActivity
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during Measurement Period )
+	  where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during Measurement Period )
 	  )
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[16, 24 )
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[16, 24 )
 	)
 	  and exists ( [("Patient Characteristic Sex: Female" using "Female (2.16.840.1.113883.3.560.100.2)")] )
 	  and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -59,9 +55,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 	  and ( exists ( ( [("Assessment, Performed: Sexually Active" using "Sexually Active (2.16.840.1.113883.3.464.1003.121.12.1040)")] SexualActivityAssessment
 	    where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-	      and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) before 
+	      and Global.NormalizeInterval ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) before 
 	      end of Measurement Period
 	) )
 	      or exists ( ( ( [("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1018)")]
@@ -82,9 +76,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	      or exists ( [("Diagnostic Study, Order: Diagnostic Studies During Pregnancy" using "Diagnostic Studies During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.1008)")] SexualActivityDiagnostics
 	  where SexualActivityDiagnostics.authorDatetime during Measurement Period )
 	      or exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1017)")] ProceduresForSexualActivity
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during Measurement Period )
+	  where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during Measurement Period )
 	  )
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -98,9 +90,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or ( exists ( ( [("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.1011)")] PregnancyTest
 	    with [("Diagnostic Study, Order: X-Ray Study (all inclusive)" using "X-Ray Study (all inclusive) (2.16.840.1.113883.3.464.1003.198.12.1034)")] XrayOrder
@@ -124,14 +114,10 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	  union [("Laboratory Test, Order: Lab Tests for Sexually Transmitted Infections" using "Lab Tests for Sexually Transmitted Infections (2.16.840.1.113883.3.464.1003.110.12.1051)")] ) LabOrders
 	  where LabOrders.authorDatetime during Measurement Period )
 	      and not exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.1017)")] ProceduresForSexualActivity
-	  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during Measurement Period )
+	  where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDatetime, ProceduresForSexualActivity.relevantPeriod ) during Measurement Period )
 	      and not exists ( ( [("Assessment, Performed: Sexually Active" using "Sexually Active (2.16.840.1.113883.3.464.1003.121.12.1040)")] SexualActivityAssessment
 	    where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-	      and if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) before 
+	      and Global.NormalizeInterval ( SexualActivityAssessment.relevantDatetime, SexualActivityAssessment.relevantPeriod ) before 
 	      end of Measurement Period
 	) )
 	      and not exists ( [("Medication, Order: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.1080)")] OrderedContraceptives
@@ -142,7 +128,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 =============================================================================================================================================================================
 Numerator:
 exists ( [("Laboratory Test, Performed: Chlamydia Screening" using "Chlamydia Screening (2.16.840.1.113883.3.464.1003.110.12.1052)")] ChlamydiaTest
-	    where Latest(NormalizeInterval(pointInTime, period)) ( ChlamydiaTest.relevantDatetime, ChlamydiaTest.relevantPeriod ) during Measurement Period
+	    where Global.LatestOf ( ChlamydiaTest.relevantDatetime, ChlamydiaTest.relevantPeriod ) during Measurement Period
 	      and ChlamydiaTest.result is not null
 	)
 =============================================================================================================================================================================
@@ -154,10 +140,10 @@ None
 =============================================================================================================================================================================
 Stratification 1:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[16, 21 )
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[16, 21 )
 	)
 =============================================================================================================================================================================
 Stratification 2:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[21, 24 )
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[21, 24 )
 	)

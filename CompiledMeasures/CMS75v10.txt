@@ -1,16 +1,16 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 20
+	    where Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) < 20
 	)
 	  and exists ( [("Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where months between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 20
+	    where Global.CalendarAgeInMonthsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) < 20
 	)
 	  and exists ( [("Encounter, Performed: Clinical Oral Evaluation" using "Clinical Oral Evaluation (2.16.840.1.113883.3.464.1003.125.12.1003)")] ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
@@ -26,9 +26,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 =============================================================================================================================================================================
 Numerator:

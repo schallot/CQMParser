@@ -2,22 +2,12 @@
 Initial Population:
 AgeInYearsAt(date from DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0))>= 18
   and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
-    let IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    let IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod )
     where IPSD is not null
       and date from start of MajorDepression.prevalencePeriod within 60 days of IPSD
@@ -32,44 +22,24 @@ AgeInYearsAt(date from DateTime((year from start of Measurement Period), 4, 30, 
   union [("Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
   union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounter
-  let IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+  let IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod )
   where date from start of ValidEncounter.relevantPeriod within 60 days of IPSD
 =============================================================================================================================================================================
 Denominator:
 AgeInYearsAt(date from DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0))>= 18
   and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
-    let IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    let IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod )
     where IPSD is not null
       and date from start of MajorDepression.prevalencePeriod within 60 days of IPSD
@@ -84,22 +54,12 @@ AgeInYearsAt(date from DateTime((year from start of Measurement Period), 4, 30, 
   union [("Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
   union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounter
-  let IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+  let IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod )
   where date from start of ValidEncounter.relevantPeriod within 60 days of IPSD
 =============================================================================================================================================================================
@@ -115,71 +75,40 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Medication, Active: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] ActiveAntidepressant
       let ActiveMedPeriod: ActiveAntidepressant Meds
         return Meds.relevantPeriod
           intersect Interval[start of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)], 
           end of Measurement Period],
-      IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+      IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod )
       where IPSD is not null
-        and Interval[date from start of period, date from end of period] ( ActiveMedPeriod ) overlaps Interval[IPSD - 105 days, IPSD )
+        and Global.ToDateInterval ( ActiveMedPeriod ) overlaps Interval[IPSD - 105 days, IPSD )
   )
 =============================================================================================================================================================================
 Numerator:
-Sum((collapse Intervals per day) X return all (difference in days between start of X and end of X)+1) ( [("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-  let IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+CMD.CumulativeDuration ( [("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+  let IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod ),
-  MedicationPeriod: MedDispense Dispense
-  let startDate: date from Coalesce(Dispense.relevantPeriod.low, Dispense.relevantDatetime, Dispense.authorDatetime),
-  totalDaysSupplied: Coalesce(Dispense.daysSupplied, Dispense.supply.value /(Dispense.dosage.value * ToDaily(Dispense.frequency)))
-  return if startDate is null then null 
-    else if Dispense.relevantPeriod.high is not null then Interval[startDate, date from 
-  end of Dispense.relevantPeriod]
-    else if totalDaysSupplied is not null then Interval[startDate, startDate + Quantity { value: totalDaysSupplied - 1, unit: 'day' }]
-    else null ( Antidepressant )
+  MedicationPeriod: CMD.MedicationDispensedPeriod ( Antidepressant )
   return MedicationPeriod
     intersect Interval[IPSD, IPSD + 114 days] ) >= 84
 =============================================================================================================================================================================
@@ -192,22 +121,12 @@ None
 Population Criteria 1:
 AgeInYearsAt(date from DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0))>= 18
   and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
-    let IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    let IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod )
     where IPSD is not null
       and date from start of MajorDepression.prevalencePeriod within 60 days of IPSD
@@ -222,22 +141,12 @@ AgeInYearsAt(date from DateTime((year from start of Measurement Period), 4, 30, 
   union [("Encounter, Performed: Psych Visit Psychotherapy" using "Psych Visit Psychotherapy (2.16.840.1.113883.3.526.3.1496)")]
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")]
   union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounter
-  let IPSD: date from start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+  let IPSD: date from start of Global.NormalizeInterval ( First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantDatetime, First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
-    where start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
-    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+    where start of Global.NormalizeInterval(Antidepressant.relevantDatetime, Antidepressant.relevantPeriod)in day of Interval[DateTime((year from start of Measurement Period - 1), 5, 1, 0, 0, 0, 0, 0), DateTime((year from start of Measurement Period), 4, 30, 23, 59, 59, 0, 0)]
+    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 ).relevantPeriod )
   where date from start of ValidEncounter.relevantPeriod within 60 days of IPSD
 =============================================================================================================================================================================

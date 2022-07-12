@@ -67,9 +67,7 @@ exists ( [("Assessment, Performed: Standardized Tools for Assessment of Cognitio
   with [("Diagnosis: Dementia & Mental Degenerations" using "Dementia & Mental Degenerations (2.16.840.1.113883.3.526.3.1005)")] Dementia
     such that EncounterAssessCognition.relevantPeriod during Measurement Period
       and Dementia.prevalencePeriod overlaps EncounterAssessCognition.relevantPeriod EncounterDementia
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CognitiveAssessment.relevantDatetime, CognitiveAssessment.relevantPeriod ) starts 12 months or less on or before day of 
+    such that Global.NormalizeInterval ( CognitiveAssessment.relevantDatetime, CognitiveAssessment.relevantPeriod ) starts 12 months or less on or before day of 
     end of EncounterDementia.relevantPeriod
   where CognitiveAssessment.result is not null
 =============================================================================================================================================================================

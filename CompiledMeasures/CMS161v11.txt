@@ -79,9 +79,7 @@ Numerator:
       and PriorMDDEpisodeEncounter.relevantPeriod ends 104 days or less before day of start of NewOrRecurrentMDDEncounter.relevantPeriod
   where NewOrRecurrentMDDEncounter.relevantPeriod during Measurement Period NewOrRecurrentMDDEncounter
   with [("Intervention, Performed: Suicide risk assessment (procedure)" using "Suicide risk assessment (procedure) (SNOMEDCT Code 225337009)")] SuicideRiskAssessment
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( SuicideRiskAssessment.relevantDatetime, SuicideRiskAssessment.relevantPeriod ) during NewOrRecurrentMDDEncounter.relevantPeriod
+    such that Global.NormalizeInterval ( SuicideRiskAssessment.relevantDatetime, SuicideRiskAssessment.relevantPeriod ) during NewOrRecurrentMDDEncounter.relevantPeriod
 =============================================================================================================================================================================
 Numerator Exclusions:
 None

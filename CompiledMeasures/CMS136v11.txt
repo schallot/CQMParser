@@ -1,32 +1,28 @@
 =============================================================================================================================================================================
 Initial Population:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
 	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
 	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
 	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 	    and First([("Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] FirstADHDMedication
-	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    where Global.EarliestOf(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) is not null
 =============================================================================================================================================================================
 Denominator:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
 	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
 	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
 	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 	    and First([("Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] FirstADHDMedication
-	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    where Global.EarliestOf(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) is not null
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -40,9 +36,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or exists ( [("Diagnosis: Narcolepsy" using "Narcolepsy (2.16.840.1.113883.3.464.1003.114.12.1011)")] Narcolepsy
 	  where Narcolepsy.prevalencePeriod starts before 
@@ -55,22 +49,16 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	    )
 	) InpatientStay
 	  with First([("Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] FirstADHDMedication
-	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    where Global.EarliestOf(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) InitialADHDMedication
 	    such that InpatientStay.relevantPeriod starts 30 days or less on or after InitialADHDMedication.relevantDatetime )
 	  or exists ( [("Medication, Active: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] ActiveADHDMedication
 	  with First([("Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] FirstADHDMedication
-	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    where Global.EarliestOf(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) InitialADHDMedication
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( ActiveADHDMedication.relevantDatetime, ActiveADHDMedication.relevantPeriod ) starts 120 days or less before InitialADHDMedication.relevantDatetime )
+	    such that Global.NormalizeInterval ( ActiveADHDMedication.relevantDatetime, ActiveADHDMedication.relevantPeriod ) starts 120 days or less before InitialADHDMedication.relevantDatetime )
 =============================================================================================================================================================================
 Numerator:
 exists ( ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -94,10 +82,8 @@ exists ( ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.84
 	    union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")]
 	) ValidNumeratorEncounter
 	    with First([("Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] FirstADHDMedication
-	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    where Global.EarliestOf(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) InitialADHDMedication
 	      such that ValidNumeratorEncounter.relevantPeriod starts 30 days or less on or after InitialADHDMedication.relevantDatetime
 	) )
@@ -110,17 +96,15 @@ None
 =============================================================================================================================================================================
 Population Criteria 1:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[6, 12 )
 	    and exists ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)")]
 	  union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1024)")]
 	  union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.1022)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period )
 	    and First([("Medication, Dispensed: ADHD Medications" using "ADHD Medications (2.16.840.1.113883.3.464.1003.196.12.1171)")] FirstADHDMedication
-	    where Earliest(NormalizeInterval(pointInTime, period))(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
-	    sort by start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)
+	    where Global.EarliestOf(FirstADHDMedication.relevantDatetime, FirstADHDMedication.relevantPeriod)during Interval[start of Measurement Period - 90 days, start of Measurement Period + 60 days]
+	    sort by start of Global.NormalizeInterval(relevantDatetime, relevantPeriod)
 	) is not null
 =============================================================================================================================================================================
 Stratification:

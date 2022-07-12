@@ -1,30 +1,30 @@
 =============================================================================================================================================================================
 Initial Population:
 TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
-		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+		where Global.LengthInDays(NonElectiveEncounter.relevantPeriod)<= 120
 			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
 		where NonElectiveEncounter.principalDiagnosis in (valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212")
 			or NonElectiveEncounter.principalDiagnosis in (valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247") AllStrokeEncounter
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18
 =============================================================================================================================================================================
 Denominator:
 TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
-		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+		where Global.LengthInDays(NonElectiveEncounter.relevantPeriod)<= 120
 			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
 		where NonElectiveEncounter.principalDiagnosis in (valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212")
 			or NonElectiveEncounter.principalDiagnosis in (valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247") AllStrokeEncounter
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18
 =============================================================================================================================================================================
 Denominator Exclusions:
 ( TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
-		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+		where Global.LengthInDays(NonElectiveEncounter.relevantPeriod)<= 120
 			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
 		where NonElectiveEncounter.principalDiagnosis in (valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212")
 			or NonElectiveEncounter.principalDiagnosis in (valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247") AllStrokeEncounter
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
 			where EncounterWithAge.dischargeDisposition in (valueset "Discharge To Acute Care Facility" using "2.16.840.1.113883.3.117.1.7.1.87")
 				or EncounterWithAge.dischargeDisposition in (valueset "Left Against Medical Advice" using "2.16.840.1.113883.3.117.1.7.1.308")
 				or EncounterWithAge.dischargeDisposition in (valueset "Discharged to Home for Hospice Care" using "2.16.840.1.113883.3.117.1.7.1.209")
@@ -32,27 +32,24 @@ Denominator Exclusions:
 				or EncounterWithAge.dischargeDisposition in (valueset "Discharged to Health Care Facility for Hospice Care" using "2.16.840.1.113883.3.117.1.7.1.207")
 	)
 		union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
-		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+		where Global.LengthInDays(NonElectiveEncounter.relevantPeriod)<= 120
 			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
 		where NonElectiveEncounter.principalDiagnosis in (valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212")
 			or NonElectiveEncounter.principalDiagnosis in (valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247") AllStrokeEncounter
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
 		with TJC.[("Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")]
 		union [("Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")] ComfortMeasures
-			such that Coalesce(start of ComfortMeasures.relevantPeriod, ComfortMeasures.authorDatetime)during ( singleton from ( [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.117.1.7.1.292)")] EDVisit
-			where EDVisit.relevantPeriod ends 1 hour or less on or before start of Encounter.relevantPeriod
-	) ) X
-		return if X is null then Encounter.relevantPeriod else Interval[start of X.relevantPeriod, end of Encounter.relevantPeriod](EncounterWithAge)
+			such that Coalesce(start of ComfortMeasures.relevantPeriod, ComfortMeasures.authorDatetime)during Global.Hospitalization(EncounterWithAge)
 =============================================================================================================================================================================
 Numerator:
 ( TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
-		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+		where Global.LengthInDays(NonElectiveEncounter.relevantPeriod)<= 120
 			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
 		where NonElectiveEncounter.principalDiagnosis in (valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212")
 			or NonElectiveEncounter.principalDiagnosis in (valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247") AllStrokeEncounter
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
 			with ( [("Procedure, Not Performed: Rehabilitation Assessment" using "Rehabilitation Assessment (2.16.840.1.113762.1.4.1045.18)")]
 		union [("Procedure, Not Performed: Rehabilitation Therapy" using "Rehabilitation Therapy (2.16.840.1.113762.1.4.1045.19)")] ) NoRehabProcedure
 		where NoRehabProcedure.negationRationale in (valueset "Medical Reason" using "2.16.840.1.113883.3.117.1.7.1.473")
@@ -60,23 +57,23 @@ Numerator:
 				such that NoRehabProcedure.authorDatetime during EncounterWithAge.relevantPeriod
 	)
 		union ( TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
-		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+		where Global.LengthInDays(NonElectiveEncounter.relevantPeriod)<= 120
 			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
 		where NonElectiveEncounter.principalDiagnosis in (valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212")
 			or NonElectiveEncounter.principalDiagnosis in (valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247") AllStrokeEncounter
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
 				with [("Procedure, Performed: Rehabilitation Assessment" using "Rehabilitation Assessment (2.16.840.1.113762.1.4.1045.18)")]
 		union [("Procedure, Performed: Rehabilitation Therapy" using "Rehabilitation Therapy (2.16.840.1.113762.1.4.1045.19)")] RehabAssessment
 					such that RehabAssessment.relevantPeriod starts during EncounterWithAge.relevantPeriod
 		)
 		union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter
-		where difference in days between start of Value and end of Value(NonElectiveEncounter.relevantPeriod)<= 120
+		where Global.LengthInDays(NonElectiveEncounter.relevantPeriod)<= 120
 			and NonElectiveEncounter.relevantPeriod ends during Measurement Period NonElectiveEncounter
 		where NonElectiveEncounter.principalDiagnosis in (valueset "Hemorrhagic Stroke" using "2.16.840.1.113883.3.117.1.7.1.212")
 			or NonElectiveEncounter.principalDiagnosis in (valueset "Ischemic Stroke" using "2.16.840.1.113883.3.117.1.7.1.247") AllStrokeEncounter
 		with [Patient Characteristic Birthdate] BirthDate
-			such that years between ToDate(BirthDateTime)and ToDate(AsOf)(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
+			such that Global.CalendarAgeInYearsAt(BirthDate.birthDatetime, start of AllStrokeEncounter.relevantPeriod)>= 18 EncounterWithAge
 		where EncounterWithAge.dischargeDisposition in (valueset "Discharged to Rehabilitation Facility" using "2.16.840.1.113883.3.117.1.7.1.132")
 =============================================================================================================================================================================
 Numerator Exclusions:

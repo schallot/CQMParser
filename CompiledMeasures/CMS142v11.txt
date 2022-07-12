@@ -32,9 +32,7 @@ AgeInYearsAt(date from start of Measurement Period)>= 18
     and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
   with [("Diagnosis: Diabetic Retinopathy" using "Diabetic Retinopathy (2.16.840.1.113883.3.526.3.327)")] DiabeticRetinopathy
     such that DiabeticRetinopathy.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterDiabeticRetinopathy
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( MacularExam.relevantDatetime, MacularExam.relevantPeriod ) during EncounterDiabeticRetinopathy.relevantPeriod
+    such that Global.NormalizeInterval ( MacularExam.relevantDatetime, MacularExam.relevantPeriod ) during EncounterDiabeticRetinopathy.relevantPeriod
   where MacularExam.result is not null
 =============================================================================================================================================================================
 Denominator Exclusions:

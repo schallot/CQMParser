@@ -39,17 +39,13 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   or ( ( exists ( ( [("Diagnosis: Status Post Right Mastectomy" using "Status Post Right Mastectomy (2.16.840.1.113883.3.464.1003.198.12.1070)")] RightMastectomyProcedure
   union ( [("Diagnosis: Unilateral Mastectomy, Unspecified Laterality" using "Unilateral Mastectomy, Unspecified Laterality (2.16.840.1.113883.3.464.1003.198.12.1071)")] UnilateralMastectomyDiagnosis
@@ -58,9 +54,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   where RightMastectomy.prevalencePeriod starts on or before 
   end of Measurement Period )
         or exists ( [("Procedure, Performed: Unilateral Mastectomy Right" using "Unilateral Mastectomy Right (2.16.840.1.113883.3.464.1003.198.12.1134)")] UnilateralMastectomyRightPerformed
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( UnilateralMastectomyRightPerformed.relevantDatetime, UnilateralMastectomyRightPerformed.relevantPeriod ) ends on or before 
+  where Global.NormalizeInterval ( UnilateralMastectomyRightPerformed.relevantDatetime, UnilateralMastectomyRightPerformed.relevantPeriod ) ends on or before 
   end of Measurement Period )
     )
       and ( exists ( ( [("Diagnosis: Status Post Left Mastectomy" using "Status Post Left Mastectomy (2.16.840.1.113883.3.464.1003.198.12.1069)")]
@@ -70,9 +64,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   where LeftMastectomy.prevalencePeriod starts on or before 
   end of Measurement Period )
           or exists ( [("Procedure, Performed: Unilateral Mastectomy Left" using "Unilateral Mastectomy Left (2.16.840.1.113883.3.464.1003.198.12.1133)")] UnilateralMastectomyLeftPerformed
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( UnilateralMastectomyLeftPerformed.relevantDatetime, UnilateralMastectomyLeftPerformed.relevantPeriod ) ends on or before 
+  where Global.NormalizeInterval ( UnilateralMastectomyLeftPerformed.relevantDatetime, UnilateralMastectomyLeftPerformed.relevantPeriod ) ends on or before 
   end of Measurement Period )
       )
   )
@@ -80,9 +72,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   where BilateralMastectomyHistory.prevalencePeriod starts on or before 
   end of Measurement Period
   or exists [("Procedure, Performed: Bilateral Mastectomy" using "Bilateral Mastectomy (2.16.840.1.113883.3.464.1003.198.12.1005)")] BilateralMastectomyPerformed
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( BilateralMastectomyPerformed.relevantDatetime, BilateralMastectomyPerformed.relevantPeriod ) ends on or before 
+  where Global.NormalizeInterval ( BilateralMastectomyPerformed.relevantDatetime, BilateralMastectomyPerformed.relevantPeriod ) ends on or before 
   end of Measurement Period
   or AIFrailLTCF.( AgeInYearsAt(date from 
     end of Measurement Period
@@ -92,9 +82,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 )
   or exists ( [("Assessment, Performed: Medical equipment used" using "Medical equipment used (LOINC Code 98181-1)")] EquipmentUsed
       where EquipmentUsed.result in (valueset "Frailty Device" (2.16.840.1.113883.3.464.1003.118.12.1300))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( EquipmentUsed.relevantDatetime, EquipmentUsed.relevantPeriod ) ends during day of Measurement Period
+        and Global.NormalizeInterval ( EquipmentUsed.relevantDatetime, EquipmentUsed.relevantPeriod ) ends during day of Measurement Period
   )
   or exists ( [("Diagnosis: Frailty Diagnosis" using "Frailty Diagnosis (2.16.840.1.113883.3.464.1003.113.12.1074)")] FrailtyDiagnosis
       where FrailtyDiagnosis.prevalencePeriod overlaps Measurement Period
@@ -136,9 +124,7 @@ from
     and InpatientEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 1 year, 
     end of Measurement Period])
         or exists ([("Medication, Active: Dementia Medications" using "Dementia Medications (2.16.840.1.113883.3.464.1003.196.12.1510)")] DementiaMedication
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( DementiaMedication.relevantDatetime, DementiaMedication.relevantPeriod ) overlaps Interval[start of Measurement Period - 1 year, 
+  where Global.NormalizeInterval ( DementiaMedication.relevantDatetime, DementiaMedication.relevantPeriod ) overlaps Interval[start of Measurement Period - 1 year, 
   end of Measurement Period])
     )
 )
@@ -147,21 +133,15 @@ from
   )>= 66
 )
   and ( ( Last([("Assessment, Performed: Housing status" using "Housing status (LOINC Code 71802-3)")] HousingStatus
-        where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(HousingStatus.relevantDatetime, HousingStatus.relevantPeriod)ends on or before 
+        where Global.NormalizeInterval(HousingStatus.relevantDatetime, HousingStatus.relevantPeriod)ends on or before 
         end of Measurement Period
         sort by 
-        end of if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(relevantDatetime, relevantPeriod)asc
+        end of Global.NormalizeInterval(relevantDatetime, relevantPeriod)asc
     )) LastHousingStatus
       where LastHousingStatus.result ~ (code "Lives in a nursing home (finding)" ("SNOMEDCT Code (160734000)"))
   ) is not null
   or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
+    where Global.NormalizeInterval(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 )
 or exists ([("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis
 where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
@@ -169,16 +149,12 @@ where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
       where PalliativeEncounter.relevantPeriod overlaps Measurement Period
   )
   or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
+      where Global.NormalizeInterval(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
 exists ( [("Diagnostic Study, Performed: Mammography" using "Mammography (2.16.840.1.113883.3.464.1003.108.12.1018)")] Mammogram
-    where ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Mammogram.relevantDatetime, Mammogram.relevantPeriod ) ends during day of Interval[DateTime((year from start of Measurement Period - 2), 10, 1, 0, 0, 0, 0, 0), 
+    where ( Global.NormalizeInterval ( Mammogram.relevantDatetime, Mammogram.relevantPeriod ) ends during day of Interval[DateTime((year from start of Measurement Period - 2), 10, 1, 0, 0, 0, 0, 0), 
       end of Measurement Period]
     )
 )

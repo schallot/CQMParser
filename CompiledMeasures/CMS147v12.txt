@@ -21,13 +21,9 @@ AgeInMonthsAt(date from start of Measurement Period)>= 6
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period
       or exists [("Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)")] Hemodialysis
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
+  where Global.NormalizeInterval ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
       or exists [("Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)")] PeritonealDialysis
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
+  where Global.NormalizeInterval ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Denominator:
@@ -52,13 +48,9 @@ AgeInMonthsAt(date from start of Measurement Period)>= 6
   union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)")] ) ValidEncounters
   where ValidEncounters.relevantPeriod during day of Measurement Period
       or exists [("Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)")] Hemodialysis
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
+  where Global.NormalizeInterval ( Hemodialysis.relevantDatetime, Hemodialysis.relevantPeriod ) overlaps Measurement Period
       or exists [("Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)")] PeritonealDialysis
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
+  where Global.NormalizeInterval ( PeritonealDialysis.relevantDatetime, PeritonealDialysis.relevantPeriod ) overlaps Measurement Period
   )
   and ( exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
   union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -76,13 +68,9 @@ AgeInMonthsAt(date from start of Measurement Period)>= 6
   union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)")] ) FluEncounter
   where FluEncounter.relevantPeriod starts during day of Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
       or exists [("Procedure, Performed: Hemodialysis" using "Hemodialysis (2.16.840.1.113883.3.526.3.1083)")] FluSeasonHemodialysis
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FluSeasonHemodialysis.relevantDatetime, FluSeasonHemodialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+  where Global.NormalizeInterval ( FluSeasonHemodialysis.relevantDatetime, FluSeasonHemodialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
       or exists [("Procedure, Performed: Peritoneal Dialysis" using "Peritoneal Dialysis (2.16.840.1.113883.3.526.3.1084)")] FluSeasonPeritonealDialysis
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FluSeasonPeritonealDialysis.relevantDatetime, FluSeasonPeritonealDialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
+  where Global.NormalizeInterval ( FluSeasonPeritonealDialysis.relevantDatetime, FluSeasonPeritonealDialysis.relevantPeriod ) overlaps Interval[start of Measurement Period - 3 months, start of Measurement Period + 3 months )
   )
 =============================================================================================================================================================================
 Denominator Exclusions:
@@ -97,25 +85,19 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
 exists ( [("Procedure, Performed: Influenza Vaccination" using "Influenza Vaccination (2.16.840.1.113883.3.526.3.402)")]
   union [("Procedure, Performed: Influenza Virus LAIV Procedure" using "Influenza Virus LAIV Procedure (2.16.840.1.113883.3.464.1003.110.12.1088)")] ) FluVaccination
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FluVaccination.relevantDatetime, FluVaccination.relevantPeriod ) during day of Interval[start of Measurement Period - 6 months, start of Measurement Period + 6 months )
+  where Global.NormalizeInterval ( FluVaccination.relevantDatetime, FluVaccination.relevantPeriod ) during day of Interval[start of Measurement Period - 6 months, start of Measurement Period + 6 months )
   or exists ( [("Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.526.3.1254)")]
   union [("Immunization, Administered: Influenza Virus LAIV Immunization" using "Influenza Virus LAIV Immunization (2.16.840.1.113883.3.464.1003.110.12.1087)")] ) AdministeredFluVaccine
   where AdministeredFluVaccine.relevantDatetime during day of Interval[start of Measurement Period - 6 months, start of Measurement Period + 6 months )

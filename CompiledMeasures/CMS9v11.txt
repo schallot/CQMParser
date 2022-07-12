@@ -6,16 +6,16 @@ PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
   ) SingleLiveBornEncounter
   with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
     such that GestationalAge.result >= 37 weeks
-      and Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+      and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
   union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and GestationalAge.result is not null
   with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and BirthWeight.result >= 3000 'g' ) SingleLiveTermEncounter
   where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period
 =============================================================================================================================================================================
@@ -26,16 +26,16 @@ PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
   ) SingleLiveBornEncounter
   with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
     such that GestationalAge.result >= 37 weeks
-      and Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+      and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
   union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and GestationalAge.result is not null
   with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and BirthWeight.result >= 3000 'g' ) SingleLiveTermEncounter
   where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period
 =============================================================================================================================================================================
@@ -46,16 +46,16 @@ PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
   ) SingleLiveBornEncounter
   with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
     such that GestationalAge.result >= 37 weeks
-      and Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+      and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
   union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and GestationalAge.result is not null
   with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and BirthWeight.result >= 3000 'g' ) SingleLiveTermEncounter
   where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter
   where exists ( QualifyingEncounter.facilityLocations Location
@@ -71,42 +71,40 @@ PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
   ) SingleLiveBornEncounter
   with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
     such that GestationalAge.result >= 37 weeks
-      and Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+      and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
   union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and GestationalAge.result is not null
   with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and BirthWeight.result >= 3000 'g' ) SingleLiveTermEncounter
   where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter
-  where difference in days between start of Value and end of Value ( QualifyingEncounter.relevantPeriod ) > 120
+  where Global.LengthInDays ( QualifyingEncounter.relevantPeriod ) > 120
   union ( PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
     such that GestationalAge.result >= 37 weeks
-      and Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+      and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
   union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and GestationalAge.result is not null
   with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and BirthWeight.result >= 3000 'g' ) SingleLiveTermEncounter
   where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter
     with ( [("Procedure, Performed: Parenteral Nutrition" using "Parenteral Nutrition (2.16.840.1.113883.3.117.1.7.1.38)")]
       union [("Medication, Administered: Total Parenteral Nutrition" using "Total Parenteral Nutrition (2.16.840.1.113762.1.4.1110.54)")] ) ParenteralNutrition
-      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ParenteralNutrition.relevantDatetime, ParenteralNutrition.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod
+      such that Global.NormalizeInterval ( ParenteralNutrition.relevantDatetime, ParenteralNutrition.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod
 )
   union ( PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
@@ -114,16 +112,16 @@ PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
   ) SingleLiveBornEncounter
   with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
     such that GestationalAge.result >= 37 weeks
-      and Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+      and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
   union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and GestationalAge.result is not null
   with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and BirthWeight.result >= 3000 'g' ) SingleLiveTermEncounter
   where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter
       where exists ( QualifyingEncounter.diagnoses BirthEncounterDiagnoses
@@ -138,26 +136,22 @@ PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpat
   ) SingleLiveBornEncounter
   with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
     such that GestationalAge.result >= 37 weeks
-      and Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+      and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
   union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter
   where exists ( InpatientEncounter.diagnoses EncounterDiagnoses
       where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))
   ) SingleLiveBornEncounter
   without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and GestationalAge.result is not null
   with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight
-    such that Earliest(NormalizeInterval(pointInTime, period)) ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
+    such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveBornEncounter.relevantPeriod
       and BirthWeight.result >= 3000 'g' ) SingleLiveTermEncounter
   where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter
   with [("Substance, Administered: Breast Milk" using "Breast Milk (2.16.840.1.113883.3.117.1.7.1.30)")] BreastMilkFeeding
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( BreastMilkFeeding.relevantDatetime, BreastMilkFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod
+    such that Global.NormalizeInterval ( BreastMilkFeeding.relevantDatetime, BreastMilkFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod
   without [("Substance, Administered: Dietary Intake Other than Breast Milk" using "Dietary Intake Other than Breast Milk (2.16.840.1.113883.3.117.1.7.1.27)")] OtherFeeding
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( OtherFeeding.relevantDatetime, OtherFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod
+    such that Global.NormalizeInterval ( OtherFeeding.relevantDatetime, OtherFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod
 =============================================================================================================================================================================
 Numerator Exclusions:
 None

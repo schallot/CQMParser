@@ -11,9 +11,7 @@ exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.
       union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]
       union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]
       union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
+      where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
       end of Measurement Period
   )
   and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
@@ -38,9 +36,7 @@ exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.
       union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]
       union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]
       union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
+      where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
       end of Measurement Period
   )
   and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]
@@ -67,9 +63,7 @@ exists ( [("Medication, Order: Low Intensity Statin Therapy" using "Low Intensit
   or exists ( [("Medication, Active: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)")]
   union [("Medication, Active: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)")]
   union [("Medication, Active: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)")] ) ActiveStatin
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ActiveStatin.relevantDatetime, ActiveStatin.relevantPeriod ) overlaps Measurement Period
+  where Global.NormalizeInterval ( ActiveStatin.relevantDatetime, ActiveStatin.relevantPeriod ) overlaps Measurement Period
 =============================================================================================================================================================================
 Numerator Exclusions:
 None
@@ -88,22 +82,16 @@ exists [("Allergy/Intolerance: Statin Allergen" using "Statin Allergen (2.16.840
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
+    where Global.NormalizeInterval(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 )
 or exists ([("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis
 where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
@@ -111,9 +99,7 @@ where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
       where PalliativeEncounter.relevantPeriod overlaps Measurement Period
   )
   or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
+      where Global.NormalizeInterval(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
   )
   or exists ( ( [("Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.1024)")]
     union [("Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.67.1.101.1.269)")]
@@ -156,9 +142,7 @@ exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.
       union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]
       union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]
       union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
+      where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before 
       end of Measurement Period
   )
   and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]

@@ -37,22 +37,16 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Procedure, Performed: Hysterectomy with No Residual Cervix" using "Hysterectomy with No Residual Cervix (2.16.840.1.113883.3.464.1003.198.12.1014)")] NoCervixProcedure
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( NoCervixProcedure.relevantDatetime, NoCervixProcedure.relevantPeriod ) ends on or before 
+    where Global.NormalizeInterval ( NoCervixProcedure.relevantDatetime, NoCervixProcedure.relevantPeriod ) ends on or before 
     end of Measurement Period
 )
   union ( [("Diagnosis: Congenital or Acquired Absence of Cervix" using "Congenital or Acquired Absence of Cervix (2.16.840.1.113883.3.464.1003.111.12.1016)")] NoCervixDiagnosis
@@ -60,9 +54,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
       end of Measurement Period
   )
   or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
+    where Global.NormalizeInterval(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period
 )
 or exists ([("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis
 where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
@@ -70,19 +62,17 @@ where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)
       where PalliativeEncounter.relevantPeriod overlaps Measurement Period
   )
   or exists ( [("Intervention, Performed: Palliative Care Intervention" using "Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)")] PalliativeIntervention
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime>(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
+      where Global.NormalizeInterval(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps Measurement Period
   )
 =============================================================================================================================================================================
 Numerator:
 exists [("Laboratory Test, Performed: Pap Test" using "Pap Test (2.16.840.1.113883.3.464.1003.108.12.1017)")] CervicalCytology
-  where Latest(NormalizeInterval(pointInTime, period)) ( CervicalCytology.relevantDatetime, CervicalCytology.relevantPeriod ) during day of Interval[start of Measurement Period - 2 years, 
+  where Global.LatestOf ( CervicalCytology.relevantDatetime, CervicalCytology.relevantPeriod ) during day of Interval[start of Measurement Period - 2 years, 
   end of Measurement Period]
     and CervicalCytology.result is not null
   or exists [("Laboratory Test, Performed: HPV Test" using "HPV Test (2.16.840.1.113883.3.464.1003.110.12.1059)")] HPVTest
-  where AgeInYearsAt(date from Latest(NormalizeInterval(pointInTime, period))(HPVTest.relevantDatetime, HPVTest.relevantPeriod))>= 30
-    and Latest(NormalizeInterval(pointInTime, period)) ( HPVTest.relevantDatetime, HPVTest.relevantPeriod ) during day of Interval[start of Measurement Period - 4 years, 
+  where AgeInYearsAt(date from Global.LatestOf(HPVTest.relevantDatetime, HPVTest.relevantPeriod))>= 30
+    and Global.LatestOf ( HPVTest.relevantDatetime, HPVTest.relevantPeriod ) during day of Interval[start of Measurement Period - 4 years, 
     end of Measurement Period]
     and HPVTest.result is not null
 =============================================================================================================================================================================

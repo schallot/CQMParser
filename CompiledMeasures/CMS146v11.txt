@@ -99,17 +99,13 @@ from
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   union from
   ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
@@ -138,9 +134,7 @@ from
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
   with [("Medication, Active: Antibiotic Medications for Pharyngitis" using "Antibiotic Medications for Pharyngitis (2.16.840.1.113883.3.464.1003.196.12.1001)")] ActiveAntibiotic
-    such that ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ActiveAntibiotic.relevantDatetime, ActiveAntibiotic.relevantPeriod ) overlaps day of Interval[start of EncounterWithPharyngitis.relevantPeriod - 30 days, start of EncounterWithPharyngitis.relevantPeriod - 1 day])
+    such that ( Global.NormalizeInterval ( ActiveAntibiotic.relevantDatetime, ActiveAntibiotic.relevantPeriod ) overlaps day of Interval[start of EncounterWithPharyngitis.relevantPeriod - 30 days, start of EncounterWithPharyngitis.relevantPeriod - 1 day])
   return EncounterWithPharyngitis
   union from
   ( [("Encounter, Performed: Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])" using "Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.]) (CPT Code 99217)")]
@@ -231,9 +225,7 @@ from
 ) AcutePharyngitisTonsillitis
   where AcutePharyngitisTonsillitis.prevalencePeriod starts during day of VisitWithAntibiotic.relevantPeriod
   return VisitWithAntibiotic EncounterWithPharyngitis
-  where ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( GroupAStreptococcusTest.relevantDatetime, GroupAStreptococcusTest.relevantPeriod ) starts during day of Interval[( 
+  where ( Global.NormalizeInterval ( GroupAStreptococcusTest.relevantDatetime, GroupAStreptococcusTest.relevantPeriod ) starts during day of Interval[( 
       end of EncounterWithPharyngitis.relevantPeriod
     ) - 3 days, ( 
       end of EncounterWithPharyngitis.relevantPeriod

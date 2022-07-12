@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and exists ( [("Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)")] HeartFailure
 	      where HeartFailure.prevalencePeriod overlaps before Measurement Period
@@ -21,7 +21,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and exists ( [("Diagnosis: Heart Failure" using "Heart Failure (2.16.840.1.113883.3.526.3.376)")] HeartFailure
 	      where HeartFailure.prevalencePeriod overlaps before Measurement Period
@@ -50,9 +50,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or exists ( [("Diagnosis: Severe dementia (disorder)" using "Severe dementia (disorder) (SNOMEDCT Code 428351000124105)")] Dementia
 	      where Dementia.prevalencePeriod overlaps Measurement Period
@@ -67,12 +65,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
 	  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
-	  let PROMIS10MentalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
-	  PROMIS10PhysicalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
+	  let PROMIS10MentalScoreTime: start of Global.NormalizeInterval ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
+	  PROMIS10PhysicalScoreTime: start of Global.NormalizeInterval ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
 	  where PROMIS10MentalScoreTime same day as PROMIS10PhysicalScoreTime
 	    and PROMIS10PhysicalScore.result is not null
 	    and PROMIS10MentalScore.result is not null
@@ -80,12 +74,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: PROMIS-10 Global Mental Health (GMH) score T-score" using "PROMIS-10 Global Mental Health (GMH) score T-score (LOINC Code 71969-0)")] PROMIS10MentalScore,
 	  [("Assessment, Performed: PROMIS-10 Global Physical Health (GPH) score T-score" using "PROMIS-10 Global Physical Health (GPH) score T-score (LOINC Code 71971-6)")] PROMIS10PhysicalScore
-	  let PROMIS10MentalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
-	  PROMIS10PhysicalScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
+	  let PROMIS10MentalScoreTime: start of Global.NormalizeInterval ( PROMIS10MentalScore.relevantDatetime, PROMIS10MentalScore.relevantPeriod ),
+	  PROMIS10PhysicalScoreTime: start of Global.NormalizeInterval ( PROMIS10PhysicalScore.relevantDatetime, PROMIS10PhysicalScore.relevantPeriod )
 	  where PROMIS10MentalScoreTime same day as PROMIS10PhysicalScoreTime
 	    and PROMIS10PhysicalScore.result is not null
 	    and PROMIS10MentalScore.result is not null
@@ -110,27 +100,13 @@ Numerator:
 	  [("Assessment, Performed: PROMIS-29 Fatigue score T-score" using "PROMIS-29 Fatigue score T-score (LOINC Code 71963-3)")] Promis29Fatigue,
 	  [("Assessment, Performed: PROMIS-29 Depression score T-score" using "PROMIS-29 Depression score T-score (LOINC Code 71965-8)")] Promis29Depression,
 	  [("Assessment, Performed: PROMIS-29 Anxiety score T-score" using "PROMIS-29 Anxiety score T-score (LOINC Code 71967-4)")] Promis29Anxiety
-	  let Promis29SleepTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Sleep.relevantDatetime, Promis29Sleep.relevantPeriod ),
-	  Promis29SocialRolesTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29SocialRoles.relevantDatetime, Promis29SocialRoles.relevantPeriod ),
-	  Promis29PhysicalTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Physical.relevantDatetime, Promis29Physical.relevantPeriod ),
-	  Promis29PainTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Pain.relevantDatetime, Promis29Pain.relevantPeriod ),
-	  Promis29FatigueTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Fatigue.relevantDatetime, Promis29Fatigue.relevantPeriod ),
-	  Promis29DepressionTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Depression.relevantDatetime, Promis29Depression.relevantPeriod ),
-	  Promis29AnxietyTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Anxiety.relevantDatetime, Promis29Anxiety.relevantPeriod )
+	  let Promis29SleepTime: start of Global.NormalizeInterval ( Promis29Sleep.relevantDatetime, Promis29Sleep.relevantPeriod ),
+	  Promis29SocialRolesTime: start of Global.NormalizeInterval ( Promis29SocialRoles.relevantDatetime, Promis29SocialRoles.relevantPeriod ),
+	  Promis29PhysicalTime: start of Global.NormalizeInterval ( Promis29Physical.relevantDatetime, Promis29Physical.relevantPeriod ),
+	  Promis29PainTime: start of Global.NormalizeInterval ( Promis29Pain.relevantDatetime, Promis29Pain.relevantPeriod ),
+	  Promis29FatigueTime: start of Global.NormalizeInterval ( Promis29Fatigue.relevantDatetime, Promis29Fatigue.relevantPeriod ),
+	  Promis29DepressionTime: start of Global.NormalizeInterval ( Promis29Depression.relevantDatetime, Promis29Depression.relevantPeriod ),
+	  Promis29AnxietyTime: start of Global.NormalizeInterval ( Promis29Anxiety.relevantDatetime, Promis29Anxiety.relevantPeriod )
 	  where Promis29SleepTime same day as Promis29SocialRolesTime
 	    and Promis29SocialRoles.result is not null
 	    and Promis29SleepTime same day as Promis29PhysicalTime
@@ -153,27 +129,13 @@ Numerator:
 	  [("Assessment, Performed: PROMIS-29 Fatigue score T-score" using "PROMIS-29 Fatigue score T-score (LOINC Code 71963-3)")] Promis29Fatigue,
 	  [("Assessment, Performed: PROMIS-29 Depression score T-score" using "PROMIS-29 Depression score T-score (LOINC Code 71965-8)")] Promis29Depression,
 	  [("Assessment, Performed: PROMIS-29 Anxiety score T-score" using "PROMIS-29 Anxiety score T-score (LOINC Code 71967-4)")] Promis29Anxiety
-	  let Promis29SleepTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Sleep.relevantDatetime, Promis29Sleep.relevantPeriod ),
-	  Promis29SocialRolesTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29SocialRoles.relevantDatetime, Promis29SocialRoles.relevantPeriod ),
-	  Promis29PhysicalTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Physical.relevantDatetime, Promis29Physical.relevantPeriod ),
-	  Promis29PainTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Pain.relevantDatetime, Promis29Pain.relevantPeriod ),
-	  Promis29FatigueTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Fatigue.relevantDatetime, Promis29Fatigue.relevantPeriod ),
-	  Promis29DepressionTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Depression.relevantDatetime, Promis29Depression.relevantPeriod ),
-	  Promis29AnxietyTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Promis29Anxiety.relevantDatetime, Promis29Anxiety.relevantPeriod )
+	  let Promis29SleepTime: start of Global.NormalizeInterval ( Promis29Sleep.relevantDatetime, Promis29Sleep.relevantPeriod ),
+	  Promis29SocialRolesTime: start of Global.NormalizeInterval ( Promis29SocialRoles.relevantDatetime, Promis29SocialRoles.relevantPeriod ),
+	  Promis29PhysicalTime: start of Global.NormalizeInterval ( Promis29Physical.relevantDatetime, Promis29Physical.relevantPeriod ),
+	  Promis29PainTime: start of Global.NormalizeInterval ( Promis29Pain.relevantDatetime, Promis29Pain.relevantPeriod ),
+	  Promis29FatigueTime: start of Global.NormalizeInterval ( Promis29Fatigue.relevantDatetime, Promis29Fatigue.relevantPeriod ),
+	  Promis29DepressionTime: start of Global.NormalizeInterval ( Promis29Depression.relevantDatetime, Promis29Depression.relevantPeriod ),
+	  Promis29AnxietyTime: start of Global.NormalizeInterval ( Promis29Anxiety.relevantDatetime, Promis29Anxiety.relevantPeriod )
 	  where Promis29SleepTime same day as Promis29SocialRolesTime
 	    and Promis29SocialRoles.result is not null
 	    and Promis29SleepTime same day as Promis29PhysicalTime
@@ -203,12 +165,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null
@@ -216,12 +174,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - oblique method T-score" using "VR-12 Mental component summary (MCS) score - oblique method T-score (LOINC Code 72026-8)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - oblique method T-score" using "VR-12 Physical component summary (PCS) score - oblique method T-score (LOINC Code 72025-0)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null
@@ -241,12 +195,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null
@@ -254,12 +204,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-12 Mental component summary (MCS) score - orthogonal method T-score" using "VR-12 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72028-4)")] VR12MentalAssessment,
 	  [("Assessment, Performed: VR-12 Physical component summary (PCS) score - orthogonal method T-score" using "VR-12 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72027-6)")] VR12PhysicalAssessment
-	  let VR12MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
-	  VR12PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
+	  let VR12MentalAssessmentTime: start of Global.NormalizeInterval ( VR12MentalAssessment.relevantDatetime, VR12MentalAssessment.relevantPeriod ),
+	  VR12PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR12PhysicalAssessment.relevantDatetime, VR12PhysicalAssessment.relevantPeriod )
 	  where VR12MentalAssessmentTime same day as VR12PhysicalAssessmentTime
 	    and VR12MentalAssessment.result is not null
 	    and VR12PhysicalAssessment.result is not null
@@ -279,12 +225,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - oblique method T-score" using "VR-36 Mental component summary (MCS) score - oblique method T-score (LOINC Code 71990-6)")] VR36MentalAssessment,
 	  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - oblique method T-score" using "VR-36 Physical component summary (PCS) score - oblique method T-score (LOINC Code 71989-8)")] VR36PhysicalAssessment
-	  let VR36MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
-	  VR36PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
+	  let VR36MentalAssessmentTime: start of Global.NormalizeInterval ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
+	  VR36PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
 	  where VR36MentalAssessmentTime same day as VR36PhysicalAssessmentTime
 	    and VR36MentalAssessment.result is not null
 	    and VR36PhysicalAssessment.result is not null
@@ -292,12 +234,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - oblique method T-score" using "VR-36 Mental component summary (MCS) score - oblique method T-score (LOINC Code 71990-6)")] VR36MentalAssessment,
 	  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - oblique method T-score" using "VR-36 Physical component summary (PCS) score - oblique method T-score (LOINC Code 71989-8)")] VR36PhysicalAssessment
-	  let VR36MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
-	  VR36PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
+	  let VR36MentalAssessmentTime: start of Global.NormalizeInterval ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
+	  VR36PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
 	  where VR36MentalAssessmentTime same day as VR36PhysicalAssessmentTime
 	    and VR36MentalAssessment.result is not null
 	    and VR36PhysicalAssessment.result is not null
@@ -317,12 +255,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - orthogonal method T-score" using "VR-36 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72008-6)")] VR36MentalAssessment,
 	  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - orthogonal method T-score" using "VR-36 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72007-8)")] VR36PhysicalAssessment
-	  let VR36MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
-	  VR36PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
+	  let VR36MentalAssessmentTime: start of Global.NormalizeInterval ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
+	  VR36PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
 	  where VR36MentalAssessmentTime same day as VR36PhysicalAssessmentTime
 	    and VR36MentalAssessment.result is not null
 	    and VR36PhysicalAssessment.result is not null
@@ -330,12 +264,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: VR-36 Mental component summary (MCS) score - orthogonal method T-score" using "VR-36 Mental component summary (MCS) score - orthogonal method T-score (LOINC Code 72008-6)")] VR36MentalAssessment,
 	  [("Assessment, Performed: VR-36 Physical component summary (PCS) score - orthogonal method T-score" using "VR-36 Physical component summary (PCS) score - orthogonal method T-score (LOINC Code 72007-8)")] VR36PhysicalAssessment
-	  let VR36MentalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
-	  VR36PhysicalAssessmentTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
+	  let VR36MentalAssessmentTime: start of Global.NormalizeInterval ( VR36MentalAssessment.relevantDatetime, VR36MentalAssessment.relevantPeriod ),
+	  VR36PhysicalAssessmentTime: start of Global.NormalizeInterval ( VR36PhysicalAssessment.relevantDatetime, VR36PhysicalAssessment.relevantPeriod )
 	  where VR36MentalAssessmentTime same day as VR36PhysicalAssessmentTime
 	    and VR36MentalAssessment.result is not null
 	    and VR36PhysicalAssessment.result is not null
@@ -355,12 +285,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: Physical score [MLHFQ]" using "Physical score [MLHFQ] (LOINC Code 85618-7)")] MLHFQPhysical,
 	  [("Assessment, Performed: Emotional score [MLHFQ]" using "Emotional score [MLHFQ] (LOINC Code 85609-6)")] MLHFQEmotional
-	  let MLHFQPhysicalTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MLHFQPhysical.relevantDatetime, MLHFQPhysical.relevantPeriod ),
-	  MLHFQEmotionalTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MLHFQEmotional.relevantDatetime, MLHFQEmotional.relevantPeriod )
+	  let MLHFQPhysicalTime: start of Global.NormalizeInterval ( MLHFQPhysical.relevantDatetime, MLHFQPhysical.relevantPeriod ),
+	  MLHFQEmotionalTime: start of Global.NormalizeInterval ( MLHFQEmotional.relevantDatetime, MLHFQEmotional.relevantPeriod )
 	  where MLHFQPhysicalTime same day as MLHFQEmotionalTime
 	    and MLHFQEmotional.result is not null
 	    and MLHFQPhysical.result is not null
@@ -368,12 +294,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: Physical score [MLHFQ]" using "Physical score [MLHFQ] (LOINC Code 85618-7)")] MLHFQPhysical,
 	  [("Assessment, Performed: Emotional score [MLHFQ]" using "Emotional score [MLHFQ] (LOINC Code 85609-6)")] MLHFQEmotional
-	  let MLHFQPhysicalTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MLHFQPhysical.relevantDatetime, MLHFQPhysical.relevantPeriod ),
-	  MLHFQEmotionalTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( MLHFQEmotional.relevantDatetime, MLHFQEmotional.relevantPeriod )
+	  let MLHFQPhysicalTime: start of Global.NormalizeInterval ( MLHFQPhysical.relevantDatetime, MLHFQPhysical.relevantPeriod ),
+	  MLHFQEmotionalTime: start of Global.NormalizeInterval ( MLHFQEmotional.relevantDatetime, MLHFQEmotional.relevantPeriod )
 	  where MLHFQPhysicalTime same day as MLHFQEmotionalTime
 	    and MLHFQEmotional.result is not null
 	    and MLHFQPhysical.result is not null
@@ -393,12 +315,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]" using "Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12] (LOINC Code 86923-0)")] KCCQ12Item,
 	  [("Assessment, Performed: Overall summary score [KCCQ-12]" using "Overall summary score [KCCQ-12] (LOINC Code 86924-8)")] KCCQ12Summary
-	  let KCCQ12ItemTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQ12Item.relevantDatetime, KCCQ12Item.relevantPeriod ),
-	  KCCQ12SummaryTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQ12Summary.relevantDatetime, KCCQ12Summary.relevantPeriod )
+	  let KCCQ12ItemTime: start of Global.NormalizeInterval ( KCCQ12Item.relevantDatetime, KCCQ12Item.relevantPeriod ),
+	  KCCQ12SummaryTime: start of Global.NormalizeInterval ( KCCQ12Summary.relevantDatetime, KCCQ12Summary.relevantPeriod )
 	  where KCCQ12ItemTime same day as KCCQ12SummaryTime
 	    and KCCQ12Summary.result is not null
 	    and KCCQ12Item.result is not null
@@ -406,12 +324,8 @@ Numerator:
 	    from
 	  [("Assessment, Performed: Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]" using "Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12] (LOINC Code 86923-0)")] KCCQ12Item,
 	  [("Assessment, Performed: Overall summary score [KCCQ-12]" using "Overall summary score [KCCQ-12] (LOINC Code 86924-8)")] KCCQ12Summary
-	  let KCCQ12ItemTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQ12Item.relevantDatetime, KCCQ12Item.relevantPeriod ),
-	  KCCQ12SummaryTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQ12Summary.relevantDatetime, KCCQ12Summary.relevantPeriod )
+	  let KCCQ12ItemTime: start of Global.NormalizeInterval ( KCCQ12Item.relevantDatetime, KCCQ12Item.relevantPeriod ),
+	  KCCQ12SummaryTime: start of Global.NormalizeInterval ( KCCQ12Summary.relevantDatetime, KCCQ12Summary.relevantPeriod )
 	  where KCCQ12ItemTime same day as KCCQ12SummaryTime
 	    and KCCQ12Summary.result is not null
 	    and KCCQ12Item.result is not null
@@ -435,24 +349,12 @@ Numerator:
 	  [("Assessment, Performed: Total symptom score [KCCQ]" using "Total symptom score [KCCQ] (LOINC Code 72191-0)")] KCCQSymptoms,
 	  [("Assessment, Performed: Physical limitation score [KCCQ]" using "Physical limitation score [KCCQ] (LOINC Code 72195-1)")] KCCQPhysicalLimits,
 	  [("Assessment, Performed: Social limitation score [KCCQ]" using "Social limitation score [KCCQ] (LOINC Code 72196-9)")] KCCQSocialLimits
-	  let KCCQLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQLifeQuality.relevantDatetime, KCCQLifeQuality.relevantPeriod ),
-	  KCCQSymptomStabilityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSymptomStability.relevantDatetime, KCCQSymptomStability.relevantPeriod ),
-	  KCCQSelfEfficacyTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSelfEfficacy.relevantDatetime, KCCQSelfEfficacy.relevantPeriod ),
-	  KCCQSymptomsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSymptoms.relevantDatetime, KCCQSymptoms.relevantPeriod ),
-	  KCCQPhysicalLimitsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQPhysicalLimits.relevantDatetime, KCCQPhysicalLimits.relevantPeriod ),
-	  KCCQSocialLimitsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSocialLimits.relevantDatetime, KCCQSocialLimits.relevantPeriod )
+	  let KCCQLifeQualityTime: start of Global.NormalizeInterval ( KCCQLifeQuality.relevantDatetime, KCCQLifeQuality.relevantPeriod ),
+	  KCCQSymptomStabilityTime: start of Global.NormalizeInterval ( KCCQSymptomStability.relevantDatetime, KCCQSymptomStability.relevantPeriod ),
+	  KCCQSelfEfficacyTime: start of Global.NormalizeInterval ( KCCQSelfEfficacy.relevantDatetime, KCCQSelfEfficacy.relevantPeriod ),
+	  KCCQSymptomsTime: start of Global.NormalizeInterval ( KCCQSymptoms.relevantDatetime, KCCQSymptoms.relevantPeriod ),
+	  KCCQPhysicalLimitsTime: start of Global.NormalizeInterval ( KCCQPhysicalLimits.relevantDatetime, KCCQPhysicalLimits.relevantPeriod ),
+	  KCCQSocialLimitsTime: start of Global.NormalizeInterval ( KCCQSocialLimits.relevantDatetime, KCCQSocialLimits.relevantPeriod )
 	  where KCCQLifeQualityTime same day as KCCQSymptomStabilityTime
 	    and KCCQSymptomStability.result is not null
 	    and KCCQLifeQualityTime same day as KCCQSelfEfficacyTime
@@ -472,24 +374,12 @@ Numerator:
 	  [("Assessment, Performed: Total symptom score [KCCQ]" using "Total symptom score [KCCQ] (LOINC Code 72191-0)")] KCCQSymptoms,
 	  [("Assessment, Performed: Physical limitation score [KCCQ]" using "Physical limitation score [KCCQ] (LOINC Code 72195-1)")] KCCQPhysicalLimits,
 	  [("Assessment, Performed: Social limitation score [KCCQ]" using "Social limitation score [KCCQ] (LOINC Code 72196-9)")] KCCQSocialLimits
-	  let KCCQLifeQualityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQLifeQuality.relevantDatetime, KCCQLifeQuality.relevantPeriod ),
-	  KCCQSymptomStabilityTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSymptomStability.relevantDatetime, KCCQSymptomStability.relevantPeriod ),
-	  KCCQSelfEfficacyTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSelfEfficacy.relevantDatetime, KCCQSelfEfficacy.relevantPeriod ),
-	  KCCQSymptomsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSymptoms.relevantDatetime, KCCQSymptoms.relevantPeriod ),
-	  KCCQPhysicalLimitsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQPhysicalLimits.relevantDatetime, KCCQPhysicalLimits.relevantPeriod ),
-	  KCCQSocialLimitsTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSocialLimits.relevantDatetime, KCCQSocialLimits.relevantPeriod )
+	  let KCCQLifeQualityTime: start of Global.NormalizeInterval ( KCCQLifeQuality.relevantDatetime, KCCQLifeQuality.relevantPeriod ),
+	  KCCQSymptomStabilityTime: start of Global.NormalizeInterval ( KCCQSymptomStability.relevantDatetime, KCCQSymptomStability.relevantPeriod ),
+	  KCCQSelfEfficacyTime: start of Global.NormalizeInterval ( KCCQSelfEfficacy.relevantDatetime, KCCQSelfEfficacy.relevantPeriod ),
+	  KCCQSymptomsTime: start of Global.NormalizeInterval ( KCCQSymptoms.relevantDatetime, KCCQSymptoms.relevantPeriod ),
+	  KCCQPhysicalLimitsTime: start of Global.NormalizeInterval ( KCCQPhysicalLimits.relevantDatetime, KCCQPhysicalLimits.relevantPeriod ),
+	  KCCQSocialLimitsTime: start of Global.NormalizeInterval ( KCCQSocialLimits.relevantDatetime, KCCQSocialLimits.relevantPeriod )
 	  where KCCQLifeQualityTime same day as KCCQSymptomStabilityTime
 	    and KCCQSymptomStability.result is not null
 	    and KCCQLifeQualityTime same day as KCCQSelfEfficacyTime
@@ -515,15 +405,11 @@ Numerator:
 	  union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)")] ) ValidEncounter
 	  where ValidEncounter.relevantPeriod during Measurement Period ValidEncounters,
 	    [("Assessment, Performed: Overall summary score [KCCQ]" using "Overall summary score [KCCQ] (LOINC Code 71940-1)")] KCCQSummaryScore
-	  let KCCQSummaryScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSummaryScore.relevantDatetime, KCCQSummaryScore.relevantPeriod )
+	  let KCCQSummaryScoreTime: start of Global.NormalizeInterval ( KCCQSummaryScore.relevantDatetime, KCCQSummaryScore.relevantPeriod )
 	  where KCCQSummaryScore.result is not null
 	  return Max({ KCCQSummaryScoreTime }) InitialKCCQTotalScore,
 	    [("Assessment, Performed: Overall summary score [KCCQ]" using "Overall summary score [KCCQ] (LOINC Code 71940-1)")] KCCQSummaryScore
-	  let KCCQSummaryScoreTime: start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( KCCQSummaryScore.relevantDatetime, KCCQSummaryScore.relevantPeriod )
+	  let KCCQSummaryScoreTime: start of Global.NormalizeInterval ( KCCQSummaryScore.relevantDatetime, KCCQSummaryScore.relevantPeriod )
 	  where KCCQSummaryScore.result is not null
 	  return Max({ KCCQSummaryScoreTime }) FollowupKCCQTotalScore
 	    where ValidEncounters.relevantPeriod ends 180 days or more before 

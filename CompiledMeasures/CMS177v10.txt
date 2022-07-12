@@ -13,8 +13,8 @@ Initial Population:
 	  )
 	    and ValidEncounter.relevantPeriod during Measurement Period MDDEncounter
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 17
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) < 17
 =============================================================================================================================================================================
 Denominator:
 ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -30,8 +30,8 @@ Denominator:
 	  )
 	    and ValidEncounter.relevantPeriod during Measurement Period MDDEncounter
 	  with [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    such that years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
-	      and years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) < 17
+	    such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 6
+	      and Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) < 17
 =============================================================================================================================================================================
 Denominator Exclusions:
 None
@@ -50,9 +50,7 @@ Numerator:
 	  )
 	    and ValidEncounter.relevantPeriod during Measurement Period MDDEncounter
 	  with [("Intervention, Performed: Suicide risk assessment (procedure)" using "Suicide risk assessment (procedure) (SNOMEDCT Code 225337009)")] SuicideRiskAssessment
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( SuicideRiskAssessment.relevantDatetime, SuicideRiskAssessment.relevantPeriod ) during MDDEncounter.relevantPeriod
+	    such that Global.NormalizeInterval ( SuicideRiskAssessment.relevantDatetime, SuicideRiskAssessment.relevantPeriod ) during MDDEncounter.relevantPeriod
 =============================================================================================================================================================================
 Numerator Exclusions:
 None

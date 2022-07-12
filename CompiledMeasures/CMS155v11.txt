@@ -37,36 +37,26 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Diagnosis: Pregnancy" using "Pregnancy (2.16.840.1.113883.3.526.3.378)")] Pregnancy
   where Pregnancy.prevalencePeriod overlaps Measurement Period )
 =============================================================================================================================================================================
 Numerator:
 exists ( [("Physical Exam, Performed: BMI percentile" using "BMI percentile (2.16.840.1.113883.3.464.1003.121.12.1012)")] BMIPercentile
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( BMIPercentile.relevantDatetime, BMIPercentile.relevantPeriod ) during day of Measurement Period
+  where Global.NormalizeInterval ( BMIPercentile.relevantDatetime, BMIPercentile.relevantPeriod ) during day of Measurement Period
     and BMIPercentile.result is not null )
   and exists ( [("Physical Exam, Performed: Height" using "Height (2.16.840.1.113883.3.464.1003.121.12.1014)")] Height
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Height.relevantDatetime, Height.relevantPeriod ) during day of Measurement Period
+  where Global.NormalizeInterval ( Height.relevantDatetime, Height.relevantPeriod ) during day of Measurement Period
     and Height.result is not null )
   and exists ( [("Physical Exam, Performed: Weight" using "Weight (2.16.840.1.113883.3.464.1003.121.12.1015)")] Weight
-  where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( Weight.relevantDatetime, Weight.relevantPeriod ) during day of Measurement Period
+  where Global.NormalizeInterval ( Weight.relevantDatetime, Weight.relevantPeriod ) during day of Measurement Period
     and Weight.result is not null )
 =============================================================================================================================================================================
 Numerator Exclusions:

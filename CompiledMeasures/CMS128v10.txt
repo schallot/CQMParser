@@ -1,19 +1,15 @@
 =============================================================================================================================================================================
 Initial Population:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
 	    let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
-	    where ( start of MajorDepression.prevalencePeriod within 60 days of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
-	        and start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
+	    where ( start of MajorDepression.prevalencePeriod within 60 days of start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
+	        and start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
 	    )
 	)
 	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -30,25 +26,19 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
-	  where start of ValidEncounter.relevantPeriod within 60 days of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
+	  where start of ValidEncounter.relevantPeriod within 60 days of start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
 =============================================================================================================================================================================
 Denominator:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
 	    let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
-	    where ( start of MajorDepression.prevalencePeriod within 60 days of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
-	        and start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
+	    where ( start of MajorDepression.prevalencePeriod within 60 days of start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
+	        and start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
 	    )
 	)
 	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -65,9 +55,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
-	  where start of ValidEncounter.relevantPeriod within 60 days of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
+	  where start of ValidEncounter.relevantPeriod within 60 days of start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
 =============================================================================================================================================================================
 Denominator Exclusions:
 Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] DischargeHospice
@@ -80,9 +68,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or exists ( [("Medication, Active: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] ActiveAntidepressant
 	      let ActiveMedPeriod: ActiveAntidepressant Meds
@@ -121,19 +107,15 @@ None
 =============================================================================================================================================================================
 Population Criteria 1:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)
 	  and exists ( [("Diagnosis: Major Depression" using "Major Depression (2.16.840.1.113883.3.464.1003.105.12.1007)")] MajorDepression
 	    let AntidepressantDispensed: First([("Medication, Dispensed: Antidepressant Medication" using "Antidepressant Medication (2.16.840.1.113883.3.464.1003.196.12.1213)")] Antidepressant
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
-	    where ( start of MajorDepression.prevalencePeriod within 60 days of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
-	        and start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
+	    where ( start of MajorDepression.prevalencePeriod within 60 days of start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
+	        and start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod ) is not null
 	    )
 	)
 	  and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -150,9 +132,7 @@ exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOI
 	    where Antidepressant.relevantDatetime in Interval[start of Measurement Period - 245 days, start of Measurement Period + 120 days]
 	    sort by relevantDatetime
 	)
-	  where start of ValidEncounter.relevantPeriod within 60 days of start of if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
+	  where start of ValidEncounter.relevantPeriod within 60 days of start of Global.NormalizeInterval ( AntidepressantDispensed.relevantDatetime, AntidepressantDispensed.relevantPeriod )
 =============================================================================================================================================================================
 Stratification:
 None

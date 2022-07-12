@@ -37,17 +37,13 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
   )
   or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment
       where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))
-        and if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
+        and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder
       where HospiceOrder.authorDatetime during day of Measurement Period
   )
   or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed
-      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
   )
   or exists ( [("Diagnosis: Severe Combined Immunodeficiency" using "Severe Combined Immunodeficiency (2.16.840.1.113883.3.464.1003.120.12.1007)")] SevereImmuneDisorder
     where date from start of SevereImmuneDisorder.prevalencePeriod during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
@@ -69,27 +65,19 @@ Numerator:
 ( exists ( from
   ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
     union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) DTaPVaccination1,
   ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
     union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) DTaPVaccination2,
   ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
     union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) DTaPVaccination3,
   ( ( [("Immunization, Administered: DTaP Vaccine" using "DTaP Vaccine (2.16.840.1.113883.3.464.1003.196.12.1214)")]
     union [("Procedure, Performed: DTaP Vaccine Administered" using "DTaP Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1022)")] ) DTaPVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( DTaPVaccination.relevantDatetime, DTaPVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) DTaPVaccination4
   where DTaPVaccination2.relevantDatetime 1 day or more after day of DTaPVaccination1.relevantDatetime
     and DTaPVaccination3.relevantDatetime 1 day or more after day of DTaPVaccination2.relevantDatetime
@@ -102,30 +90,22 @@ Numerator:
   and ( exists ( from
   ( ( [("Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)")]
     union [("Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)")] ) PolioVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PolioVaccination.relevantDatetime, PolioVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( PolioVaccination.relevantDatetime, PolioVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) PolioVaccination1,
   ( ( [("Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)")]
     union [("Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)")] ) PolioVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PolioVaccination.relevantDatetime, PolioVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( PolioVaccination.relevantDatetime, PolioVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) PolioVaccination2,
   ( ( [("Immunization, Administered: Inactivated Polio Vaccine (IPV)" using "Inactivated Polio Vaccine (IPV) (2.16.840.1.113883.3.464.1003.196.12.1219)")]
     union [("Procedure, Performed: Inactivated Polio Vaccine (IPV) Administered" using "Inactivated Polio Vaccine (IPV) Administered (2.16.840.1.113883.3.464.1003.110.12.1045)")] ) PolioVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PolioVaccination.relevantDatetime, PolioVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( PolioVaccination.relevantDatetime, PolioVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) PolioVaccination3
   where PolioVaccination2.relevantDatetime 1 day or more after day of PolioVaccination1.relevantDatetime
     and PolioVaccination3.relevantDatetime 1 day or more after day of PolioVaccination2.relevantDatetime
   return PolioVaccination1 ) )
   and ( exists ( ( ( [("Immunization, Administered: Measles, Mumps and Rubella (MMR) Vaccine" using "Measles, Mumps and Rubella (MMR) Vaccine (2.16.840.1.113883.3.464.1003.196.12.1224)")]
     union [("Procedure, Performed: Measles, Mumps and Rubella (MMR) Vaccine Administered" using "Measles, Mumps and Rubella (MMR) Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1031)")] ) MMRVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( MMRVaccination.relevantDatetime, MMRVaccination.relevantPeriod ) ) during Interval[date from Patient.birthDatetime + 1 year, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( MMRVaccination.relevantDatetime, MMRVaccination.relevantPeriod ) ) during Interval[date from Patient.birthDatetime + 1 year, date from Patient.birthDatetime + 2 years]
 ) )
       or ( exists ( [("Diagnosis: Measles" using "Measles (2.16.840.1.113883.3.464.1003.110.12.1053)")] MeaslesDiagnosis
   where date from start of MeaslesDiagnosis.prevalencePeriod during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
@@ -137,60 +117,42 @@ Numerator:
   )
   and ( exists ( ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
     union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
     union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllHibDoses1
   without ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
     union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
     union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllHibDoses2
     such that AllHibDoses1.relevantDatetime less than 1 day before AllHibDoses2.relevantDatetime HibImmunization //union of 3 and 4 dose immunizations
 //4 dose test
     let HasFourDose: Count(( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
     union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ))> 0
     where ( HasFourDose //if pt had at least one 4 dose code
         and Count(distinct(( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
     union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
     union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllHibDoses1
   without ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
     union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
     union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllHibDoses2
     such that AllHibDoses1.relevantDatetime less than 1 day before AllHibDoses2.relevantDatetime HibVaccinations
               return HibVaccinations.relevantDatetime
@@ -200,27 +162,19 @@ Numerator:
       or ( HasFourDose is false //if pt did not have at least one 4 dose code
           and Count(distinct(( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
     union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
     union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllHibDoses1
   without ( ( [("Immunization, Administered: Hib Vaccine (3 dose schedule)" using "Hib Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1083)")]
     union [("Procedure, Performed: Hib Vaccine (3 dose schedule) Administered" using "Hib Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1084)")] ) ThreeDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseHib.relevantDatetime, ThreeDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Hib Vaccine (4 dose schedule)" using "Hib Vaccine (4 dose schedule) (2.16.840.1.113883.3.464.1003.110.12.1085)")]
     union [("Procedure, Performed: Hib Vaccine (4 dose schedule) Administered" using "Hib Vaccine (4 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1086)")] ) FourDoseHib
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( FourDoseHib.relevantDatetime, FourDoseHib.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllHibDoses2
     such that AllHibDoses1.relevantDatetime less than 1 day before AllHibDoses2.relevantDatetime HibVaccinations
                 return HibVaccinations.relevantDatetime
@@ -234,21 +188,15 @@ Numerator:
   and ( exists ( from
   ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
     union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 ) HepatitisBVaccination1,
   ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
     union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 ) HepatitisBVaccination2,
   ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
     union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 ) HepatitisBVaccination3
   where HepatitisBVaccination2.relevantDatetime 1 day or more after day of HepatitisBVaccination1.relevantDatetime
     and HepatitisBVaccination3.relevantDatetime 1 day or more after day of HepatitisBVaccination2.relevantDatetime
@@ -256,21 +204,15 @@ Numerator:
       or ( exists ( from
   ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
     union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 ) HepatitisBVaccination1,
   ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
     union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 ) HepatitisBVaccination2,
   ( ( [("Immunization, Administered: Hepatitis B Vaccine" using "Hepatitis B Vaccine (2.16.840.1.113883.3.464.1003.196.12.1216)")]
     union [("Procedure, Performed: Hepatitis B Vaccine Administered" using "Hepatitis B Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1042)")] ) HepatitisBVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( HepatitisBVaccination.relevantDatetime, HepatitisBVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years]
 ) HepatitisBVaccination3
   where HepatitisBVaccination2.relevantDatetime 1 day or more after day of HepatitisBVaccination1.relevantDatetime
     and HepatitisBVaccination3.relevantDatetime 1 day or more after day of HepatitisBVaccination2.relevantDatetime
@@ -283,9 +225,7 @@ Numerator:
   )
   and ( exists ( ( ( [("Immunization, Administered: Varicella Zoster Vaccine (VZV)" using "Varicella Zoster Vaccine (VZV) (2.16.840.1.113883.3.464.1003.196.12.1170)")]
     union [("Procedure, Performed: Varicella Zoster Vaccine (VZV) Administered" using "Varicella Zoster Vaccine (VZV) Administered (2.16.840.1.113883.3.464.1003.110.12.1040)")] ) ChickenPoxVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ChickenPoxVaccination.relevantDatetime, ChickenPoxVaccination.relevantPeriod ) ) during Interval[date from Patient.birthDatetime + 1 year, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ChickenPoxVaccination.relevantDatetime, ChickenPoxVaccination.relevantPeriod ) ) during Interval[date from Patient.birthDatetime + 1 year, date from Patient.birthDatetime + 2 years]
 ) )
       or exists ( [("Diagnosis: Varicella Zoster" using "Varicella Zoster (2.16.840.1.113883.3.464.1003.110.12.1039)")] VaricellaZoster
   where date from start of VaricellaZoster.prevalencePeriod during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
@@ -293,27 +233,19 @@ Numerator:
   and ( exists ( from
   ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
     union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) PneumococcalVaccination1,
   ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
     union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) PneumococcalVaccination2,
   ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
     union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) PneumococcalVaccination3,
   ( ( [("Immunization, Administered: Pneumococcal Conjugate Vaccine" using "Pneumococcal Conjugate Vaccine (2.16.840.1.113883.3.464.1003.196.12.1221)")]
     union [("Procedure, Performed: Pneumococcal Conjugate Vaccine Administered" using "Pneumococcal Conjugate Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1046)")] ) PneumococcalVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( PneumococcalVaccination.relevantDatetime, PneumococcalVaccination.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) PneumococcalVaccination4
   where PneumococcalVaccination2.relevantDatetime 1 day or more after day of PneumococcalVaccination1.relevantDatetime
     and PneumococcalVaccination3.relevantDatetime 1 day or more after day of PneumococcalVaccination2.relevantDatetime
@@ -321,68 +253,48 @@ Numerator:
   return PneumococcalVaccination1 ) )
   and ( exists ( ( ( [("Immunization, Administered: Hepatitis A Vaccine" using "Hepatitis A Vaccine (2.16.840.1.113883.3.464.1003.196.12.1215)")]
     union [("Procedure, Performed: Hepatitis A Vaccine Administered" using "Hepatitis A Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1041)")] ) HepatitisAVaccination
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( HepatitisAVaccination.relevantDatetime, HepatitisAVaccination.relevantPeriod ) ) during Interval[date from Patient.birthDatetime + 1 year, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( HepatitisAVaccination.relevantDatetime, HepatitisAVaccination.relevantPeriod ) ) during Interval[date from Patient.birthDatetime + 1 year, date from Patient.birthDatetime + 2 years]
 ) )
       or exists ( [("Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.1024)")] HepatitisADiagnosis
   where date from start of HepatitisADiagnosis.prevalencePeriod during day of Interval[date from Patient.birthDatetime, date from Patient.birthDatetime + 2 years] )
   )
   and ( exists ( ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
     union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
     union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllRotavirusDoses1
   without ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
     union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
     union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllRotavirusDoses2
     such that AllRotavirusDoses1.relevantDatetime less than 1 day before AllRotavirusDoses2.relevantDatetime RotavirusImmunization
     let HasThreeDose: Count(( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
     union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ))> 0
     where ( HasThreeDose
         and Count(distinct(( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
     union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
     union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllRotavirusDoses1
   without ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
     union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
     union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllRotavirusDoses2
     such that AllRotavirusDoses1.relevantDatetime less than 1 day before AllRotavirusDoses2.relevantDatetime RotavirusVaccinations
               return RotavirusVaccinations.relevantDatetime
@@ -392,27 +304,19 @@ Numerator:
       or ( HasThreeDose is false
           and Count(distinct(( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
     union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
     union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllRotavirusDoses1
   without ( ( [("Immunization, Administered: rotavirus, live, monovalent vaccine" using "rotavirus, live, monovalent vaccine (CVX Code 119)")]
     union [("Procedure, Performed: Rotavirus Vaccine (2 dose schedule) Administered" using "Rotavirus Vaccine (2 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1048)")] ) TwoDoseRotavirus
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( TwoDoseRotavirus.relevantDatetime, TwoDoseRotavirus.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 )
   union ( ( [("Immunization, Administered: Rotavirus Vaccine (3 dose schedule)" using "Rotavirus Vaccine (3 dose schedule) (2.16.840.1.113883.3.464.1003.196.12.1223)")]
     union [("Procedure, Performed: Rotavirus Vaccine (3 dose schedule) Administered" using "Rotavirus Vaccine (3 dose schedule) Administered (2.16.840.1.113883.3.464.1003.110.12.1047)")] ) ThreeDoseRotavirus
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( ThreeDoseRotavirus.relevantDatetime, ThreeDoseRotavirus.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 42 days, date from Patient.birthDatetime + 2 years]
 ) AllRotavirusDoses2
     such that AllRotavirusDoses1.relevantDatetime less than 1 day before AllRotavirusDoses2.relevantDatetime RotavirusVaccinations
                 return RotavirusVaccinations.relevantDatetime
@@ -427,29 +331,21 @@ Numerator:
   and ( exists ( from
   ( ( [("Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)")]
     union [("Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)")] ) InfluenzaAdministration
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
 ) FluVaccination1,
   ( ( [("Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)")]
     union [("Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)")] ) InfluenzaAdministration
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
 ) FluVaccination2
   where FluVaccination2.relevantDatetime 1 day or more after day of FluVaccination1.relevantDatetime
   return FluVaccination1 )
       or ( exists ( ( [("Immunization, Administered: Influenza Virus LAIV Immunization" using "Influenza Virus LAIV Immunization (2.16.840.1.113883.3.464.1003.110.12.1087)")]
     union [("Procedure, Performed: Influenza Virus LAIV Procedure" using "Influenza Virus LAIV Procedure (2.16.840.1.113883.3.464.1003.110.12.1088)")] ) InfluenzaAdministration
-    where Interval[date from start of period, date from end of period] ( if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 2 years, date from Patient.birthDatetime + 2 years]
+    where Global.ToDateInterval ( Global.NormalizeInterval ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) ) during day of Interval[date from Patient.birthDatetime + 2 years, date from Patient.birthDatetime + 2 years]
 )
   and exists ( ( [("Immunization, Administered: Influenza Vaccine" using "Influenza Vaccine (2.16.840.1.113883.3.464.1003.196.12.1218)")]
     union [("Procedure, Performed: Influenza Vaccine Administered" using "Influenza Vaccine Administered (2.16.840.1.113883.3.464.1003.110.12.1044)")] ) InfluenzaAdministration
-    where if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
+    where Global.NormalizeInterval ( InfluenzaAdministration.relevantDatetime, InfluenzaAdministration.relevantPeriod ) during day of Interval[date from Patient.birthDatetime + 180 days, date from Patient.birthDatetime + 2 years]
 ) )
   )
 =============================================================================================================================================================================

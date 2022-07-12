@@ -1,7 +1,7 @@
 =============================================================================================================================================================================
 Initial Population:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
 	    and First([("Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)")] DependenceDiagnosis
 	    with(( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
@@ -21,7 +21,7 @@ exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC
 =============================================================================================================================================================================
 Denominator:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
 	    and First([("Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)")] DependenceDiagnosis
 	    with(( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
@@ -50,9 +50,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	      where HospiceOrder.authorDatetime during Measurement Period
 	  )
 	  or exists ( [("Intervention, Performed: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospicePerformed
-	      where if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
+	      where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period
 	  )
 	  or exists ( ( [("Intervention, Performed: Alcohol and Drug Dependence Treatment" using "Alcohol and Drug Dependence Treatment (2.16.840.1.113883.3.464.1003.106.12.1005)")]
 	    union [("Intervention, Performed: Psych Visit - Psychotherapy" using "Psych Visit - Psychotherapy (2.16.840.1.113883.3.526.3.1496)")] ) Interventions
@@ -72,9 +70,7 @@ Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter 
 	        end of Measurement Period
 	    sort by start of prevalencePeriod
 	) FirstDiagnosis
-	      such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before start of FirstDiagnosis.prevalencePeriod
+	      such that Global.NormalizeInterval ( Interventions.relevantDatetime, Interventions.relevantPeriod ) starts 60 days or less before start of FirstDiagnosis.prevalencePeriod
 	)
 	  union ( ( ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
@@ -150,9 +146,7 @@ exists [("Intervention, Performed: Alcohol and Drug Dependence Treatment" using 
 	        end of Measurement Period
 	    sort by start of prevalencePeriod
 	) FirstDiagnosed
-	    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-	  else if period is not null then period 
-	  else null as Interval<DateTime> ( TreatmentInitiatedWithIntervention.relevantDatetime, TreatmentInitiatedWithIntervention.relevantPeriod ) starts 14 days or less after day of start of FirstDiagnosed.prevalencePeriod
+	    such that Global.NormalizeInterval ( TreatmentInitiatedWithIntervention.relevantDatetime, TreatmentInitiatedWithIntervention.relevantPeriod ) starts 14 days or less after day of start of FirstDiagnosed.prevalencePeriod
 	  or exists [("Medication, Order: Opiate Antagonists" using "Opiate Antagonists (2.16.840.1.113883.3.464.1003.198.12.1132)")] TreatmentInitiatedWithMedication
 	  with First([("Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)")] DependenceDiagnosis
 	    with(( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -180,7 +174,7 @@ None
 =============================================================================================================================================================================
 Population Criteria 1:
 exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	  where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
+	  where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 13
 	    and First([("Diagnosis: Alcohol and Drug Dependence" using "Alcohol and Drug Dependence (2.16.840.1.113883.3.464.1003.106.12.1001)")] DependenceDiagnosis
 	    with(( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
 	  union [("Encounter, Performed: Emergency Department Visit" using "Emergency Department Visit (2.16.840.1.113883.3.464.1003.101.12.1010)")]
@@ -200,10 +194,10 @@ exists [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC
 =============================================================================================================================================================================
 Stratification 1:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[13, 17]
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) in Interval[13, 17]
 	)
 =============================================================================================================================================================================
 Stratification 2:
 exists ( [("Patient Characteristic Birthdate: Birth date" using "Birth date (LOINC Code 21112-8)")] BirthDate
-	    where years between ToDate(BirthDateTime)and ToDate(AsOf) ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
+	    where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start of Measurement Period ) >= 18
 	)

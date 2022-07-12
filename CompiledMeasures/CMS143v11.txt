@@ -37,9 +37,7 @@ exists [("Diagnostic Study, Performed: Cup to Disc Ratio" using "Cup to Disc Rat
     and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
   with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterWithPOAG
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( CupToDiscExamPerformed.relevantDatetime, CupToDiscExamPerformed.relevantPeriod ) during EncounterWithPOAG.relevantPeriod
+    such that Global.NormalizeInterval ( CupToDiscExamPerformed.relevantDatetime, CupToDiscExamPerformed.relevantPeriod ) during EncounterWithPOAG.relevantPeriod
   where CupToDiscExamPerformed.result is not null
   and exists [("Diagnostic Study, Performed: Optic Disc Exam for Structural Abnormalities" using "Optic Disc Exam for Structural Abnormalities (2.16.840.1.113883.3.526.3.1334)")] OpticDiscExamPerformed
   with ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)")]
@@ -51,9 +49,7 @@ exists [("Diagnostic Study, Performed: Cup to Disc Ratio" using "Cup to Disc Rat
     and QualifyingEncounter.class !~ (code "virtual" ("ActCode Code (VR)")) ValidQualifyingEncounter
   with [("Diagnosis: Primary Open-Angle Glaucoma" using "Primary Open-Angle Glaucoma (2.16.840.1.113883.3.526.3.326)")] PrimaryOpenAngleGlaucoma
     such that PrimaryOpenAngleGlaucoma.prevalencePeriod overlaps ValidQualifyingEncounter.relevantPeriod EncounterWithPOAG
-    such that if pointInTime is not null then Interval[pointInTime, pointInTime]
-  else if period is not null then period 
-  else null as Interval<DateTime> ( OpticDiscExamPerformed.relevantDatetime, OpticDiscExamPerformed.relevantPeriod ) during EncounterWithPOAG.relevantPeriod
+    such that Global.NormalizeInterval ( OpticDiscExamPerformed.relevantDatetime, OpticDiscExamPerformed.relevantPeriod ) during EncounterWithPOAG.relevantPeriod
   where OpticDiscExamPerformed.result is not null
 =============================================================================================================================================================================
 Numerator Exclusions:
