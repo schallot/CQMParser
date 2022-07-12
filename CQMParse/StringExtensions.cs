@@ -18,6 +18,30 @@ namespace CQMParse
             return s;
         }
 
+        public static string RemoveComments(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str)) return str;
+            var commentStart = str.IndexOf("/*");
+            if (commentStart < 0) return str;
+            var commentEnd = str.Substring(commentStart).IndexOf("*/");
+
+            while(commentStart >= 0 && commentEnd > commentStart)
+            {
+                str = str.Substring(0, commentStart) + str.Substring(commentEnd + 2);
+                commentStart = str.IndexOf("/*");
+                if (commentStart >= 0)
+                {
+                    commentEnd = str.Substring(commentStart).IndexOf("*/");
+                }
+                else
+                {
+                    commentEnd = -1;
+                }
+            }
+
+            return str;            
+        }
+
         public static IEnumerable<(string segment, bool isQuoted)> BreakIntoQuotedAndUnquoted(this string s, IEnumerable<CodeNode> allCodes)
         {
             s = FormatFunctionCalls(s, allCodes);

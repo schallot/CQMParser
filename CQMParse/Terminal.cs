@@ -163,8 +163,8 @@ namespace CQMParse
             }
             
             var dataCriteriaNodes = DataCriteriaTerminal.GetAllLineLineItemsInDataCriteriaSection(root.OwnerDocument);
-            // Nodes that start with dollar signs are structured more like regular code nodes, so we'll deal with them elsewhere
-            foreach (var node in dataCriteriaNodes.Where(x=>!x.InnerText.Trim().StartsWith("$")))
+            // Nodes that start with dollar signs are structured more like regular code nodes, so we'll deal with them elsewhere           
+            foreach (var node in dataCriteriaNodes.Where(x=>!x.InnerText.Trim().StartsWith("$") && !x.InnerText.Trim().Equals("None", StringComparison.InvariantCultureIgnoreCase)))
             {
                 criteria.Add(new DataCriteriaTerminal(node, terms));
             }

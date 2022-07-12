@@ -125,42 +125,77 @@ namespace CQMParse
         {
             if (code.IsPopulated) return;
 
-            var segTexts = code.SegmentText.BreakIntoQuotedAndUnquoted(allCodes);
+            var segTexts = code.SegmentText.RemoveComments().BreakIntoQuotedAndUnquoted(allCodes);
 
             var segments = new List<ISegment>();
 
+            var prev = ("", false);
             foreach(var s in segTexts)
-            {
+            {                
                 if (!s.isQuoted)
                 {
                     segments.Add(new PlainTextSegment(s.segment));
                 }
                 else
                 {
-                    var terminal = terminals.FirstOrDefault(x => x.Name.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase));
+                    var terminal = terminals.FirstOrDefault(x => x.Name.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase));                    
                     if(terminal != null)
                     {
                         segments.Add(terminal);
                     }
                     else
                     {
-                        var c = allCodes.FirstOrDefault(x => x.Name.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase));
-                        if(c == null)
-                        {
-                            c = allCodes.FirstOrDefault(x => x.Name.Equals($"TJC.{s.segment}", StringComparison.InvariantCultureIgnoreCase));
-                        }
+                        var prevTxt = prev.Item1;
+                        
 
-                        if(c == null)
+                        var c = allCodes.FirstOrDefault(x => x.Name.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase));
+
+                        if (c == null && !string.IsNullOrWhiteSpace(prevTxt) && prevTxt.Trim().EndsWith("."))
                         {
-                            // TODO: Measurement Period is defined up in the top table.  Might want to parse this out.  For now just treating as plain text.
-                            var skippableNames = new[] { "Measurement Period", "LengthInDays", "HospitalizationWithObservation", "Patient Characteristic Birthdate" };
-                            if(skippableNames.Any(y=>y.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase)))
+                            var prefix = prevTxt.Split(' ', '\r', '\n', '\t').Last();
+                            c = allCodes.FirstOrDefault(x => x.Name.Equals($"{prefix}{s.segment}", StringComparison.InvariantCultureIgnoreCase));
+                        }
+                        if (c == null)
+                        {
+                            // Sometimes they leave off a prefix.  Grr.
+                            c = allCodes.FirstOrDefault(x => x.Name.EndsWith($".{s.segment}", StringComparison.InvariantCultureIgnoreCase));
+                        }
+                        if (c == null)
+                        {
+
+                            // Check to see if there's a plurality issue.  For instance, hospital setting/hospital settings in CMS111v10
+                            if (!s.segment.EndsWith("s"))
                             {
-                                segments.Add(new PlainTextSegment(s.segment));
+                                terminal = terminals.FirstOrDefault(x => x.Name.Equals(s.segment + "s", StringComparison.InvariantCultureIgnoreCase));
+                            }
+                            if (terminal != null)
+                            {
+                                segments.Add(terminal);
                             }
                             else
                             {
-                                throw new Exception($"Couldn't find code named [{s.segment}]");
+                                // TODO: Measurement Period is defined up in the top table.  Might want to parse this out.  For now just treating as plain text.
+                                var skippableNames = new[] { "Measurement Period", "LengthInDays", "HospitalizationWithObservation",
+                                    "Patient Characteristic Birthdate", "LowRiskDatetime", "Laboratory Test, Performed", "InitialADHDMedication", 
+                                    "Medication", "Patient Characteristic Expired", "AgeInYearsAt", "Procedure, Order", "Medication, Active",
+                                    "Date"};
+                                if (skippableNames.Any(y => y.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase)))
+                                {
+                                    segments.Add(new PlainTextSegment(s.segment));
+                                }
+                                else
+                                {
+                                    var tempFile = Path.Combine(Path.GetTempFileName() + ".html");
+                                    File.WriteAllText(tempFile, code.CodeHtmlNode.OwnerDocument.ParsedText);
+
+                                    using var fileopener = new System.Diagnostics.Process();
+
+                                    fileopener.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                                    fileopener.StartInfo.Arguments = "\"" + tempFile + "\"";
+                                    fileopener.Start();
+
+                                    throw new Exception($"Couldn't find code named [{s.segment}]");
+                                }
                             }
                         }
                         else
@@ -173,6 +208,7 @@ namespace CQMParse
                         }
                     }
                 }
+                prev = s;
             }
             code._subSegments = segments;
             code.IsPopulated = true;

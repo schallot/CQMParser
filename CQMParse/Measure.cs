@@ -11,13 +11,14 @@ namespace CQMParse
     public class Measure
     {
         public Uri SourceLocation { get; }
+        public string SourceLocationAbsolute => SourceLocation?.AbsolutePath;
         public CodeNode InitalPopulation { get; }
         public CodeNode Denominator { get; }
         public CodeNode DenominatorExclusions { get; }
         public CodeNode Numerator { get; }
         public CodeNode NumeratorExclusions { get; }
         public CodeNode DenominatorExceptions { get; }
-        public CodeNode Stratification { get; }
+        public CodeNode[] OtherPopulationCriteria { get; }
 
         (int measureNumber, string versionString, int versionNumber) MeasureId { get; }
         public int MeasureNumber { get; }
@@ -97,25 +98,32 @@ namespace CQMParse
             Numerator = codeNodes.First(x => x.Name.Equals("Numerator"));
             NumeratorExclusions = codeNodes.First(x => x.Name.Equals("Numerator Exclusions"));
             DenominatorExceptions = codeNodes.First(x => x.Name.Equals("Denominator Exceptions"));
-            Stratification = codeNodes.First(x => x.Name.Equals("Stratification"));
+
+            var mainPopulationCriteria = new[] { InitalPopulation, Denominator, DenominatorExclusions, Numerator, NumeratorExclusions, DenominatorExceptions };
+
+            var allNodes = doc.DocumentNode.Descendants();
+            var populationCriteriaNodes = InitalPopulation.CodeHtmlNode.GetMostRecentCommonAncestor(Denominator.CodeHtmlNode).Descendants().ToArray();
+            OtherPopulationCriteria = codeNodes.Where(x => populationCriteriaNodes.Contains(x.CodeHtmlNode) && !mainPopulationCriteria.Contains(x)).ToArray();            
         }
 
         public string GetSummary()
         {
-            var roots = new[] { InitalPopulation, Denominator, DenominatorExclusions, Numerator, NumeratorExclusions, DenominatorExceptions, Stratification };
+            var mainPopulationCritieria = new[] { InitalPopulation, Denominator, DenominatorExclusions, Numerator, NumeratorExclusions, DenominatorExceptions};
 
             var sb = new StringBuilder();
-            foreach (var r in roots)
+            foreach (var r in mainPopulationCritieria.Union(OtherPopulationCriteria))
             {
                 sb.AppendLine("=============================================================================================================================================================================");
                 sb.AppendLine($"{r.Name}:");
                 sb.AppendLine(r.GetFormatted(0, "\t"));
             }
+
             return sb.ToString();
         }
         
         public void WriteSummary(string outputDirectory)
         {
+            Console.WriteLine($"Processing measure {SourceLocation.LocalPath}");
             var s = GetSummary();
             var path = Path.Combine(outputDirectory, $"CMS{MeasureNumber}v{VersionNumber}.txt");
             if (File.Exists(path))

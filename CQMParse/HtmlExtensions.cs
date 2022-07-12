@@ -9,6 +9,20 @@ namespace CQMParse
 {
     public static class HtmlExtensions
     {
+        public static HtmlNode GetMostRecentCommonAncestor(this HtmlNode node1, HtmlNode node2)
+        {
+            if (node1 == node2) return node1;
+
+            var ancestors1 = node1.AncestorsAndSelf();
+            var ancestors2 = node2.AncestorsAndSelf();
+
+            var common = ancestors1.Intersect(ancestors2).ToArray();
+
+            var mostRecent = common.OrderByDescending(y => y.StreamPosition).First();
+
+            return mostRecent;            
+        }
+
         public static HtmlNode GetNextElementWithClass(this HtmlNode node,string className)
         {
             var all = node.OwnerDocument.DocumentNode.DescendantsAndSelf().ToList();
