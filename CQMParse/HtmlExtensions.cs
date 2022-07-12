@@ -19,7 +19,7 @@ namespace CQMParse
 
         public static HtmlNode GetNextElementWithClass(string className, HtmlNode[] allDocumentNodes, long nodeIndex)
         {
-            for(long i=nodeIndex; i<allDocumentNodes.Length; i++)
+            for(long i=nodeIndex + 1; i<allDocumentNodes.Length; i++)
             {
                 var n = allDocumentNodes[i];
                 if (n != null && n.HasClass(className)) return n;
@@ -37,7 +37,7 @@ namespace CQMParse
 
         public static HtmlNode GetNextElementWithName(string name, HtmlNode[] allDocumentNodes, long nodeIndex)
         {
-            for (long i = nodeIndex; i < allDocumentNodes.Length; i++)
+            for (long i = nodeIndex + 1; i < allDocumentNodes.Length; i++)
             {
                 var n = allDocumentNodes[i];
                 if (n != null && n.HasName(name)) return n;

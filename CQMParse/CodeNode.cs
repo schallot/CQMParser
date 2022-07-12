@@ -25,19 +25,33 @@ namespace CQMParse
                     }
                 }
             }
+
+            var dataCriteriaCodeNodes = DataCriteriaTerminal.GetAllLineLineItemsInDataCriteriaSection(root.OwnerDocument);
+            // Nodes that start with dollar signs are structured more like regular code nodes, so we'll deal with them elsewhere
+            foreach (var node in dataCriteriaCodeNodes.Where(x => x.InnerText.Trim().StartsWith("$")))
+            {
+                var name = node.InnerText.Split('=', ' ', '\t').First(x=>!string.IsNullOrWhiteSpace(x));
+                result.Add(new CodeNode(name, node));
+            }
+
             return result;
         }
 
-        private CodeNode(HtmlNode htmlNode, HtmlNode codeNode)
+        private CodeNode(string codeName, HtmlNode codeNode)
         {
-            NameHtmlNode = htmlNode;
+            RawName = codeName;
             CodeHtmlNode = codeNode;
-            Name = System.Web.HttpUtility.HtmlDecode(htmlNode.InnerText).Trim();
+            Name = System.Web.HttpUtility.HtmlDecode(codeName).Trim();
             if (Name.Contains("("))
             {
                 Name = Name.Substring(0, Name.IndexOf('('));
             }
             SegmentText = System.Web.HttpUtility.HtmlDecode(codeNode.InnerText).Trim();
+        }
+
+        private CodeNode(HtmlNode nameNode, HtmlNode codeNode) : this(nameNode.InnerText, codeNode)
+        {
+
         }
 
         const string NameNodeClass = "list-header";
@@ -46,7 +60,7 @@ namespace CQMParse
         public bool IsFunction { 
             get
             {
-                var txt = NameHtmlNode.InnerText;
+                var txt = RawName;
                 if (txt.Contains("(") && txt.Contains("."))
                 {
                     return true;
@@ -60,8 +74,7 @@ namespace CQMParse
             get
             {
                 if (!IsFunction) return "";
-                var txt = NameHtmlNode.InnerText;
-                return NameHtmlNode.InnerText.Substring(0, txt.IndexOf(".")).Trim();
+                return RawName.Substring(0, RawName.IndexOf(".")).Trim();
             }
         }
 
@@ -70,7 +83,7 @@ namespace CQMParse
             get
             {
                 if (!IsFunction) return "";
-                var txt = NameHtmlNode.InnerText.Trim();
+                var txt = RawName.Trim();
                 txt = txt.Substring($"{FunctionNameSpace}.".Length).Trim();
                 txt = txt.Split('(').First();
                 return txt;
@@ -83,7 +96,8 @@ namespace CQMParse
         public string Name { get; }
         public string SegmentText { get; }
 
-        public HtmlNode NameHtmlNode { get; }
+        //public HtmlNode NameHtmlNode { get; }
+        public string RawName { get; }
         public HtmlNode CodeHtmlNode { get; }
 
         public override string ToString()
@@ -139,15 +153,8 @@ namespace CQMParse
                         if(c == null)
                         {
                             // TODO: Measurement Period is defined up in the top table.  Might want to parse this out.  For now just treating as plain text.
-                            if (s.segment.Trim().Equals("Measurement Period", StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                segments.Add(new PlainTextSegment(s.segment));
-                            }
-                            else if (s.segment.Trim().Equals("LengthInDays", StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                segments.Add(new PlainTextSegment(s.segment));
-                            }
-                            else if (s.segment.Trim().Equals("HospitalizationWithObservation", StringComparison.InvariantCultureIgnoreCase))
+                            var skippableNames = new[] { "Measurement Period", "LengthInDays", "HospitalizationWithObservation", "Patient Characteristic Birthdate" };
+                            if(skippableNames.Any(y=>y.Equals(s.segment, StringComparison.InvariantCultureIgnoreCase)))
                             {
                                 segments.Add(new PlainTextSegment(s.segment));
                             }

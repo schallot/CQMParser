@@ -1,0 +1,2631 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Use of High-Risk Medications in Older Adults 10.2.000</title>
+<style type="text/css">
+    body {
+        color: rgb(0,0,0);
+        background-color: rgb(255, 255, 255);
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 11px;
+        overflow-y: auto;
+    }
+    h1 {
+        font-size: 12pt;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 11pt;
+        font-weight: bold;
+    }
+
+    h3 {
+        font-size: 10pt;
+        font-weight: bold;
+    }
+
+    h4 {
+        font-size: 8pt;
+        font-weight: bold;
+    }
+
+    tr {
+        background-color: #ccc;
+    }
+
+    td {
+        padding: 0.1cm 0.2cm;
+        vertical-align: top;
+    }
+
+    a {
+        /*color: rgb(0, 0, 255);
+      background-color: rgb(255,255,255);*/
+    }
+
+    table {
+        line-height: 10pt;
+        width: 80%;
+        font-size: 11px;
+    }
+
+    /*div {
+    width: 80%;
+}*/
+
+    .list-unstyled {
+        list-style-type: none;
+    }
+
+    .list-unstyled li {
+        padding-top: 5px;
+    }
+
+    .list-header {
+        font-size: 12px;
+        color: rgb(0, 0, 238);
+    }
+
+    .list-header:hover {
+        text-decoration: underline;
+    }
+
+    .code {
+        font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif;
+        color: black;
+        font-size: 12px;
+    }
+
+    .p-l-10 {
+        padding-left: 10px;
+    }
+
+    .section {
+        font-size: 10pt;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-right: 0.5em;
+        font-weight: 700;
+    }
+
+    .cql-keyword-new {
+        color: rgb(0, 0, 255);
+        font-weight: 700;
+    }
+
+    .cql-class,
+    .cql-object {
+        color: rgb(25, 127, 157);
+    }
+
+    .cql_keyword {
+        color: rgb(127, 0, 85);
+        font-weight: 700;
+    }
+
+    .cql_function {
+        color: rgb(127, 0, 85);
+        font-weight: 700;
+    }
+
+    .cql_attribute {
+        color: rgb(127, 0, 85);
+        font-weight: 700;
+    }
+
+    .cql_string {
+        color: rgb(42, 0, 255);
+    }
+
+    .cql_identifier .cql_function {
+        color: rgb(60, 76, 114);
+    }
+
+    hr.style13 {
+        height: 10px;
+        border: 0;
+        box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    }
+
+    .treeview:hover input~label:before,
+    .treeview.hover input~label:before {
+        opacity: 1.0;
+        -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -ms-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+    }
+
+    .treeview ul {
+        -webkit-transition-duration: 1s;
+        -moz-transition-duration: 1s;
+        -ms-transition-duration: 1s;
+        -o-transition-duration: 1s;
+        transition-duration: 1s;
+        -webkit-transition-timing-function: ease;
+        -moz-transition-timing-function: ease;
+        -ms-transition-timing-function: ease;
+        -o-transition-timing-function: ease;
+        transition-timing-function: ease;
+        list-style: none;
+        padding-left: 1em;
+    }
+
+    .treeview ul li span {
+        -webkit-transition-property: color;
+        -moz-transition-property: color;
+        -ms-transition-property: color;
+        -o-transition-property: color;
+        transition-property: color;
+        -webkit-transition-duration: 1s;
+        -moz-transition-duration: 1s;
+        -ms-transition-duration: 1s;
+        -o-transition-duration: 1s;
+        transition-duration: 1s;
+
+    }
+
+    .treeview input {
+        display: none;
+    }
+
+    .treeview input[type=checkbox]:checked~ul {
+        display: none;
+    }
+
+    .treeview input[type=checkbox]~ul {
+        margin-right: 20%;
+        opacity: 1;
+    }
+
+    .treeview input~label {
+        cursor: pointer;
+    }
+
+    .treeview input~label:before {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        margin-left: -1em;
+        margin-top: 0.25em;
+        border-width: 4px;
+        border-style: solid;
+        border-top-color: transparent;
+        border-right-color: rgb(0, 0, 238);
+        border-bottom-color: rgb(0, 0, 238);
+        border-left-color: transparent;
+        opacity: 0.0;
+        -webkit-transition-property: opacity;
+        -moz-transition-property: opacity;
+        -ms-transition-property: opacity;
+        -o-transition-property: opacity;
+        transition-property: opacity;
+        -webkit-transition-duration: 1s;
+        -moz-transition-duration: 1s;
+        -ms-transition-duration: 1s;
+        -o-transition-duration: 1s;
+        transition-duration: 1s;
+    }
+
+    .treeview input:checked~label:before {
+        margin-left: -0.8em;
+        border-width: 5px;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: rgb(0, 0, 238);
+    }
+
+    .h1center {
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: center;
+        width: 80%;
+    }
+
+    .header_table {
+        border: 1pt inset rgb(0, 0, 0);
+    }
+
+    .narr_table {
+        width: 100%;
+    }
+
+    .narr_tr {
+        background-color: rgb(225, 225, 225);
+    }
+
+    pre {
+        /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+        white-space: pre-wrap;
+        /* css-3 */
+        white-space: -moz-pre-wrap !important;
+        /* Mozilla, since 1999 */
+        white-space: -pre-wrap;
+        /* Opera 4-6 */
+        white-space: -o-pre-wrap;
+        /* Opera 7 */
+        word-wrap: break-word;
+        /* Internet Explorer 5.5+ */
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 11px;
+        text-align: left;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+    }
+
+    .narr_th {
+        background-color: rgb(201, 201, 201);
+    }
+
+    .td_label {
+        font-weight: bold;
+        color: white;
+    }
+
+    .hll {
+        background-color: #ffffcc
+    }
+
+    .c {
+        color: #408080;
+        font-style: italic
+    }
+
+    /* Comment */
+    .err {
+        border: 1px solid #FF0000
+    }
+
+    /* Error */
+    .k {
+        color: #008000;
+        font-weight: bold
+    }
+
+    /* Keyword */
+    .o {
+        color: #666666
+    }
+
+    /* Operator */
+    .cm {
+        color: #408080;
+        font-style: italic
+    }
+
+    /* Comment.Multiline */
+    .cp {
+        color: #BC7A00
+    }
+
+    /* Comment.Preproc */
+    .c1 {
+        color: #408080;
+        font-style: italic
+    }
+
+    /* Comment.Single */
+    .cs {
+        color: #408080;
+        font-style: italic
+    }
+
+    /* Comment.Special */
+    .gd {
+        color: #A00000
+    }
+
+    /* Generic.Deleted */
+    .ge {
+        font-style: italic
+    }
+
+    /* Generic.Emph */
+    .gr {
+        color: #FF0000
+    }
+
+    /* Generic.Error */
+    .gh {
+        color: #000080;
+        font-weight: bold
+    }
+
+    /* Generic.Heading */
+    .gi {
+        color: #00A000
+    }
+
+    /* Generic.Inserted */
+    .go {
+        color: #888888
+    }
+
+    /* Generic.Output */
+    .gp {
+        color: #000080;
+        font-weight: bold
+    }
+
+    /* Generic.Prompt */
+    .gs {
+        font-weight: bold
+    }
+
+    /* Generic.Strong */
+    .gu {
+        color: #800080;
+        font-weight: bold
+    }
+
+    /* Generic.Subheading */
+    .gt {
+        color: #0044DD
+    }
+
+    /* Generic.Traceback */
+    .kc {
+        color: #008000;
+        font-weight: bold
+    }
+
+    /* Keyword.Constant */
+    .kd {
+        color: #008000;
+        font-weight: bold
+    }
+
+    /* Keyword.Declaration */
+    .kn {
+        color: #008000;
+        font-weight: bold
+    }
+
+    /* Keyword.Namespace */
+    .kp {
+        color: #008000
+    }
+
+    /* Keyword.Pseudo */
+    .kr {
+        color: #008000;
+        font-weight: bold
+    }
+
+    /* Keyword.Reserved */
+    .kt {
+        color: #B00040
+    }
+
+    /* Keyword.Type */
+    .m {
+        color: #666666
+    }
+
+    /* Literal.Number */
+    .s {
+        color: #BA2121
+    }
+
+    /* Literal.String */
+    .na {
+        color: #7D9029
+    }
+
+    /* Name.Attribute */
+    .nb {
+        color: #008000
+    }
+
+    /* Name.Builtin */
+    .nc {
+        color: #0000FF;
+        font-weight: bold
+    }
+
+    /* Name.Class */
+    .no {
+        color: #880000
+    }
+
+    /* Name.Constant */
+    .nd {
+        color: #AA22FF
+    }
+
+    /* Name.Decorator */
+    .ni {
+        color: #999999;
+        font-weight: bold
+    }
+
+    /* Name.Entity */
+    .ne {
+        color: #D2413A;
+        font-weight: bold
+    }
+
+    /* Name.Exception */
+    .nf {
+        color: #0000FF
+    }
+
+    /* Name.Function */
+    .nl {
+        color: #A0A000
+    }
+
+    /* Name.Label */
+    .nn {
+        color: #0000FF;
+        font-weight: bold
+    }
+
+    /* Name.Namespace */
+    .nt {
+        color: #008000;
+        font-weight: bold
+    }
+
+    /* Name.Tag */
+    .nv {
+        color: #19177C
+    }
+
+    /* Name.Variable */
+    .ow {
+        color: #AA22FF;
+        font-weight: bold
+    }
+
+    /* Operator.Word */
+    .w {
+        color: #bbbbbb
+    }
+
+    /* Text.Whitespace */
+    .mf {
+        color: #666666
+    }
+
+    /* Literal.Number.Float */
+    .mh {
+        color: #666666
+    }
+
+    /* Literal.Number.Hex */
+    .mi {
+        color: #666666
+    }
+
+    /* Literal.Number.Integer */
+    .mo {
+        color: #666666
+    }
+
+    /* Literal.Number.Oct */
+    .sb {
+        color: #BA2121
+    }
+
+    /* Literal.String.Backtick */
+    .sc {
+        color: #BA2121
+    }
+
+    /* Literal.String.Char */
+    .sd {
+        color: #BA2121;
+        font-style: italic
+    }
+
+    /* Literal.String.Doc */
+    .s2 {
+        color: #BA2121
+    }
+
+    /* Literal.String.Double */
+    .se {
+        color: #BB6622;
+        font-weight: bold
+    }
+
+    /* Literal.String.Escape */
+    .sh {
+        color: #BA2121
+    }
+
+    /* Literal.String.Heredoc */
+    .si {
+        color: #BB6688;
+        font-weight: bold
+    }
+
+    /* Literal.String.Interpol */
+    .sx {
+        color: #008000
+    }
+
+    /* Literal.String.Other */
+    .sr {
+        color: #BB6688
+    }
+
+    /* Literal.String.Regex */
+    .s1 {
+        color: #BA2121
+    }
+
+    /* Literal.String.Single */
+    .ss {
+        color: #19177C
+    }
+
+    /* Literal.String.Symbol */
+    .bp {
+        color: #008000
+    }
+
+    /* Name.Builtin.Pseudo */
+    .vc {
+        color: #19177C
+    }
+
+    /* Name.Variable.Class */
+    .vg {
+        color: #19177C
+    }
+
+    /* Name.Variable.Global */
+    .vi {
+        color: #19177C
+    }
+
+    /* Name.Variable.Instance */
+    .il {
+    color: #666666
+    }
+
+    /* Literal.Number.Integer.Long */
+
+    #nn-text {
+        text-align: center;
+        text-align: center;
+        color: lightgrey;
+        font-size: 40px;
+    }
+
+    .cql-definition-body {
+        width: 950px;
+        display: block;
+        word-wrap: break-word;
+    }
+
+    li {
+        padding-left: 15px;
+    }
+    .row-header {
+        background-color:#656565;
+        width:20%;
+        padding: 0.1cm 0.2cm;
+        text-align: left;
+    }
+</style>    </head>
+    <body>
+<table class="header_table" role="presentation">
+    <tbody>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">eCQM Title</span></th>
+            <td style="width:80%" colspan="3"><h1 style="font-size:10px">Use of High-Risk Medications in Older Adults</h1></td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">eCQM Identifier (Measure Authoring Tool)</span></th>
+            <td style="width:30%">156</td>
+
+            <th scope="row" class="row-header"><span class="td_label">eCQM Version Number</span></th>
+            <td style="width:30%">10.2.000</td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">NQF Number</span></th>
+            <td style="width:30%">Not Applicable</td>
+
+            <th scope="row" class="row-header"><span class="td_label">GUID</span></th>
+            <td style="width:30%">a3837ff8-1abc-4ba9-800e-fd4e7953adbd</td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Measurement Period</span></th>
+            <td style="width:80%" colspan="3">January 1, 20XX through December 31, 20XX</td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Measure Steward</span></th>
+            <td style="width:80%" colspan="3">National Committee for Quality Assurance</td>
+        </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Measure Developer</span></th>
+                    <td style="width:80%" colspan="3">National Committee for Quality Assurance</td>
+                </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Endorsed By</span></th>
+            <td style="width:80%" colspan="3">None</td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Description</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>Percentage of patients 65 years of age and older who were ordered at least two high-risk medications from the same drug class. Three rates are reported. 
+1. Percentage of patients 65 years of age and older who were ordered at least two high-risk medications from the same drug class.
+2. Percentage of patients 65 years of age and older who were ordered at least two high-risk medications from the same drug class, except for appropriate diagnoses.
+3. Total rate (the sum of the two numerators divided by the denominator, deduplicating for patients in both numerators).</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Copyright</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>This Physician Performance Measure (Measure) and related data specifications are owned and stewarded by the Centers for Medicare &amp; Medicaid Services (CMS). CMS contracted (Contract HHSM-500-2011-00079C) with the National Committee for Quality Assurance (NCQA) to develop this electronic measure. NCQA is not responsible for any use of the Measure. NCQA makes no representations, warranties, or endorsement about the quality of any organization or physician that uses or reports performance measures and NCQA has no liability to anyone who relies on such measures or specifications.
+
+Limited proprietary coding is contained in the Measure specifications for user convenience. Users of proprietary code sets should obtain all necessary licenses from the owners of the code sets. NCQA disclaims all liability for use or accuracy of any third party codes contained in the specifications.
+
+CPT(R) contained in the Measure specifications is copyright 2004-2020 American Medical Association. LOINC(R) copyright 2004-2020 Regenstrief Institute, Inc. This material contains SNOMED Clinical Terms(R) (SNOMED CT[R]) copyright 2004-2020 International Health Terminology Standards Development Organisation. ICD-10 copyright 2020 World Health Organization. All Rights Reserved.</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Disclaimer</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>The performance Measure is not a clinical guideline and does not establish a standard of medical care, and has not been tested for all potential applications. THE MEASURE AND SPECIFICATIONS ARE PROVIDED &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND.
+ 
+Due to technical limitations, registered trademarks are indicated by (R) or [R] and unregistered trademarks are indicated by (TM) or [TM].</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Measure Scoring</span></th>
+            <td style="width:80%" colspan="3">Proportion</td>
+        </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Measure Type</span></th>
+                    <td style="width:80%" colspan="3">Process</td>
+                </tr>
+            <tr>
+                <th scope="row" class="row-header"><span class="td_label">Stratification</span></th>
+                <td style="width:80%" colspan="3">
+                    <div style="width:660px;">
+                        <pre>None</pre>
+                    </div>
+                </td>
+            </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Risk Adjustment</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>None</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Rate Aggregation</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>None</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Rationale</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>Certain medications (MacKinnon &amp; Hepler, 2003) are associated with increased risk of harm from drug side-effects and drug toxicity and pose a concern for patient safety. There is clinical consensus that these drugs pose increased risks in older adults (Kaufman, Brodin, &amp; Sarafian, 2005). Potentially inappropriate medication use in older adults has been connected to significantly longer hospital stay lengths and increased hospitalization costs (Hagstrom et al., 2015) as well as increased risk of death (Lau et al. 2004). Use of specific high-risk medications such as hypnotics, including benzodiazepine receptor agonists, and nonsteroidal anti-inflammatory drugs (NSAIDS) can result in increased risk of delirium, falls, fractures, gastrointestinal bleeding and acute kidney injury (Merel et al., 2017). Long-term use of benzodiazepines in older adults has been associated with increased risk of dementia (Zhong et al., 2015; Takada et al., 2016). Additionally, the use of antipsychotics can lead to increased risk of stroke and greater cognitive decline in older adults with dementia (Tampi et al., 2016).
+
+Older adults receiving inappropriate medications are more likely to report poorer health status at follow-up, compared to those who receive appropriate medications (Fu, Liu, &amp; Christensen, 2004). A study of the prevalence of potentially inappropriate medication use in older adults found that 40 percent of individuals 65 and older filled at least one prescription for a potentially inappropriate medication and 13 percent filled two or more (Fick et al., 2008). While some adverse drug events are unavoidable, studies estimate that between 30 and 80 percent of adverse drug events in older adults are preventable (MacKinnon &amp; Hepler, 2003).
+
+Reducing the number of inappropriate prescriptions can lead to improved patient safety and significant cost savings. Conservative estimates of extra costs due to potentially inappropriate medications in older adults average $7.2 billion a year (Fu et al., 2007 ). Medication use by older adults will likely increase further as the U.S. population ages, new drugs are developed, and new therapeutic and preventive uses for medications are discovered (Rothberg et al., 2008). The annual direct costs of preventable adverse drug events (ADEs) in the Medicare population have been estimated to exceed $800 million (Institute of Medicine, 2007). By the year 2030, nearly one in five U.S. residents is expected to be aged 65 years or older; this age group is projected to more than double in number from 38.7 million in 2008 to more than 88.5 million in 2050.  Likewise, the population aged 85 years or older is expected to increase almost four-fold, from 5.4 million to 19 million between 2008 and 2050. As the older adult population continues to grow, the number of older adults who present with multiple medical conditions for which several medications are prescribed will continue to increase, resulting in polypharmacy concerns (Gray &amp; Gardner, 2009).</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Clinical Recommendation Statement</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>The measure is based on recommendations from the American Geriatrics Society Beers Criteria[R] for Potentially Inappropriate Medication Use in Older Adults (2019 Update). The criteria were developed through key clinical expert consensus processes by Beers in 1997, Zhan in 2001 and an updated process by Fick et al. in 2003, 2012, 2015, and 2019. The Beers Criteria identifies lists of drugs that are potentially inappropriate for all older adults and drugs that are potentially inappropriate in older adults based on various high-risk factors such as dosage, days supply and underlying diseases or conditions. 
+NCQA&#39;s Geriatric Measurement Advisory Panel recommended a subset of drugs that should be used with caution in older adults for inclusion in the measure based upon the recommendations in the Beers Criteria.</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Improvement Notation</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>Lower score indicates better quality</pre>
+                </div>
+            </td>
+        </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'American Geriatrics Society 2015 Beers Criteria Update Expert Panel. (2015). American Geriatrics Society 2015 updated Beers criteria for potentially inappropriate medication use in older adults. Journal of the American Geriatrics Society, 63(11), 2227-2246.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Beers, M. H. (1997). Explicit criteria for determining potentially inappropriate medication use by the elderly. Archives of Internal Medicine, 157, 1531-1536.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Campanelli, C. M. (2012). American Geriatrics Society updated Beers criteria for potentially inappropriate medication use in older adults: The American Geriatrics Society 2012 Beers Criteria Update Expert Panel. Journal of the American Geriatrics Society, 60(4), 616.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Fick, D. M., Cooper J. W., Wade, W. E., et al. (2003). Updating the Beers criteria for potentially inappropriate medication use in older adults. Archives of Internal Medicine, 163(22), 2716-2724.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Fick, D. M., Mion, L. C., Beers, M. H., et al. (2008). Health outcomes associated with potentially inappropriate medication use in older adults. Research in Nursing &amp; Health, 31(1), 42-51.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Fu, A. Z., Liu, G. G., &amp; Christensen, D. B. (2004). Inappropriate medication use and health outcomes in the elderly. Journal of the American Geriatrics Society, 52(11), 1934-1939.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Gray, C. L., &amp; Gardner, C. (2009). Adverse drug events in the elderly: An ongoing problem. Journal of Managed Care &amp; Specialty Pharmacy, 15(7), 568-571.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Hagstrom, K., Nailor, M., Lindberg, M., Hobbs, L., &amp; Sobieraj, D. M. 2015. Association Between Potentially Inappropriate Medication Use in Elderly Adults and Hospital-Related Outcomes. Journal of the American Geriatrics Society, 63(1), 185-186.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Institute of Medicine, Committee on Identifying and Preventing Medication Errors. (2007). Preventing medication errors. Aspden, P., Wolcott, J. A., Bootman, J. L., &amp; Cronenwatt, L. R. (eds.). Washington, DC: National Academy Press.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Kaufman, M. B., Brodin, K. A., &amp; Sarafian, A. (2005, April/May). Effect of prescriber education on the use of medications contraindicated in older adults in a managed Medicare population. Journal of Managed Care &amp; Specialty Pharmacy, 11(3), 211-219.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Lau, D.T., J.D., Kasper, D.E., Potter, A. Lyles. (2004). Potentially Inappropriate Medication Prescriptions Among Elderly Nursing Home Residents: Their Scope and Associated Resident and Facility Characteristics. Health Services Research, 39(5), 1257-1276.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'MacKinnon, N. J., &amp; Hepler, C. D. (2003). Indicators of preventable drug-related morbidity in older adults: Use within a managed care organization. Journal of Managed Care &amp; Specialty Pharmacy, 9(2), 134-141.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Rothberg, M. B., Perkow, P. S., Liu, F., et al. (2008). Potentially inappropriate medication use in hospitalized elders. Journal of Hospital Medicine, 3(2), 91-102.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Zhan, C., Sangl, J., Bierman, A. S., et al. (2001). Potentially inappropriate medication use in the community-dwelling elderly. JAMA, 286(22), 2823-2868.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: '2019 American Geriatrics Society Beers Criteria Update Expert Panel. (2019). American Geriatrics Society 2019 Updated AGS Beers Criteria for Potentially Inappropriate Medication Use in Older Adults. Journal of the American Geriatrics Society, 67(4), 674-694.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Merel, S.E., and D.S. Paauw. (2017). Common Drug Side Effects and Drug-Drug Interactions in Elderly Adults in Primary Care. Journal of the American Geriatrics Society, 65(7), 1578-1585.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Takada, M., M. Fujimoto, and K. Hosomi. (2016). Association between benzodiazepine use and dementia: data mining of different medical databases. International Journal of Medical Sciences, 13(11), 825-834.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Tampi ,R.R., D.J. Tampi, S. Balachandran, and S. Srinivasan. (2016). Antipsychotic use in dementia: a systematic review of benefits and risks from meta-analyses. Therapeutic Advances in Chronic Disease, 7(5), 229-245.'</pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="row-header"><span class="td_label">Reference</span></th>
+                    <td style="width:80%" colspan="3">
+                        <div style="width:660px;">
+                            <pre>Reference Type: CITATION</pre>
+                            <br/>
+                            <pre>Reference Text: 'Zhong, G., Y. Wang, Y. Zhang, and Y. Zhao. (2015). Association between benzodiazepine use and dementia: a meta-analysis. PLoS One, 10(5).'</pre>
+                        </div>
+                    </td>
+                </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Definition</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>Index prescription start date. The start date of the earliest prescription ordered for a high-risk medication during the measurement period.
+
+A high-risk medication is identified by either of the following:
+     a. A prescription for medications classified as high risk at any dose and for any duration
+     b. Prescriptions for medications classified as high risk at any dose with greater than a 90 day supply</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Guidance</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>The intent of the measure is to assess if the patient has been ordered at least two of the same high-risk medication prescriptions from the same medication class on different days.
+
+The intent of the measure is to assess if the reporting provider ordered the high-risk medication(s). If the patient had a high-risk medication previously prescribed by another provider, they would not be counted towards the numerator unless the reporting provider also ordered a high-risk medication for them.
+
+This eCQM is a patient-based measure.
+ 
+This version of the eCQM uses QDM version 5.5. Please refer to the eCQI resource center (https://ecqi.healthit.gov/qdm) for more information on the QDM.</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Transmission Format</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>TBD</pre>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Initial Population</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>Patients 65 years and older who had a visit during the measurement period</pre>
+                </div>
+            </td>
+        </tr>
+            <tr>
+                <th scope="row" class="row-header"><span class="td_label">Denominator</span></th>
+                <td style="width:80%" colspan="3">
+                    <div style="width:660px;">
+                        <pre>Equals Initial Population</pre>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="row-header"><span class="td_label">Denominator Exclusions</span></th>
+                <td style="width:80%" colspan="3">
+                    <div style="width:660px;">
+                        <pre>Exclude patients who are in hospice care for any part of the measurement period.
+
+Exclude patients receiving palliative care during the measurement period.</pre>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="row-header"><span class="td_label">Numerator</span></th>
+                <td style="width:80%" colspan="3">
+                    <div style="width:660px;">
+                        <pre>Rate 1 : Patients with at least two orders of high-risk medications from the same drug class.
+
+Rate 2: Patients with at least two orders of high-risk medications from the same drug class (i.e., antipsychotics and benzodiazepines).
+
+Total rate (the sum of the two previous numerators, deduplicated).</pre>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="row-header"><span class="td_label">Numerator Exclusions</span></th>
+                <td style="width:80%" colspan="3">
+                    <div style="width:660px;">
+                        <pre>Rate 2: For patients with two or more antipsychotic prescriptions ordered, exclude patients who have a diagnosis of schizophrenia, schizoaffective disorder, or bipolar disorder on or between January 1 of the year prior to the measurement period and the Index Prescription Start Date (IPSD) for antipsychotics. 
+
+For patients with two or more benzodiazepine prescriptions ordered, exclude patients who have a diagnosis of seizure disorders, rapid eye movement sleep behavior disorder, benzodiazepine withdrawal, ethanol withdrawal, or severe generalized anxiety disorder on or between January 1 of the year prior to the measurement period and the IPSD for benzodiazepines.</pre>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="row-header"><span class="td_label">Denominator Exceptions</span></th>
+                <td style="width:80%" colspan="3">
+                    <div style="width:660px;">
+                        <pre>None</pre>
+                    </div>
+                </td>
+            </tr>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Supplemental Data Elements</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>For every patient evaluated by this measure also identify payer, race, ethnicity and sex</pre>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2>
+    <a name="toc">Table of Contents</a>
+</h2>
+<ul style="padding-left: 50px;">
+    <li><a href="#d1e405">Population Criteria</a></li>
+    <li><a href="#d1e649">Definitions</a></li>
+    <li><a href="#d1e650">Functions</a></li>
+    <li><a href="#d1e555">Terminology</a></li>
+            <li><a href="#d1e647">Data Criteria (QDM Data Elements)</a></li>
+
+    <li><a href="#d1e767">Supplemental Data Elements</a></li>
+    <li><a href="#d1e879">Risk Adjustment Variables</a></li>
+</ul><div style="float:left; background:teal; height:3px; width:80%"></div>
+<pre><br/></pre><h3><a name="d1e405" href="#toc">Population Criteria</a></h3>
+<div>
+	            <ul style="list-style:none;">
+<li class="list-unstyled" style="list-style:none;padding-left:0;">
+    <div class="treeview hover p-l-10">
+        <input type="checkbox" id="Population_Criteria_1_1332048707" />
+        <label for="Population_Criteria_1_1332048707" class="list-header"><b>Population Criteria 1</b></label>
+            <ul>
+<li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Initial_Population_216541618"/>
+                <label for="Initial_Population_216541618" class="list-header"><strong>Initial Population</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">exists [&quot;Patient Characteristic Birthdate&quot;: &quot;Birth date&quot;] BirthDate
+  where Global.&quot;CalendarAgeInYearsAt&quot; ( BirthDate.birthDatetime, start of &quot;Measurement Period&quot; ) &gt;= 65
+    and exists ( &quot;Qualifying Encounters&quot; )</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_2020120487"/>
+                <label for="Denominator_2020120487" class="list-header"><strong>Denominator</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">&quot;Initial Population&quot;</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_Exclusions_604804852"/>
+                <label for="Denominator_Exclusions_604804852" class="list-header"><strong>Denominator Exclusions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">Hospice.&quot;Has Hospice&quot;
+  or PalliativeCare.&quot;Palliative Care in the Measurement Period&quot;</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Numerator_46127559"/>
+                <label for="Numerator_46127559" class="list-header"><strong>Numerator</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">exists ( &quot;Same High Risk Medications Ordered on Different Days&quot; )
+  or ( &quot;Two High Risk Medications with Prolonged Duration&quot; )</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Numerator_Exclusions_1649189149"/>
+                <label for="Numerator_Exclusions_1649189149" class="list-header"><strong>Numerator Exclusions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_Exceptions_491830926"/>
+                <label for="Denominator_Exceptions_491830926" class="list-header"><strong>Denominator Exceptions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Stratification_212730326"/>
+                <label for="Stratification_212730326" class="list-header"><strong>Stratification</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li>            </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0;">
+    <div class="treeview hover p-l-10">
+        <input type="checkbox" id="Population_Criteria_2_1099522051" />
+        <label for="Population_Criteria_2_1099522051" class="list-header"><b>Population Criteria 2</b></label>
+            <ul>
+<li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Initial_Population_1200803271"/>
+                <label for="Initial_Population_1200803271" class="list-header"><strong>Initial Population</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">exists [&quot;Patient Characteristic Birthdate&quot;: &quot;Birth date&quot;] BirthDate
+  where Global.&quot;CalendarAgeInYearsAt&quot; ( BirthDate.birthDatetime, start of &quot;Measurement Period&quot; ) &gt;= 65
+    and exists ( &quot;Qualifying Encounters&quot; )</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_576847889"/>
+                <label for="Denominator_576847889" class="list-header"><strong>Denominator</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">&quot;Initial Population&quot;</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_Exclusions_581403551"/>
+                <label for="Denominator_Exclusions_581403551" class="list-header"><strong>Denominator Exclusions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">Hospice.&quot;Has Hospice&quot;
+  or PalliativeCare.&quot;Palliative Care in the Measurement Period&quot;</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Numerator_507413150"/>
+                <label for="Numerator_507413150" class="list-header"><strong>Numerator</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">( &quot;More than One Antipsychotic Order&quot; )
+  or ( &quot;More than One Benzodiazepine Order&quot; )</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Numerator_Exclusions_1456871966"/>
+                <label for="Numerator_Exclusions_1456871966" class="list-header"><strong>Numerator Exclusions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">( &quot;More than One Antipsychotic Order&quot;
+    and not ( &quot;More than One Benzodiazepine Order&quot; )
+    and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Schizophrenia&quot;]
+          union [&quot;Diagnosis&quot;: &quot;Bipolar Disorder&quot;]
+          union [&quot;Diagnosis&quot;: &quot;Other Bipolar Disorder&quot;] ) AntipsychoticTreatedDiagnoses
+          where AntipsychoticTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Antipsychotic Index Prescription Start Date&quot;]
+      )
+    )
+)
+  or ( &quot;More than One Benzodiazepine Order&quot;
+      and not ( &quot;More than One Antipsychotic Order&quot; )
+      and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Seizure Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;REM Sleep Behavior Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Benzodiazepine Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Alcohol Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Generalized Anxiety Disorder&quot;] ) BenzodiazepineTreatedDiagnoses
+            where BenzodiazepineTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Benzodiazepine Index Prescription Start Date&quot;]
+        )
+      )
+  )
+  or ( &quot;More than One Benzodiazepine Order&quot;
+      and ( &quot;More than One Antipsychotic Order&quot; )
+      and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Seizure Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;REM Sleep Behavior Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Benzodiazepine Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Alcohol Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Generalized Anxiety Disorder&quot;] ) BenzodiazepineTreatedDiagnoses
+            where BenzodiazepineTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Benzodiazepine Index Prescription Start Date&quot;]
+        )
+      )
+      and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Schizophrenia&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Bipolar Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Other Bipolar Disorder&quot;] ) AntipsychoticTreatedDiagnoses
+            where AntipsychoticTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Antipsychotic Index Prescription Start Date&quot;]
+        )
+      )
+  )</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_Exceptions_1864607449"/>
+                <label for="Denominator_Exceptions_1864607449" class="list-header"><strong>Denominator Exceptions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Stratification_649212891"/>
+                <label for="Stratification_649212891" class="list-header"><strong>Stratification</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li>            </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0;">
+    <div class="treeview hover p-l-10">
+        <input type="checkbox" id="Population_Criteria_3_2083139914" />
+        <label for="Population_Criteria_3_2083139914" class="list-header"><b>Population Criteria 3</b></label>
+            <ul>
+<li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Initial_Population_1222194552"/>
+                <label for="Initial_Population_1222194552" class="list-header"><strong>Initial Population</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">exists [&quot;Patient Characteristic Birthdate&quot;: &quot;Birth date&quot;] BirthDate
+  where Global.&quot;CalendarAgeInYearsAt&quot; ( BirthDate.birthDatetime, start of &quot;Measurement Period&quot; ) &gt;= 65
+    and exists ( &quot;Qualifying Encounters&quot; )</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_1501990847"/>
+                <label for="Denominator_1501990847" class="list-header"><strong>Denominator</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">&quot;Initial Population&quot;</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_Exclusions_1076228054"/>
+                <label for="Denominator_Exclusions_1076228054" class="list-header"><strong>Denominator Exclusions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">Hospice.&quot;Has Hospice&quot;
+  or PalliativeCare.&quot;Palliative Care in the Measurement Period&quot;</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Numerator_907060272"/>
+                <label for="Numerator_907060272" class="list-header"><strong>Numerator</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body">( &quot;Numerator 2&quot;
+    and not &quot;Numerator Exclusion&quot;
+)
+  or ( &quot;Numerator 1&quot;
+      and not &quot;Numerator 2&quot;
+  )</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Numerator_Exclusions_2045280703"/>
+                <label for="Numerator_Exclusions_2045280703" class="list-header"><strong>Numerator Exclusions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Denominator_Exceptions_310346260"/>
+                <label for="Denominator_Exceptions_310346260" class="list-header"><strong>Denominator Exceptions</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled" style="list-style:none;padding-left:0px;">
+    <div class="treeview hover p-l-10">
+        <ul class="list-unstyled">
+            <li class="list-unstyled"><input type="checkbox" id="Stratification_1125890127"/>
+                <label for="Stratification_1125890127" class="list-header"><strong>Stratification</strong></label>
+                <ul class="code">
+                    <li class="list-unstyled">
+                        <div class="treeview hover p-l-10">
+                            <ul>
+                                <li style="padding-left: 0px;">
+                                    <div>
+                                        <pre class="cql-definition-body cql-class">None</pre>
+                                    </div>
+                                </li>
+                            </ul>&nbsp;
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li>            </ul>
+    </div>
+</li>            </ul>
+</div><h3><a name="d1e649" href="#toc">Definitions</a></h3>
+<div>
+    <ul style="list-style:none;padding-left: 10px;">
+        <li class="list-unstyled" style="list-style:none;">
+            <div>
+                <ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="AntiInfectives_During_Measurement_Period1299138067" />
+            <label for="AntiInfectives_During_Measurement_Period1299138067" class="list-header"><strong>AntiInfectives During Measurement Period</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">[&quot;Medication, Order&quot;: &quot;Anti Infectives, other&quot;] AntiInfectives
+  where AntiInfectives.authorDatetime during &quot;Measurement Period&quot;</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Antipsychotic_Index_Prescription_Start_Date1278991517" />
+            <label for="Antipsychotic_Index_Prescription_Start_Date1278991517" class="list-header"><strong>Antipsychotic Index Prescription Start Date</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">&quot;First Antipsychotic Medication Ordered&quot;</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Benzodiazepine_Index_Prescription_Start_Date218300982" />
+            <label for="Benzodiazepine_Index_Prescription_Start_Date218300982" class="list-header"><strong>Benzodiazepine Index Prescription Start Date</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">&quot;First Benzodiazepine Medication Ordered&quot;</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Denominator1944241490" />
+            <label for="Denominator1944241490" class="list-header"><strong>Denominator</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">&quot;Initial Population&quot;</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Denominator_Exclusions87486422" />
+            <label for="Denominator_Exclusions87486422" class="list-header"><strong>Denominator Exclusions</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">Hospice.&quot;Has Hospice&quot;
+  or PalliativeCare.&quot;Palliative Care in the Measurement Period&quot;</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="First_Antipsychotic_Medication_Ordered1248784611" />
+            <label for="First_Antipsychotic_Medication_Ordered1248784611" class="list-header"><strong>First Antipsychotic Medication Ordered</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">First([&quot;Medication, Order&quot;: &quot;Antipsychotic&quot;] AntipsychoticMedication
+    where AntipsychoticMedication.authorDatetime during &quot;Measurement Period&quot;
+    return AntipsychoticMedication.authorDatetime
+    sort asc
+)</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="First_Benzodiazepine_Medication_Ordered82640204" />
+            <label for="First_Benzodiazepine_Medication_Ordered82640204" class="list-header"><strong>First Benzodiazepine Medication Ordered</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">First([&quot;Medication, Order&quot;: &quot;Benzodiazepine&quot;] BenzodiazepineMedication
+    where BenzodiazepineMedication.authorDatetime during &quot;Measurement Period&quot;
+    return BenzodiazepineMedication.authorDatetime
+    sort asc
+)</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Hospice_Has_Hospice1471018415" />
+            <label for="Hospice_Has_Hospice1471018415" class="list-header"><strong>Hospice.Has Hospice</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">exists ( [&quot;Encounter, Performed&quot;: &quot;Encounter Inpatient&quot;] DischargeHospice
+    where ( DischargeHospice.dischargeDisposition ~ &quot;Discharge to home for hospice care (procedure)&quot;
+        or DischargeHospice.dischargeDisposition ~ &quot;Discharge to healthcare facility for hospice care (procedure)&quot;
+    )
+      and DischargeHospice.relevantPeriod ends during &quot;Measurement Period&quot;
+)
+  or exists ( [&quot;Intervention, Order&quot;: &quot;Hospice care ambulatory&quot;] HospiceOrder
+      where HospiceOrder.authorDatetime during &quot;Measurement Period&quot;
+  )
+  or exists ( [&quot;Intervention, Performed&quot;: &quot;Hospice care ambulatory&quot;] HospicePerformed
+      where Global.&quot;NormalizeInterval&quot; ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps &quot;Measurement Period&quot;
+  )</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Initial_Population1208472983" />
+            <label for="Initial_Population1208472983" class="list-header"><strong>Initial Population</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">exists [&quot;Patient Characteristic Birthdate&quot;: &quot;Birth date&quot;] BirthDate
+  where Global.&quot;CalendarAgeInYearsAt&quot; ( BirthDate.birthDatetime, start of &quot;Measurement Period&quot; ) &gt;= 65
+    and exists ( &quot;Qualifying Encounters&quot; )</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="More_than_One_AntiInfective_Order1989434462" />
+            <label for="More_than_One_AntiInfective_Order1989434462" class="list-header"><strong>More than One AntiInfective Order</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">//Anti Infectives, other
+exists ( &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Anti Infectives, other&quot;]))</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="More_than_One_Antipsychotic_Order1611372829" />
+            <label for="More_than_One_Antipsychotic_Order1611372829" class="list-header"><strong>More than One Antipsychotic Order</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">exists ( &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Antipsychotic&quot;]))</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="More_than_One_Benzodiazepine_Order826522874" />
+            <label for="More_than_One_Benzodiazepine_Order826522874" class="list-header"><strong>More than One Benzodiazepine Order</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">exists ( &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Benzodiazepine&quot;]))</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Numerator_1826811997" />
+            <label for="Numerator_1826811997" class="list-header"><strong>Numerator 1</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">exists ( &quot;Same High Risk Medications Ordered on Different Days&quot; )
+  or ( &quot;Two High Risk Medications with Prolonged Duration&quot; )</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Numerator_21980284143" />
+            <label for="Numerator_21980284143" class="list-header"><strong>Numerator 2</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">( &quot;More than One Antipsychotic Order&quot; )
+  or ( &quot;More than One Benzodiazepine Order&quot; )</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Numerator_31639784598" />
+            <label for="Numerator_31639784598" class="list-header"><strong>Numerator 3</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">( &quot;Numerator 2&quot;
+    and not &quot;Numerator Exclusion&quot;
+)
+  or ( &quot;Numerator 1&quot;
+      and not &quot;Numerator 2&quot;
+  )</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Numerator_Exclusion816838188" />
+            <label for="Numerator_Exclusion816838188" class="list-header"><strong>Numerator Exclusion</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">( &quot;More than One Antipsychotic Order&quot;
+    and not ( &quot;More than One Benzodiazepine Order&quot; )
+    and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Schizophrenia&quot;]
+          union [&quot;Diagnosis&quot;: &quot;Bipolar Disorder&quot;]
+          union [&quot;Diagnosis&quot;: &quot;Other Bipolar Disorder&quot;] ) AntipsychoticTreatedDiagnoses
+          where AntipsychoticTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Antipsychotic Index Prescription Start Date&quot;]
+      )
+    )
+)
+  or ( &quot;More than One Benzodiazepine Order&quot;
+      and not ( &quot;More than One Antipsychotic Order&quot; )
+      and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Seizure Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;REM Sleep Behavior Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Benzodiazepine Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Alcohol Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Generalized Anxiety Disorder&quot;] ) BenzodiazepineTreatedDiagnoses
+            where BenzodiazepineTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Benzodiazepine Index Prescription Start Date&quot;]
+        )
+      )
+  )
+  or ( &quot;More than One Benzodiazepine Order&quot;
+      and ( &quot;More than One Antipsychotic Order&quot; )
+      and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Seizure Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;REM Sleep Behavior Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Benzodiazepine Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Alcohol Withdrawal&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Generalized Anxiety Disorder&quot;] ) BenzodiazepineTreatedDiagnoses
+            where BenzodiazepineTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Benzodiazepine Index Prescription Start Date&quot;]
+        )
+      )
+      and ( exists ( ( [&quot;Diagnosis&quot;: &quot;Schizophrenia&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Bipolar Disorder&quot;]
+            union [&quot;Diagnosis&quot;: &quot;Other Bipolar Disorder&quot;] ) AntipsychoticTreatedDiagnoses
+            where AntipsychoticTreatedDiagnoses.prevalencePeriod overlaps Interval[start of &quot;Measurement Period&quot; - 1 year, &quot;Antipsychotic Index Prescription Start Date&quot;]
+        )
+      )
+  )</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="PalliativeCare_Palliative_Care_in_the_Measurement_Period2050197271" />
+            <label for="PalliativeCare_Palliative_Care_in_the_Measurement_Period2050197271" class="list-header"><strong>PalliativeCare.Palliative Care in the Measurement Period</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">exists ( [&quot;Assessment, Performed&quot;: &quot;Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)&quot;] PalliativeAssessment
+    where Global.&quot;NormalizeInterval&quot;(PalliativeAssessment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps &quot;Measurement Period&quot;
+)
+  or exists ( [&quot;Encounter, Performed&quot;: &quot;Palliative Care Encounter&quot;] PalliativeEncounter
+      where PalliativeEncounter.relevantPeriod overlaps &quot;Measurement Period&quot;
+  )
+  or exists ( [&quot;Intervention, Performed&quot;: &quot;Palliative Care Intervention&quot;] PalliativeIntervention
+      where Global.&quot;NormalizeInterval&quot;(PalliativeIntervention.relevantDatetime, PalliativeIntervention.relevantPeriod) overlaps &quot;Measurement Period&quot;
+  )</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Qualifying_Encounters685792359" />
+            <label for="Qualifying_Encounters685792359" class="list-header"><strong>Qualifying Encounters</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">( [&quot;Encounter, Performed&quot;: &quot;Office Visit&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Ophthalmologic Services&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Preventive Care Services - Established Office Visit, 18 and Up&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Discharge Services - Nursing Facility&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Nursing Facility Visit&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Care Services in Long-Term Residential Facility&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Preventive Care Services-Initial Office Visit, 18 and Up&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Annual Wellness Visit&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Home Healthcare Services&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Telephone Visits&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Online Assessments&quot;]
+  union [&quot;Encounter, Performed&quot;: &quot;Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal.&quot;] ) ValidEncounter
+  where ValidEncounter.relevantPeriod during &quot;Measurement Period&quot;</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Same_High_Risk_Medications_Ordered_on_Different_Days1524485588" />
+            <label for="Same_High_Risk_Medications_Ordered_on_Different_Days1524485588" class="list-header"><strong>Same High Risk Medications Ordered on Different Days</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">( from
+    [&quot;Medication, Order&quot;: &quot;List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly&quot;] MedicationOrder1,
+    [&quot;Medication, Order&quot;: &quot;List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly&quot;] MedicationOrder2
+    where MedicationOrder1.authorDatetime during &quot;Measurement Period&quot;
+      and MedicationOrder2.authorDatetime during &quot;Measurement Period&quot;
+      and MedicationOrder1.authorDatetime 1 day or more after MedicationOrder2.authorDatetime
+      and MedicationOrder1.code ~ MedicationOrder2.code
+    return MedicationOrder1
+)
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Amitriptyline Hydrochloride&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Amoxapine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Orphenadrine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Atropine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Benztropine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Brompheniramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Butabarbital&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Butalbital&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Carbinoxamine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Carisoprodol&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Chlorpheniramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Chlorpropamide&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Chlorzoxazone&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Clemastine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Clomipramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Conjugated Estrogens&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Cyclobenzaprine Hydrochloride&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Cyproheptadine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Desiccated Thyroid&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Desipramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Dexbrompheniramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Dexchlorpheniramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Dicyclomine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Dimenhydrinate&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Diphenhydramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Dipyridamole&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Disopyramide&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Doxylamine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Esterified Estrogens&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Estradiol&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Estropipate&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Glyburide&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Guanfacine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Hydroxyzine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Hyoscyamine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Imipramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Indomethacin&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Isoxsuprine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Ketorolac Tromethamine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Meclizine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Megestrol&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Meperidine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Meprobamate&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Metaxalone&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Methocarbamol&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Methyldopa&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Nifedipine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Nortriptyline&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Paroxetine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Pentobarbital&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Phenobarbital&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Promethazine Hydrochloride&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Protriptyline&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Propantheline&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Scopolamine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Secobarbital&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Trihexyphenidyl&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Trimipramine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Triprolidine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Nonbenzodiazepine hypnotics&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Methscopolamine&quot;])
+  union &quot;More Than One of Same Medication Order&quot;([&quot;Medication, Order&quot;: &quot;Pyrilamine&quot;])</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="SDE_Ethnicity1248204129" />
+            <label for="SDE_Ethnicity1248204129" class="list-header"><strong>SDE Ethnicity</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">[&quot;Patient Characteristic Ethnicity&quot;: &quot;Ethnicity&quot;]</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="SDE_Payer1935569183" />
+            <label for="SDE_Payer1935569183" class="list-header"><strong>SDE Payer</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">[&quot;Patient Characteristic Payer&quot;: &quot;Payer&quot;]</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="SDE_Race393547329" />
+            <label for="SDE_Race393547329" class="list-header"><strong>SDE Race</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">[&quot;Patient Characteristic Race&quot;: &quot;Race&quot;]</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="SDE_Sex183700720" />
+            <label for="SDE_Sex183700720" class="list-header"><strong>SDE Sex</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">[&quot;Patient Characteristic Sex&quot;: &quot;ONC Administrative Sex&quot;]</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Two_High_Risk_Medications_with_Prolonged_Duration277710253" />
+            <label for="Two_High_Risk_Medications_with_Prolonged_Duration277710253" class="list-header"><strong>Two High Risk Medications with Prolonged Duration</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">( &quot;Cumulative Medication Duration&quot;(&quot;AntiInfectives During Measurement Period&quot;)&gt;= 90
+    and &quot;More than One AntiInfective Order&quot;
+)</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>            </div>
+        </li>
+    </ul>
+</div><h3><a name="d1e650" href="#toc">Functions</a></h3>
+<div>
+    <ul style="list-style:none;padding-left: 10px;">
+        <li class="list-unstyled" style="list-style:none;">
+            <div>
+                <ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Cumulative_Medication_Duration_Medication_List__Medication__Order___597273558" />
+            <label for="Cumulative_Medication_Duration_Medication_List__Medication__Order___597273558" class="list-header"><strong>Cumulative Medication Duration(Medication List&lt;&quot;Medication, Order&quot;&gt;)</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">Sum((collapse(Medication.relevantPeriod))CumulativeDosages
+    return all duration in days of CumulativeDosages
+)</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Global_CalendarAgeInYearsAt_BirthDateTime_DateTime__AsOf_DateTime_1094696652" />
+            <label for="Global_CalendarAgeInYearsAt_BirthDateTime_DateTime__AsOf_DateTime_1094696652" class="list-header"><strong>Global.CalendarAgeInYearsAt(BirthDateTime DateTime, AsOf DateTime)</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">years between ToDate(BirthDateTime)and ToDate(AsOf)</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Global_NormalizeInterval_pointInTime_DateTime__period_Interval_DateTime__2107871548" />
+            <label for="Global_NormalizeInterval_pointInTime_DateTime__period_Interval_DateTime__2107871548" class="list-header"><strong>Global.NormalizeInterval(pointInTime DateTime, period Interval&lt;DateTime&gt;)</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">if pointInTime is not null then Interval[pointInTime, pointInTime]
+  else if period is not null then period 
+  else null as Interval&lt;DateTime&gt;</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="Global_ToDate_Value_DateTime_1140371018" />
+            <label for="Global_ToDate_Value_DateTime_1140371018" class="list-header"><strong>Global.ToDate(Value DateTime)</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">DateTime(year from Value, month from Value, day from Value, 0, 0, 0, 0, timezoneoffset from Value)</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul><ul class="list-unstyled" style="list-style:none;padding-left:0;">
+    <li class="list-unstyled">
+        <div class="treeview hover p-l-10">
+            <input type="checkbox" id="More_Than_One_of_Same_Medication_Order_Medication_List__Medication__Order___624814073" />
+            <label for="More_Than_One_of_Same_Medication_Order_Medication_List__Medication__Order___624814073" class="list-header"><strong>More Than One of Same Medication Order(Medication List&lt;&quot;Medication, Order&quot;&gt;)</strong></label>
+            <ul class="code" style="margin-right: 20%; opacity: 1;">
+                <li class="list-unstyled">
+                    <div>
+                        <ul style="padding-left: 0px;">
+                            <li style="padding-left: 0px;" class="list-unstyled">
+                                <div>
+                                    <pre class="cql-definition-body">&quot;Medication&quot; OrderMedication1
+  with &quot;Medication&quot; OrderMedication2
+    such that OrderMedication1.authorDatetime 1 day or more after OrderMedication2.authorDatetime
+      and OrderMedication1.authorDatetime during &quot;Measurement Period&quot;
+      and OrderMedication2.authorDatetime during &quot;Measurement Period&quot;
+  return OrderMedication1</pre>
+                                </div>
+                            </li>
+                        </ul>&nbsp;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>            </div>
+        </li>
+    </ul>
+</div><h3><a name="d1e555" href="#toc">Terminology</a></h3>
+<div>
+            <ul style="padding-left: 50px;">
+                <li style="width:80%">code &quot;Birth date&quot; (&quot;LOINC Code (21112-8)&quot;)</li>
+                <li style="width:80%">code &quot;Discharge to healthcare facility for hospice care (procedure)&quot; (&quot;SNOMEDCT Code (428371000124100)&quot;)</li>
+                <li style="width:80%">code &quot;Discharge to home for hospice care (procedure)&quot; (&quot;SNOMEDCT Code (428361000124107)&quot;)</li>
+                <li style="width:80%">code &quot;Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)&quot; (&quot;LOINC Code (71007-9)&quot;)</li>
+                <li style="width:80%">code &quot;Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal.&quot; (&quot;CPT Code (99211)&quot;)</li>
+                <li style="width:80%">valueset &quot;Alcohol Withdrawal&quot; (2.16.840.1.113883.3.464.1003.105.12.1209)</li>
+                <li style="width:80%">valueset &quot;Amitriptyline Hydrochloride&quot; (2.16.840.1.113883.3.464.1003.196.12.1373)</li>
+                <li style="width:80%">valueset &quot;Amoxapine&quot; (2.16.840.1.113883.3.464.1003.196.12.1273)</li>
+                <li style="width:80%">valueset &quot;Annual Wellness Visit&quot; (2.16.840.1.113883.3.526.3.1240)</li>
+                <li style="width:80%">valueset &quot;Anti Infectives, other&quot; (2.16.840.1.113883.3.464.1003.196.12.1481)</li>
+                <li style="width:80%">valueset &quot;Antipsychotic&quot; (2.16.840.1.113883.3.464.1003.196.12.1523)</li>
+                <li style="width:80%">valueset &quot;Atropine&quot; (2.16.840.1.113883.3.464.1003.196.12.1274)</li>
+                <li style="width:80%">valueset &quot;Benzodiazepine&quot; (2.16.840.1.113883.3.464.1003.196.12.1522)</li>
+                <li style="width:80%">valueset &quot;Benzodiazepine Withdrawal&quot; (2.16.840.1.113883.3.464.1003.105.12.1208)</li>
+                <li style="width:80%">valueset &quot;Benztropine&quot; (2.16.840.1.113883.3.464.1003.196.12.1361)</li>
+                <li style="width:80%">valueset &quot;Bipolar Disorder&quot; (2.16.840.1.113883.3.464.1003.105.12.1157)</li>
+                <li style="width:80%">valueset &quot;Brompheniramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1427)</li>
+                <li style="width:80%">valueset &quot;Butabarbital&quot; (2.16.840.1.113883.3.464.1003.196.12.1402)</li>
+                <li style="width:80%">valueset &quot;Butalbital&quot; (2.16.840.1.113883.3.464.1003.196.12.1514)</li>
+                <li style="width:80%">valueset &quot;Carbinoxamine&quot; (2.16.840.1.113883.3.464.1003.196.12.1306)</li>
+                <li style="width:80%">valueset &quot;Care Services in Long-Term Residential Facility&quot; (2.16.840.1.113883.3.464.1003.101.12.1014)</li>
+                <li style="width:80%">valueset &quot;Carisoprodol&quot; (2.16.840.1.113883.3.464.1003.196.12.1369)</li>
+                <li style="width:80%">valueset &quot;Chlorpheniramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1352)</li>
+                <li style="width:80%">valueset &quot;Chlorpropamide&quot; (2.16.840.1.113883.3.464.1003.196.12.1303)</li>
+                <li style="width:80%">valueset &quot;Chlorzoxazone&quot; (2.16.840.1.113883.3.464.1003.196.12.1362)</li>
+                <li style="width:80%">valueset &quot;Clemastine&quot; (2.16.840.1.113883.3.464.1003.196.12.1308)</li>
+                <li style="width:80%">valueset &quot;Clomipramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1336)</li>
+                <li style="width:80%">valueset &quot;Conjugated Estrogens&quot; (2.16.840.1.113883.3.464.1003.196.12.1357)</li>
+                <li style="width:80%">valueset &quot;Cyclobenzaprine Hydrochloride&quot; (2.16.840.1.113883.3.464.1003.196.12.1372)</li>
+                <li style="width:80%">valueset &quot;Cyproheptadine&quot; (2.16.840.1.113883.3.464.1003.196.12.1277)</li>
+                <li style="width:80%">valueset &quot;Desiccated Thyroid&quot; (2.16.840.1.113883.3.464.1003.196.12.1354)</li>
+                <li style="width:80%">valueset &quot;Desipramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1278)</li>
+                <li style="width:80%">valueset &quot;Dexbrompheniramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1375)</li>
+                <li style="width:80%">valueset &quot;Dexchlorpheniramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1300)</li>
+                <li style="width:80%">valueset &quot;Dicyclomine&quot; (2.16.840.1.113883.3.464.1003.196.12.1279)</li>
+                <li style="width:80%">valueset &quot;Dimenhydrinate&quot; (2.16.840.1.113883.3.464.1003.196.12.1500)</li>
+                <li style="width:80%">valueset &quot;Diphenhydramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1293)</li>
+                <li style="width:80%">valueset &quot;Dipyridamole&quot; (2.16.840.1.113883.3.464.1003.196.12.1349)</li>
+                <li style="width:80%">valueset &quot;Discharge Services - Nursing Facility&quot; (2.16.840.1.113883.3.464.1003.101.12.1013)</li>
+                <li style="width:80%">valueset &quot;Disopyramide&quot; (2.16.840.1.113883.3.464.1003.196.12.1311)</li>
+                <li style="width:80%">valueset &quot;Doxylamine&quot; (2.16.840.1.113883.3.464.1003.196.12.1515)</li>
+                <li style="width:80%">valueset &quot;Encounter Inpatient&quot; (2.16.840.1.113883.3.666.5.307)</li>
+                <li style="width:80%">valueset &quot;Esterified Estrogens&quot; (2.16.840.1.113883.3.464.1003.196.12.1419)</li>
+                <li style="width:80%">valueset &quot;Estradiol&quot; (2.16.840.1.113883.3.464.1003.196.12.1365)</li>
+                <li style="width:80%">valueset &quot;Estropipate&quot; (2.16.840.1.113883.3.464.1003.196.12.1319)</li>
+                <li style="width:80%">valueset &quot;Ethnicity&quot; (2.16.840.1.114222.4.11.837)</li>
+                <li style="width:80%">valueset &quot;Generalized Anxiety Disorder&quot; (2.16.840.1.113883.3.464.1003.105.12.1210)</li>
+                <li style="width:80%">valueset &quot;Glyburide&quot; (2.16.840.1.113883.3.464.1003.196.12.1368)</li>
+                <li style="width:80%">valueset &quot;Guanfacine&quot; (2.16.840.1.113883.3.464.1003.196.12.1341)</li>
+                <li style="width:80%">valueset &quot;Home Healthcare Services&quot; (2.16.840.1.113883.3.464.1003.101.12.1016)</li>
+                <li style="width:80%">valueset &quot;Hospice care ambulatory&quot; (2.16.840.1.113762.1.4.1108.15)</li>
+                <li style="width:80%">valueset &quot;Hydroxyzine&quot; (2.16.840.1.113883.3.464.1003.196.12.1374)</li>
+                <li style="width:80%">valueset &quot;Hyoscyamine&quot; (2.16.840.1.113883.3.464.1003.196.12.1501)</li>
+                <li style="width:80%">valueset &quot;Imipramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1359)</li>
+                <li style="width:80%">valueset &quot;Indomethacin&quot; (2.16.840.1.113883.3.464.1003.196.12.1366)</li>
+                <li style="width:80%">valueset &quot;Isoxsuprine&quot; (2.16.840.1.113883.3.464.1003.196.12.1422)</li>
+                <li style="width:80%">valueset &quot;Ketorolac Tromethamine&quot; (2.16.840.1.113883.3.464.1003.196.12.1364)</li>
+                <li style="width:80%">valueset &quot;List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly&quot; (2.16.840.1.113883.3.464.1003.196.12.1272)</li>
+                <li style="width:80%">valueset &quot;Meclizine&quot; (2.16.840.1.113883.3.464.1003.196.12.1506)</li>
+                <li style="width:80%">valueset &quot;Megestrol&quot; (2.16.840.1.113883.3.464.1003.196.12.1342)</li>
+                <li style="width:80%">valueset &quot;Meperidine&quot; (2.16.840.1.113883.3.464.1003.196.12.1351)</li>
+                <li style="width:80%">valueset &quot;Meprobamate&quot; (2.16.840.1.113883.3.464.1003.196.12.1284)</li>
+                <li style="width:80%">valueset &quot;Metaxalone&quot; (2.16.840.1.113883.3.464.1003.196.12.1358)</li>
+                <li style="width:80%">valueset &quot;Methocarbamol&quot; (2.16.840.1.113883.3.464.1003.196.12.1370)</li>
+                <li style="width:80%">valueset &quot;Methscopolamine&quot; (2.16.840.1.113883.3.464.1003.196.12.1525)</li>
+                <li style="width:80%">valueset &quot;Methyldopa&quot; (2.16.840.1.113883.3.464.1003.196.12.1331)</li>
+                <li style="width:80%">valueset &quot;Nifedipine&quot; (2.16.840.1.113883.3.464.1003.196.12.1353)</li>
+                <li style="width:80%">valueset &quot;Nonbenzodiazepine hypnotics&quot; (2.16.840.1.113883.3.464.1003.196.12.1480)</li>
+                <li style="width:80%">valueset &quot;Nortriptyline&quot; (2.16.840.1.113883.3.464.1003.196.12.1507)</li>
+                <li style="width:80%">valueset &quot;Nursing Facility Visit&quot; (2.16.840.1.113883.3.464.1003.101.12.1012)</li>
+                <li style="width:80%">valueset &quot;Office Visit&quot; (2.16.840.1.113883.3.464.1003.101.12.1001)</li>
+                <li style="width:80%">valueset &quot;ONC Administrative Sex&quot; (2.16.840.1.113762.1.4.1)</li>
+                <li style="width:80%">valueset &quot;Online Assessments&quot; (2.16.840.1.113883.3.464.1003.101.12.1089)</li>
+                <li style="width:80%">valueset &quot;Ophthalmologic Services&quot; (2.16.840.1.113883.3.464.1003.101.11.1206)</li>
+                <li style="width:80%">valueset &quot;Orphenadrine&quot; (2.16.840.1.113883.3.464.1003.196.12.1302)</li>
+                <li style="width:80%">valueset &quot;Other Bipolar Disorder&quot; (2.16.840.1.113883.3.464.1003.105.12.1204)</li>
+                <li style="width:80%">valueset &quot;Palliative Care Encounter&quot; (2.16.840.1.113883.3.464.1003.101.12.1090)</li>
+                <li style="width:80%">valueset &quot;Palliative Care Intervention&quot; (2.16.840.1.113883.3.464.1003.198.12.1135)</li>
+                <li style="width:80%">valueset &quot;Paroxetine&quot; (2.16.840.1.113883.3.464.1003.196.12.1508)</li>
+                <li style="width:80%">valueset &quot;Payer&quot; (2.16.840.1.114222.4.11.3591)</li>
+                <li style="width:80%">valueset &quot;Pentobarbital&quot; (2.16.840.1.113883.3.464.1003.196.12.1518)</li>
+                <li style="width:80%">valueset &quot;Phenobarbital&quot; (2.16.840.1.113883.3.464.1003.196.12.1348)</li>
+                <li style="width:80%">valueset &quot;Preventive Care Services - Established Office Visit, 18 and Up&quot; (2.16.840.1.113883.3.464.1003.101.12.1025)</li>
+                <li style="width:80%">valueset &quot;Preventive Care Services-Initial Office Visit, 18 and Up&quot; (2.16.840.1.113883.3.464.1003.101.12.1023)</li>
+                <li style="width:80%">valueset &quot;Promethazine Hydrochloride&quot; (2.16.840.1.113883.3.464.1003.196.12.1367)</li>
+                <li style="width:80%">valueset &quot;Propantheline&quot; (2.16.840.1.113883.3.464.1003.196.12.1519)</li>
+                <li style="width:80%">valueset &quot;Protriptyline&quot; (2.16.840.1.113883.3.464.1003.196.12.1509)</li>
+                <li style="width:80%">valueset &quot;Pyrilamine&quot; (2.16.840.1.113883.3.464.1003.196.12.1524)</li>
+                <li style="width:80%">valueset &quot;Race&quot; (2.16.840.1.114222.4.11.836)</li>
+                <li style="width:80%">valueset &quot;REM Sleep Behavior Disorder&quot; (2.16.840.1.113883.3.464.1003.105.12.1207)</li>
+                <li style="width:80%">valueset &quot;Schizophrenia&quot; (2.16.840.1.113883.3.464.1003.105.12.1205)</li>
+                <li style="width:80%">valueset &quot;Scopolamine&quot; (2.16.840.1.113883.3.464.1003.196.12.1520)</li>
+                <li style="width:80%">valueset &quot;Secobarbital&quot; (2.16.840.1.113883.3.464.1003.196.12.1521)</li>
+                <li style="width:80%">valueset &quot;Seizure Disorder&quot; (2.16.840.1.113883.3.464.1003.105.12.1206)</li>
+                <li style="width:80%">valueset &quot;Telephone Visits&quot; (2.16.840.1.113883.3.464.1003.101.12.1080)</li>
+                <li style="width:80%">valueset &quot;Trihexyphenidyl&quot; (2.16.840.1.113883.3.464.1003.196.12.1334)</li>
+                <li style="width:80%">valueset &quot;Trimipramine&quot; (2.16.840.1.113883.3.464.1003.196.12.1285)</li>
+                <li style="width:80%">valueset &quot;Triprolidine&quot; (2.16.840.1.113883.3.464.1003.196.12.1408)</li>
+        </ul>
+</div>    <h3><a name="d1e647" href="#toc">Data Criteria (QDM Data Elements)</a></h3>
+
+<div>
+        <ul style="padding-left: 50px;">
+                <li style="width:80%">&quot;Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)&quot; using &quot;Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: Alcohol Withdrawal&quot; using &quot;Alcohol Withdrawal (2.16.840.1.113883.3.464.1003.105.12.1209)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: Benzodiazepine Withdrawal&quot; using &quot;Benzodiazepine Withdrawal (2.16.840.1.113883.3.464.1003.105.12.1208)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: Bipolar Disorder&quot; using &quot;Bipolar Disorder (2.16.840.1.113883.3.464.1003.105.12.1157)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: Generalized Anxiety Disorder&quot; using &quot;Generalized Anxiety Disorder (2.16.840.1.113883.3.464.1003.105.12.1210)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: Other Bipolar Disorder&quot; using &quot;Other Bipolar Disorder (2.16.840.1.113883.3.464.1003.105.12.1204)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: REM Sleep Behavior Disorder&quot; using &quot;REM Sleep Behavior Disorder (2.16.840.1.113883.3.464.1003.105.12.1207)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: Schizophrenia&quot; using &quot;Schizophrenia (2.16.840.1.113883.3.464.1003.105.12.1205)&quot;</li>
+                <li style="width:80%">&quot;Diagnosis: Seizure Disorder&quot; using &quot;Seizure Disorder (2.16.840.1.113883.3.464.1003.105.12.1206)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Annual Wellness Visit&quot; using &quot;Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Care Services in Long-Term Residential Facility&quot; using &quot;Care Services in Long-Term Residential Facility (2.16.840.1.113883.3.464.1003.101.12.1014)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Discharge Services - Nursing Facility&quot; using &quot;Discharge Services - Nursing Facility (2.16.840.1.113883.3.464.1003.101.12.1013)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Encounter Inpatient&quot; using &quot;Encounter Inpatient (2.16.840.1.113883.3.666.5.307)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Home Healthcare Services&quot; using &quot;Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.1016)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Nursing Facility Visit&quot; using &quot;Nursing Facility Visit (2.16.840.1.113883.3.464.1003.101.12.1012)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal.&quot; using &quot;Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal. (CPT Code 99211)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Office Visit&quot; using &quot;Office Visit (2.16.840.1.113883.3.464.1003.101.12.1001)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Online Assessments&quot; using &quot;Online Assessments (2.16.840.1.113883.3.464.1003.101.12.1089)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Ophthalmologic Services&quot; using &quot;Ophthalmologic Services (2.16.840.1.113883.3.464.1003.101.11.1206)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Palliative Care Encounter&quot; using &quot;Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.1090)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Preventive Care Services - Established Office Visit, 18 and Up&quot; using &quot;Preventive Care Services - Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1025)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Preventive Care Services-Initial Office Visit, 18 and Up&quot; using &quot;Preventive Care Services-Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.1023)&quot;</li>
+                <li style="width:80%">&quot;Encounter, Performed: Telephone Visits&quot; using &quot;Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.1080)&quot;</li>
+                <li style="width:80%">&quot;Intervention, Order: Hospice care ambulatory&quot; using &quot;Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)&quot;</li>
+                <li style="width:80%">&quot;Intervention, Performed: Hospice care ambulatory&quot; using &quot;Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)&quot;</li>
+                <li style="width:80%">&quot;Intervention, Performed: Palliative Care Intervention&quot; using &quot;Palliative Care Intervention (2.16.840.1.113883.3.464.1003.198.12.1135)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Amitriptyline Hydrochloride&quot; using &quot;Amitriptyline Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1373)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Amoxapine&quot; using &quot;Amoxapine (2.16.840.1.113883.3.464.1003.196.12.1273)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Anti Infectives, other&quot; using &quot;Anti Infectives, other (2.16.840.1.113883.3.464.1003.196.12.1481)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Antipsychotic&quot; using &quot;Antipsychotic (2.16.840.1.113883.3.464.1003.196.12.1523)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Atropine&quot; using &quot;Atropine (2.16.840.1.113883.3.464.1003.196.12.1274)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Benzodiazepine&quot; using &quot;Benzodiazepine (2.16.840.1.113883.3.464.1003.196.12.1522)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Benztropine&quot; using &quot;Benztropine (2.16.840.1.113883.3.464.1003.196.12.1361)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Brompheniramine&quot; using &quot;Brompheniramine (2.16.840.1.113883.3.464.1003.196.12.1427)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Butabarbital&quot; using &quot;Butabarbital (2.16.840.1.113883.3.464.1003.196.12.1402)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Butalbital&quot; using &quot;Butalbital (2.16.840.1.113883.3.464.1003.196.12.1514)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Carbinoxamine&quot; using &quot;Carbinoxamine (2.16.840.1.113883.3.464.1003.196.12.1306)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Carisoprodol&quot; using &quot;Carisoprodol (2.16.840.1.113883.3.464.1003.196.12.1369)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Chlorpheniramine&quot; using &quot;Chlorpheniramine (2.16.840.1.113883.3.464.1003.196.12.1352)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Chlorpropamide&quot; using &quot;Chlorpropamide (2.16.840.1.113883.3.464.1003.196.12.1303)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Chlorzoxazone&quot; using &quot;Chlorzoxazone (2.16.840.1.113883.3.464.1003.196.12.1362)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Clemastine&quot; using &quot;Clemastine (2.16.840.1.113883.3.464.1003.196.12.1308)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Clomipramine&quot; using &quot;Clomipramine (2.16.840.1.113883.3.464.1003.196.12.1336)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Conjugated Estrogens&quot; using &quot;Conjugated Estrogens (2.16.840.1.113883.3.464.1003.196.12.1357)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Cyclobenzaprine Hydrochloride&quot; using &quot;Cyclobenzaprine Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1372)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Cyproheptadine&quot; using &quot;Cyproheptadine (2.16.840.1.113883.3.464.1003.196.12.1277)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Desiccated Thyroid&quot; using &quot;Desiccated Thyroid (2.16.840.1.113883.3.464.1003.196.12.1354)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Desipramine&quot; using &quot;Desipramine (2.16.840.1.113883.3.464.1003.196.12.1278)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Dexbrompheniramine&quot; using &quot;Dexbrompheniramine (2.16.840.1.113883.3.464.1003.196.12.1375)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Dexchlorpheniramine&quot; using &quot;Dexchlorpheniramine (2.16.840.1.113883.3.464.1003.196.12.1300)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Dicyclomine&quot; using &quot;Dicyclomine (2.16.840.1.113883.3.464.1003.196.12.1279)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Dimenhydrinate&quot; using &quot;Dimenhydrinate (2.16.840.1.113883.3.464.1003.196.12.1500)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Diphenhydramine&quot; using &quot;Diphenhydramine (2.16.840.1.113883.3.464.1003.196.12.1293)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Dipyridamole&quot; using &quot;Dipyridamole (2.16.840.1.113883.3.464.1003.196.12.1349)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Disopyramide&quot; using &quot;Disopyramide (2.16.840.1.113883.3.464.1003.196.12.1311)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Doxylamine&quot; using &quot;Doxylamine (2.16.840.1.113883.3.464.1003.196.12.1515)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Esterified Estrogens&quot; using &quot;Esterified Estrogens (2.16.840.1.113883.3.464.1003.196.12.1419)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Estradiol&quot; using &quot;Estradiol (2.16.840.1.113883.3.464.1003.196.12.1365)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Estropipate&quot; using &quot;Estropipate (2.16.840.1.113883.3.464.1003.196.12.1319)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Glyburide&quot; using &quot;Glyburide (2.16.840.1.113883.3.464.1003.196.12.1368)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Guanfacine&quot; using &quot;Guanfacine (2.16.840.1.113883.3.464.1003.196.12.1341)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Hydroxyzine&quot; using &quot;Hydroxyzine (2.16.840.1.113883.3.464.1003.196.12.1374)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Hyoscyamine&quot; using &quot;Hyoscyamine (2.16.840.1.113883.3.464.1003.196.12.1501)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Imipramine&quot; using &quot;Imipramine (2.16.840.1.113883.3.464.1003.196.12.1359)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Indomethacin&quot; using &quot;Indomethacin (2.16.840.1.113883.3.464.1003.196.12.1366)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Isoxsuprine&quot; using &quot;Isoxsuprine (2.16.840.1.113883.3.464.1003.196.12.1422)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Ketorolac Tromethamine&quot; using &quot;Ketorolac Tromethamine (2.16.840.1.113883.3.464.1003.196.12.1364)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly&quot; using &quot;List of Single RxNorm Code Concepts for High Risk Drugs for the Elderly (2.16.840.1.113883.3.464.1003.196.12.1272)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Meclizine&quot; using &quot;Meclizine (2.16.840.1.113883.3.464.1003.196.12.1506)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Megestrol&quot; using &quot;Megestrol (2.16.840.1.113883.3.464.1003.196.12.1342)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Meperidine&quot; using &quot;Meperidine (2.16.840.1.113883.3.464.1003.196.12.1351)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Meprobamate&quot; using &quot;Meprobamate (2.16.840.1.113883.3.464.1003.196.12.1284)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Metaxalone&quot; using &quot;Metaxalone (2.16.840.1.113883.3.464.1003.196.12.1358)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Methocarbamol&quot; using &quot;Methocarbamol (2.16.840.1.113883.3.464.1003.196.12.1370)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Methscopolamine&quot; using &quot;Methscopolamine (2.16.840.1.113883.3.464.1003.196.12.1525)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Methyldopa&quot; using &quot;Methyldopa (2.16.840.1.113883.3.464.1003.196.12.1331)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Nifedipine&quot; using &quot;Nifedipine (2.16.840.1.113883.3.464.1003.196.12.1353)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Nonbenzodiazepine hypnotics&quot; using &quot;Nonbenzodiazepine hypnotics (2.16.840.1.113883.3.464.1003.196.12.1480)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Nortriptyline&quot; using &quot;Nortriptyline (2.16.840.1.113883.3.464.1003.196.12.1507)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Orphenadrine&quot; using &quot;Orphenadrine (2.16.840.1.113883.3.464.1003.196.12.1302)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Paroxetine&quot; using &quot;Paroxetine (2.16.840.1.113883.3.464.1003.196.12.1508)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Pentobarbital&quot; using &quot;Pentobarbital (2.16.840.1.113883.3.464.1003.196.12.1518)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Phenobarbital&quot; using &quot;Phenobarbital (2.16.840.1.113883.3.464.1003.196.12.1348)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Promethazine Hydrochloride&quot; using &quot;Promethazine Hydrochloride (2.16.840.1.113883.3.464.1003.196.12.1367)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Propantheline&quot; using &quot;Propantheline (2.16.840.1.113883.3.464.1003.196.12.1519)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Protriptyline&quot; using &quot;Protriptyline (2.16.840.1.113883.3.464.1003.196.12.1509)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Pyrilamine&quot; using &quot;Pyrilamine (2.16.840.1.113883.3.464.1003.196.12.1524)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Scopolamine&quot; using &quot;Scopolamine (2.16.840.1.113883.3.464.1003.196.12.1520)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Secobarbital&quot; using &quot;Secobarbital (2.16.840.1.113883.3.464.1003.196.12.1521)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Trihexyphenidyl&quot; using &quot;Trihexyphenidyl (2.16.840.1.113883.3.464.1003.196.12.1334)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Trimipramine&quot; using &quot;Trimipramine (2.16.840.1.113883.3.464.1003.196.12.1285)&quot;</li>
+                <li style="width:80%">&quot;Medication, Order: Triprolidine&quot; using &quot;Triprolidine (2.16.840.1.113883.3.464.1003.196.12.1408)&quot;</li>
+                <li style="width:80%">&quot;Patient Characteristic Birthdate: Birth date&quot; using &quot;Birth date (LOINC Code 21112-8)&quot;</li>
+                <li style="width:80%">&quot;Patient Characteristic Ethnicity: Ethnicity&quot; using &quot;Ethnicity (2.16.840.1.114222.4.11.837)&quot;</li>
+                <li style="width:80%">&quot;Patient Characteristic Payer: Payer&quot; using &quot;Payer (2.16.840.1.114222.4.11.3591)&quot;</li>
+                <li style="width:80%">&quot;Patient Characteristic Race: Race&quot; using &quot;Race (2.16.840.1.114222.4.11.836)&quot;</li>
+                <li style="width:80%">&quot;Patient Characteristic Sex: ONC Administrative Sex&quot; using &quot;ONC Administrative Sex (2.16.840.1.113762.1.4.1)&quot;</li>
+        </ul>
+</div><h3><a name="d1e767" href="#toc">Supplemental Data Elements</a></h3>
+<ul style="list-style:none;padding-left: 25px;">
+	<li class="list-unstyled">
+    <div class="treeview hover p-l-10">
+        <input type="checkbox" id="SDE_Ethnicity395013844" />
+        <label for="SDE_Ethnicity395013844" class="list-header"><strong>SDE Ethnicity</strong></label>
+        <ul class="code" style="margin-right: 20%; opacity: 1;">
+            <li class="list-unstyled">
+                <div>
+                    <ul style="padding-left: 0px;">
+                        <li style="padding-left: 0px;" class="list-unstyled">
+                            <div>
+                                <pre class="cql-definition-body">[&quot;Patient Characteristic Ethnicity&quot;: &quot;Ethnicity&quot;]</pre>
+                            </div>
+                        </li>
+                    </ul>&nbsp;
+                </div>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled">
+    <div class="treeview hover p-l-10">
+        <input type="checkbox" id="SDE_Payer650470003" />
+        <label for="SDE_Payer650470003" class="list-header"><strong>SDE Payer</strong></label>
+        <ul class="code" style="margin-right: 20%; opacity: 1;">
+            <li class="list-unstyled">
+                <div>
+                    <ul style="padding-left: 0px;">
+                        <li style="padding-left: 0px;" class="list-unstyled">
+                            <div>
+                                <pre class="cql-definition-body">[&quot;Patient Characteristic Payer&quot;: &quot;Payer&quot;]</pre>
+                            </div>
+                        </li>
+                    </ul>&nbsp;
+                </div>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled">
+    <div class="treeview hover p-l-10">
+        <input type="checkbox" id="SDE_Race491557751" />
+        <label for="SDE_Race491557751" class="list-header"><strong>SDE Race</strong></label>
+        <ul class="code" style="margin-right: 20%; opacity: 1;">
+            <li class="list-unstyled">
+                <div>
+                    <ul style="padding-left: 0px;">
+                        <li style="padding-left: 0px;" class="list-unstyled">
+                            <div>
+                                <pre class="cql-definition-body">[&quot;Patient Characteristic Race&quot;: &quot;Race&quot;]</pre>
+                            </div>
+                        </li>
+                    </ul>&nbsp;
+                </div>
+            </li>
+        </ul>
+    </div>
+</li><li class="list-unstyled">
+    <div class="treeview hover p-l-10">
+        <input type="checkbox" id="SDE_Sex754754905" />
+        <label for="SDE_Sex754754905" class="list-header"><strong>SDE Sex</strong></label>
+        <ul class="code" style="margin-right: 20%; opacity: 1;">
+            <li class="list-unstyled">
+                <div>
+                    <ul style="padding-left: 0px;">
+                        <li style="padding-left: 0px;" class="list-unstyled">
+                            <div>
+                                <pre class="cql-definition-body">[&quot;Patient Characteristic Sex&quot;: &quot;ONC Administrative Sex&quot;]</pre>
+                            </div>
+                        </li>
+                    </ul>&nbsp;
+                </div>
+            </li>
+        </ul>
+    </div>
+</li></ul><h3><a name="d1e879" href="#toc">Risk Adjustment Variables</a></h3>
+<ul style="list-style:none;padding-left: 25px;">
+			<li>None</li>
+</ul><div style="float:left; background:teal; height:3px; width:80%"></div>
+<pre><br/></pre><table class="header_table" role="presentation">
+    <tbody>
+        <tr>
+            <th scope="row" class="row-header"><span class="td_label">Measure Set</span></th>
+            <td style="width:80%" colspan="3">
+                <div style="width:660px;">
+                    <pre>None</pre>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+    </body>
+</html>

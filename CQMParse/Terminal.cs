@@ -20,6 +20,25 @@ namespace CQMParse
 
         public override IEnumerable<ISegment> SubSegments => new[] { this };
 
+        public static List<HtmlNode> GetAllLineLineItemsInDataCriteriaSection(HtmlDocument doc)
+        {
+            var result = new List<HtmlNode>();
+            var allNodes = doc.DocumentNode.Descendants().ToArray();
+            for (int i = 0; i < allNodes.Length; i++)
+            {
+                var node = allNodes[i];
+                if (node.HasName("h3")
+                    && (node.InnerText.Contains("Data Criteria", StringComparison.InvariantCulture)
+                    || node.InnerText.Contains("QDM Data Elements")))
+                {
+                    var ul = node.GetNextElementWithName("ul");
+                    var lis = ul.Descendants().Where(x => x.HasName("li") && !x.Ancestors().Any(x=>x.HasName("li"))).ToArray();
+                    result.AddRange(lis);
+                }
+            }
+            return result;
+        }
+
         public DataCriteriaTerminal(HtmlNode node, IEnumerable<TerminologyTerminal> allTerminals) : base(node)
         {
             var splitToken = "\" using \"";
@@ -109,7 +128,11 @@ namespace CQMParse
         public TerminologyTerminal(HtmlNode root) : base(root)
         {
             Name = SegmentText.GetQuotedSections().First();
-            Code = SegmentText.GetParentheticalSections().Last();
+            Code = SegmentText.GetParentheticalSections().LastOrDefault();
+            if (string.IsNullOrWhiteSpace(Code))
+            {
+                Code = SegmentText.GetQuotedSections().Last();
+            }
         }
     }
 
@@ -138,18 +161,12 @@ namespace CQMParse
                     terms.AddRange(lis.Select(y=> TerminologyTerminal.Create(y)));
                 }
             }
-
-            for (int i = 0; i < allNodes.Length; i++)
+            
+            var dataCriteriaNodes = DataCriteriaTerminal.GetAllLineLineItemsInDataCriteriaSection(root.OwnerDocument);
+            // Nodes that start with dollar signs are structured more like regular code nodes, so we'll deal with them elsewhere
+            foreach (var node in dataCriteriaNodes.Where(x=>!x.InnerText.Trim().StartsWith("$")))
             {
-                var node = allNodes[i];
-                if (node.HasName("h3")
-                    && (node.InnerText.Contains("Data Criteria", StringComparison.InvariantCulture)
-                    || node.InnerText.Contains("QDM Data Elements")))
-                {
-                    var ul = node.GetNextElementWithName("ul");
-                    var lis = ul.Descendants().Where(x => x.HasName("li")).ToArray();                    
-                    criteria.AddRange(lis.Select(y => new DataCriteriaTerminal(y, terms)));
-                }
+                criteria.Add(new DataCriteriaTerminal(node, terms));
             }
 
             result.AddRange(terms);
