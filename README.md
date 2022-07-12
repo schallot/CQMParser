@@ -2,7 +2,7 @@
 
 Electronic Clinical Quality Measures are defined in HTML docs provided at https://ecqi.healthit.gov.  For example,
 [CMS72v10](https://ecqi.healthit.gov/sites/default/files/ecqm/measures/CMS72v10.html).
-These documents primarially define how patient populations are calculated for the metric, which involves a fairly regular pseudocode involving nested definitions.
+These documents primarially define how patient populations are calculated for the metric, which involves a fairly well-structured pseudocode involving nested definitions.
 
 This tool is designed to take an eCQM document, and recursively find and replace as many of the concepts as possible so that the population criteria are spelled out as explicitly as possible.  For example, for CMS72v10, the numerator is expressed as 
 
