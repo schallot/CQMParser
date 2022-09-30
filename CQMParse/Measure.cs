@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +45,7 @@ namespace CQMParse
         {
             using WebClient web1 = new WebClient();
             string data = web1.DownloadString(url);
-            return data;
+            return FindAndReplaceInMeasureHtml(data);
         }
 
         private static HtmlDocument GetHtmlFromUri(Uri uri)
@@ -54,6 +54,7 @@ namespace CQMParse
             if (uri.IsFile)
             {
                 measureHtml = File.ReadAllText(uri.LocalPath);
+                measureHtml = FindAndReplaceInMeasureHtml(measureHtml);
             }
             else
             {
@@ -62,6 +63,18 @@ namespace CQMParse
             var doc = new HtmlDocument();
             doc.LoadHtml(measureHtml);
             return doc;
+        }
+
+        /// <summary>
+        /// For weird cases, we might have to do a little find/replace to get things to work,
+        /// because every dang measure seems to follow its own invented conventions.
+        /// </summary>
+        /// <returns></returns>
+        private static string FindAndReplaceInMeasureHtml(string html)
+        {
+            html = html.Replace(" (Excluding Blood Transfusion)", " [Excluding Blood Transfusions]"); // usually we can ignore things in brackets.  Not so for this one case in 1028.  Plus there's plurality mismatch to deal with...
+            html = html.Replace(" (Excluding Blood Transfusions)", " [Excluding Blood Transfusions]"); // usually we can ignore things in brackets.  Not so for this one case in 1028.  Plus there's plurality mismatch to deal with...
+            return html;
         }
 
         public Measure(Uri uri) : this(GetHtmlFromUri(uri), uri)

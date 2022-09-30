@@ -1,0 +1,236 @@
+=============================================================================================================================================================================
+Initial Population:
+PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge)
+=============================================================================================================================================================================
+Denominator:
+PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks )
+=============================================================================================================================================================================
+Denominator Exclusions:
+PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where exists ( TwentyWeeksPlusEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in (valueset "COVID 19 Confirmed" (2.16.840.1.113762.1.4.1029.373))
+  )
+    and ( exists ( TwentyWeeksPlusEncounter.diagnoses EncounterDiagnoses
+          where EncounterDiagnoses.code in (valueset "Respiratory Conditions Related to COVID 19" (2.16.840.1.113762.1.4.1029.376))
+            or exists ( [("Procedure, Performed: Respiratory Support Procedures Related to COVID 19" using "Respiratory Support Procedures Related to COVID 19 (2.16.840.1.113762.1.4.1029.379)")] EncounterProcedures
+                where Global.NormalizeInterval ( EncounterProcedures.relevantDatetime, EncounterProcedures.relevantPeriod ) starts during day of PCMaternal.HospitalizationWithEDOBTriageObservation ( TwentyWeeksPlusEncounter )
+            )
+      )
+    )
+=============================================================================================================================================================================
+Numerator:
+PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where exists ( TwentyWeeksPlusEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in (valueset "Severe Maternal Morbidity Diagnoses" (2.16.840.1.113762.1.4.1029.255))
+        and EncounterDiagnoses.presentOnAdmissionIndicator in (valueset "Present on Admission = No or Unable To Determine" (2.16.840.1.113762.1.4.1029.370))
+  )
+    or exists ( [("Procedure, Performed: Severe Maternal Morbidity Procedures" using "Severe Maternal Morbidity Procedures (2.16.840.1.113762.1.4.1029.256)")] EncounterProcedures
+        where Global.NormalizeInterval ( EncounterProcedures.relevantDatetime, EncounterProcedures.relevantPeriod ) starts during day of PCMaternal.HospitalizationWithEDOBTriageObservation ( TwentyWeeksPlusEncounter )
+    )
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where TwentyWeeksPlusEncounter.dischargeDisposition in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  with [("Procedure, Performed: Blood Transfusion" using "Blood Transfusion (2.16.840.1.113762.1.4.1029.213)")] BloodTransfusion
+    such that Global.NormalizeInterval ( BloodTransfusion.relevantDatetime, BloodTransfusion.relevantPeriod ) starts during day of PCMaternal.HospitalizationWithEDOBTriageObservation ( TwentyWeeksPlusEncounter )
+=============================================================================================================================================================================
+Numerator Exclusions:
+None
+=============================================================================================================================================================================
+Denominator Exceptions:
+None
+=============================================================================================================================================================================
+Stratification:
+//This logic identifies a subset of the numerator population with severe obstetric complications excluding cases where transfusion was the only severe obstetric complication.
+PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where exists ( TwentyWeeksPlusEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in (valueset "Severe Maternal Morbidity Diagnoses" (2.16.840.1.113762.1.4.1029.255))
+        and EncounterDiagnoses.presentOnAdmissionIndicator in (valueset "Present on Admission = No or Unable To Determine" (2.16.840.1.113762.1.4.1029.370))
+  )
+    or exists ( [("Procedure, Performed: Severe Maternal Morbidity Procedures" using "Severe Maternal Morbidity Procedures (2.16.840.1.113762.1.4.1029.256)")] EncounterProcedures
+        where Global.NormalizeInterval ( EncounterProcedures.relevantDatetime, EncounterProcedures.relevantPeriod ) starts during day of PCMaternal.HospitalizationWithEDOBTriageObservation ( TwentyWeeksPlusEncounter )
+    )
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where TwentyWeeksPlusEncounter.dischargeDisposition in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  with [("Procedure, Performed: Blood Transfusion" using "Blood Transfusion (2.16.840.1.113762.1.4.1029.213)")] BloodTransfusion
+    such that Global.NormalizeInterval ( BloodTransfusion.relevantDatetime, BloodTransfusion.relevantPeriod ) starts during day of PCMaternal.HospitalizationWithEDOBTriageObservation ( TwentyWeeksPlusEncounter )
+  except PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where exists ( TwentyWeeksPlusEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in (valueset "COVID 19 Confirmed" (2.16.840.1.113762.1.4.1029.373))
+  )
+    and ( exists ( TwentyWeeksPlusEncounter.diagnoses EncounterDiagnoses
+          where EncounterDiagnoses.code in (valueset "Respiratory Conditions Related to COVID 19" (2.16.840.1.113762.1.4.1029.376))
+            or exists ( [("Procedure, Performed: Respiratory Support Procedures Related to COVID 19" using "Respiratory Support Procedures Related to COVID 19 (2.16.840.1.113762.1.4.1029.379)")] EncounterProcedures
+                where Global.NormalizeInterval ( EncounterProcedures.relevantDatetime, EncounterProcedures.relevantPeriod ) starts during day of PCMaternal.HospitalizationWithEDOBTriageObservation ( TwentyWeeksPlusEncounter )
+            )
+      )
+    )
+  intersect PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where exists ( TwentyWeeksPlusEncounter.diagnoses EncounterDiagnoses
+      where EncounterDiagnoses.code in (valueset "Severe Maternal Morbidity Diagnoses" (2.16.840.1.113762.1.4.1029.255))
+        and EncounterDiagnoses.presentOnAdmissionIndicator in (valueset "Present on Admission = No or Unable To Determine" (2.16.840.1.113762.1.4.1029.370))
+  )
+    or exists ( [("Procedure, Performed: Severe Maternal Morbidity Procedures" using "Severe Maternal Morbidity Procedures (2.16.840.1.113762.1.4.1029.256)")] EncounterProcedures
+        where Global.NormalizeInterval ( EncounterProcedures.relevantDatetime, EncounterProcedures.relevantPeriod ) starts during day of PCMaternal.HospitalizationWithEDOBTriageObservation ( TwentyWeeksPlusEncounter )
+    )
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) >= 20
+  union PCMaternal.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient
+  where AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)>= 8
+    and AgeInYearsAt(date from start of EncounterInpatient.relevantPeriod)< 65
+    and EncounterInpatient.relevantPeriod ends during day of Measurement Period EncounterWithAge
+  with [("Procedure, Performed: Delivery Procedures" using "Delivery Procedures (2.16.840.1.113762.1.4.1045.59)")] DeliveryProcedure
+    such that Global.NormalizeInterval ( DeliveryProcedure.relevantDatetime, DeliveryProcedure.relevantPeriod ) starts during day of HospitalizationWithEDOBTriageObservation(EncounterWithAge) DeliveryEncounter
+  where PCMaternal.CalculatedGestationalAge ( DeliveryEncounter ) is null
+    and ( PCMaternal.LastEstimatedGestationalAge ( DeliveryEncounter ) >= 20 weeks ) TwentyWeeksPlusEncounter
+  where TwentyWeeksPlusEncounter.dischargeDisposition in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))
