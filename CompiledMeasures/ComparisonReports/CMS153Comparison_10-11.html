@@ -1,0 +1,843 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS153v10.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS153v11.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;[("Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start </span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period )</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">in Interval[16, 24</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">in Interval[16, 24</span><span class="sf17b18">]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">2.16.840.1.113883.3.560.100.2</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">AdministrativeGender Code F</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; and exists ( ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>22)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>22)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>24)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>24)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.10<wbr>16)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.10<wbr>16)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")] ) ValidEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")] ) ValidEncounter</span><span class="sf17b18">s</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ValidEncounter</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ValidEncounter</span><span class="sf17b18">s</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and ( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Assessment, Performed: </span><span class="sf17b16">Sexually</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Active</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Sexually</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Active</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.121.12.10<wbr>40</span><span style="color: #000000; background-color: #efcb05; ">)")] SexualActivityAssessment</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("Assessment, Performed: </span><span class="sf17b16">Have</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">you ever had vaginal intercourse [PhenX]</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Have</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">you</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">ever had vaginal intercourse [PhenX] </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">LOINC Code 64728-9</span><span style="color: #000000; background-color: #efcb05; ">)")] SexualActivityAssessment</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.NormalizeInterval ( SexualActivityAssessment.relevantDateti<wbr>me, SexualActivityAssessment.relevantPeriod<wbr> ) </span><span style="color: #000000; background-color: #efcb05; ">before </span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.NormalizeInterval ( SexualActivityAssessment.relevantDateti<wbr>me, SexualActivityAssessment.relevantPeriod<wbr> ) </span><span class="sf17b18">on or </span><span style="color: #000000; background-color: #efcb05; ">before </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or </span><span style="color: #000000; background-color: #efcb05; ">exists ( ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>18)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>18)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.10<wbr>03)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.10<wbr>03)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Complications of Pregnancy, Childbirth and the Puerperium" using "Complications of Pregnancy, Childbirth and the Puerperium (2.16.840.1.113883.3.464.1003.111.12.10<wbr>12)")] ) SexualActivityDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Complications of Pregnancy, Childbirth and the Puerperium" using "Complications of Pregnancy, Childbirth and the Puerperium (2.16.840.1.113883.3.464.1003.111.12.10<wbr>12)")] ) SexualActivityDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where SexualActivityDiagnosis.prevalencePerio<wbr>d overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where SexualActivityDiagnosis.prevalencePerio<wbr>d overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Active: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] ActiveContraceptives</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Active: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] ActiveContraceptives</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ActiveContraceptives.relevantPeriod overlaps Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ActiveContraceptives.relevantPeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Order: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] OrderedContraceptives</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where OrderedContraceptives.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Order: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] OrderedContraceptives</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where OrderedContraceptives.authorDatetime during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pap Test" using "Pap Test (2.16.840.1.113883.3.464.1003.108.12.10<wbr>17)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")] </span><span class="sf17b16">PregnancyTest</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b18">where PregnancyTest.authorDatetime during day of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists </span><span style="color: #000000; background-color: #efcb05; ">( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pap Test" using "Pap Test (2.16.840.1.113883.3.464.1003.108.12.10<wbr>17)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests During Pregnancy" using "Lab Tests During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>07)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests During Pregnancy" using "Lab Tests During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>07)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests for Sexually Transmitted Infections" using "Lab Tests for Sexually Transmitted Infections (2.16.840.1.113883.3.464.1003.110.12.10<wbr>51)")] ) LabOrders</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests for Sexually Transmitted Infections" using "Lab Tests for Sexually Transmitted Infections (2.16.840.1.113883.3.464.1003.110.12.10<wbr>51)")] ) LabOrders</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where LabOrders.authorDatetime during </span><span class="sf17b16">Measurement</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Period</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) AllLabOrders</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where LabOrders.authorDatetime during </span><span class="sf17b16">day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where AllLabOrders.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Diagnostic Study, Order: Diagnostic Studies During Pregnancy" using "Diagnostic Studies During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>08)")] SexualActivityDiagnostics</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Diagnostic Study, Order: Diagnostic Studies During Pregnancy" using "Diagnostic Studies During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>08)")] SexualActivityDiagnostics</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where SexualActivityDiagnostics.authorDatetim<wbr>e during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where SexualActivityDiagnostics.authorDatetim<wbr>e during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>17)")] ProceduresForSexualActivity</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDat<wbr>etime, ProceduresForSexualActivity.relevantPer<wbr>iod ) during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>17)")] ProceduresForSexualActivity</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDat<wbr>etime, ProceduresForSexualActivity.relevantPer<wbr>iod ) during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;[("Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start </span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period )</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">in Interval[16, 24</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">in Interval[16, 24</span><span class="sf17b18">]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">2.16.840.1.113883.3.560.100.2</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">AdministrativeGender Code F</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; and exists ( ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>22)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services, Initial Office Visit, 0 to 17" using "Preventive Care Services, Initial Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>22)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>24)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Preventive Care, Established Office Visit, 0 to 17" using "Preventive Care, Established Office Visit, 0 to 17 (2.16.840.1.113883.3.464.1003.101.12.10<wbr>24)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.10<wbr>16)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Home Healthcare Services" using "Home Healthcare Services (2.16.840.1.113883.3.464.1003.101.12.10<wbr>16)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")] ) ValidEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")] ) ValidEncounter</span><span class="sf17b18">s</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ValidEncounter</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ValidEncounter</span><span class="sf17b18">s</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and ( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Assessment, Performed: </span><span class="sf17b16">Sexually</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Active</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Sexually</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Active</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.121.12.10<wbr>40</span><span style="color: #000000; background-color: #efcb05; ">)")] SexualActivityAssessment</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("Assessment, Performed: </span><span class="sf17b16">Have</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">you ever had vaginal intercourse [PhenX]</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Have</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">you</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">ever had vaginal intercourse [PhenX] </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">LOINC Code 64728-9</span><span style="color: #000000; background-color: #efcb05; ">)")] SexualActivityAssessment</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.NormalizeInterval ( SexualActivityAssessment.relevantDateti<wbr>me, SexualActivityAssessment.relevantPeriod<wbr> ) </span><span style="color: #000000; background-color: #efcb05; ">before </span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.NormalizeInterval ( SexualActivityAssessment.relevantDateti<wbr>me, SexualActivityAssessment.relevantPeriod<wbr> ) </span><span class="sf17b18">on or </span><span style="color: #000000; background-color: #efcb05; ">before </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d10" href="#d10">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or </span><span style="color: #000000; background-color: #efcb05; ">exists ( ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>18)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>18)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.10<wbr>03)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.10<wbr>03)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Complications of Pregnancy, Childbirth and the Puerperium" using "Complications of Pregnancy, Childbirth and the Puerperium (2.16.840.1.113883.3.464.1003.111.12.10<wbr>12)")] ) SexualActivityDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Complications of Pregnancy, Childbirth and the Puerperium" using "Complications of Pregnancy, Childbirth and the Puerperium (2.16.840.1.113883.3.464.1003.111.12.10<wbr>12)")] ) SexualActivityDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where SexualActivityDiagnosis.prevalencePerio<wbr>d overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where SexualActivityDiagnosis.prevalencePerio<wbr>d overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d11" href="#d11">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Active: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] ActiveContraceptives</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Active: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] ActiveContraceptives</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ActiveContraceptives.relevantPeriod overlaps Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ActiveContraceptives.relevantPeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Order: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] OrderedContraceptives</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where OrderedContraceptives.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Order: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] OrderedContraceptives</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where OrderedContraceptives.authorDatetime during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pap Test" using "Pap Test (2.16.840.1.113883.3.464.1003.108.12.10<wbr>17)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")] </span><span class="sf17b16">PregnancyTest</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b18">where PregnancyTest.authorDatetime during day of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists </span><span style="color: #000000; background-color: #efcb05; ">( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pap Test" using "Pap Test (2.16.840.1.113883.3.464.1003.108.12.10<wbr>17)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests During Pregnancy" using "Lab Tests During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>07)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests During Pregnancy" using "Lab Tests During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>07)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests for Sexually Transmitted Infections" using "Lab Tests for Sexually Transmitted Infections (2.16.840.1.113883.3.464.1003.110.12.10<wbr>51)")] ) LabOrders</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests for Sexually Transmitted Infections" using "Lab Tests for Sexually Transmitted Infections (2.16.840.1.113883.3.464.1003.110.12.10<wbr>51)")] ) LabOrders</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d12" href="#d12">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where LabOrders.authorDatetime during </span><span class="sf17b16">Measurement</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Period</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) AllLabOrders</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where LabOrders.authorDatetime during </span><span class="sf17b16">day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where AllLabOrders.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Diagnostic Study, Order: Diagnostic Studies During Pregnancy" using "Diagnostic Studies During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>08)")] SexualActivityDiagnostics</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Diagnostic Study, Order: Diagnostic Studies During Pregnancy" using "Diagnostic Studies During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>08)")] SexualActivityDiagnostics</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where SexualActivityDiagnostics.authorDatetim<wbr>e during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where SexualActivityDiagnostics.authorDatetim<wbr>e during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>17)")] ProceduresForSexualActivity</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDat<wbr>etime, ProceduresForSexualActivity.relevantPer<wbr>iod ) during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Procedure, Performed: Procedures Used to Indicate Sexual Activity" using "Procedures Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>17)")] ProceduresForSexualActivity</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where Global.NormalizeInterval ( ProceduresForSexualActivity.relevantDat<wbr>etime, ProceduresForSexualActivity.relevantPer<wbr>iod ) during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d13" href="#d13">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] </span><span class="sf17b16">DischargeHospice</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">Hospice.exists ( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] </span><span class="sf17b16">InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where ( </span><span class="sf17b16">DischargeHospice</span><span style="color: #000000; background-color: #efcb05; ">.dischargeDisposition ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ( </span><span class="sf17b16">InpatientEncounter</span><span style="color: #000000; background-color: #efcb05; ">.dischargeDisposition<wbr> ~ (code "Discharge to home for hospice care (procedure)" ("SNOMEDCT Code (428361000124107)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or </span><span class="sf17b16">DischargeHospice</span><span style="color: #000000; background-color: #efcb05; ">.dischargeDisposition ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; or </span><span class="sf17b16">InpatientEncounter</span><span style="color: #000000; background-color: #efcb05; ">.dischargeDisposition<wbr> ~ (code "Discharge to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; and InpatientEncounter.relevantPeriod ends during day of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( [("Encounter, Performed: Hospice Encounter" using "Hospice Encounter (2.16.840.1.113883.3.464.1003.1003)")] HospiceEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where HospiceEncounter.relevantPeriod overlaps Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d14" href="#d14">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">DischargeHospice</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">ends</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">16.840.1.113883.3.526.3.1584)")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">HospiceOrder</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b18">where HospiceOrder.authorDatetime </span><span style="color: #000000; background-color: #efcb05; ">during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d15" href="#d15">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or exists ( [("Intervention, </span><span class="sf17b18">Order: Hospice care ambulatory" using "Hospice care ambulatory (2.16.840.1.113762.1.4.1108.15)")] HospiceOrder</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; or exists ( [("Intervention, </span><span style="color: #000000; background-color: #efcb05; ">Performed: Hospice </span><span class="sf17b16">C</span><span style="color: #000000; background-color: #efcb05; ">are </span><span class="sf17b16">A</span><span style="color: #000000; background-color: #efcb05; ">mbulatory" using "Hospice </span><span class="sf17b16">C</span><span style="color: #000000; background-color: #efcb05; ">are </span><span class="sf17b16">A</span><span style="color: #000000; background-color: #efcb05; ">mbulatory (2.16.840.1.113</span><span class="sf17b16">883</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">3</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">526</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">3</span><span style="color: #000000; background-color: #efcb05; ">.15</span><span class="sf17b18">84</span><span style="color: #000000; background-color: #efcb05; ">)")] HospicePerformed</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where HospiceOrder.authorDatetime during Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; or exists ( [("Intervention, </span><span style="color: #000000; background-color: #efcb05; ">Performed: Hospice </span><span class="sf17b16">c</span><span style="color: #000000; background-color: #efcb05; ">are </span><span class="sf17b16">a</span><span style="color: #000000; background-color: #efcb05; ">mbulatory" using "Hospice </span><span class="sf17b16">c</span><span style="color: #000000; background-color: #efcb05; ">are </span><span class="sf17b16">a</span><span style="color: #000000; background-color: #efcb05; ">mbulatory (2.16.840.1.113</span><span class="sf17b16">762</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">1</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">4</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">1108</span><span style="color: #000000; background-color: #efcb05; ">.15</span><span style="color: #000000; background-color: #efcb05; ">)")] HospicePerformed</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d16" href="#d16">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or ( </span><span style="color: #000000; background-color: #efcb05; ">exists ( ( [("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")] PregnancyTest</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; or ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( ( [("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")] PregnancyTest</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; with [("Diagnostic Study, Order: </span><span class="sf17b16">X-</span><span style="color: #000000; background-color: #efcb05; ">Ray Study</span><span class="sf17b18">&nbsp;(all inclusive)</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">X-</span><span style="color: #000000; background-color: #efcb05; ">Ray Study (</span><span class="sf17b18">all inclusive) (</span><span style="color: #000000; background-color: #efcb05; ">2.16.840.1.113883.3.464.1003.198.12.10<wbr>34)")] XrayOrder</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; with [("Diagnostic Study, Order: </span><span class="sf17b16">X</span><span style="color: #000000; background-color: #efcb05; ">Ray Study</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">X</span><span style="color: #000000; background-color: #efcb05; ">Ray Study (</span><span style="color: #000000; background-color: #efcb05; ">2.16.840.1.113883.3.464.1003.198.12.10<wbr>34)")] XrayOrder</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that XrayOrder.authorDatetime occurs 7 days or less on or after day of PregnancyTest.authorDatetime</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that XrayOrder.authorDatetime occurs 7 days or less on or after day of PregnancyTest.authorDatetime</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where PregnancyTest.authorDatetime during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where PregnancyTest.authorDatetime during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union ( [("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")] PregnancyTestOrder</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union ( [("Laboratory Test, Order: Pregnancy Test" using "Pregnancy Test (2.16.840.1.113883.3.464.1003.111.12.10<wbr>11)")] PregnancyTestOrder</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; with [("Medication, Order: Isotretinoin" using "Isotretinoin (2.16.840.1.113883.3.464.1003.196.12.11<wbr>43)")] AccutaneOrder</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with [("Medication, Order: Isotretinoin" using "Isotretinoin (2.16.840.1.113883.3.464.1003.196.12.11<wbr>43)")] AccutaneOrder</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that AccutaneOrder.authorDatetime occurs 7 days or less on or after day of PregnancyTestOrder.authorDatetime</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that AccutaneOrder.authorDatetime occurs 7 days or less on or after day of PregnancyTestOrder.authorDatetime</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where PregnancyTestOrder.authorDatetime during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where PregnancyTestOrder.authorDatetime during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d17" href="#d17">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>18)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Assessment,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Performed: Have you ever had vaginal intercourse [PhenX]" using "Have you ever had vaginal intercourse [PhenX] </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Code 64728-9)")] SexualActivityAssessment</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; where SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; and Global.NormalizeInterval ( SexualActivityAssessment.relevantDateti<wbr>me, SexualActivityAssessment.relevantPeriod<wbr> ) on or before </span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; end of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">) )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; and not ( exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Diagnoses Used to Indicate Sexual Activity" using "Diagnoses Used to Indicate Sexual Activity (2.16.840.1.113883.3.464.1003.111.12.10<wbr>18)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.10<wbr>03)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: HIV" using "HIV (2.16.840.1.113883.3.464.1003.120.12.10<wbr>03)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Complications of Pregnancy, Childbirth and the Puerperium" using "Complications of Pregnancy, Childbirth and the Puerperium (2.16.840.1.113883.3.464.1003.111.12.10<wbr>12)")] ) SexualActivityDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Complications of Pregnancy, Childbirth and the Puerperium" using "Complications of Pregnancy, Childbirth and the Puerperium (2.16.840.1.113883.3.464.1003.111.12.10<wbr>12)")] ) SexualActivityDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where SexualActivityDiagnosis.prevalencePerio<wbr>d overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where SexualActivityDiagnosis.prevalencePerio<wbr>d overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d18" href="#d18">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and not </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Active: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] ActiveContraceptives</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and not </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("Medication, Active: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] ActiveContraceptives</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ActiveContraceptives.relevantPeriod overlaps Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ActiveContraceptives.relevantPeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pap Test" using "Pap Test (2.16.840.1.113883.3.464.1003.108.12.10<wbr>17)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Order: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] OrderedContraceptives</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; where OrderedContraceptives.authorDatetime during day of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">) )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; and not ( exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("Laboratory Test, Order: Pap Test" using "Pap Test (2.16.840.1.113883.3.464.1003.108.12.10<wbr>17)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests During Pregnancy" using "Lab Tests During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>07)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests During Pregnancy" using "Lab Tests During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>07)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests for Sexually Transmitted Infections" using "Lab Tests for Sexually Transmitted Infections (2.16.840.1.113883.3.464.1003.110.12.10<wbr>51)")] ) LabOrders</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Laboratory Test, Order: Lab Tests for Sexually Transmitted Infections" using "Lab Tests for Sexually Transmitted Infections (2.16.840.1.113883.3.464.1003.110.12.10<wbr>51)")] ) LabOrders</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d19" href="#d19">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where LabOrders.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where LabOrders.authorDatetime during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("</span><span class="sf17b16">Procedure</span><span style="color: #000000; background-color: #efcb05; ">, </span><span class="sf17b16">Performed</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Procedures</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Used</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">to</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Indicate Sexual Activit</span><span style="color: #000000; background-color: #efcb05; ">y" using "</span><span class="sf17b16">Procedures</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Used</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">to</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Indicate</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Sexual Activity </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.111.12.10<wbr></span><span class="sf17b16">17</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">ProceduresForSexualActivity</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where </span><span class="sf17b16">Global</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">ProceduresForSexualActivity.relevantDat<wbr>etime,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">ProceduresForSexualActivity.relevantPer<wbr>iod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( [("</span><span class="sf17b16">Diagnostic Study</span><span style="color: #000000; background-color: #efcb05; ">, </span><span class="sf17b16">Order</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Diagnostic</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Studies</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">During</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Pregnanc</span><span style="color: #000000; background-color: #efcb05; ">y" using "</span><span class="sf17b16">Diagnostic</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Studies</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">During</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Pregnancy</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.111.12.10<wbr></span><span class="sf17b16">08</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">SexualActivityDiagnostics</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Assessment</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span class="sf17b16">Sexually</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Active</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Sexually</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Active</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.1</span><span class="sf17b16">2</span><span style="color: #000000; background-color: #efcb05; ">1.12.10<wbr></span><span class="sf17b16">40</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">SexualActivityAssessment</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where </span><span class="sf17b16">SexualActivityDiagnostics</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">authorDatetim<wbr>e</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">during</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where </span><span class="sf17b18">SexualActivityAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and </span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval ( </span><span class="sf17b16">SexualActivityAssessment</span><span style="color: #000000; background-color: #efcb05; ">.relevantDateti<wbr>me, </span><span class="sf17b16">SexualActivityAssessment</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod<wbr> ) </span><span class="sf17b16">before</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and not </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Procedure</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span class="sf17b16">Procedures</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Used to Indicate Sexual Activity</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Procedures</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Used</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">to Indicate Sexual Activity </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.1</span><span class="sf17b16">1</span><span style="color: #000000; background-color: #efcb05; ">1.12.10<wbr></span><span class="sf17b16">17</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">ProceduresForSexualActivity</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where </span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval ( </span><span class="sf17b16">ProceduresForSexualActivity</span><span style="color: #000000; background-color: #efcb05; ">.relevantDat<wbr>etime, </span><span class="sf17b16">ProceduresForSexualActivity</span><span style="color: #000000; background-color: #efcb05; ">.relevantPer<wbr>iod ) </span><span class="sf17b16">during</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; ) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">and not exists ( [("Medication, Order: Contraceptive Medications" using "Contraceptive Medications (2.16.840.1.113883.3.464.1003.196.12.10<wbr>80)")] OrderedContraceptives</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where OrderedContraceptives.authorDatetime during Measurement Period )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and not exists ( [("Diagnostic Study, Order: Diagnostic Studies During Pregnancy" using "Diagnostic Studies During Pregnancy (2.16.840.1.113883.3.464.1003.111.12.10<wbr>08)")] SexualActivityDiagnostics</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where SexualActivityDiagnostics.authorDatetim<wbr>e during Measurement Period )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( [("Laboratory Test, Performed: Chlamydia Screening" using "Chlamydia Screening (2.16.840.1.113883.3.464.1003.110.12.10<wbr>52)")] ChlamydiaTest</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( [("Laboratory Test, Performed: Chlamydia Screening" using "Chlamydia Screening (2.16.840.1.113883.3.464.1003.110.12.10<wbr>52)")] ChlamydiaTest</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d20" href="#d20">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where Global.LatestOf ( ChlamydiaTest.relevantDatetime, ChlamydiaTest.relevantPeriod ) during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where Global.LatestOf ( ChlamydiaTest.relevantDatetime, ChlamydiaTest.relevantPeriod ) during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ChlamydiaTest.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and ChlamydiaTest.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d21" href="#d21">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification 1:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification 1:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d22" href="#d22">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;[("Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start </span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period )</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">in Interval[16, 2</span><span class="sf17b16">1</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">in Interval[16, 2</span><span class="sf17b16">0]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification 2:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification 2:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d23" href="#d23">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;[("Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, start </span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period )</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">in Interval[21, 24</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">in Interval[21, 24</span><span class="sf17b18">]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

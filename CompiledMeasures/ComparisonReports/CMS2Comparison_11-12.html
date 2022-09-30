@@ -1,0 +1,1011 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS2v11.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS2v12.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 12</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 12</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and exists ( ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; and exists ( ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 12</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 12</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and exists ( ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; and exists ( ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( [("Diagnosis: Bipolar Diagnosis" using "Bipolar Diagnosis (2.16.840.1.113883.3.600.450)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( [("Diagnosis: Bipolar Diagnosis" using "Bipolar Diagnosis (2.16.840.1.113883.3.600.450)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Depression Diagnosis" using "Depression Diagnosis (2.16.840.1.113883.3.600.145)")] ) DiagnosisBipolarorDepression</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Diagnosis: Depression Diagnosis" using "Depression Diagnosis (2.16.840.1.113883.3.600.145)")] ) DiagnosisBipolarorDepression</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that DiagnosisBipolarorDepression.prevalence<wbr>Period starts before QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that DiagnosisBipolarorDepression.prevalence<wbr>Period starts before QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">( </span><span class="sf17b16">exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">( </span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">in</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Interval[12,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;1</span><span class="sf17b16">6]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&lt;</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;1</span><span class="sf17b16">7</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( ( Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and ( ( Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) AdolescentScreen</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) AdolescentScreen</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where AdolescentScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where AdolescentScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d10" href="#d10">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d11" href="#d11">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) LastAdolescentScreen,</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) LastAdolescentScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; [("Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; [("Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Performed: Follow Up for Adolescent Depression" using "Follow Up for Adolescent Depression (2.16.840.1.113883.3.526.3.1569)")] FollowUpPositiveAdolescentScreen,</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Performed: Follow Up for Adolescent Depression" using "Follow Up for Adolescent Depression (2.16.840.1.113883.3.526.3.1569)")] FollowUpPositiveAdolescentScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d12" href="#d12">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.NormalizeInterval ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and LastAdolescentScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and LastAdolescentScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d13" href="#d13">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; and ( </span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdolescentScreen.</span><span style="color: #000000; background-color: #efcb05; ">author<wbr>Datetime</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">same day as </span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; and ( </span><span class="sf17b18">( Coalesce(start of Global.NormalizeInterval(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdolescentScreen.</span><span class="sf17b18">relevantDatetime, FollowUpPositiveAdolescentScreen.releva<wbr>ntPeriod), FollowUpPositiveAdolescentScreen.</span><span style="color: #000000; background-color: #efcb05; ">author<wbr>Datetime</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">same day as </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( Coalesce(</span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.releva<wbr>ntPeriod</span><span class="sf17b18">),</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">FollowUpPositiveAdolescentScreen.author<wbr>Datetime</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">2</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">days</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or less after </span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdolescentScreen.releva<wbr>ntDatetime, FollowUpPositiveAdolescentScreen.releva<wbr>ntPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">same</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">as</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d14" href="#d14">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or ( </span><span class="sf17b16">exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">= 17</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; or ( </span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">= 17</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( ( Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and ( ( Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d15" href="#d15">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d16" href="#d16">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) AdolescentScreen</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) AdolescentScreen</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where AdolescentScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where AdolescentScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d17" href="#d17">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; Last([("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d18" href="#d18">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdolescentDepr<wbr>essionScreening.relevantDatetime, AdolescentDepressionScreening.relevantP<wbr>eriod)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdolescentDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d19" href="#d19">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) LastAdolescentScreen,</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) LastAdolescentScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; [("Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; [("Medication, Order: Adolescent Depression Medications" using "Adolescent Depression Medications (2.16.840.1.113883.3.526.3.1567)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Order: Referral for Adolescent Depression" using "Referral for Adolescent Depression (2.16.840.1.113883.3.526.3.1570)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Performed: Follow Up for Adolescent Depression" using "Follow Up for Adolescent Depression (2.16.840.1.113883.3.526.3.1569)")] FollowUpPositiveAdolescentScreen,</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Performed: Follow Up for Adolescent Depression" using "Follow Up for Adolescent Depression (2.16.840.1.113883.3.526.3.1569)")] FollowUpPositiveAdolescentScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d20" href="#d20">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.NormalizeInterval ( LastAdolescentScreen.relevantDatetime, LastAdolescentScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and LastAdolescentScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and LastAdolescentScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d21" href="#d21">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; and ( </span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdolescentScreen.</span><span style="color: #000000; background-color: #efcb05; ">author<wbr>Datetime</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">same day as </span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; and ( </span><span class="sf17b18">( Coalesce(start of Global.NormalizeInterval(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdolescentScreen.</span><span class="sf17b18">relevantDatetime, FollowUpPositiveAdolescentScreen.releva<wbr>ntPeriod), FollowUpPositiveAdolescentScreen.</span><span style="color: #000000; background-color: #efcb05; ">author<wbr>Datetime</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">same day as </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( Coalesce(</span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdolescentScreen.relevantDatetime, FollowUpPositiveAdolescentScreen.releva<wbr>ntPeriod</span><span class="sf17b18">),</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">FollowUpPositiveAdolescentScreen.author<wbr>Datetime</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">2</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">days</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or less after </span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdolescentScreen.releva<wbr>ntDatetime, FollowUpPositiveAdolescentScreen.releva<wbr>ntPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">same</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">as</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d22" href="#d22">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or ( Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or ( Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d23" href="#d23">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d24" href="#d24">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) AdultScreen</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) AdultScreen</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where AdultScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where AdultScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d25" href="#d25">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d26" href="#d26">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d27" href="#d27">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) LastAdultScreen,</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) LastAdultScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; [("Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; [("Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Performed: Follow Up for Adult Depression" using "Follow Up for Adult Depression (2.16.840.1.113883.3.526.3.1568)")] FollowUpPositiveAdultScreen,</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Performed: Follow Up for Adult Depression" using "Follow Up for Adult Depression (2.16.840.1.113883.3.526.3.1568)")] FollowUpPositiveAdultScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d28" href="#d28">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.NormalizeInterval ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and LastAdultScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and LastAdultScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d29" href="#d29">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; and ( </span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdultScreen.</span><span style="color: #000000; background-color: #efcb05; ">authorDatet<wbr>ime</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">same day as </span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; and ( </span><span class="sf17b18">( Coalesce(start of Global.NormalizeInterval(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdultScreen.</span><span class="sf17b18">relevantDatetime, FollowUpPositiveAdultScreen.relevantPer<wbr>iod), FollowUpPositiveAdultScreen.</span><span style="color: #000000; background-color: #efcb05; ">authorDatet<wbr>ime</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">same day as </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( Coalesce(</span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPer<wbr>iod</span><span class="sf17b18">),</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">FollowUpPositiveAdultScreen.authorDatet<wbr>ime</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">2</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">days</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or less after </span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdultScreen.relevantDat<wbr>etime, FollowUpPositiveAdultScreen.relevantPer<wbr>iod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">same</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">as</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d30" href="#d30">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or ( </span><span class="sf17b16">exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or ( </span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( ( Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and ( ( Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d31" href="#d31">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d32" href="#d32">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) AdultScreen</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) AdultScreen</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where AdultScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where AdultScreen.result ~ (code "Depression screening negative (finding)" ("SNOMEDCT Code (428171000124102)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d33" href="#d33">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or exists from</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; Last([("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultDepressionScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d34" href="#d34">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval(AdultDepressio<wbr>nScreening.relevantDatetime, AdultDepressionScreening.relevantPeriod<wbr>)14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdultDepressionScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d35" href="#d35">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">) LastAdultScreen,</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">) LastAdultScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; [("Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; [("Medication, Order: Adult Depression Medications" using "Adult Depression Medications (2.16.840.1.113883.3.526.3.1566)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Order: Referral for Adult Depression" using "Referral for Adult Depression (2.16.840.1.113883.3.526.3.1571)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Performed: Follow Up for Adult Depression" using "Follow Up for Adult Depression (2.16.840.1.113883.3.526.3.1568)")] FollowUpPositiveAdultScreen,</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Performed: Follow Up for Adult Depression" using "Follow Up for Adult Depression (2.16.840.1.113883.3.526.3.1568)")] FollowUpPositiveAdultScreen,</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d36" href="#d36">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.NormalizeInterval ( LastAdultScreen.relevantDatetime, LastAdultScreen.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and LastAdultScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and LastAdultScreen.result ~ (code "Depression screening positive (finding)" ("SNOMEDCT Code (428181000124104)"))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d37" href="#d37">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; and ( </span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdultScreen.</span><span style="color: #000000; background-color: #efcb05; ">authorDatet<wbr>ime</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">same day as </span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; and ( </span><span class="sf17b18">( Coalesce(start of Global.NormalizeInterval(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdultScreen.</span><span class="sf17b18">relevantDatetime, FollowUpPositiveAdultScreen.relevantPer<wbr>iod), FollowUpPositiveAdultScreen.</span><span style="color: #000000; background-color: #efcb05; ">authorDatet<wbr>ime</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">same day as </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod </span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b18">( Coalesce(</span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositi<wbr>veAdultScreen.relevantDatetime, FollowUpPositiveAdultScreen.relevantPer<wbr>iod</span><span class="sf17b18">),</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">FollowUpPositiveAdultScreen.authorDatet<wbr>ime</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">2</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">days</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or less after </span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">or </span><span style="color: #000000; background-color: #efcb05; ">start of Global.NormalizeInterval</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">FollowUpPositiveAdultScreen.relevantDat<wbr>etime, FollowUpPositiveAdultScreen.relevantPer<wbr>iod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">same</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">day </span><span class="sf17b16">as</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d38" href="#d38">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">( exists [("Assessment, Not Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] NoAdolescentScreen</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">( exists [("Assessment, Not Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] NoAdolescentScreen</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d39" href="#d39">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that NoAdolescentScreen.authorDatetime during QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that NoAdolescentScreen.authorDatetime during QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where ( NoAdolescentScreen.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where ( NoAdolescentScreen.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or NoAdolescentScreen.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or NoAdolescentScreen.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and not exists ( [("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and not exists ( [("Assessment, Performed: Adolescent depression screening assessment" using "Adolescent depression screening assessment (LOINC Code 73831-0)")] AdolescentScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d40" href="#d40">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( AdolescentScreening.relevantDatetime, AdolescentScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( AdolescentScreening.relevantDatetime, AdolescentScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdolescentScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdolescentScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d41" href="#d41">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or ( exists [("Assessment, Not Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] NoAdultScreen</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; or ( exists [("Assessment, Not Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] NoAdultScreen</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d42" href="#d42">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that NoAdultScreen.authorDatetime during QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that NoAdultScreen.authorDatetime during QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where ( NoAdultScreen.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where ( NoAdultScreen.negationRationale in (valueset "Patient Declined" (2.16.840.1.113883.3.526.3.1582))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or NoAdultScreen.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or NoAdultScreen.negationRationale in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and not exists ( [("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultScreening</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and not exists ( [("Assessment, Performed: Adult depression screening assessment" using "Adult depression screening assessment (LOINC Code 73832-8)")] AdultScreening</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Encounter, Performed: Encounter to Screen for Depression" using "Encounter to Screen for Depression (2.16.840.1.113883.3.600.1916)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d43" href="#d43">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")] </span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Physical Therapy Evaluation" using "Physical Therapy Evaluation (2.16.840.1.113883.3.526.3.1022)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">) </span><span style="color: #000000; background-color: #efcb05; ">QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where QualifyingEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( AdultScreening.relevantDatetime, AdultScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( AdultScreening.relevantDatetime, AdultScreening.relevantPeriod ) 14 days or less on or before day of start of QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AdultScreening.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and AdultScreening.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d44" href="#d44">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

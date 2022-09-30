@@ -1,0 +1,451 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS132v7.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS132v8.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">exists </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">&nbsp;[</span><span style="color: #000000; background-color: #efcb05; ">Patient Characteristic Birthdate</span><span style="color: #000000; background-color: #efcb05; ">] BirthDate</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">"</span><span style="color: #000000; background-color: #efcb05; ">Patient Characteristic Birthdate</span><span class="sf17b18">: Birth date" using "Birth date (LOINC Code 21112-8)")</span><span style="color: #000000; background-color: #efcb05; ">] BirthDate</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Global.CalendarAgeInYearsAt(BirthDate.b<wbr>irthDatetime, start of Measurement Period)&gt;= 18</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">that </span><span style="color: #000000; background-color: #efcb05; ">Global.CalendarAgeInYearsAt(BirthDate.b<wbr>irthDatetime, start of Measurement Period)&gt;= 18</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">exists </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">&nbsp;[</span><span style="color: #000000; background-color: #efcb05; ">Patient Characteristic Birthdate</span><span style="color: #000000; background-color: #efcb05; ">] BirthDate</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">"</span><span style="color: #000000; background-color: #efcb05; ">Patient Characteristic Birthdate</span><span class="sf17b18">: Birth date" using "Birth date (LOINC Code 21112-8)")</span><span style="color: #000000; background-color: #efcb05; ">] BirthDate</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Global.CalendarAgeInYearsAt(BirthDate.b<wbr>irthDatetime, start of Measurement Period)&gt;= 18</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">that </span><span style="color: #000000; background-color: #efcb05; ">Global.CalendarAgeInYearsAt(BirthDate.b<wbr>irthDatetime, start of Measurement Period)&gt;= 18</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; with [("Procedure, Performed: Prior Pars Plana Vitrectomy" using "Prior Pars Plana Vitrectomy (2.16.840.1.113883.3.526.3.1434)")] ParsPlanaVitrectomy</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that ParsPlanaVitrectomy.relevantPeriod starts before end of CataractSurgeryPerformed.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with [("Medication, Active: Use of Systemic Sympathetic alpha-1a Antagonist Medication for Treatment of Prostatic Hypertrophy" using "Use of Systemic Sympathetic alpha-1a Antagonist Medication for Treatment of Prostatic Hypertrophy (2.16.840.1.113883.3.526.3.1442)")] ActiveSympatheticAlpha1aAntagonist</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with [("Medication, Active: Use of Systemic Sympathetic alpha-1a Antagonist Medication for Treatment of Prostatic Hypertrophy" using "Use of Systemic Sympathetic alpha-1a Antagonist Medication for Treatment of Prostatic Hypertrophy (2.16.840.1.113883.3.526.3.1442)")] ActiveSympatheticAlpha1aAntagonist</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that ActiveSympatheticAlpha1aAntagonist.rele<wbr>vantPeriod overlaps before CataractSurgeryPerformed.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that ActiveSympatheticAlpha1aAntagonist.rele<wbr>vantPeriod overlaps before CataractSurgeryPerformed.relevantPeriod<wbr></span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Diagnosis: Acute and Subacute Iridocyclitis" using "Acute and Subacute Iridocyclitis (2.16.840.1.113883.3.526.3.1241)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Diagnosis: Acute and Subacute Iridocyclitis" using "Acute and Subacute Iridocyclitis (2.16.840.1.113883.3.526.3.1241)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Adhesions and Disruptions of Iris and Ciliary Body" using "Adhesions and Disruptions of Iris and Ciliary Body (2.16.840.1.113883.3.526.3.1405)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Adhesions and Disruptions of Iris and Ciliary Body" using "Adhesions and Disruptions of Iris and Ciliary Body (2.16.840.1.113883.3.526.3.1405)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Anomalies of Pupillary Function" using "Anomalies of Pupillary Function (2.16.840.1.113883.3.526.3.1406)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Anomalies of Pupillary Function" using "Anomalies of Pupillary Function (2.16.840.1.113883.3.526.3.1406)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Aphakia and Other Disorders of Lens" using "Aphakia and Other Disorders of Lens (2.16.840.1.113883.3.526.3.1407)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Burn Confined to Eye and Adnexa" using "Burn Confined to Eye and Adnexa (2.16.840.1.113883.3.526.3.1409)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Burn Confined to Eye and Adnexa" using "Burn Confined to Eye and Adnexa (2.16.840.1.113883.3.526.3.1409)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract Secondary to Ocular Disorders" using "Cataract Secondary to Ocular Disorders (2.16.840.1.113883.3.526.3.1410)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract Secondary to Ocular Disorders" using "Cataract Secondary to Ocular Disorders (2.16.840.1.113883.3.526.3.1410)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract, Congenital" using "Cataract, Congenital (2.16.840.1.113883.3.526.3.1412)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract, Congenital" using "Cataract, Congenital (2.16.840.1.113883.3.526.3.1412)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract, Mature or Hypermature" using "Cataract, Mature or Hypermature (2.16.840.1.113883.3.526.3.1413)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract, Mature or Hypermature" using "Cataract, Mature or Hypermature (2.16.840.1.113883.3.526.3.1413)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract, Posterior Polar" using "Cataract, Posterior Polar (2.16.840.1.113883.3.526.3.1414)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cataract, Posterior Polar" using "Cataract, Posterior Polar (2.16.840.1.113883.3.526.3.1414)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Central Corneal Ulcer" using "Central Corneal Ulcer (2.16.840.1.113883.3.526.3.1428)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Central Corneal Ulcer" using "Central Corneal Ulcer (2.16.840.1.113883.3.526.3.1428)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Certain Types of Iridocyclitis" using "Certain Types of Iridocyclitis (2.16.840.1.113883.3.526.3.1415)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Certain Types of Iridocyclitis" using "Certain Types of Iridocyclitis (2.16.840.1.113883.3.526.3.1415)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Chronic Iridocyclitis" using "Chronic Iridocyclitis (2.16.840.1.113883.3.526.3.1416)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Chronic Iridocyclitis" using "Chronic Iridocyclitis (2.16.840.1.113883.3.526.3.1416)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cloudy Cornea" using "Cloudy Cornea (2.16.840.1.113883.3.526.3.1417)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cloudy Cornea" using "Cloudy Cornea (2.16.840.1.113883.3.526.3.1417)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Corneal Edema" using "Corneal Edema (2.16.840.1.113883.3.526.3.1418)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Corneal Edema" using "Corneal Edema (2.16.840.1.113883.3.526.3.1418)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Corneal Opacity and Other Disorders of Cornea" using "Corneal Opacity and Other Disorders of Cornea (2.16.840.1.113883.3.526.3.1419)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Corneal Opacity and Other Disorders of Cornea" using "Corneal Opacity and Other Disorders of Cornea (2.16.840.1.113883.3.526.3.1419)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cysts of Iris, Ciliary Body, and Anterior Chamber" using "Cysts of Iris, Ciliary Body, and Anterior Chamber (2.16.840.1.113883.3.526.3.1420)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Enophthalmos" using "Enophthalmos (2.16.840.1.113883.3.526.3.1421)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Glaucoma" using "Glaucoma (2.16.840.1.113883.3.526.3.1423)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Glaucoma" using "Glaucoma (2.16.840.1.113883.3.526.3.1423)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Glaucoma Associated with Congenital Anomalies, Dystrophies, and Systemic Syndromes" using "Glaucoma Associated with Congenital Anomalies, Dystrophies, and Systemic Syndromes (2.16.840.1.113883.3.526.3.1461)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Hereditary Corneal Dystrophies" using "Hereditary Corneal Dystrophies (2.16.840.1.113883.3.526.3.1424)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Hereditary Corneal Dystrophies" using "Hereditary Corneal Dystrophies (2.16.840.1.113883.3.526.3.1424)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: High Hyperopia" using "High Hyperopia (2.16.840.1.113883.3.526.3.1425)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: High Hyperopia" using "High Hyperopia (2.16.840.1.113883.3.526.3.1425)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Hypotony of Eye" using "Hypotony of Eye (2.16.840.1.113883.3.526.3.1426)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Hypotony of Eye" using "Hypotony of Eye (2.16.840.1.113883.3.526.3.1426)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Injury to Optic Nerve and Pathways" using "Injury to Optic Nerve and Pathways (2.16.840.1.113883.3.526.3.1427)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Injury to Optic Nerve and Pathways" using "Injury to Optic Nerve and Pathways (2.16.840.1.113883.3.526.3.1427)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Morgagnian Cataract" using "Morgagnian Cataract (2.16.840.1.113883.3.526.3.1558)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Morgagnian Cataract" using "Morgagnian Cataract (2.16.840.1.113883.3.526.3.1558)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Open Wound of Eyeball" using "Open Wound of Eyeball (2.16.840.1.113883.3.526.3.1430)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Open Wound of Eyeball" using "Open Wound of Eyeball (2.16.840.1.113883.3.526.3.1430)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Other Endophthalmitis" using "Other Endophthalmitis (2.16.840.1.113883.3.526.3.1473)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Pathologic Myopia" using "Pathologic Myopia (2.16.840.1.113883.3.526.3.1432)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Pathologic Myopia" using "Pathologic Myopia (2.16.840.1.113883.3.526.3.1432)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Posterior Lenticonus" using "Posterior Lenticonus (2.16.840.1.113883.3.526.3.1433)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Posterior Lenticonus" using "Posterior Lenticonus (2.16.840.1.113883.3.526.3.1433)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Pseudoexfoliation Syndrome" using "Pseudoexfoliation Syndrome (2.16.840.1.113883.3.526.3.1435)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Pseudoexfoliation Syndrome" using "Pseudoexfoliation Syndrome (2.16.840.1.113883.3.526.3.1435)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Purulent Endophthalmitis" using "Purulent Endophthalmitis (2.16.840.1.113883.3.526.3.1477)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Retrolental Fibroplasias" using "Retrolental Fibroplasias (2.16.840.1.113883.3.526.3.1438)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Retrolental Fibroplasias" using "Retrolental Fibroplasias (2.16.840.1.113883.3.526.3.1438)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Traumatic Cataract" using "Traumatic Cataract (2.16.840.1.113883.3.526.3.1443)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Traumatic Cataract" using "Traumatic Cataract (2.16.840.1.113883.3.526.3.1443)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Uveitis" using "Uveitis (2.16.840.1.113883.3.526.3.1444)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Uveitis" using "Uveitis (2.16.840.1.113883.3.526.3.1444)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Vascular Disorders of Iris and Ciliary Body" using "Vascular Disorders of Iris and Ciliary Body (2.16.840.1.113883.3.526.3.1445)")] ) ComorbidDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Vascular Disorders of Iris and Ciliary Body" using "Vascular Disorders of Iris and Ciliary Body (2.16.840.1.113883.3.526.3.1445)")] ) ComorbidDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that ComorbidDiagnosis.prevalencePeriod overlaps before CataractSurgeryPerformed.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that ComorbidDiagnosis.prevalencePeriod overlaps before CataractSurgeryPerformed.relevantPeriod<wbr></span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">[("Procedure, Performed: Cataract Surgery" using "Cataract Surgery (2.16.840.1.113883.3.526.3.1411)")] CataractSurgery</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where CataractSurgery.relevantPeriod during Measurement Period CataractSurgeryPerformed</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Procedure, Performed: Aspiration and Injection Procedures" using "Aspiration and Injection Procedures (2.16.840.1.113883.3.526.3.1408)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Procedure, Performed: Aspiration and Injection Procedures" using "Aspiration and Injection Procedures (2.16.840.1.113883.3.526.3.1408)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Excision of Adhesions" using "Excision of Adhesions (2.16.840.1.113883.3.526.3.1422)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Excision of Adhesions" using "Excision of Adhesions (2.16.840.1.113883.3.526.3.1422)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Lens Procedure" using "Lens Procedure (2.16.840.1.113883.3.526.3.1429)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Lens Procedure" using "Lens Procedure (2.16.840.1.113883.3.526.3.1429)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Removal Procedures" using "Removal Procedures (2.16.840.1.113883.3.526.3.1436)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Removal Procedures" using "Removal Procedures (2.16.840.1.113883.3.526.3.1436)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Retinal Repair Procedures" using "Retinal Repair Procedures (2.16.840.1.113883.3.526.3.1437)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Retinal Repair Procedures" using "Retinal Repair Procedures (2.16.840.1.113883.3.526.3.1437)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Revision Procedures" using "Revision Procedures (2.16.840.1.113883.3.526.3.1439)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Revision Procedures" using "Revision Procedures (2.16.840.1.113883.3.526.3.1439)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Scleral Procedures" using "Scleral Procedures (2.16.840.1.113883.3.526.3.1440)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Scleral Procedures" using "Scleral Procedures (2.16.840.1.113883.3.526.3.1440)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Vitreous Procedures" using "Vitreous Procedures (2.16.840.1.113883.3.526.3.1447)")] ) SurgicalComplicationProcedure</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Vitreous Procedures" using "Vitreous Procedures (2.16.840.1.113883.3.526.3.1447)")] ) SurgicalComplicationProcedure</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that SurgicalComplicationProcedure.relevantP<wbr>eriod starts 30 days or less after day of end of CataractSurgeryPerformed.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that SurgicalComplicationProcedure.relevantP<wbr>eriod starts 30 days or less after day of </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; end of CataractSurgeryPerformed.relevantPeriod<wbr></span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">and SurgicalComplicationProcedure !~ CataractSurgeryPerformed</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

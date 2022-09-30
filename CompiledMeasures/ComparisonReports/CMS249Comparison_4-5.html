@@ -1,0 +1,871 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS249v4.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS249v5.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">in Interval[50, 6</span><span class="sf17b16">3]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">in Interval[50, 6</span><span class="sf17b16">4</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">AdministrativeGender Code F</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">2.16.840.1.113883.3.560.100.2</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">- Other</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Other </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.101.12.10<wbr>30</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">CPT Code 99429</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")] ) ValidEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")] ) ValidEncounter</span><span class="sf17b18">s</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ValidEncounter</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; where ValidEncounter</span><span class="sf17b18">s</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">in Interval[50, 6</span><span class="sf17b16">3]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of Measurement Period</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">in Interval[50, 6</span><span class="sf17b16">4</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">AdministrativeGender Code F</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">and exists ( [("Patient Characteristic Sex: Female" using "Female (</span><span class="sf17b16">2.16.840.1.113883.3.560.100.2</span><span style="color: #000000; background-color: #efcb05; ">)")] )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; and exists ( [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">- Other</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Other </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.101.12.10<wbr>30</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">CPT Code 99429</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Online Assessments" using "Online Assessments (2.16.840.1.113883.3.464.1003.101.12.10<wbr>89)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")] ) ValidEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Telephone Visits" using "Telephone Visits (2.16.840.1.113883.3.464.1003.101.12.10<wbr>80)")] ) ValidEncounter</span><span class="sf17b18">s</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ValidEncounter</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; where ValidEncounter</span><span class="sf17b18">s</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">singleton from </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("P</span><span class="sf17b16">atient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Characteristic</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Birthdate</span><span style="color: #000000; background-color: #efcb05; ">: B</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">" using "B</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">LOINC Code </span><span class="sf17b16">21112</span><span style="color: #000000; background-color: #efcb05; ">-</span><span class="sf17b16">8</span><span style="color: #000000; background-color: #efcb05; ">)")] B</span><span class="sf17b16">irthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">First</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">[("P</span><span class="sf17b16">hysical</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Exam,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Performed</span><span style="color: #000000; background-color: #efcb05; ">: B</span><span class="sf17b16">ody</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">mass index (BMI) [Ratio]</span><span style="color: #000000; background-color: #efcb05; ">" using "B</span><span class="sf17b16">ody</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">mass</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">index </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">BMI) [Ratio] (</span><span style="color: #000000; background-color: #efcb05; ">LOINC Code </span><span class="sf17b16">39156</span><span style="color: #000000; background-color: #efcb05; ">-</span><span class="sf17b16">5</span><span style="color: #000000; background-color: #efcb05; ">)")] B</span><span class="sf17b16">MI</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">let</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Age:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Global.</span><span class="sf17b16">CalendarAgeInYearsAt </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">B</span><span class="sf17b16">irthDate</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">birth</span><span style="color: #000000; background-color: #efcb05; ">Datetime, </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period </span><span class="sf17b18">),</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">of </span><span style="color: #000000; background-color: #efcb05; ">Global.</span><span class="sf17b16">NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">B</span><span class="sf17b16">MI</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">relevant</span><span style="color: #000000; background-color: #efcb05; ">Da<wbr>tetime, </span><span class="sf17b16">BMI.relevantPeriod)during</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">NumberOfRiskFactors:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Count((</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">{</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">First(Diagnosis</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Dx</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">BMI.result</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">is</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">not</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">null</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Dx.prevalencePeriod starts on or before day of </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of prevalencePeriod</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )([("Diagnosis: Rheumatoid Arthritis" using "Rheumatoid Arthritis (2.16.840.1.113883.3.464.1003.113.12.10<wbr>05)")]), First(Diagnosis Dx</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Dx.prevalencePeriod starts on or before day of </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of prevalencePeriod</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )([("Diagnosis: Hyperthyroidism" using "Hyperthyroidism (2.16.840.1.113883.3.464.1003.117.12.10<wbr>15)")]), First(Diagnosis Dx</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Dx.prevalencePeriod starts on or before day of </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of prevalencePeriod</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )([("Diagnosis: Malabsorption Syndromes" using "Malabsorption Syndromes (2.16.840.1.113883.3.464.1003.199.12.10<wbr>50)")]), First(Diagnosis Dx</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Dx.prevalencePeriod starts on or before day of </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of prevalencePeriod</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )([("Diagnosis: Chronic Liver Disease" using "Chronic Liver Disease (2.16.840.1.113883.3.464.1003.199.12.10<wbr>35)")]), First(Diagnosis Dx</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where Dx.prevalencePeriod starts on or before day of </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of prevalencePeriod</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )([("Diagnosis: Chronic Malnutrition" using "Chronic Malnutrition (2.16.840.1.113883.3.464.1003.199.12.10<wbr>36)")])} )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Osteoporotic Fractures" using "Osteoporotic Fractures (2.16.840.1.113883.3.464.1003.113.12.10<wbr>50)")] PathologicalFracture</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where PathologicalFracture.prevalencePeriod starts on or before day of </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; end of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; union [("Assessment, Performed: History of hip fracture in parent" using "History of hip fracture in parent (2.16.840.1.113883.3.464.1003.113.12.10<wbr>40)")] ParentFractureHistory</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where start of Global.NormalizeInterval ( ParentFractureHistory.relevantDatetime,<wbr> ParentFractureHistory.relevantPeriod ) before start of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Osteopenia" using "Osteopenia (2.16.840.1.113883.3.464.1003.113.12.10<wbr>49)")] OsteopeniaDiagnosis</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where OsteopeniaDiagnosis.prevalencePeriod starts before start Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; union { First([("Assessment, Performed: Tobacco Use Screening" using "Tobacco Use Screening (2.16.840.1.113883.3.526.3.1278)")] TobaccoScreen</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where TobaccoScreen.result in (valueset "Current Tobacco Smoker" (2.16.840.1.113883.3.600.2390))</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and start of Global.NormalizeInterval(TobaccoScreen.<wbr>relevantDatetime, TobaccoScreen.relevantPeriod)during Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">}</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">FirstBMI</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">{</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">First([("Assessment, Performed: A</span><span class="sf17b16">verage</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Number</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Drinks</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">per</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Drinking</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Day</span><span style="color: #000000; background-color: #efcb05; ">" using "A</span><span class="sf17b16">verage</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Number</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Drinks</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">per</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Drinking</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.106.12.10<wbr>18</span><span style="color: #000000; background-color: #efcb05; ">)")] AverageDrinks</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">FirstBMI.result &lt;= 20 'kg/m2' is not null</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or </span><span style="color: #000000; background-color: #efcb05; ">First([("Assessment, Performed: A</span><span class="sf17b16">lcoholic</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">drinks</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">per</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">drinking</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Reported</span><span style="color: #000000; background-color: #efcb05; ">" using "A</span><span class="sf17b16">lcoholic</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">drinks</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">per</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">drinking</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Reported</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;(</span><span class="sf17b16">LOINC Code 11287-0</span><span style="color: #000000; background-color: #efcb05; ">)")] AverageDrinks</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where start of Global.NormalizeInterval(AverageDrinks.<wbr>relevantDatetime, AverageDrinks.relevantPeriod)during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where start of Global.NormalizeInterval(AverageDrinks.<wbr>relevantDatetime, AverageDrinks.relevantPeriod)during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and AverageDrinks.result &gt; 2 '{drinks}/d'</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and AverageDrinks.result &gt; 2 '{drinks}/d'</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; sort by start of Global.NormalizeInterval(relevantDateti<wbr>me, relevantPeriod)</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">}</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">is not null</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">{</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">First</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">[("P</span><span class="sf17b16">hysical Exam</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span class="sf17b16">BMI</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Ratio</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">BMI</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Ratio</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.</span><span class="sf17b16">600</span><span style="color: #000000; background-color: #efcb05; ">.1</span><span style="color: #000000; background-color: #efcb05; ">.</span><span style="color: #000000; background-color: #efcb05; ">1</span><span class="sf17b16">49</span><span style="color: #000000; background-color: #efcb05; ">0)")] </span><span class="sf17b16">BMI</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists [("Diagnosis: Osteoporosis" using "Osteoporosis (2.16.840.1.113883.3.464.1003.113.12.10<wbr>38</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">OsteoporosisDiagnosis</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where </span><span class="sf17b18">start of </span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">BMI</span><span style="color: #000000; background-color: #efcb05; ">.relevantDa<wbr>tetime, </span><span class="sf17b16">BMI</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">during</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">OsteoporosisDiagnosis.prevalencePeriod starts before start of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">BMI.result</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">is</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">not</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">null</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">&nbsp; or exists [</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Diagnosis: Osteopenia" using "Osteopenia (2.16.840.1.113883.3.464.1003.113.12.10<wbr>49)")] OsteopeniaDiagnosis</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">sort</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">by</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">relevantDateti<wbr>me, </span><span style="color: #000000; background-color: #efcb05; ">relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where OsteopeniaDiagnosis.prevalencePeriod starts before start of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">}</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">FirstBMI</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("P</span><span class="sf17b16">rocedure</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span class="sf17b16">Gastric</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Bypass Surgery</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Gastric</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Bypass</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Surgery </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.</span><span class="sf17b16">464</span><span style="color: #000000; background-color: #efcb05; ">.1</span><span class="sf17b18">003</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b18">198.12.</span><span style="color: #000000; background-color: #efcb05; ">1</span><span class="sf17b16">0<wbr>5</span><span style="color: #000000; background-color: #efcb05; ">0)")] </span><span class="sf17b16">GastricBypass</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">where </span><span class="sf17b16">FirstBMI</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">result</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&lt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">20</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">'kg/m2'</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where </span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">&nbsp;GastricBypass</span><span style="color: #000000; background-color: #efcb05; ">.relevantDatetime, </span><span class="sf17b16">GastricBypass</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">ends before start of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">union [("</span><span class="sf17b16">Patient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Characteristic Race</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">White</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">White</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.1</span><span class="sf17b16">2</span><span style="color: #000000; background-color: #efcb05; ">3.12.10<wbr></span><span class="sf17b16">07</span><span style="color: #000000; background-color: #efcb05; ">)")]</span><span class="sf17b18">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">+</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">( </span><span class="sf17b16">if</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Sum(( collapse ( [("Medication, Active: Glucocorticoids (oral only)" using "Glucocorticoids (oral only) (2.16.840.1.113883.3.464.1003.196.12.12<wbr>66)")] Glucocorticoid</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Active:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Aromatase</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Inhibitors"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Aromatase</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Inhibitors (2.16.840.1.113883.3.464.1003.196.12.12<wbr>65)")] AromataseInhibitorActive</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; where </span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;AromataseInhibitorActive.</span><span style="color: #000000; background-color: #efcb05; ">relevantDateti<wbr>me, </span><span class="sf17b18">AromataseInhibitorActive.</span><span style="color: #000000; background-color: #efcb05; ">relevantPeriod<wbr></span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">starts before start of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">( [("Medication, Order: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.12<wbr>65)")] AromataseInhibitorOrder</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">where </span><span class="sf17b16">AromataseInhibitorOrder</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">authorDatetime</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">before</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">union [("</span><span class="sf17b16">Assessment,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Performed</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">History of hip fracture in parent</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">History</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">of hip fracture in parent </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.1</span><span class="sf17b16">1</span><span style="color: #000000; background-color: #efcb05; ">3.12.10<wbr></span><span class="sf17b16">40</span><span style="color: #000000; background-color: #efcb05; ">)")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">ParentFractureHistory</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">where start of Global.NormalizeInterval </span><span style="color: #000000; background-color: #efcb05; ">( </span><span class="sf17b16">ParentFractureHistory.relevantDatetime,<wbr></span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">ParentFractureHistory.relevantPeriod ) before start of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or </span><span style="color: #000000; background-color: #efcb05; ">Sum(( collapse ( [("Medication, Active: Glucocorticoids (oral only)" using "Glucocorticoids (oral only) (2.16.840.1.113883.3.464.1003.196.12.12<wbr>66)")] Glucocorticoid</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where Glucocorticoid.relevantPeriod starts before </span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where Glucocorticoid.relevantPeriod starts before </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; end of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d10" href="#d10">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">).relevantPeriod </span><span style="color: #000000; background-color: #efcb05; ">) GlucocorticoidIntervals</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">).relevantPeriod </span><span class="sf17b18">per day </span><span style="color: #000000; background-color: #efcb05; ">) GlucocorticoidIntervals</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; return d</span><span class="sf17b16">uration</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;in days of ( GlucocorticoidIntervals</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; return d</span><span class="sf17b16">ifference</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;in days of ( GlucocorticoidIntervals</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; intersect Interval[Patient.birthDatetime, </span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; intersect Interval[Patient.birthDatetime, </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; end of Measurement Period]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d11" href="#d11">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; )</span><span style="color: #000000; background-color: #efcb05; ">) &gt;= 90 </span><span class="sf17b16">then</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">1</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; )</span><span class="sf17b18">&nbsp;+ 1</span><span style="color: #000000; background-color: #efcb05; ">) &gt;= 90</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">else</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">0</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">exists</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Diagnosis</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Dx</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Dx.prevalencePeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">starts</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">on</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">before</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">day</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">return</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Age</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">between</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">50</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">54</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">e</span><span style="color: #000000; background-color: #efcb05; ">nd </span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Measurement</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Period([("Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Osteoporotic Fractures" using "Osteoporotic Fractures (2.16.840.1.113883.3.464.1003.113.12.10<wbr>50</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">a</span><span style="color: #000000; background-color: #efcb05; ">nd </span><span class="sf17b16">NumberOfRiskFactors</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&gt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">4</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Malabsorption</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Syndromes"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Malabsorption</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Syndromes</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(2.16.840.1.113883.3.464.1003.199.12.10<wbr>50)")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Chronic Malnutrition" using "Chronic Malnutrition (2.16.840.1.113883.</span><span style="color: #000000; background-color: #efcb05; ">3</span><span class="sf17b16">.464.1003.199.12.10<wbr>36</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Age</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">between</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">55</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">59</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Chronic</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Liver</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Disease"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Chronic</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Liver</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Disease</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">2</span><span class="sf17b16">.16.840.1.113883.3.464.1003.199.12.10<wbr>35</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">"</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">NumberOfRiskFactors</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&gt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">3</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: </span><span class="sf17b16">Rheumatoid Arthrit</span><span style="color: #000000; background-color: #efcb05; ">is" using "</span><span class="sf17b16">Rheumatoid</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Arthritis </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.113.12.10<wbr></span><span class="sf17b16">05</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Hyperthyroidism"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Hyperthyroidism</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(2.16.840.1.113883.3.464.1003.117.12.10<wbr>15)")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Age</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">between</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">60</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">63</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Type 1 Diabetes" using "Type 1 Diabetes (2.16.840.1.113883.3.464.1003.103.12.10<wbr>20)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">NumberOfRiskFactors</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&gt;= </span><span style="color: #000000; background-color: #efcb05; ">2</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b18">or exists </span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: </span><span class="sf17b16">Osteoporos</span><span style="color: #000000; background-color: #efcb05; ">is" using "</span><span class="sf17b16">Osteoporosis</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.113.12.10<wbr></span><span class="sf17b16">38</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">OsteoporosisDiagnosis</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">OsteoporosisDiagnosis.prevalencePeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">overlaps</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">before</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Measurement</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b18">or exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("Diagnosis: Type 1 Diabetes" using "Type 1 Diabetes (2.16.840.1.113883.3.464.1003.103.12.10<wbr>20)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Osteogenesis Imperfecta" using "Osteogenesis Imperfecta (2.16.840.1.113883.3.464.1003.113.12.10<wbr>44)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Osteogenesis Imperfecta" using "Osteogenesis Imperfecta (2.16.840.1.113883.3.464.1003.113.12.10<wbr>44)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Ankylosing Spondylitis" using "Ankylosing Spondylitis (2.16.840.1.113883.3.464.1003.113.12.10<wbr>45)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Ankylosing Spondylitis" using "Ankylosing Spondylitis (2.16.840.1.113883.3.464.1003.113.12.10<wbr>45)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Psoriatic Arthritis" using "Psoriatic Arthritis (2.16.840.1.113883.3.464.1003.113.12.10<wbr>46)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Psoriatic Arthritis" using "Psoriatic Arthritis (2.16.840.1.113883.3.464.1003.113.12.10<wbr>46)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Ehlers Danlos Syndrome" using "Ehlers Danlos Syndrome (2.16.840.1.113883.3.464.1003.113.12.10<wbr>47)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Ehlers Danlos Syndrome" using "Ehlers Danlos Syndrome (2.16.840.1.113883.3.464.1003.113.12.10<wbr>47)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Cushings Syndrome" using "Cushings Syndrome (2.16.840.1.113883.3.464.1003.117.12.10<wbr>09)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cushings Syndrome" using "Cushings Syndrome (2.16.840.1.113883.3.464.1003.117.12.10<wbr>09)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d12" href="#d12">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Marfan's Syndrome" using "Marfan's Syndrome (2.16.840.1.113883.3.464.1003.113.12.10<wbr>48)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Diagnosis: Hyperparathyroidism" using "Hyperparathyroidism (2.16.840.1.113883.3.464.1003.117.12.10<wbr>16)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Hyperparathyroidism" using "Hyperparathyroidism (2.16.840.1.113883.3.464.1003.117.12.10<wbr>16)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d13" href="#d13">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Diagnosis: </span><span class="sf17b16">Lupus</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Lupu</span><span style="color: #000000; background-color: #efcb05; ">s </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.11</span><span class="sf17b16">7</span><span style="color: #000000; background-color: #efcb05; ">.12.10<wbr></span><span class="sf17b16">10</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b18">) IndependentRiskDiagnosis</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: </span><span class="sf17b16">Marfan's Syndrome</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Marfan'</span><span style="color: #000000; background-color: #efcb05; ">s </span><span class="sf17b18">Syndrome </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.11</span><span class="sf17b16">3</span><span style="color: #000000; background-color: #efcb05; ">.12.10<wbr></span><span class="sf17b16">48</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IndependentRiskDiagnosis.prevalencePeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">starts</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">before</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Lupus"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Lupus (2.16.840.1.113883.3.464.1003.117.12.10<wbr>10)")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Measurement</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Multiple</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Myeloma" using "Multiple Myeloma (2.16.840.1.113883.3.464.1003.1011)")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">exists ( ( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Procedure, Performed</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Gastric</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Bypass Surgery</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Gastric</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Bypass</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Surgery </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.</span><span class="sf17b18">198.12.</span><span style="color: #000000; background-color: #efcb05; ">10<wbr></span><span class="sf17b16">50</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b18">GastricBypass</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Diagnosis</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Premature</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Menopause</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Premature</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Menopause</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.464.1003.</span><span style="color: #000000; background-color: #efcb05; ">10</span><span class="sf17b16">13</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Global.NormalizeInterval </span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">GastricBypass.relevantDatetime,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">GastricBypass.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">ends</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">before</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Diagnosis:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Eating</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Disorders"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Eating</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Disorders</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(2.16.840.1.113883.3.464.1003.1039)")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">union [("Diagnosis: Amenorrhea" using "Amenorrhea (2.16.840.1.113883.3.464.1003.1022</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">union ( [("Medication, Active: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.12<wbr>65</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">AromataseInhibitorActive</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">where Global.NormalizeInterval ( AromataseInhibitorActive.relevantDateti<wbr>me, AromataseInhibitorActive.relevantPeriod<wbr> </span><span style="color: #000000; background-color: #efcb05; ">) </span><span class="sf17b18">starts before start of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists Procedure Proc</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where Global.NormalizeInterval ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of </span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; end of Measurement Period([("Procedure, Performed: Chemotherapy" using "Chemotherapy (2.16.840.1.113883.3.526.3.485)")])</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( Procedure Proc</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where Global.NormalizeInterval ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of </span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; end of Measurement Period([("Procedure, Performed: Bilateral Oophorectomy" using "Bilateral Oophorectomy (2.16.840.1.113883.3.526.3.471)")]))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( Procedure Proc</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where Global.NormalizeInterval ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of </span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; end of Measurement Period([("Procedure, Performed: Evidence of Bilateral Oophorectomy" using "Evidence of Bilateral Oophorectomy (2.16.840.1.113883.3.464.1003.1048)")])<wbr>)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or ( exists ( Procedure Proc</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where Global.NormalizeInterval ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of </span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; end of Measurement Period(([("Procedure, Performed: Unilateral Oophorectomy, Unspecified Laterality" using "Unilateral Oophorectomy, Unspecified Laterality (2.16.840.1.113883.3.464.1003.1035)")] UnilateralOophorectomy</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where UnilateralOophorectomy.anatomicalLocati<wbr>onSite ~ (code "Right (qualifier value)" ("SNOMEDCT Code (24028007)"))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Unilateral Oophorectomy Right" using "Unilateral Oophorectomy Right (2.16.840.1.113883.3.464.1003.1032)")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; and exists ( Procedure Proc</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where Global.NormalizeInterval ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of </span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; end of Measurement Period(([("Procedure, Performed: Unilateral Oophorectomy, Unspecified Laterality" using "Unilateral Oophorectomy, Unspecified Laterality (2.16.840.1.113883.3.464.1003.1035)")] UnilateralOophorectomy</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where UnilateralOophorectomy.anatomicalLocati<wbr>onSite ~ (code "Left (qualifier value)" ("SNOMEDCT Code (7771000)"))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Unilateral Oophorectomy Left" using "Unilateral Oophorectomy Left (2.16.840.1.113883.3.464.1003.1028)")]</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d14" href="#d14">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union ( [("Medication, Order: Aromatase Inhibitors" using "Aromatase Inhibitors (2.16.840.1.113883.3.464.1003.196.12.12<wbr>65)")] AromataseInhibitorOrder</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where AromataseInhibitorOrder.authorDatetime before start of Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d15" href="#d15">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Assessment, Performed: Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment" using "Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment (LOINC Code 90265-0)")] ProbabilityAssessment</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where ProbabilityAssessment.result &gt;= 8.4 '%'</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; and start of Global.NormalizeInterval ( ProbabilityAssessment.relevantDatetime,<wbr> ProbabilityAssessment.relevantPeriod ) before start of Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d16" href="#d16">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; or exists Procedure Proc</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; where Global.NormalizeInterval ( Proc.relevantDatetime, Proc.relevantPeriod ) ends on or before day of </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; end of Measurement Period([("Procedure, Performed: Major Transplant" using "Major Transplant (2.16.840.1.113883.3.464.1003.198.12.10<wbr>75)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Procedure, Performed: Kidney Transplant" using "Kidney Transplant (2.16.840.1.113883.3.464.1003.109.12.10<wbr>12)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Procedure, Performed: Bone Marrow Transplant" using "Bone Marrow Transplant (2.16.840.1.113883.3.666.5.336)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists [("Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.10<wbr>51)")] DXA</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists [("Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.10<wbr>51)")] DXA</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where DXA.authorDatetime during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where DXA.authorDatetime during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d17" href="#d17">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; sort by authorDatetime asc</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d18" href="#d18">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">None</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b16">exists</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">( ( [("Assessment, Performed: Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment" using "Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment (LOINC Code 90265-0)")] FRAX</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; where FRAX.result &gt;= 8.4 '%'</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; union ( [("Assessment, Performed: Osteoporosis Risk Assessment Instrument" using "Osteoporosis Risk Assessment Instrument (LOINC Code 98139-9)")] ORAI</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where ORAI.result &gt;= 9</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; union ( [("Assessment, Performed: Osteoporosis Index of Risk panel" using "Osteoporosis Index of Risk panel (LOINC Code 98133-2)")] OSIRIS</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where OSIRIS.result &lt; 1.0</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; union ( [("Assessment, Performed: Osteoporosis Self-Assessment Tool" using "Osteoporosis Self-Assessment Tool (LOINC Code 98146-4)")] OST</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where OST.result &lt; 2.0</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; ) ) RiskAssessment</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where start of Global.NormalizeInterval ( RiskAssessment.relevantDatetime, RiskAssessment.relevantPeriod ) before First([("Diagnostic Study, Order: DXA (Dual energy Xray Absorptiometry) Scan" using "DXA (Dual energy Xray Absorptiometry) Scan (2.16.840.1.113883.3.464.1003.113.12.10<wbr>51)")] DXA</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; where DXA.authorDatetime during Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; sort by authorDatetime asc).authorDatetime</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

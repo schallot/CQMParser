@@ -1,0 +1,767 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS347v5.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS347v6.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cerebrovascular Disease</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">TIA" using "Cerebrovascular Disease</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">TIA (2.16.840.1.113762.1.4.1047.44)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Diagnosis: Cerebrovascular Disease</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or </span><span style="color: #000000; background-color: #efcb05; ">TIA" using "Cerebrovascular Disease</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or </span><span style="color: #000000; background-color: #efcb05; ">TIA (2.16.840.1.113762.1.4.1047.44)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)")] ) ASCVDDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)")] ) ASCVDDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where ASCVDDiagnosis.prevalencePeriod </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">s </span><span class="sf17b18">before </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ASCVDDiagnosis.prevalencePeriod </span><span class="sf17b16">overlap</span><span style="color: #000000; background-color: #efcb05; ">s </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union ( ( [("Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union ( ( [("Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before </span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">- Other</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Other </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.101.12.10<wbr>30</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">CPT Code 99429</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.10<wbr>26)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.10<wbr>26)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")] ) ValidEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")] ) ValidEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where ValidEncounter.relevantPeriod during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where ValidEncounter.relevantPeriod during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cerebrovascular Disease</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">TIA" using "Cerebrovascular Disease</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">TIA (2.16.840.1.113762.1.4.1047.44)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Diagnosis: Cerebrovascular Disease</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or </span><span style="color: #000000; background-color: #efcb05; ">TIA" using "Cerebrovascular Disease</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or </span><span style="color: #000000; background-color: #efcb05; ">TIA (2.16.840.1.113762.1.4.1047.44)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)")] ) ASCVDDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)")] ) ASCVDDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where ASCVDDiagnosis.prevalencePeriod </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">s </span><span class="sf17b18">before </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ASCVDDiagnosis.prevalencePeriod </span><span class="sf17b16">overlap</span><span style="color: #000000; background-color: #efcb05; ">s </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union ( ( [("Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union ( ( [("Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before </span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">- Other</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Other </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.101.12.10<wbr>30</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">CPT Code 99429</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.10<wbr>26)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.10<wbr>26)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")] ) ValidEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")] ) ValidEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where ValidEncounter.relevantPeriod during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where ValidEncounter.relevantPeriod during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">exists ( ( [("Diagnosis: </span><span class="sf17b18">Pregnancy or Other Related Diagnoses" using "Pregnancy or Other Related Diagnoses (2.16.840.1.113883.3.600.1.1623)")]</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">exists ( ( [("Diagnosis: </span><span style="color: #000000; background-color: #efcb05; ">Breastfeeding" using "Breastfeeding (2.16.840.1.113762.1.4.1047.73)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: </span><span style="color: #000000; background-color: #efcb05; ">Breastfeeding" using "Breastfeeding (2.16.840.1.113762.1.4.1047.73)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Rhabdomyolysis" using "Rhabdomyolysis (2.16.840.1.113762.1.4.1047.102)")] ) ExclusionDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Rhabdomyolysis" using "Rhabdomyolysis (2.16.840.1.113762.1.4.1047.102)")] ) ExclusionDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where ExclusionDiagnosis.prevalencePeriod overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where ExclusionDiagnosis.prevalencePeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( [("Medication, Order: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( [("Medication, Order: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Medication, Order: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Medication, Order: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Medication, Order: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)")] ) StatinOrdered</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Medication, Order: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)")] ) StatinOrdered</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where StatinOrdered.authorDatetime during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where StatinOrdered.authorDatetime during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or exists ( [("Medication, Active: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; or exists ( [("Medication, Active: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Medication, Active: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Medication, Active: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Medication, Active: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)")] ) ActiveStatin</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Medication, Active: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)")] ) ActiveStatin</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ActiveStatin.relevantDatetime, ActiveStatin.relevantPeriod ) overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.NormalizeInterval ( ActiveStatin.relevantDatetime, ActiveStatin.relevantPeriod ) overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists [("Allergy/Intolerance: Statin Allergen" using "Statin Allergen (2.16.840.1.113762.1.4.1110.42)")] StatinAllergy</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists [("Allergy/Intolerance: Statin Allergen" using "Statin Allergen (2.16.840.1.113762.1.4.1110.42)")] StatinAllergy</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where StatinAllergy.prevalencePeriod overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where StatinAllergy.prevalencePeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or </span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Intervention</span><span style="color: #000000; background-color: #efcb05; ">, </span><span class="sf17b16">Order</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Hospice</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Care Ambulatory</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Hospice</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Care</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Ambulatory </span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.</span><span class="sf17b16">52</span><span style="color: #000000; background-color: #efcb05; ">6.</span><span class="sf17b16">3</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">1584</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; or </span><span class="sf17b18">Hospice.</span><span style="color: #000000; background-color: #efcb05; ">exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">, </span><span class="sf17b16">Performed</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Inpatient</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Inpatient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(2.16.840.1.113883.3.</span><span class="sf17b16">66</span><span style="color: #000000; background-color: #efcb05; ">6.</span><span class="sf17b16">5</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">307</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b18">InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Intervention,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Order:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Palliative</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Hospice Care</span><span style="color: #000000; background-color: #efcb05; ">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Palliativ</span><span style="color: #000000; background-color: #efcb05; ">e </span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b16">H</span><span style="color: #000000; background-color: #efcb05; ">ospice </span><span class="sf17b16">C</span><span style="color: #000000; background-color: #efcb05; ">are (</span><span class="sf17b16">2.16.840.1.113883.3.600.1.1579</span><span style="color: #000000; background-color: #efcb05; ">)"</span><span class="sf17b18">)]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">PalliativeOrHospiceCareOrder</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">InpatientEncounter.dischargeDisposition<wbr></span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">~</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">"</span><span class="sf17b18">Discharge</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">to</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">hom</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b18">f</span><span style="color: #000000; background-color: #efcb05; ">or </span><span class="sf17b16">h</span><span style="color: #000000; background-color: #efcb05; ">ospice </span><span class="sf17b16">c</span><span style="color: #000000; background-color: #efcb05; ">are (</span><span class="sf17b16">procedure</span><span style="color: #000000; background-color: #efcb05; ">)"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">("SNOMEDCT</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">(428361000124107)"))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">where</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">PalliativeOrHospiceCareOrd</span><span style="color: #000000; background-color: #efcb05; ">er.</span><span class="sf17b16">authorDate<wbr>time</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">on</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">befor</span><span style="color: #000000; background-color: #efcb05; ">e </span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">InpatientEncount</span><span style="color: #000000; background-color: #efcb05; ">er.</span><span class="sf17b16">dischargeDisposition<wbr></span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">~</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Discharg</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b18">to healthcare facility for hospice care (procedure)" ("SNOMEDCT Code (428371000124100)"))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">)</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span class="sf17b16">and</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">InpatientEncounter.relevantPeriod ends during day of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; or exists ( ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">")]</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Intervention</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span class="sf17b18">Palliative or </span><span style="color: #000000; background-color: #efcb05; ">Hospice </span><span class="sf17b16">Care</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b18">Palliative or </span><span style="color: #000000; background-color: #efcb05; ">Hospice </span><span class="sf17b16">Care</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;(2.16.840.1.113883.3.</span><span class="sf17b16">600</span><span style="color: #000000; background-color: #efcb05; ">.1</span><span style="color: #000000; background-color: #efcb05; ">.1</span><span class="sf17b16">579</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">PalliativeOrHospiceCarePerformed</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">or</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span style="color: #000000; background-color: #efcb05; ">Hospice </span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span style="color: #000000; background-color: #efcb05; ">Hospice </span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;(2.16.840.1.113883.3.</span><span class="sf17b16">464</span><span style="color: #000000; background-color: #efcb05; ">.1</span><span class="sf17b18">003</span><span style="color: #000000; background-color: #efcb05; ">.1</span><span class="sf17b16">003</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">HospiceEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where </span><span class="sf17b16">Global</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b18">NormalizeInterval ( PalliativeOrHospiceCarePerformed.releva<wbr>ntDatetime, PalliativeOrHospiceCarePerformed.</span><span style="color: #000000; background-color: #efcb05; ">releva<wbr>ntPeriod </span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">starts</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">on</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or before </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where </span><span class="sf17b16">HospiceEncounter</span><span style="color: #000000; background-color: #efcb05; ">.</span><span style="color: #000000; background-color: #efcb05; ">relevantPeriod </span><span class="sf17b16">overlaps</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Measurement</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">end</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">of Measurement Period</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( [("Assessment, Performed: Hospice care [Minimum Data Set]" using "Hospice care [Minimum Data Set] (LOINC Code 45755-6)")] HospiceAssessment</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where HospiceAssessment.result ~ (code "Yes (qualifier value)" ("SNOMEDCT Code (373066001)"))</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; and Global.NormalizeInterval ( HospiceAssessment.relevantDatetime, HospiceAssessment.relevantPeriod ) overlaps Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( [("Intervention, Order: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospiceOrder</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where HospiceOrder.authorDatetime during day of Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( [("Intervention, Performed: Hospice Care Ambulatory" using "Hospice Care Ambulatory (2.16.840.1.113883.3.526.3.1584)")] HospicePerformed</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( HospicePerformed.relevantDatetime, HospicePerformed.relevantPeriod ) overlaps Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; )</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or PalliativeCare.exists ( [("Assessment, Performed: Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)" using "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal) (LOINC Code 71007-9)")] PalliativeAssessment</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; where Global.NormalizeInterval(PalliativeAsse<wbr>ssment.relevantDatetime, PalliativeAssessment.relevantPeriod) overlaps Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">or exists ([("Diagnosis: Encounter for palliative care" using "Encounter for palliative care (ICD10CM Code Z51.5)")] PalliativeDiagnosis</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">where PalliativeDiagnosis.prevalencePeriod overlaps Measurement Period)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; or exists ( [("Encounter, Performed: Palliative Care Encounter" using "Palliative Care Encounter (2.16.840.1.113883.3.464.1003.101.12.10<wbr>90)")] PalliativeEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; where PalliativeEncounter.relevantPeriod overlaps Measurement Period</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d10" href="#d10">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; or exists ( [("</span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">for</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">palliative care</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Encounter</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">for</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">palliative</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">care </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">ICD10CM Code Z51</span><span style="color: #000000; background-color: #efcb05; ">.</span><span style="color: #000000; background-color: #efcb05; ">5)")] Palliative</span><span class="sf17b16">Encounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; or exists ( [("</span><span class="sf17b16">Intervention</span><span style="color: #000000; background-color: #efcb05; ">, Performed: </span><span class="sf17b16">Palliative</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Care</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Intervention</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Palliative</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Care</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Intervention</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b18">16.840.1.113883.3.464.1003.198.12.11<wbr>3</span><span style="color: #000000; background-color: #efcb05; ">5)")] Palliative</span><span class="sf17b16">Intervention</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where </span><span class="sf17b16">PalliativeEncounter</span><span style="color: #000000; background-color: #efcb05; ">.</span><span style="color: #000000; background-color: #efcb05; ">relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">s </span><span class="sf17b18">on or before </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; where </span><span class="sf17b16">Global</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b18">NormalizeInterval(PalliativeInte<wbr>rvention.relevantDatetime, PalliativeIntervention.</span><span style="color: #000000; background-color: #efcb05; ">relevantPeriod</span><span class="sf17b18">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">overlap</span><span style="color: #000000; background-color: #efcb05; ">s </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or exists ( ( [("Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.10<wbr>24)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; or exists ( ( [("Diagnosis: Hepatitis A" using "Hepatitis A (2.16.840.1.113883.3.464.1003.110.12.10<wbr>24)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.67.1.101.1.269)")]<wbr></span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Hepatitis B" using "Hepatitis B (2.16.840.1.113883.3.67.1.101.1.269)")]<wbr></span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Liver Disease" using "Liver Disease (2.16.840.1.113762.1.4.1047.42)")] ) HepatitisLiverDisease</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Liver Disease" using "Liver Disease (2.16.840.1.113762.1.4.1047.42)")] ) HepatitisLiverDisease</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where HepatitisLiverDisease.prevalencePeriod overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where HepatitisLiverDisease.prevalencePeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d11" href="#d11">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or exists ( [("Diagnosis: Statin Associated Muscle Symptoms" using "Statin Associated Muscle Symptoms (2.16.840.1.113762.1.4.1108.85)")] StatinMuscleSymptom</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; or exists ( [("Diagnosis: Statin Associated Muscle Symptoms" using "Statin Associated Muscle Symptoms (2.16.840.1.113762.1.4.1108.85)")] StatinMuscleSymptom</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where StatinMuscleSymptom.prevalencePeriod overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where StatinMuscleSymptom.prevalencePeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d12" href="#d12">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or exists ( [("Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)")] ESRD</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; or exists ( [("Diagnosis: End Stage Renal Disease" using "End Stage Renal Disease (2.16.840.1.113883.3.526.3.353)")] ESRD</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where ESRD.prevalencePeriod overlaps Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where ESRD.prevalencePeriod overlaps Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d13" href="#d13">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; or exists [("Adverse Event: Statin Allergen" using "Statin Allergen (2.16.840.1.113762.1.4.1110.42)")] StatinReaction</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; or exists [("Adverse Event: Statin Allergen" using "Statin Allergen (2.16.840.1.113762.1.4.1110.42)")] StatinReaction</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where StatinReaction.relevantDatetime during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where StatinReaction.relevantDatetime during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d14" href="#d14">.</a></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; or exists ( ( [("Medication, Not Ordered: Low Intensity Statin Therapy" using "Low Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1574)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Medication, Not Ordered: Moderate Intensity Statin Therapy" using "Moderate Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1575)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Medication, Not Ordered: High Intensity Statin Therapy" using "High Intensity Statin Therapy (2.16.840.1.113883.3.526.3.1572)")] ) NoStatinTherapyOrdered</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; with ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services Established Office Visit, 18 and Up" using "Preventive Care Services Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Unlisted preventive medicine service" using "Unlisted preventive medicine service (CPT Code 99429)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services Individual Counseling" using "Preventive Care Services Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.10<wbr>26)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services Initial Office Visit, 18 and Up" using "Preventive Care Services Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")] ) ValidEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; where ValidEncounter.relevantPeriod during Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; such that NoStatinTherapyOrdered.authorDatetime during QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where NoStatinTherapyOrdered.negationRational<wbr>e in (valueset "Medical Reason" (2.16.840.1.113883.3.526.3.1007))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Population Criteria 1:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Population Criteria 1:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">exists ( ( [("Diagnosis: Myocardial Infarction" using "Myocardial Infarction (2.16.840.1.113883.3.526.3.403)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d15" href="#d15">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Cerebrovascular Disease</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">TIA" using "Cerebrovascular Disease</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span class="sf17b18">,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">TIA (2.16.840.1.113762.1.4.1047.44)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; union [("Diagnosis: Cerebrovascular Disease</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or </span><span style="color: #000000; background-color: #efcb05; ">TIA" using "Cerebrovascular Disease</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;Stroke</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">or </span><span style="color: #000000; background-color: #efcb05; ">TIA (2.16.840.1.113762.1.4.1047.44)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Atherosclerosis and Peripheral Arterial Disease" using "Atherosclerosis and Peripheral Arterial Disease (2.16.840.1.113762.1.4.1047.21)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Ischemic Heart Disease or Other Related Diagnoses" using "Ischemic Heart Disease or Other Related Diagnoses (2.16.840.1.113762.1.4.1047.46)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)")] ) ASCVDDiagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Diagnosis: Stable and Unstable Angina" using "Stable and Unstable Angina (2.16.840.1.113762.1.4.1047.47)")] ) ASCVDDiagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d16" href="#d16">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where ASCVDDiagnosis.prevalencePeriod </span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">s </span><span class="sf17b18">before </span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; where ASCVDDiagnosis.prevalencePeriod </span><span class="sf17b16">overlap</span><span style="color: #000000; background-color: #efcb05; ">s </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; end of </span><span style="color: #000000; background-color: #efcb05; ">Measurement Period</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union ( ( [("Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union ( ( [("Procedure, Performed: PCI" using "PCI (2.16.840.1.113762.1.4.1045.67)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG Surgeries" using "CABG Surgeries (2.16.840.1.113883.3.666.5.694)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Carotid Intervention" using "Carotid Intervention (2.16.840.1.113883.3.117.1.7.1.204)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: CABG, PCI Procedure" using "CABG, PCI Procedure (2.16.840.1.113762.1.4.1138.566)")] ) ASCVDProcedure</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before </span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.NormalizeInterval ( ASCVDProcedure.relevantDatetime, ASCVDProcedure.relevantPeriod ) starts before </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; end of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; and exists ( [("Encounter, Performed: Annual Wellness Visit" using "Annual Wellness Visit (2.16.840.1.113883.3.526.3.1240)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Office Visit" using "Office Visit (2.16.840.1.113883.3.464.1003.101.12.10<wbr>01)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Consultation" using "Outpatient Consultation (2.16.840.1.113883.3.464.1003.101.12.10<wbr>08)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Outpatient Encounters for Preventive Care" using "Outpatient Encounters for Preventive Care (2.16.840.1.113883.3.526.3.1576)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d17" href="#d17">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span class="sf17b18">- </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up" using "Preventive Care Services </span><span style="color: #000000; background-color: #efcb05; ">Established Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>25)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">- Other</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Preventive</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Car</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">Services</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">Other </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">2.16.840.1.113883.3.464.1003.101.12.10<wbr>30</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: </span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Unlisted</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">preventiv</span><span style="color: #000000; background-color: #efcb05; ">e </span><span class="sf17b16">medicine</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">service</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b16">CPT Code 99429</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.10<wbr>26)")]</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Individual Counseling (2.16.840.1.113883.3.464.1003.101.12.10<wbr>26)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">-</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")] ) ValidEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union [("Encounter, Performed: Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up" using "Preventive Care Services</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">Initial Office Visit, 18 and Up (2.16.840.1.113883.3.464.1003.101.12.10<wbr>23)")] ) ValidEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where ValidEncounter.relevantPeriod during Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where ValidEncounter.relevantPeriod during Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

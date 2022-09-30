@@ -1,0 +1,763 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS9v10.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS9v11.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d10" href="#d10">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d11" href="#d11">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d12" href="#d12">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d13" href="#d13">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d14" href="#d14">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d15" href="#d15">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( QualifyingEncounter.facilityLocations Location</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( QualifyingEncounter.facilityLocations Location</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Location.code in (valueset "Neonatal Intensive Care Unit (NICU)" (2.16.840.1.113762.1.4.1029.205))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Location.code in (valueset "Neonatal Intensive Care Unit (NICU)" (2.16.840.1.113762.1.4.1029.205))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)) //in case newborn was transferred to regular Intensive Care Unit for special care.</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; or Location.code in (valueset "Intensive Care Unit" (2.16.840.1.113762.1.4.1029.206)) //in case newborn was transferred to regular Intensive Care Unit for special care.</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; or QualifyingEncounter.dischargeDispositio<wbr>n in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; or QualifyingEncounter.dischargeDispositio<wbr>n in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; or QualifyingEncounter.dischargeDispositio<wbr>n in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; or QualifyingEncounter.dischargeDispositio<wbr>n in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; or QualifyingEncounter.dischargeDispositio<wbr>n in (valueset "Other Health Care Facility" (2.16.840.1.113762.1.4.1029.67))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; or QualifyingEncounter.dischargeDispositio<wbr>n in (valueset "Other Health Care Facility" (2.16.840.1.113762.1.4.1029.67))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d16" href="#d16">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d17" href="#d17">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d18" href="#d18">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d19" href="#d19">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d20" href="#d20">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( QualifyingEncounter.relevantPeriod ) &gt; 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( QualifyingEncounter.relevantPeriod ) &gt; 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union ( PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union ( PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d21" href="#d21">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d22" href="#d22">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d23" href="#d23">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d24" href="#d24">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d25" href="#d25">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; with ( [("Procedure, Performed: Parenteral Nutrition" using "Parenteral Nutrition (2.16.840.1.113883.3.117.1.7.1.38)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; with ( [("Procedure, Performed: Parenteral Nutrition" using "Parenteral Nutrition (2.16.840.1.113883.3.117.1.7.1.38)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; union [("Medication, Administered: Total Parenteral Nutrition" using "Total Parenteral Nutrition (2.16.840.1.113762.1.4.1110.54)")] ) ParenteralNutrition</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Medication, Administered: Total Parenteral Nutrition" using "Total Parenteral Nutrition (2.16.840.1.113762.1.4.1110.54)")] ) ParenteralNutrition</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( ParenteralNutrition.relevantDatetime, ParenteralNutrition.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( ParenteralNutrition.relevantDatetime, ParenteralNutrition.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d26" href="#d26">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union ( PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union ( PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d27" href="#d27">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d28" href="#d28">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d29" href="#d29">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d30" href="#d30">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d31" href="#d31">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where exists ( QualifyingEncounter.diagnoses BirthEncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( QualifyingEncounter.diagnoses BirthEncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where BirthEncounterDiagnoses.code in (valueset "Galactosemia" (2.16.840.1.113883.3.117.1.7.1.35))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where BirthEncounterDiagnoses.code in (valueset "Galactosemia" (2.16.840.1.113883.3.117.1.7.1.35))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">PCNewborn.( [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d32" href="#d32">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that GestationalAge.result &gt;= 37 weeks</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d33" href="#d33">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; and Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( InpatientEncounter.diagnoses EncounterDiagnoses</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where EncounterDiagnoses.code in (valueset "Single Live Born Newborn Born in Hospital" (2.16.840.1.113883.3.117.1.7.1.26))</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d34" href="#d34">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; ) SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; ) SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Assessment, Performed: Gestational age--at birth" using "Gestational age--at birth (LOINC Code 76516-4)")] GestationalAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d35" href="#d35">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( GestationalAge.relevantDatetime, GestationalAge.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and GestationalAge.result is not null</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Assessment, Performed: Birth Weight" using "Birth Weight (2.16.840.1.113762.1.4.1029.194)")] BirthWeight</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d36" href="#d36">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">irth</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod<wbr></span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.EarliestOf ( BirthWeight.relevantDatetime, BirthWeight.relevantPeriod ) during SingleLiveB</span><span class="sf17b16">orn</span><span style="color: #000000; background-color: #efcb05; ">Encounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and BirthWeight.result &gt;= 3000 'g' ) SingleLiveTermEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where SingleLiveTermEncounter.relevantPeriod ends during day of Measurement Period QualifyingEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Substance, Administered: Breast Milk" using "Breast Milk (2.16.840.1.113883.3.117.1.7.1.30)")] BreastMilkFeeding</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Substance, Administered: Breast Milk" using "Breast Milk (2.16.840.1.113883.3.117.1.7.1.30)")] BreastMilkFeeding</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( BreastMilkFeeding.relevantDatetime, BreastMilkFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that Global.NormalizeInterval ( BreastMilkFeeding.relevantDatetime, BreastMilkFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; without [("Substance, Administered: Dietary Intake Other than Breast Milk" using "Dietary Intake Other than Breast Milk (2.16.840.1.113883.3.117.1.7.1.27)")] OtherFeeding</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; without [("Substance, Administered: Dietary Intake Other than Breast Milk" using "Dietary Intake Other than Breast Milk (2.16.840.1.113883.3.117.1.7.1.27)")] OtherFeeding</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( OtherFeeding.relevantDatetime, OtherFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that Global.NormalizeInterval ( OtherFeeding.relevantDatetime, OtherFeeding.relevantPeriod ) starts during QualifyingEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

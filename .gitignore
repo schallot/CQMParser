@@ -12,3 +12,7 @@ CQMParse/bin/Debug/net6.0/
 .vs/CQMParser/v17/
 
 .vs/ProjectEvaluation/
+
+CQMVersionCompare/obj/
+
+CQMVersionCompare/bin/

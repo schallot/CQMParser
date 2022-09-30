@@ -1,0 +1,923 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS72v10.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS72v11.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.HospitalizationWithObservationLe<wbr>ngthofStay ( IschemicStrokeEncounter ) &lt; 2</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.HospitalizationWithObservationLe<wbr>ngthofStay ( IschemicStrokeEncounter ) &lt; 2</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with TJC.[("Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with TJC.[("Intervention, Order: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")] ComfortMeasures</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Intervention, Performed: Comfort Measures" using "Comfort Measures (1.3.6.1.4.1.33895.1.3.0.45)")] ComfortMeasures</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Coalesce(start of Global.NormalizeInterval(ComfortMeasure<wbr>s.relevantDatetime, ComfortMeasures.relevantPeriod), ComfortMeasures.authorDatetime)during </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Coalesce(start of Global.NormalizeInterval(ComfortMeasure<wbr>s.relevantDatetime, ComfortMeasures.relevantPeriod), ComfortMeasures.authorDatetime)during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Medication, Administered: Thrombolytic (t-PA) Therapy" using "Thrombolytic (t-PA) Therapy (2.16.840.1.113883.3.117.1.7.1.226)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Medication, Administered: Thrombolytic (t-PA) Therapy" using "Thrombolytic (t-PA) Therapy (2.16.840.1.113883.3.117.1.7.1.226)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Procedure, Performed: Intravenous or Intra-arterial Thrombolytic (t-PA) Therapy" using "Intravenous or Intra-arterial Thrombolytic (t-PA) Therapy (2.16.840.1.113762.1.4.1045.21)")] ThrombolyticTherapy</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Procedure, Performed: Intravenous or Intra-arterial Thrombolytic (t-PA) Therapy" using "Intravenous or Intra-arterial Thrombolytic (t-PA) Therapy (2.16.840.1.113762.1.4.1045.21)")] ThrombolyticTherapy</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( ThrombolyticTherapy.relevantDatetime, ThrombolyticTherapy.relevantPeriod ) starts during Interval[start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) - 24 hours, </span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that Global.NormalizeInterval ( ThrombolyticTherapy.relevantDatetime, ThrombolyticTherapy.relevantPeriod ) starts during Interval[start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) - 24 hours, </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; end of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; end of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists IschemicStrokeEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists IschemicStrokeEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Intravenous or Intra arterial Thrombolytic (tPA) Therapy Prior to Arrival" (2.16.840.1.113762.1.4.1110.21))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where Diagnosis.code in (valueset "Intravenous or Intra arterial Thrombolytic (tPA) Therapy Prior to Arrival" (2.16.840.1.113762.1.4.1110.21))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [Diagnosis: (valueset "Intravenous or Intra arterial Thrombolytic (tPA) Therapy Prior to Arrival" (2.16.840.1.113762.1.4.1110.21))] PriorTPA</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [Diagnosis: (valueset "Intravenous or Intra arterial Thrombolytic (tPA) Therapy Prior to Arrival" (2.16.840.1.113762.1.4.1110.21))] PriorTPA</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that PriorTPA.authorDatetime during Global.HospitalizationWithObservation ( IschemicStrokeEncounter )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that PriorTPA.authorDatetime during Global.HospitalizationWithObservation ( IschemicStrokeEncounter )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Medication, Administered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] Antithrombotic</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Medication, Administered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] Antithrombotic</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d10" href="#d10">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( Antithrombotic.relevantDatetime, Antithrombotic.relevantPeriod ) starts during </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.NormalizeInterval ( Antithrombotic.relevantDatetime, Antithrombotic.relevantPeriod ) starts during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d11" href="#d11">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Medication, Not Ordered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] NoAntithromboticOrder</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Medication, Not Ordered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] NoAntithromboticOrder</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where NoAntithromboticOrder.negationRationale<wbr> in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where NoAntithromboticOrder.negationRationale<wbr> in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; or NoAntithromboticOrder.negationRationale<wbr> in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; or NoAntithromboticOrder.negationRationale<wbr> in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union [("Medication, Not Administered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] NoAntithromboticGiven</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union [("Medication, Not Administered: Antithrombotic Therapy" using "Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.62)")] NoAntithromboticGiven</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where NoAntithromboticGiven.negationRationale<wbr> in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where NoAntithromboticGiven.negationRationale<wbr> in (valueset "Medical Reason" (2.16.840.1.113883.3.117.1.7.1.473))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; or NoAntithromboticGiven.negationRationale<wbr> in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93)) NoAntithrombotic</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; or NoAntithromboticGiven.negationRationale<wbr> in (valueset "Patient Refusal" (2.16.840.1.113883.3.117.1.7.1.93)) NoAntithrombotic</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d12" href="#d12">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that NoAntithrombotic.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that NoAntithrombotic.authorDatetime during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d13" href="#d13">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Medication, Administered: Pharmacological Contraindications For Antithrombotic Therapy" using "Pharmacological Contraindications For Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.52)")] PharmacologicalContraindications</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Medication, Administered: Pharmacological Contraindications For Antithrombotic Therapy" using "Pharmacological Contraindications For Antithrombotic Therapy (2.16.840.1.113762.1.4.1110.52)")] PharmacologicalContraindications</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d14" href="#d14">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.NormalizeInterval ( PharmacologicalContraindications.releva<wbr>ntDatetime, PharmacologicalContraindications.releva<wbr>ntPeriod ) starts during </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that Global.NormalizeInterval ( PharmacologicalContraindications.releva<wbr>ntDatetime, PharmacologicalContraindications.releva<wbr>ntPeriod ) starts during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; union TJC.[("Encounter, Performed: Non-Elective Inpatient Encounter" using "Non-Elective Inpatient Encounter (2.16.840.1.113883.3.117.1.7.1.424)")] NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where Global.LengthInDays ( NonElectiveEncounter.relevantPeriod ) &lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and NonElectiveEncounter.relevantPeriod ends during day of Measurement Period NonElectiveEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( NonElectiveEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and ( Diagnosis.code in (valueset "Hemorrhagic Stroke" (2.16.840.1.113883.3.117.1.7.1.212))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) AllStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) AllStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d15" href="#d15">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using "Birth date </span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of AllStrokeEncounter.relevantPeriod</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b16">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 EncounterWithAge</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( EncounterWithAge.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "Ischemic Stroke" (2.16.840.1.113883.3.117.1.7.1.247))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and Diagnosis.rank = 1</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; ) IschemicStrokeEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; ) IschemicStrokeEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Laboratory Test, Performed: INR" using "INR (2.16.840.1.113883.3.117.1.7.1.213)")] INR</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with [("Laboratory Test, Performed: INR" using "INR (2.16.840.1.113883.3.117.1.7.1.213)")] INR</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d16" href="#d16">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; such that INR.resultDatetime during </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; such that INR.resultDatetime during </span><span class="sf17b18">day of </span><span style="color: #000000; background-color: #efcb05; ">TJC.CalendarDayOfOrDayAfter ( start of Global.HospitalizationWithObservation ( IschemicStrokeEncounter ) )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and INR.result &gt; 3.5</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; and INR.result &gt; 3.5</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

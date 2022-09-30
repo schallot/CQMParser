@@ -1,0 +1,527 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WinMerge File Compare Report</title>
+<style type="text/css">
+<!--
+table {margin: 0; border: 1px solid #a0a0a0; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);}
+td,th {word-break: break-all; font-size: 12pt;padding: 0 3px;}
+tr { vertical-align: top; }
+.title {color: white; background-color: blue; vertical-align: top; padding: 4px 4px; background: linear-gradient(mediumblue, darkblue);}
+.sf3b2 {color: #000000; background-color: #ffffff; }
+.sf3b5 {color: #000000; background-color: #0078d7; }
+.sf3b14 {color: #000000; background-color: #ffa0a0; }
+.sf3b16 {color: #000000; background-color: #f1e2ad; }
+.sf3b18 {color: #000000; background-color: #ffaa82; }
+.sf3b19 {color: #000000; background-color: #c8816c; }
+.sf6b2 {color: #ffffff; background-color: #ffffff; }
+.sf6b5 {color: #ffffff; background-color: #0078d7; }
+.sf6b14 {color: #ffffff; background-color: #ffa0a0; }
+.sf6b16 {color: #ffffff; background-color: #f1e2ad; }
+.sf6b18 {color: #ffffff; background-color: #ffaa82; }
+.sf6b19 {color: #ffffff; background-color: #c8816c; }
+.sf7b2 {color: #0000ff; background-color: #ffffff; font-weight: bold; }
+.sf7b5 {color: #0000ff; background-color: #0078d7; font-weight: bold; }
+.sf7b14 {color: #0000ff; background-color: #ffa0a0; font-weight: bold; }
+.sf7b16 {color: #0000ff; background-color: #f1e2ad; font-weight: bold; }
+.sf7b18 {color: #0000ff; background-color: #ffaa82; font-weight: bold; }
+.sf7b19 {color: #0000ff; background-color: #c8816c; font-weight: bold; }
+.sf8b2 {color: #800080; background-color: #ffffff; }
+.sf8b5 {color: #800080; background-color: #0078d7; }
+.sf8b14 {color: #800080; background-color: #ffa0a0; }
+.sf8b16 {color: #800080; background-color: #f1e2ad; }
+.sf8b18 {color: #800080; background-color: #ffaa82; }
+.sf8b19 {color: #800080; background-color: #c8816c; }
+.sf9b2 {color: #008000; background-color: #ffffff; }
+.sf9b5 {color: #008000; background-color: #0078d7; }
+.sf9b14 {color: #008000; background-color: #ffa0a0; }
+.sf9b16 {color: #008000; background-color: #f1e2ad; }
+.sf9b18 {color: #008000; background-color: #ffaa82; }
+.sf9b19 {color: #008000; background-color: #c8816c; }
+.sf10b2 {color: #ff0000; background-color: #ffffff; }
+.sf10b5 {color: #ff0000; background-color: #0078d7; }
+.sf10b14 {color: #ff0000; background-color: #ffa0a0; }
+.sf10b16 {color: #ff0000; background-color: #f1e2ad; }
+.sf10b18 {color: #ff0000; background-color: #ffaa82; }
+.sf10b19 {color: #ff0000; background-color: #c8816c; }
+.sf11b2 {color: #606060; background-color: #ffffff; }
+.sf11b5 {color: #606060; background-color: #0078d7; }
+.sf11b14 {color: #606060; background-color: #ffa0a0; }
+.sf11b16 {color: #606060; background-color: #f1e2ad; }
+.sf11b18 {color: #606060; background-color: #ffaa82; }
+.sf11b19 {color: #606060; background-color: #c8816c; }
+.sf12b2 {color: #800000; background-color: #ffffff; }
+.sf12b5 {color: #800000; background-color: #0078d7; }
+.sf12b14 {color: #800000; background-color: #ffa0a0; }
+.sf12b16 {color: #800000; background-color: #f1e2ad; }
+.sf12b18 {color: #800000; background-color: #ffaa82; }
+.sf12b19 {color: #800000; background-color: #c8816c; }
+.sf13b2 {color: #0080c0; background-color: #ffffff; }
+.sf13b5 {color: #0080c0; background-color: #0078d7; }
+.sf13b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf13b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf13b18 {color: #0080c0; background-color: #ffaa82; }
+.sf13b19 {color: #0080c0; background-color: #c8816c; }
+.sf15b2 {color: #000000; background-color: #ffffff; }
+.sf15b5 {color: #000000; background-color: #0078d7; }
+.sf15b14 {color: #000000; background-color: #ffa0a0; }
+.sf15b16 {color: #000000; background-color: #f1e2ad; }
+.sf15b18 {color: #000000; background-color: #ffaa82; }
+.sf15b19 {color: #000000; background-color: #c8816c; }
+.sf17b2 {color: #000000; background-color: #ffffff; }
+.sf17b5 {color: #000000; background-color: #0078d7; }
+.sf17b14 {color: #000000; background-color: #ffa0a0; }
+.sf17b16 {color: #000000; background-color: #f1e2ad; }
+.sf17b18 {color: #000000; background-color: #ffaa82; }
+.sf17b19 {color: #000000; background-color: #c8816c; }
+.sf20b2 {color: #000080; background-color: #ffffff; }
+.sf20b5 {color: #000080; background-color: #0078d7; }
+.sf20b14 {color: #000080; background-color: #ffa0a0; }
+.sf20b16 {color: #000080; background-color: #f1e2ad; }
+.sf20b18 {color: #000080; background-color: #ffaa82; }
+.sf20b19 {color: #000080; background-color: #c8816c; }
+.sf21b2 {color: #0080c0; background-color: #ffffff; }
+.sf21b5 {color: #0080c0; background-color: #0078d7; }
+.sf21b14 {color: #0080c0; background-color: #ffa0a0; }
+.sf21b16 {color: #0080c0; background-color: #f1e2ad; }
+.sf21b18 {color: #0080c0; background-color: #ffaa82; }
+.sf21b19 {color: #0080c0; background-color: #c8816c; }
+.ln {text-align: right; word-break: normal; color: #000000; background-color: #f0f0f0;}
+-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" style="width:100%;">
+<thead>
+<tr>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS506v4.txt</th>
+<th colspan="2" class="title" style="width:50.000000%">C:\code\CQMParser\CompiledMeasures\CMS506v5.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Initial Population:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d1" href="#d1">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of InpatientHospitalEncounter.relevantPeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of InpatientHospitalEncounter.relevantPeri<wbr>od</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 InpatientEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with ( [("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with ( [("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d2" href="#d2">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; w</span><span class="sf17b16">ith</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">"Patient Characteristic Birthdate: Birth </span><span style="color: #000000; background-color: #efcb05; ">date</span><span class="sf17b18">"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">"Birth date (LOINC Code 21112-8)")] BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; w</span><span class="sf17b16">here</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">AgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">from</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">start of InpatientHospitalEncounter.relevantPeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 InpatientEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; such that Global.CalendarAgeInYearsAt ( BirthDate.birthDatetime, </span><span style="color: #000000; background-color: #efcb05; ">start of InpatientHospitalEncounter.relevantPeri<wbr>od</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">&gt;= 18 InpatientEncounter</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with ( [("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; with ( [("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; union [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] ) OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; such that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d3" href="#d3">.</a></td><td style="color: #000000; background-color: #e9e9e9; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #fbf2bf; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d4" href="#d4">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Patient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Characteristic Birthdate</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(LOINC</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">21112-8</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeri<wbr>od)&gt;= 18 InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">that</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Global.CalendarAgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">BirthDate.birthDatetime,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">InpatientHospitalEncounter</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">relevantPeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">&gt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">18</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II &amp; III Opioid Medications</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&amp;</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">III</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Opioid Medications (2.16.840.1.113762.1.4.1111.165</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Benzodiazepines"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV Benzodiazepines (2</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">16.840.1.113762.1.4.1125.1)")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span><span class="sf17b18">.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where exists ( [("Diagnosis: All Primary and Secondary Cancer" using "All Primary and Secondary Cancer (2.16.840.1.113762.1.4.1111.161)")] Cancer</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where exists ( [("Diagnosis: All Primary and Secondary Cancer" using "All Primary and Secondary Cancer (2.16.840.1.113762.1.4.1111.161)")] Cancer</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Cancer.prevalencePeriod overlaps InpatientEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where Cancer.prevalencePeriod overlaps InpatientEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d5" href="#d5">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; or exists ( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; or exists ( </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d6" href="#d6">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Patient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Characteristic Birthdate</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(LOINC</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">21112-8</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeri<wbr>od)&gt;= 18 InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">that</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Global.CalendarAgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">BirthDate.birthDatetime,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">InpatientHospitalEncounter</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">relevantPeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">&gt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">18</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II &amp; III Opioid Medications</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&amp;</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">III</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Opioid Medications (2.16.840.1.113762.1.4.1111.165</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Benzodiazepines"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV Benzodiazepines (2</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">16.840.1.113762.1.4.1125.1)")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span><span class="sf17b18">.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where exists InpatientEncounter.diagnoses Diagnosis</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where exists InpatientEncounter.diagnoses Diagnosis</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "All Primary and Secondary Cancer" (2.16.840.1.113762.1.4.1111.161))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Diagnosis.code in (valueset "All Primary and Secondary Cancer" (2.16.840.1.113762.1.4.1111.161))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d7" href="#d7">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; or exists ( [("Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] </span><span class="sf17b16">PalliativeOrHospiceCareOrder</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; or exists ( [("Intervention, Order: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b18">where PalliativeOrHospiceCareOrder.authorDate<wbr>time during InpatientEncounter.relevantPeriod</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">[("Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] PalliativeOrHospiceCare</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; )</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; where </span><span class="sf17b18">Coalesce(start of </span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval</span><span style="color: #000000; background-color: #efcb05; ">(</span><span style="color: #000000; background-color: #efcb05; ">PalliativeOrHo<wbr>spiceCare</span><span style="color: #000000; background-color: #efcb05; ">.relevantDatetime, PalliativeOrHospiceCare</span><span style="color: #000000; background-color: #efcb05; ">.relevantPeriod</span><span class="sf17b18">)<wbr>,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">PalliativeOrHospiceCare.authorDatetime</span><span style="color: #000000; background-color: #efcb05; ">)<wbr></span><span class="sf17b18">during</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Global.HospitalizationWithObservation</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">)</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; &nbsp; &nbsp; or exists ( </span><span style="color: #000000; background-color: #efcb05; ">[("Intervention, Performed: Palliative or Hospice Care" using "Palliative or Hospice Care (2.16.840.1.113883.3.600.1.1579)")] PalliativeOrHospiceCare</span><span class="sf17b18">Performed</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where </span><span style="color: #000000; background-color: #efcb05; ">Global.NormalizeInterval</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">(</span><span class="sf17b18">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">PalliativeOrHospiceCare</span><span class="sf17b18">Performed</span><span style="color: #000000; background-color: #efcb05; ">.releva<wbr>ntDatetime, PalliativeOrHospiceCare</span><span class="sf17b18">Performed</span><span style="color: #000000; background-color: #efcb05; ">.releva<wbr>ntPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">)</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">overlaps</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span><span class="sf17b18">.relevantPeriod</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d8" href="#d8">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; or exists ( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; or exists ( </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d9" href="#d9">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Patient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Characteristic Birthdate</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(LOINC</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">21112-8</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeri<wbr>od)&gt;= 18 InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">that</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Global.CalendarAgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">BirthDate.birthDatetime,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">InpatientHospitalEncounter</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">relevantPeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">&gt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">18</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II &amp; III Opioid Medications</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&amp;</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">III</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Opioid Medications (2.16.840.1.113762.1.4.1111.165</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Benzodiazepines"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV Benzodiazepines (2</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">16.840.1.113762.1.4.1125.1)")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span><span class="sf17b18">.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where InpatientEncounter.dischargeDisposition<wbr> in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where InpatientEncounter.dischargeDisposition<wbr> in (valueset "Discharge To Acute Care Facility" (2.16.840.1.113883.3.117.1.7.1.87))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or InpatientEncounter.dischargeDisposition<wbr> in (valueset "Hospice Care Referral or Admission" (2.16.840.1.113762.1.4.1116.365))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or InpatientEncounter.dischargeDisposition<wbr> in (valueset "Hospice Care Referral or Admission" (2.16.840.1.113762.1.4.1116.365))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or InpatientEncounter.dischargeDisposition<wbr> in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or InpatientEncounter.dischargeDisposition<wbr> in (valueset "Patient Expired" (2.16.840.1.113883.3.117.1.7.1.309))</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d10" href="#d10">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">( </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d11" href="#d11">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Patient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Characteristic Birthdate</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(LOINC</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">21112-8</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeri<wbr>od)&gt;= 18 InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">that</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Global.CalendarAgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">BirthDate.birthDatetime,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">InpatientHospitalEncounter</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">relevantPeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">&gt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">18</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II &amp; III Opioid Medications</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&amp;</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">III</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Opioid Medications (2.16.840.1.113762.1.4.1111.165</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Benzodiazepines"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV Benzodiazepines (2</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">16.840.1.113762.1.4.1125.1)")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span><span class="sf17b18">.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; where ( Count([("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")] Opioids</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; where ( Count([("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")] Opioids</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Opioids.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; where Opioids.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return distinct Opioids.code</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return distinct Opioids.code</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )&gt;= 2</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )&gt;= 2</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d12" href="#d12">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">)</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; union ( Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; union ( </span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">Global.[("Encounter, Performed: Encounter Inpatient" using "Encounter Inpatient (2.16.840.1.113883.3.666.5.307)")] EncounterInpatient</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; where LengthInDays(EncounterInpatient.relevan<wbr>tPeriod)&lt;= 120</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; and EncounterInpatient.relevantPeriod ends during day of Measurement Period InpatientHospitalEncounter</span></code></td>
+</tr>
+<tr>
+<td class="ln"><a name="d13" href="#d13">.</a></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Patient</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Characteristic Birthdate</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Birth</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">date</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(LOINC</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Code</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">21112-8</span><span style="color: #000000; background-color: #efcb05; ">)")] </span><span class="sf17b16">BirthDate</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; </span><span class="sf17b18">where AgeInYearsAt(date from start of InpatientHospitalEncounter.relevantPeri<wbr>od)&gt;= 18 InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">that</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Global.CalendarAgeInYearsAt</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">(</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">BirthDate.birthDatetime,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">start</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">of</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">InpatientHospitalEncounter</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">relevantPeri<wbr>od</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">&gt;=</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">18</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span class="sf17b18">&nbsp; </span><span style="color: #000000; background-color: #efcb05; ">with </span><span class="sf17b18">( </span><span style="color: #000000; background-color: #efcb05; ">[("</span><span class="sf17b16">Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge</span><span style="color: #000000; background-color: #efcb05; ">: </span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II &amp; III Opioid Medications</span><span style="color: #000000; background-color: #efcb05; ">" using "</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">II</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">&amp;</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">III</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Opioid Medications (2.16.840.1.113762.1.4.1111.165</span><span style="color: #000000; background-color: #efcb05; ">)")]</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">union</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">[("Medication,</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Discharge:</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">Benzodiazepines"</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">using</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">"Schedule</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b16">IV Benzodiazepines (2</span><span style="color: #000000; background-color: #efcb05; ">.</span><span class="sf17b16">16.840.1.113762.1.4.1125.1)")]</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;) </span><span class="sf17b16">OpioidOrBenzodiazepineDischargeMedicati<wbr>on</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td style="color: #000000; background-color: #c0c0c0; "><code>&nbsp;</code></td>
+<td class="ln"></td><td style="color: #000000; background-color: #efcb05; "><code><span style="color: #000000; background-color: #efcb05; ">&nbsp; &nbsp; </span><span class="sf17b16">such</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">that OpioidOrBenzodiazepineDischargeMedicati<wbr>on.authorDatetime during </span><span style="color: #000000; background-color: #efcb05; ">InpatientEncounter</span><span class="sf17b18">.relevantPeriod</span><span style="color: #000000; background-color: #efcb05; ">&nbsp;</span><span class="sf17b18">InpatientEncounter</span>&nbsp;</code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; with [("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")] OpioidsDischarge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Medication, Discharge: Schedule II &amp; III Opioid Medications" using "Schedule II &amp; III Opioid Medications (2.16.840.1.113762.1.4.1111.165)")] OpioidsDischarge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that OpioidsDischarge.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that OpioidsDischarge.authorDatetime during InpatientEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; with [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] BenzodiazepinesDischarge</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; with [("Medication, Discharge: Schedule IV Benzodiazepines" using "Schedule IV Benzodiazepines (2.16.840.1.113762.1.4.1125.1)")] BenzodiazepinesDischarge</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; such that BenzodiazepinesDischarge.authorDatetime<wbr> during InpatientEncounter.relevantPeriod</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; &nbsp; such that BenzodiazepinesDischarge.authorDatetime<wbr> during InpatientEncounter.relevantPeriod</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; &nbsp; &nbsp; )</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">&nbsp; )</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Numerator Exclusions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Denominator Exceptions:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">=======================================<wbr>=======================================<wbr>=======================================<wbr>=======================================<wbr>=================</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">Stratification:</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+<td class="ln"></td><td class="sf3b2"><code><span class="sf3b2">None</span></code></td>
+</tr>
+<tr>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+<td class="ln"></td><td class="sf3b2"><code>&nbsp;</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
